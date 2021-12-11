@@ -89,7 +89,10 @@
                             <tr>
                                 <th>주소</th>
                                 <td>
-                                    <button type="button" class="btn_address" name="user_address">주소 검색</button>
+                                    <button type="button" class="btn_address" name="user_address" onclick="execDaumPostcode()">주소 검색</button>
+									<input type="text" class="inputText" name="address" id="address" placeholder="주소" style="margin-top:10px">
+									<input type="text" class="inputText" name="detailAddress" id="detailAddress" style="margin-top:10px" placeholder="상세주소">
+									<input type="hidden" class="inputText" name="user_address" id="totalAddress">
                                 </td>
                             </tr>
 
@@ -129,7 +132,7 @@
                         </tbody>
                     </table>
                 <div style="text-align: center; margin-top: 30px;">
-                    <button type="submit" class="btn_join" onclick="return frm_check()">가입하기</button>
+                    <button type="button" class="btn_join" onclick="frm_check()">가입하기</button>
                 </div> 
                 </form>
              
@@ -146,7 +149,8 @@
 
 		</script>
 
-       		<script src="/resources/js/join.js"></script> 
+     	<script src="/resources/js/join.js"></script> 
+     	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </body>
     		</c:otherwise>
 	</c:choose>
