@@ -49,50 +49,13 @@ public class ProductController {
 		if(admin == null) admin = "0";
 		cri.setAdmin(admin);	
 		
-		String serTitle = cri.getSerTitle();
-		String order = cri.getOrder();
+		cri.initCri();
+		
 		String category2 = cri.getCategory2();
 		String category1 = cri.getCategory1();		
 		String category22 = "ㅇ";
 		
-		if(order==null) {
-			order = "registdate";
-		}
-		if(serTitle==null ) {
-			serTitle="%%";
-		}else {
-			serTitle = "%"+serTitle+"%";
-		}
-//		if(serTitle.equals("전체보기") ||serTitle.equals("all")){
-//			serTitle="%%";
-//			category22="전체보기";
-//		}
-		if(category2==null) {
-			category2="%%";
-			category22="전체보기";
-		}else {
-			category2 = "%"+category2+"%";
-		}
-//		if(category2.equals("전체보기")) {
-//			category2="%%";
-//			category22="전체보기";
-//		}
-		if(category1 == null) {
-			category1="%%";
-		}else {
-			category1 = "%"+category1+"%";
-		}
-		if(category1.equals("신상품")) {
-			category1="new";
-		}else if(category1.equals("할인상품")) {
-			category1="sale";
-		}
-		else if(category1.equals("베스트")) {
-			category1="best";
-		}
 		
-		cri.setCri(serTitle, order, category1, category2);
-			
 		list = service.getList(cri);
 		paging = service.getPages(cri);
 		
@@ -108,17 +71,17 @@ public class ProductController {
 			category1="베스트";
 		}
 		
-		cri.setCri(serTitle, order, category1, category2);
+		cri.setCri(category1, category2);
 		model.addAttribute("paging", paging);
 		model.addAttribute("pdList", list);
 		model.addAttribute("cri", cri);
 		System.out.println(cri.getStartPage());
 		System.out.println(cri.getEndPage());
 		for(ProductVO lst : list) {
-			log.info("pd_num"+lst.getPd_num());
+			log.info(lst);
 		}
 		
-		
+		System.out.println("씨팔");
 		return "/product_list.jsp";
 	}
 	
