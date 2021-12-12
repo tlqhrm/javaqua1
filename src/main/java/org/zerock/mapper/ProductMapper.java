@@ -3,7 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
-import org.zerock.domain.BoardVO;
+import org.zerock.domain.ProductVO;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.BoardCriteria;
@@ -18,15 +18,15 @@ public interface ProductMapper {
 			
 		public String getTime();
 						
-		public int insert(BoardVO board);
+		public int insert(ProductVO board);
 		
-		public void insertSelectKey(BoardVO board);
+		public void insertSelectKey(ProductVO board);
 		
-		public BoardVO read(int bd_id);
+		public ProductVO productDetail(int pd_num);
 		
-		public int delete(int bd_id);
+		public int delete(int pd_num);
 		
-		public int update(BoardVO board);
+		public int update(ProductVO board);
 		
-		public int updateCount(int bd_id);
+		public int updateCount(int pd_num);
 }

@@ -28,9 +28,6 @@ public class ProductVO {
 	
 	
 	public void pvoInit() {
-		System.out.println(price);
-		System.out.println(category1);
-		System.out.println(file1);
 		strPrice = Integer.toString(price).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
 		strPrice2 = Integer.toString(price+((price*discount)/100)).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
 		

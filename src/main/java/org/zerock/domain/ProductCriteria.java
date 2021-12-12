@@ -49,8 +49,6 @@ public class ProductCriteria {
 		if(category2==null) {
 			category2="%%";
 			category22="전체보기";
-		}else {
-			category2 = "%"+category2+"%";
 		}
 		if(category2.equals("전체보기")) {
 			category2="%%";
@@ -69,6 +67,11 @@ public class ProductCriteria {
 		else if(category1.equals("베스트")) {
 			category1="best";
 		}
+		
+		if(category22 == null) {
+			category22 = ";";
+		}
+		
 	}
 	
 	

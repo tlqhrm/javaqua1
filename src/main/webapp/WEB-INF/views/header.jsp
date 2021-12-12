@@ -84,11 +84,11 @@
             <div class="frame">
                 <div class="menu">                   
                     <ul>
-                        <li id="view_all"><a href="/product/list?page=1" ><div><span id="s_1"></span><span id="s_2"></span><span id="s_3"></span></div>전체보기</a> </li>
-                        <li><a href="JavaquaServlet?command=product_list&page=1&category1=new">신상품</a></li>
-                        <li><a href="JavaquaServlet?command=product_list&page=1&category1=best">베스트</a></li>
-                        <li><a href="JavaquaServlet?command=product_list&page=1&category1=sale">할인상품</a></li>
-                        <li><a href="JavaquaServlet?command=product_list&page=1&category2=수초">수초</a></li>
+                        <li id="view_all"><a href="/product/productList?page=1" ><div><span id="s_1"></span><span id="s_2"></span><span id="s_3"></span></div>전체보기</a> </li>
+                        <li><a href="/product/productList?page=1&category1=new">신상품</a></li>
+                        <li><a href="/product/productList?page=1&category1=best">베스트</a></li>
+                        <li><a href="/product/productList?page=1&category1=sale">할인상품</a></li>
+                        <li><a href="/product/productList?page=1&category2=수초">수초</a></li>
                     </ul>
                     <div id="side_search">
                         <form action="JavaquaServlet" method="post">
