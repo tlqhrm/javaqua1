@@ -27,15 +27,20 @@ public class ProductVO {
 	String strPrice2;
 	
 	
-	public ProductVO(int price,String category1, String file1) {
-		this.strPrice = Integer.toString(price).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-		this.strPrice2 = Integer.toString(price+((price*discount)/100)).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+	public void pvoInit() {
+		System.out.println(price);
+		System.out.println(category1);
+		System.out.println(file1);
+		strPrice = Integer.toString(price).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		strPrice2 = Integer.toString(price+((price*discount)/100)).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		
+		
 		try {
-			this.file2 = (file1.split(";")[0]);
+			file2 = (file1.split(";")[0]);
 		} catch (Exception e) {
-			this.file2 = ";";
+			file2 = ";";
 		}
 		
-		this.category1Arr = category1.split(";");
+		category1Arr = category1.split(";");
 	}
 }

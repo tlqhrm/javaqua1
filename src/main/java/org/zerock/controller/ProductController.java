@@ -45,18 +45,24 @@ public class ProductController {
 			
 		log.info("listProduct");
 		List<ProductVO> list = new ArrayList<>();
+		System.out.println("1");
 		int[] paging = new int[3];
 		if(admin == null) admin = "0";
 		cri.setAdmin(admin);	
 		
 		cri.initCri();
-		
+		System.out.println("2");
 		String category2 = cri.getCategory2();
 		String category1 = cri.getCategory1();		
 		String category22 = "ㅇ";
 		
-		
+		System.out.println("3");
 		list = service.getList(cri);
+		for(ProductVO lst : list) {
+			lst.pvoInit();
+		}
+		
+		System.out.println("4");
 		paging = service.getPages(cri);
 		
 		if(category22.equals("전체보기")) {
@@ -75,13 +81,7 @@ public class ProductController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("pdList", list);
 		model.addAttribute("cri", cri);
-		System.out.println(cri.getStartPage());
-		System.out.println(cri.getEndPage());
-		for(ProductVO lst : list) {
-			log.info(lst);
-		}
-		
-		System.out.println("씨팔");
+
 		return "/product_list.jsp";
 	}
 	
