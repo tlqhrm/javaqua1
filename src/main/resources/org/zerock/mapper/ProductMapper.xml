@@ -24,8 +24,8 @@
 	</insert>
 	
 
-	<select id="read" resultType="org.zerock.domain.BoardVO">
-		<![CDATA[select * from board where bd_id = #{bd_id}]]>
+	<select id="productDetail" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * from Product where pd_num = #{pd_num}]]>
 	</select>
 	
 	<delete id="delete">

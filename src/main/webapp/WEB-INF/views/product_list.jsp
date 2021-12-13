@@ -30,9 +30,9 @@
         <!-- <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;"><a>열대어</a> > <a>랜덤금붕어</a></div> -->
             <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.category1 ne '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq '%%'}">${cri.category2}2</c:when><c:otherwise >'${cri.serTitle }' 검색결과</c:otherwise></c:choose>   &nbsp;</a></h3></div>          
             <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;  ">
-            	<span style="float:right; padding-bottom:20px;"><a href="JavaquaServlet?command=product_list&page=1&category2=${cri.category2 }&order=registdate&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "registdate"}'>now_order</c:if>">신상품순</a>
-            	&nbsp;&nbsp;<a href="JavaquaServlet?command=product_list&page=1&category2=${cri.category2 }&order=salescount&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "salescount"}'>now_order</c:if>">판매량순</a>
-            	&nbsp;&nbsp;<a href="JavaquaServlet?command=product_list&page=1&category2=${cri.category2 }&order=price&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "price"}'>now_order</c:if>">높은가격순</a></span>
+            	<span style="float:right; padding-bottom:20px;"><a href="/product/productList?page=1&category2=${cri.category2 }&order=registdate&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "registdate"}'>now_order</c:if>">신상품순</a>
+            	&nbsp;&nbsp;<a href="/product/productList?page=1&category2=${cri.category2 }&order=salescount&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "salescount"}'>now_order</c:if>">판매량순</a>
+            	&nbsp;&nbsp;<a href="/product/productList?page=1&category2=${cri.category2 }&order=price&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "price"}'>now_order</c:if>">높은가격순</a></span>
             </div>
             <div class = "list_goods">
                 <div class="bx-wrapper">
@@ -40,10 +40,10 @@
                         <ul class="list_1" style=" position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
                         	<c:forEach items="${pdList }" var="pd">
                         	
-                            <li class="cut" id=list_1><a href='JavaquaServlet?command=product_detail&pd_num=${pd.pd_num }'><img src="/upload/${pd.file1 }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
+                            <li class="cut" id=list_1><a href='/product/productDetail?pd_num=${pd.pd_num }'><img src="/upload/${pd.file1 }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
                                 <div class="info_goods" >
                                     <span class="name">                              
-                                        <a class="txt" href='JavaquaServlet?command=product_detail&pd_num=${pd.pd_num }'>${pd.title }</a>
+                                        <a class="txt" href='/product/productDetail?pd_num=${pd.pd_num }'>${pd.title }</a>
                                     </span><br>
                                     <span class="price">
                                     	<c:if test="${pd.discount ne 0 }">
