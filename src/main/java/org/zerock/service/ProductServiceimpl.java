@@ -5,12 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.domain.BoardVO;
+import org.zerock.domain.ProductVO;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
-import org.zerock.domain.BoardCriteria;
 import org.zerock.domain.PagingDTO;
-import org.zerock.mapper.BoardMapper;
 import org.zerock.mapper.ProductMapper;
 
 import lombok.Setter;
@@ -26,34 +24,34 @@ public class ProductServiceimpl implements ProductService {
 	private ProductMapper mapper;
 	
 	@Override
-	public int register(BoardVO board) {
+	public int register(ProductVO pvo) {
 		
-		log.info("register......" + board);
+		log.info("register......" + pvo);
 		
-		return mapper.insert(board);
+		return mapper.insert(pvo);
 	}
 
 	@Override
-	public BoardVO get(int bd_id) {
+	public ProductVO productDetail(int pd_num) {
 
-		log.info("get........" + bd_id);
+		log.info("get........" + pd_num);
 		
-		mapper.updateCount(bd_id);
+		mapper.updateCount(pd_num);
 		
-		return mapper.read(bd_id);
+		return mapper.productDetail(pd_num);
 	}
 
 	@Override
-	public boolean modify(BoardVO board) {
+	public boolean modify(ProductVO pvo) {
 		
-		log.info("modify......" + board);
-		return mapper.update(board) == 1;
+		log.info("modify......" + pvo);
+		return mapper.update(pvo) == 1;
 	}
 
 	@Override
-	public boolean remove(int bd_id) {
-		log.info("remove......" + bd_id);
-		return mapper.delete(bd_id) == 1;
+	public boolean remove(int pd_num) {
+		log.info("remove......" + pd_num);
+		return mapper.delete(pd_num) == 1;
 	}
 
 	@Override
