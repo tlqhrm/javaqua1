@@ -1,6 +1,6 @@
 src/main/java/org/zerock/config/
 
-
+pom.propertires
 
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
@@ -17,6 +17,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+
 
 # External tool builders
 .externalToolBuilders/
