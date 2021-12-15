@@ -3,6 +3,9 @@ pom.properties
 
 123.txt
 target/
+.project
+.classpath
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
