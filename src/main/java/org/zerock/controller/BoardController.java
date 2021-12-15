@@ -122,7 +122,6 @@ public class BoardController {
 	
 	@GetMapping("/boardList")
 	public String listBoard(BoardCriteria cri, @Nullable @SessionAttribute("id") String id,@Nullable @SessionAttribute("admin") String admin,Model model, HttpServletRequest request) {
-		System.out.println("4"+cri.getPage());
 		
 		log.info(cri.getBd_category2()+" List");
 		List<BoardVO> list = new ArrayList<>();

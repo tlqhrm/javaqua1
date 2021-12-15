@@ -25,12 +25,7 @@ public class BoardCriteria {
 	private int endPage;
 	
 	public BoardCriteria(int page, String[] serBoard, String word) {
-		System.out.println("0"+this.page);
 		this.page = page;
-		System.out.println("1"+page);
-		System.out.println("2"+this.page);
-		this.page = 5;
-		System.out.println("3"+this.page);
 //		this.serBoard = serBoard;
 		
 		pagePerList = 10;
