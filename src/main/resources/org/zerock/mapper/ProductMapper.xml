@@ -8,11 +8,11 @@
 	
 	</select> -->	
 	<select id="paging" resultType="_int">	
-		<![CDATA[select count(*) from product where category1 like #{category1} and category2 like #{category2} and Title Like #{serTitle} order by #{order} desc]]>
+		<![CDATA[select count(*) from product where category1 like #{category1} and category2 like #{category2} and Title Like #{serTitle} order by ${order} desc]]>
 	</select>
 	
 	<select id="getList" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from (select ROWNUM as rnum, A.* from (select * from product where category1 like #{category1} and category2 like #{category2} and Title Like #{serTitle} order by #{order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
+		<![CDATA[select * from (select ROWNUM as rnum, A.* from (select * from product where category1 like #{category1} and category2 like #{category2} and Title Like #{serTitle} order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
 	</select>
 	
 	<insert id="insert">

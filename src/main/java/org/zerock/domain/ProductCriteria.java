@@ -59,12 +59,12 @@ public class ProductCriteria {
 		}else {
 			category1 = "%"+category1+"%";
 		}
-		if(category1.equals("신상품")) {
+		if(category1.equals("%신상품%")) {
 			category1="new";
-		}else if(category1.equals("할인상품")) {
+		}else if(category1.equals("%할인상품%")) {
 			category1="sale";
 		}
-		else if(category1.equals("베스트")) {
+		else if(category1.equals("%베스트%")) {
 			category1="best";
 		}
 		

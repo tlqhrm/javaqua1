@@ -61,7 +61,7 @@ public class ProductController {
 		System.out.println(cri.getOrder());
 		System.out.println(category2);
 		
-		
+		System.out.println(cri.getCategory1());
 		if(category22.equals("전체보기")) {
 			category2 = "전체보기";
 		}
@@ -73,6 +73,8 @@ public class ProductController {
 		else if(category1.equals("%best%")) {
 			category1="베스트";
 		}
+		
+		System.out.println(cri.getCategory1());
 		
 		cri.setCri(category1, category2);
 		model.addAttribute("paging", paging);

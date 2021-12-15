@@ -40,7 +40,7 @@
                         <ul class="list_1" style=" position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
                         	<c:forEach items="${pdList }" var="pd">
                         	
-                            <li class="cut" id=list_1><a href='/product/productDetail?pd_num=${pd.pd_num }'><img src="/upload/${pd.file1 }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
+                            <li class="cut" id=list_1><a href='/product/productDetail?pd_num=${pd.pd_num }'><img src="/resources/upload/${pd.file1 }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
                                 <div class="info_goods" >
                                     <span class="name">                              
                                         <a class="txt" href='/product/productDetail?pd_num=${pd.pd_num }'>${pd.title }</a>
