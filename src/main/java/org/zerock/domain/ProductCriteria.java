@@ -38,9 +38,7 @@ public class ProductCriteria {
 			order = "registdate";
 		}
 		if(serTitle==null ) {
-			serTitle="%%";
-		}else {
-			serTitle = "%"+serTitle+"%";
+			serTitle="";
 		}
 		if(serTitle.equals("전체보기") ||serTitle.equals("all")){
 			serTitle="%%";
@@ -60,12 +58,12 @@ public class ProductCriteria {
 			category1 = "%"+category1+"%";
 		}
 		if(category1.equals("%신상품%")) {
-			category1="new";
+			category1="%new%";
 		}else if(category1.equals("%할인상품%")) {
-			category1="sale";
+			category1="%sale%";
 		}
 		else if(category1.equals("%베스트%")) {
-			category1="best";
+			category1="%best%";
 		}
 		
 		if(category22 == null) {

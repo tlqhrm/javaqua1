@@ -91,10 +91,9 @@
                         <li><a href="/product/productList?page=1&category2=수초">수초</a></li>
                     </ul>
                     <div id="side_search">
-                        <form action="JavaquaServlet" method="post">
-                        	<input type="hidden" name="command" value="product_list">
+                        <form action="/product/productList" method="get">
                         	<input type="hidden" name="page" value="1">                      	
-                            <input type="text" class="text_btn text_btn_clear" placeholder="검색어를 입력하세요." value="<c:if test="${serTitle ne '전체보기' }">${serTitle}</c:if>" name="serTitle">
+                            <input type="text" class="text_btn text_btn_clear" placeholder="검색어를 입력하세요." value="<c:if test="${cri.serTitle ne '전체보기' }">${cri.serTitle}</c:if>" name="serTitle">
                             <input type="image" class="search_btn" src="/resources/images/헤더/검색버튼.png">
                             
                             <div>

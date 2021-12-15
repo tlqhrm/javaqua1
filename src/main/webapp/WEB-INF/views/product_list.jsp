@@ -28,7 +28,7 @@
      	
         <div class = "product_list">
         <!-- <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;"><a>열대어</a> > <a>랜덤금붕어</a></div> -->
-            <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.category1 ne '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq '%%'}">${cri.category2}2</c:when><c:otherwise >'${cri.serTitle }' 검색결과</c:otherwise></c:choose>   &nbsp;</a></h3></div>          
+            <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.category1 ne '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq ''}">${cri.category2}2</c:when><c:otherwise >'${cri.serTitle }' 검색결과</c:otherwise></c:choose>   &nbsp;</a></h3></div>          
             <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;  ">
             	<span style="float:right; padding-bottom:20px;"><a href="/product/productList?page=1&category2=${cri.category2 }&order=registdate&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "registdate"}'>now_order</c:if>">신상품순</a>
             	&nbsp;&nbsp;<a href="/product/productList?page=1&category2=${cri.category2 }&order=salescount&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "salescount"}'>now_order</c:if>">판매량순</a>
@@ -80,9 +80,13 @@
                                     </span>                                                                                                             
                                 </div>
                             </li>
-                            
-                           </c:forEach> 
+                           </c:forEach>                      
                         </ul>
+                        <c:if test="${empty pdList }">
+                          		<div>
+                           		<h2 style="margin-top:100px;display:inline-block ;text-align:center; height:200px; width:1050px;">등록된 상품이 없습니다.</h2>
+                           		</div>
+                           </c:if>
                     </div>
                 </div>
             </div>
@@ -90,13 +94,13 @@
         <div id="page_div">
     
     <div id="page_select">
-        <a class="first" href="JavaquaServlet?command=${bd_category2}_list&page=1"></a>
+        <a class="first" href="/product/productList?page=1&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}"></a>
         <c:choose>
-        	<c:when test="${page == 1}">
+        	<c:when test="${cri.page == 1}">
         		<a class="prev" href=""></a>
         	</c:when>
         	<c:otherwise>
-        		<a class="prev" href="JavaquaServlet?command=${bd_category2}_list&page=${page-1}"></a>
+        		<a class="prev" href="JavaquaServlet?command=${bd_category2}_list&page=${cri.page-1}"></a>
         	</c:otherwise>
         </c:choose>
         <c:forEach begin="${paging[0]}" end="${paging[1]}" step="1" var="i">
