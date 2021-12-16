@@ -6,16 +6,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href="css/suport_page.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="css/header.css">    
+    <link href="images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">  
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/loginCheck.js"></script>
     
-    <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/product_regist.css">
 </head>
 

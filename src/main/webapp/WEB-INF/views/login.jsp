@@ -11,7 +11,6 @@
     <title>Javaqua</title>
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
     <script src="/resources/js/login.js"></script>
     
 
