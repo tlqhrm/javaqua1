@@ -115,7 +115,7 @@
         	<c:when test="${cri.page == paging[2]}">
         		<a class="next" href=""></a>
         	</c:when>
-        	<c:otherwise>
+        	<c:otherwise> 
         		<a class="next" href="/product/productList?page=${cri.page+1 }&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}"></a>
         	</c:otherwise>
         </c:choose>

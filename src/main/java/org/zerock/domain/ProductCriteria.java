@@ -46,9 +46,11 @@ public class ProductCriteria {
 			if(category1 ==null || category1.equals("null") || category1.equals("") ) {		
 				if(category2 ==null || category2.equals("null") || category2.equals("")) {
 					listTitle = "전체보기";
-				}else {
+				}else {					
 					criCategory2 = category2;
 					listTitle = category2;
+					
+					initCategory2();
 				}
 			}else {
 				criCategory1 = category1; 
@@ -64,6 +66,16 @@ public class ProductCriteria {
 		}else {
 			criSerTitle = serTitle;
 			listTitle = "'"+serTitle+"' 검색결과";
+		}
+	}
+	
+	public void initCategory2() {
+		if(category2.equals("금붕어")) {
+			criCategory2 = "랜덤 금붕어||최상급 금붕어||오란다||난주||점보||진주린";
+		}else if (category2.equals("베타/구라미")) {
+			criCategory2 = "랜덤베타||실물베타||야생베타||구라미";
+		}else if (category2.equals("애완새우/달팽이")) {
+			criCategory2 = "생이새우||비쉬림프||패각류";
 		}
 	}
 }

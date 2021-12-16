@@ -121,37 +121,37 @@
                                 <li><a href="/product/productList?page=1&category2=진주린">진주린</a></li>
                             </ul>
                         </li>
-                        <li><a href="#none">구피</a></li>
-                        <li><a href="#none">플래티/몰리</a></li>
-                        <li><a href="#none">테트라</a></li>
-                        <li><a href="#none">베타/구라미<span>></span></a>
+                        <li><a href="/product/productList?page=1&category2=구피">구피</a></li>
+                        <li><a href="/product/productList?page=1&category2=플래티/몰리">플래티/몰리</a></li>
+                        <li><a href="/product/productList?page=1&category2=테트라">테트라</a></li>
+                        <li><a href="/product/productList?page=1&category2=베타/구라미">베타/구라미<span>></span></a>
                             <ul id="h_menu_beta">
-                                <li><a href="#none">랜덤 베타</a></li>
-                                <li><a href="#none">실물 베타</a></li>
-                                <li><a href="#none">야생 베타</a></li>
-                                <li><a href="#none">구라미</a></li>
+                                <li><a href="/product/productList?page=1&category2=랜덤 베타">랜덤 베타</a></li>
+                                <li><a href="/product/productList?page=1&category2=실물 베타">실물 베타</a></li>
+                                <li><a href="/product/productList?page=1&category2=야생 베타">야생 베타</a></li>
+                                <li><a href="/product/productList?page=1&category2=구라미">구라미</a></li>
                             </ul>
                         </li>
-                        <li><a href="#none">라스보라/레인보우</a></li>
-                        <li><a href="#none">코리/플레코/캣</a></li>
-                        <li><a href="#none">엔젤/디스커스</a></li>
-                        <li><a href="#none">라미네지/시클리드</a></li>
-                        <li><a href="#none">애완새우/달팽이<span>></span></a>
+                        <li><a href="/product/productList?page=1&category2=라스보라/레인보우">라스보라/레인보우</a></li>
+                        <li><a href="/product/productList?page=1&category2=코리/플레코/캣">코리/플레코/캣</a></li>
+                        <li><a href="/product/productList?page=1&category2=엔젤/디스커스">엔젤/디스커스</a></li>
+                        <li><a href="/product/productList?page=1&category2=라미네지/시클리드">라미네지/시클리드</a></li>
+                        <li><a href="/product/productList?page=1&category2=애완새우/달팽이">애완새우/달팽이<span>></span></a>
                             <ul id="h_menu_shirimp">
-                                <li><a href="#none">생이새우</a></li>
-                                <li><a href="#none">비쉬림프</a></li>
-                                <li><a href="#none">패각류</a></li>
+                                <li><a href="/product/productList?page=1&category2=생이새우">생이새우</a></li>
+                                <li><a href="/product/productList?page=1&category2=비쉬림프">비쉬림프</a></li>
+                                <li><a href="/product/productList?page=1&category2=패각류">패각류</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class='h_menu'id='b_right'>
                         <h3>수초</h3> 
-                        <li><a href="#none">전경수초</a></li>
-                        <li><a href="#none">중경수초</a></li>
-                        <li><a href="#none">후경수초</a></li>
-                        <li><a href="#none">씨앗수초</a></li>
-                        <li><a href="#none">부상수초</a></li>
-                        <li><a href="#none">음성수초</a></li>
+                        <li><a href="/product/productList?page=1&category2=전경수초">전경수초</a></li>
+                        <li><a href="/product/productList?page=1&category2=중경수초">중경수초</a></li>
+                        <li><a href="/product/productList?page=1&category2=후경수초">후경수초</a></li>
+                        <li><a href="/product/productList?page=1&category2=씨앗수초">씨앗수초</a></li>
+                        <li><a href="/product/productList?page=1&category2=부상수초">부상수초</a></li>
+                        <li><a href="/product/productList?page=1&category2=음성수초">음성수초</a></li>
                     </ul>
                 </div>  
             </div>
