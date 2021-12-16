@@ -28,7 +28,7 @@
      	
         <div class = "product_list">
         <!-- <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;"><a>열대어</a> > <a>랜덤금붕어</a></div> -->
-            <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.category1 ne '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq ''}">${cri.category2}2</c:when><c:otherwise >'${cri.serTitle }' 검색결과</c:otherwise></c:choose>   &nbsp;</a></h3></div>          
+            <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.serTitle ne '' }">'${cri.serTitle }' 검색결과</c:when><c:when test="${cri.category2 eq '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq ''}">${cri.category2}2</c:when></c:choose>   &nbsp;</a></h3></div>          
             <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;  ">
             	<span style="float:right; padding-bottom:20px;"><a href="/product/productList?page=1&category2=${cri.category2 }&order=registdate&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "registdate"}'>now_order</c:if>">신상품순</a>
             	&nbsp;&nbsp;<a href="/product/productList?page=1&category2=${cri.category2 }&order=salescount&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "salescount"}'>now_order</c:if>">판매량순</a>
@@ -100,30 +100,26 @@
         		<a class="prev" href=""></a>
         	</c:when>
         	<c:otherwise>
-        		<a class="prev" href="JavaquaServlet?command=${bd_category2}_list&page=${cri.page-1}"></a>
+        		<a class="prev" href="/product/productList?page=${cri.page-1}&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}"></a>
         	</c:otherwise>
         </c:choose>
         <c:forEach begin="${paging[0]}" end="${paging[1]}" step="1" var="i">
-        <c:choose>
-        	<c:when test="${page != i}">
-        		<a class="number" href="JavaquaServlet?command=${bd_category2}_list&page=${i}">${i}</a>
-        	</c:when>
-        	<c:otherwise>
-				<a class="number" id="now_num" href="JavaquaServlet?command=${bd_category2}_list&page=${i}">${i}</a>
-        	</c:otherwise>
-        </c:choose>
+        
+        	
+        <a <c:if test="${cri.page == i}">id="now_num"</c:if> class="number" href="/product/productList?page=${i }&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}">${i}</a>
+        	
         
         </c:forEach>
  		<c:choose>
-        	<c:when test="${page == paging[2]}">
+        	<c:when test="${cri.page == paging[2]}">
         		<a class="next" href=""></a>
         	</c:when>
         	<c:otherwise>
-        		<a class="next" href="JavaquaServlet?command=${bd_category2}_list&page=${page+1}"></a>
+        		<a class="next" href="/product/productList?page=${cri.page+1 }&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}"></a>
         	</c:otherwise>
         </c:choose>
 
-        <a class="last" href="JavaquaServlet?command=${bd_category2}_list&page=${paging[2]}"></a>
+        <a class="last" href="/product/productList?page=${paging[2] }&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}"></a>
     </div>  
     </div>
     <jsp:include page="footer.jsp"></jsp:include>

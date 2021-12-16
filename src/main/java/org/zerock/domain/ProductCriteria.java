@@ -13,7 +13,7 @@ public class ProductCriteria {
 	private String admin; 
 
 	private String[] serSet = new String[3];	
-	private String category22;
+	private String listTitle;
 	private int pagePerList;
 	private int pagingCount;
 	private int startPage;
@@ -27,12 +27,7 @@ public class ProductCriteria {
 		startPage = (page - 1) * pagePerList +1;
 		endPage = startPage + pagePerList -1;
 	}
-	
-	public void setCri(String category1, String category2) {
-		this.category1 = category1;
-		this.category2 = category2;
-	}
-	
+
 	public void initCri() {
 		if(order==null) {
 			order = "registdate";
@@ -40,18 +35,12 @@ public class ProductCriteria {
 		if(serTitle==null ) {
 			serTitle="";
 		}
-		if(serTitle.equals("전체보기") ||serTitle.equals("all")){
-			serTitle="%%";
-			category22="전체보기";
-		}
 		if(category2==null) {
-			category2="%%";
-			category22="전체보기";
+			category2="^";
 		}
-		if(category2.equals("전체보기")) {
-			category2="%%";
-			category22="전체보기";
-		}
+		
+		
+		
 		if(category1 == null) {
 			category1="%%";
 		}else {
@@ -65,16 +54,41 @@ public class ProductCriteria {
 		else if(category1.equals("%베스트%")) {
 			category1="%best%";
 		}
-		
-		if(category22 == null) {
-			category22 = ";";
+		else if(category1.equals("%전체보기%")) {
+			category1="%%";
 		}
 		
 	}
 	
+	public void initCri2() {
+		if(category1.equals("%new%")) {
+			category1="신상품";
+		}else if(category1.equals("%sale%")) {
+			category1="할인상품";
+		}
+		else if(category1.equals("%best%")) {
+			category1="베스트";
+		}
+		else if(category1.equals("%전체보기%")) {
+			category1="전체보기";
+		}
+		else if(category1.equals("%%")) {
+			category1="전체보기";
+		}
+	}
 	
 	
-	
-	
-	
+	public void initCri3() {
+		if( serTitle.equals("null") || serTitle==null){
+			if(category1.equals("null") || category1 ==null) {
+				if(category1.equals("null") || category1 ==null) {
+					listTitle = "전체보기";
+				}
+			}else {
+				listTitle = category1;
+			}
+		}else {
+			listTitle = "'"+serTitle+"' 검색결과";
+		}
+	}
 }

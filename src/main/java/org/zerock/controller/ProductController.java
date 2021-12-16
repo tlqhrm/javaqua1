@@ -40,7 +40,6 @@ public class ProductController {
 	@GetMapping("/productList")
 	public String listProduct(ProductCriteria cri, @Nullable @SessionAttribute("admin") String admin,Model model) {
 		
-		
 		log.info("listProduct");
 		List<ProductVO> list = new ArrayList<>();
 		int[] paging = new int[3];
@@ -48,9 +47,6 @@ public class ProductController {
 		cri.setAdmin(admin);	
 		
 		cri.initCri();
-		String category2 = cri.getCategory2();
-		String category1 = cri.getCategory1();		
-		String category22 = cri.getCategory22();
 
 		list = service.getList(cri);
 		for(ProductVO lst : list) {
@@ -58,25 +54,8 @@ public class ProductController {
 		}
 		
 		paging = service.getPages(cri);
-		System.out.println(cri.getOrder());
-		System.out.println(category2);
-		
-		System.out.println(cri.getCategory1());
-		if(category22.equals("전체보기")) {
-			category2 = "전체보기";
-		}
-		if(category1.equals("%new%")) {
-			category1="신상품";
-		}else if(category1.equals("%sale%")) {
-			category1="할인상품";
-		}
-		else if(category1.equals("%best%")) {
-			category1="베스트";
-		}
-		
-		System.out.println(cri.getCategory1());
-		
-		cri.setCri(category1, category2);
+
+		cri.initCri2();
 		model.addAttribute("paging", paging);
 		model.addAttribute("pdList", list);
 		model.addAttribute("cri", cri);

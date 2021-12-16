@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/resources/js/header.js"></script>
+    <link rel="stylesheet" href="/resources/css/header.css"> 
+    
 </head>
 <body>
 <c:if test="${serTitle eq '%%'}"><c:set var="serTitle" value=""></c:set></c:if>
@@ -93,7 +95,7 @@
                     <div id="side_search">
                         <form action="/product/productList" method="get">
                         	<input type="hidden" name="page" value="1">                      	
-                            <input type="text" class="text_btn text_btn_clear" placeholder="검색어를 입력하세요." value="<c:if test="${cri.serTitle ne '전체보기' }">${cri.serTitle}</c:if>" name="serTitle">
+                            <input type="text" class="text_btn text_btn_clear" placeholder="검색어를 입력하세요." value="${cri.serTitle}" name="serTitle">
                             <input type="image" class="search_btn" src="/resources/images/헤더/검색버튼.png">
                             
                             <div>
@@ -109,14 +111,14 @@
                 <div>                                   
                     <ul class='h_menu' id='b_left'>
                         <h3>열대어</h3> 
-                        <li><a href="#none">금붕어<span>></span></a>
+                        <li><a href="/product/productList?page=1&category2=금붕어">금붕어<span>></span></a>
                             <ul id="h_menu_gold">
-                                <li><a href="#none">랜덤 금붕어</a></li>
-                                <li><a href="#none">최상급 금붕어</a></li>
-                                <li><a href="#none">오란다</a></li>
-                                <li><a href="#none">난주</a></li>
-                                <li><a href="#none">점보</a></li>
-                                <li><a href="#none">진주린</a></li>
+                                <li><a href="/product/productList?page=1&category2=랜덤 금붕어">랜덤 금붕어</a></li>
+                                <li><a href="/product/productList?page=1&category2=최상급 금붕어">최상급 금붕어</a></li>
+                                <li><a href="/product/productList?page=1&category2=오란다">오란다</a></li>
+                                <li><a href="/product/productList?page=1&category2=난주">난주</a></li>
+                                <li><a href="/product/productList?page=1&category2=점보">점보</a></li>
+                                <li><a href="/product/productList?page=1&category2=진주린">진주린</a></li>
                             </ul>
                         </li>
                         <li><a href="#none">구피</a></li>
