@@ -48,14 +48,14 @@ public class ProductController {
 		
 		cri.initCri();
 
+
 		list = service.getList(cri);
 		for(ProductVO lst : list) {
 			lst.pvoInit();
 		}
 		
 		paging = service.getPages(cri);
-
-		cri.initCri2();
+		
 		model.addAttribute("paging", paging);
 		model.addAttribute("pdList", list);
 		model.addAttribute("cri", cri);

@@ -28,7 +28,8 @@
      	
         <div class = "product_list">
         <!-- <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;"><a>열대어</a> > <a>랜덤금붕어</a></div> -->
-            <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.serTitle ne '' }">'${cri.serTitle }' 검색결과</c:when><c:when test="${cri.category2 eq '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq ''}">${cri.category2}2</c:when></c:choose>   &nbsp;</a></h3></div>          
+        <!--     <div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp; <c:choose><c:when test="${cri.serTitle ne '' }">'${cri.serTitle }' 검색결과</c:when><c:when test="${cri.category2 eq '%%'}">${cri.category1}1</c:when><c:when test="${cri.serTitle eq ''}">${cri.category2}2</c:when></c:choose>   &nbsp;</a></h3></div> -->          
+        	<div class = "tit_goods" ><h3><a class="list_name" href='#none'>&nbsp;&nbsp;${cri.listTitle } &nbsp;</a></h3></div>
             <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;  ">
             	<span style="float:right; padding-bottom:20px;"><a href="/product/productList?page=1&category2=${cri.category2 }&order=registdate&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "registdate"}'>now_order</c:if>">신상품순</a>
             	&nbsp;&nbsp;<a href="/product/productList?page=1&category2=${cri.category2 }&order=salescount&serTitle=${cri.serTitle }&category1=${cri.category1 }" class="<c:if test='${cri.order eq "salescount"}'>now_order</c:if>">판매량순</a>
