@@ -24,11 +24,11 @@ const v=new Vue({
 	methods : {
 		회원정보가져오기 : function(){
              const params = new URLSearchParams();
-             params.append('command', 'member_info');
              params.append('user_id', id);
            
-             axios.post('JavaquaServlet',params)
+             axios.post('/member/selectMember',params)
              .then(res=>{
+             	console.log(res.data);
             	this.회원정보 = res.data;
              })
              .catch(err=>{
@@ -37,8 +37,6 @@ const v=new Vue({
              });
 		},
 		결제하기 : function(){
-		alert("dd");
-		return;
              const params = new URLSearchParams();
              params.append('command', 'direct_order');
              params.append('user_id', id);

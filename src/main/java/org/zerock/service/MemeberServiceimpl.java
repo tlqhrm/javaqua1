@@ -68,4 +68,9 @@ public class MemeberServiceimpl implements MemberService {
 		return mapper.getEmail(email) !=0 ;
 		
 	}
+	
+	@Override
+	public MemberVO selectMember(MemberVO mvo) {
+		return mapper.selectMember(mvo);
+	}
 }

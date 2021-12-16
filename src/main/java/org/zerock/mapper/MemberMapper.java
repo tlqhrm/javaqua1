@@ -29,4 +29,6 @@ public interface MemberMapper {
 		public int getId(String id);
 		
 		public int getEmail(String email);
+		
+		public MemberVO selectMember(MemberVO mvo);
 }
