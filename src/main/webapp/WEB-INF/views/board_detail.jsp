@@ -272,7 +272,8 @@ var v_comments = new Vue({
 		},
 		
 		commentReg(bd_id, id){
-			const admin = ${admin};
+			let admin = 0;				
+			if(${admin}1 == 11) admin = 1;
 			const bd_category2 = '${bvo.bd_category2}';
 			const comment1 = document.getElementById("input_comment").value;
 			if(comment1 == ""){

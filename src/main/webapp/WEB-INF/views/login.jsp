@@ -11,13 +11,14 @@
     <title>Javaqua</title>
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
     <script src="/resources/js/login.js"></script>
     
 
 </head>
 
 <body>
-<c:if test="${name != null }"><script>location.href = document.referrer;</script></c:if>
+<c:if test="${name != null }"><script>alert('잘못된 접근입니다.'); history.go(-1);</script></c:if>
     <div id="header">
         <div id="header2">
             <div id="header_logo" style="width: 1050px;margin: 0px; margin-left: auto; margin-right: auto; ">
