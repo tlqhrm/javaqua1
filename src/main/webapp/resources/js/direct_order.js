@@ -37,6 +37,8 @@ const v=new Vue({
              });
 		},
 		결제하기 : function(){
+		alert("dd");
+		return;
              const params = new URLSearchParams();
              params.append('command', 'direct_order');
              params.append('user_id', id);

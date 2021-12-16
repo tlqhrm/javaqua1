@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/resources/js/header.js"></script>
+<link rel="stylesheet" href="/resources/css/header.css">
 </head>
 <body>
 <c:if test="${serTitle eq '%%'}"><c:set var="serTitle" value=""></c:set></c:if>
