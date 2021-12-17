@@ -157,9 +157,10 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping("/selectMember")
-	public MemberVO selectMember(MemberVO mvo) {	
-		log.info("selectMember....."+mvo);
-		mvo = service.selectMember(mvo);
+	public MemberVO selectMember(String user_id) {	
+		log.info("selectMember....");
+		MemberVO mvo = new MemberVO();
+		mvo = service.selectMember(user_id);
 		return mvo;
 	}
 }

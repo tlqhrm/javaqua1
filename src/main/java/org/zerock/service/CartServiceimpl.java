@@ -19,10 +19,8 @@ public class CartServiceimpl implements CartService{
 		//이미 담은 물품인지 판별
 		int result = mapper.pdChk(cvo);
 		if(result >= 1) {
-			System.out.println("00");
 			return 0;
 		}else {
-			System.out.println("11");
 			return mapper.cart_add(cvo);
 		}
 	}

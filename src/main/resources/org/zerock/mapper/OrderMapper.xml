@@ -2,5 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.prg//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.OrderMapper">
-
+	<select id="stockChk" resultType="int">
+		select stock from product where pd_num = #{pd_num}	
+	</select>
+	<insert id="insertOd">
+		insert into order1(od_num, user_id, totalPrice)
+	 	values(ORDER1_SEQ.NEXTVAL,#{odvo.user_id},#{totalPrice})
+	</insert>
+	<insert id="insertOdt">
+		<selectKey keyProperty="od_num" order="BEFORE" resultType="int">
+			SELECT od_num FROM order1 WHERE user_id=#{user_id} and ROWNUM=1 order by od_num DESC
+		</selectKey>
+	
+		insert into order_detail(odt_num,od_num,pd_num,user_id,amount,price,title)
+	 	values(ORDER_DETAIL_SEQ.NEXTVAL,#{od_num},#{pd_num},#{user_id},#{amount},#{price},#{title})
+	</insert>
 </mapper>

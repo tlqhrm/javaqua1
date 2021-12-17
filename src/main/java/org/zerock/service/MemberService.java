@@ -19,5 +19,5 @@ public interface MemberService {
 	
 	public boolean getEmail(String email);
 	
-	public MemberVO selectMember(MemberVO mvo);
+	public MemberVO selectMember(String user_id);
 }

@@ -10,7 +10,7 @@
 	    <title>JavaQua</title>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="이미지/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-	    <link rel="stylesheet" type="text/css" href="css/order.css">
+	    <link rel="stylesheet" type="text/css" href="/resources/css/order.css">
 	   	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
 

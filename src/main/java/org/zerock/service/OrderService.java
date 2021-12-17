@@ -1,5 +1,7 @@
 package org.zerock.service;
 
-public interface OrderService {
+import org.zerock.domain.OrderDetailVO;
 
+public interface OrderService {
+	public int directOrder(OrderDetailVO odvo, int totalprice);
 }

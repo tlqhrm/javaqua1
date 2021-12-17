@@ -30,5 +30,5 @@ public interface MemberMapper {
 		
 		public int getEmail(String email);
 		
-		public MemberVO selectMember(MemberVO mvo);
+		public MemberVO selectMember(String user_id);
 }

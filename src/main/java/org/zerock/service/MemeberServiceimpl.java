@@ -70,7 +70,7 @@ public class MemeberServiceimpl implements MemberService {
 	}
 	
 	@Override
-	public MemberVO selectMember(MemberVO mvo) {
-		return mapper.selectMember(mvo);
+	public MemberVO selectMember(String user_id) {
+		return mapper.selectMember(user_id);
 	}
 }
