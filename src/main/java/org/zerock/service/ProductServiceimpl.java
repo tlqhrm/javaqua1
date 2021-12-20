@@ -76,6 +76,12 @@ public class ProductServiceimpl implements ProductService {
 		return pdto.getStartEnd();
 	}
 
+	@Override
+	public int productRegist(ProductVO pvo) {
+		int result = mapper.productRegist(pvo);
+		return result;
+	}
+
 
 	
 }

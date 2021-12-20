@@ -20,4 +20,6 @@ public interface ProductService {
 
 	public List<ProductVO> getList(ProductCriteria cri);
 
+	public int productRegist(ProductVO pvo);
+
 }

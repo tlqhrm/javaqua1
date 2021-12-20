@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/css/product_list.css">
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    
+    <script src="/resources/js/mouse.js"></script>
 
     
 
@@ -37,7 +37,8 @@
                         <ul class="list_1" style=" position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
                         	<c:forEach items="${pdList }" var="pd">
                         	
-                            <li class="cut" id=list_1><a href='/product/productDetail?pd_num=${pd.pd_num }'><img src="/resources/upload/${pd.file1 }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
+                            <li class="cut" id=list_1><span id="list_img"><a href='/product/productDetail?pd_num=${pd.pd_num }'><img src="/resources/upload/product/${pd.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
+                            	</span>
                                 <div class="info_goods" >
                                     <span class="name">                              
                                         <a class="txt" href='/product/productDetail?pd_num=${pd.pd_num }'>${pd.title }</a>

@@ -61,7 +61,7 @@ public class BoardController {
 	@PostMapping("/boardWrite")
 	public String writeBoard(BoardVO bvo, Model model,@SessionAttribute("id") String id,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {
 		
-		String path2 = "C:\\sts\\spring_study\\ex021\\src\\main\\webapp\\resources\\upload\\board";
+		String path2 = "C:\\git\\javaqua1\\src\\main\\webapp\\resources\\upload\\board";
 		context = request.getServletContext();
 		String path = context.getRealPath("resources/upload/board");
 		

@@ -15,12 +15,12 @@
 		<![CDATA[select * from (select ROWNUM as rnum, A.* from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
 	</select>
 	
-	<insert id="insert">
-		<selectKey keyProperty="bd_id" order="BEFORE" resultType="_int">
-			select board_seq.nextval from dual
+	<insert id="productRegist">
+		<selectKey keyProperty="pd_num" order="BEFORE" resultType="_int">
+			select product_seq.nextval from dual
 		</selectKey>
-		<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1)
-				 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1})]]>
+		<![CDATA[insert into Product(pd_num, category1, category2, title, price, content, file1, stock, discount)
+				 values(#{pd_num}, #{category1}, #{category2}, #{title}, #{price}, #{content}, #{file1}, #{stock}, #{discount})]]>
 	</insert>
 	
 

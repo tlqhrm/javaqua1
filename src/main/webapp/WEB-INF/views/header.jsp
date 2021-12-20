@@ -79,7 +79,7 @@
                 </ul>
             </div>         
             <c:if test="${admin eq 1}">
-            	<h1>관리자 로그인 입니다.</h1>
+            	<div><h1 style="display: inline-block;">관리자 로그인 입니다.</h1><span style="position: absolute;right: 10px; z-index:10;"><button type="button" onClick="location.href='/product/productRegistForm'">상품등록</button></span></div>
             </c:if>         
         </div>
         <div id="header3">

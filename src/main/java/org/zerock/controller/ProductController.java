@@ -2,24 +2,35 @@ package org.zerock.controller;
 
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.omg.CORBA.Request;
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.zerock.domain.ProductVO;
+import org.zerock.etc.ImagePath;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.service.ProductService;
 
@@ -28,7 +39,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/product/*")
+@RequestMapping(value= "/product/*", produces = "application/text; charset=UTF-8")
 @AllArgsConstructor
 public class ProductController {
 	@Autowired
@@ -63,48 +74,96 @@ public class ProductController {
 		return "/product_list.jsp";
 	}
 	
-	@GetMapping("/writeForm")
-	public String writepvoForm(String bd_category2, Model model) {
+	@GetMapping("/productRegistForm")
+	public String registForm() {
 		
-		log.info("writepvoForm............ " + bd_category2);
+		log.info("ProductRegistForm............ ");
+	
 		
-		model.addAttribute("bd_category2",bd_category2);
-		return "/pvo_write.jsp";
+		return "/product_regist.jsp";
 	}
-	  
-//	@PostMapping("/write")
-//	public String writepvo(ProductVO pvo, Model model,@SessionAttribute("id") String id, MultipartFile file , HttpServletRequest request) {
-//		
-//		String path2 = "C:\\sts\\spring_study\\ex021\\src\\main\\webapp\\resources\\upload\\pvo";
-//		context = request.getServletContext();
-//		String path = context.getRealPath("resources/upload/pvo");
-//		
-//		
-//		log.info("-----------------------");
-//		log.info("Upload File Name: "+file.getOriginalFilename());
-//		log.info("Upload File Size: "+file.getSize());
-//		pvo.setFile1(file.getOriginalFilename());
-//		
-//		File saveFile = new File(path, file.getOriginalFilename());
-//		File saveFile2 = new File(path2, file.getOriginalFilename());
+	
+	@ResponseBody
+	@PostMapping("/productRegist")
+	public String writepvo(ProductVO pvo, Model model, MultipartHttpServletRequest mhsr ){
 //		try {
-//			file.transferTo(saveFile);
-//			file.transferTo(saveFile2);
-//		}catch (Exception e) {
-//			log.error(e.getMessage());
+//			mhsr.setCharacterEncoding("UTF-8");
+//		} catch (UnsupportedEncodingException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
 //		}
-//		
-//		
-//		log.info("/write.....");
-//		pvo.setUser_id(id);
-//		
-//		service.register(pvo);
-//		
-//		int bd_id = pvo.getBd_id();
-//				
-//		return "redirect:/pvo/read?bd_id="+bd_id;
-//	}
-//	
+		
+		System.out.println(1);
+		String category1 = null;
+		String[] category1_arr = mhsr.getParameterValues("category1");
+		for( String c1 : category1_arr) {
+			if(category1 == null) {
+				category1 = (c1+";");
+			}else {
+				category1 += (c1+";");
+			}
+		}
+		System.out.println(2);
+		pvo.setCategory1(category1);
+		
+		pvo.pvoInit();
+		
+		
+		String path = ImagePath.get();
+		System.out.println(3);
+		List<MultipartFile> files = mhsr.getFiles("files");
+		StringBuffer sb = new StringBuffer();
+		System.out.println(4);
+//		UUID uuid;
+		int i = 0;
+		for(MultipartFile f : files) {
+			System.out.println(11);
+//			uuid = UUID.randomUUID();
+			String fileName = pvo.getFile1Arr()[i];
+			System.out.println(11.5);
+			System.out.println(fileName);
+			sb.append(fileName+";");
+			System.out.println(sb);
+			System.out.println(12);
+//			MultipartFile mFile = mhsr.getFile(f.getOriginalFilename());
+			File file = new File(path+"product", fileName);
+			System.out.println(path+"product"+ fileName);
+			System.out.println(13);
+//			if(mFile.getSize() != 0) {
+				System.out.println(14);
+				if(!file.exists()) {
+					System.out.println(15);
+					if(file.getParentFile().mkdirs()) {
+						System.out.println(16);
+						try {
+							file.createNewFile();
+							System.out.println(17);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+//				}
+				System.out.println(18);
+				try {
+					f.transferTo(file);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			i++;
+		}
+		System.out.println(19);
+		log.info(sb);
+		String file1 = sb.toString();
+		pvo.setFile1(file1);
+		
+		service.productRegist(pvo);
+		
+		String pd_num = Integer.toString(pvo.getPd_num());
+
+		return pd_num;
+	}
+	
 	@GetMapping("/productDetail")
 	public String readpvo(int pd_num,Model model) {
 		log.info("read:" + pd_num);
@@ -112,7 +171,8 @@ public class ProductController {
 		ProductVO pvo = service.productDetail(pd_num);
 
 		pvo.setPrice2(pvo.getPrice() - (pvo.getPrice() / pvo.getDiscount()));
-
+		
+		pvo.pvoInit();
 		model.addAttribute("pvo",pvo);
 		
 		return "/product_detail.jsp";
