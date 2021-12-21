@@ -1,11 +1,17 @@
 package org.zerock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.zerock.domain.CartVO;
+import org.zerock.domain.Order1VO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.ProductVO;
 import org.zerock.service.OrderService;
@@ -22,7 +28,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@GetMapping("/direct_order")
-	public String direct_order(ProductVO pvo) {
+	public String direct_order() {
 		log.info("direct_order............" );
 		
 		return "/direct_order.jsp";
@@ -33,6 +39,17 @@ public class OrderController {
 		log.info("order_ok............" );
 		
 		return "/order_ok.jsp";
+	}
+	
+	@GetMapping("/order_list")
+	public String order_list(@SessionAttribute("id") String user_id , Model model) {
+		log.info("controller............ ");		
+		
+		List<Order1VO> orderlist = orderService.orderList(user_id);
+		List<OrderDetailVO> detail_list = orderService.orderDetailList(user_id);	
+		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("detail_list", detail_list);
+		return "/mypage_orderlist.jsp";
 	}
 	
 	@ResponseBody

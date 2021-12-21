@@ -12,7 +12,7 @@
 	    <meta name="viewport" content="width=device-width">  
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	    <link rel="stylesheet" href="css/10-11.css" />
+	    <link rel="stylesheet" href="/resources/css/10-11.css" />
 	    <link href="images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">	    
 	    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	    
@@ -63,7 +63,7 @@
 		                    <c:set var= "total" value="${total + (cart.price*cart.amount)}"/>    
 		                    <div class="row data">
 		                        <div class="subdiv">
-		                            <div class="img"><img src="upload/${cart.file1}" width="60"></div>
+		                            <div class="img"><img src="/resources/upload/${cart.file1}" width="60"></div>
 		                            <div class="pname">
 		                                <span>${cart.title}</span>
 		                            </div>
@@ -109,7 +109,7 @@
 		<script>
 			let id="${id}";	
 		</script>
-		<script type="text/javascript" src="js/10-11.js"></script>
+		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 
 
 	</body>

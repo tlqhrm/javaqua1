@@ -1,6 +1,7 @@
 const v=new Vue({
     el : "#app",
     data : {		
+    	배송비 : 3500,
 		회원정보 : {
 			name : '',
 			user_email : '',
@@ -9,36 +10,38 @@ const v=new Vue({
 		}
 	},	
 	created : function(){
-		if(id==null){alert("회원만 이용할수 있습니다.");location.href="login.jsp"}
+		if(!id){alert("회원만 이용할수 있습니다.");location.href="login.jsp"}
 		this.회원정보가져오기();
 	},	
+	computed : {
+		최종결제금액 : function(){
+			return (total*1)+this.배송비;
+		}	
+	},
 	methods : {
 		회원정보가져오기 : function(){
-		alert(id);
-			const params = new URLSearchParams();
-			params.append('command', 'member_info');
-			params.append('user_id', id);
-			
-			axios.post('JavaquaServlet',params)
-			.then(res=>{
-				this.회원정보 = res.data;
-				console.log(res.date);
-			})
-			.catch(err=>{
-			alert("오류가 발생했습니다.");
-			 	console.log(err);
-			});
+             const params = new URLSearchParams();
+             params.append('user_id', id);
+           
+             axios.post('/member/selectMember',params)
+             .then(res=>{
+            	this.회원정보 = res.data;
+             })
+             .catch(err=>{
+            	alert("오류가 발생했습니다.");
+              	console.log(err);
+             });
 		},
 		결제하기 : function(){
+			//product 리스트 받아와서 cart리스트랑 비교 후 재고 체크 해야함
              const params = new URLSearchParams();
-             params.append('command', 'cart_order');
              params.append('user_id', id);
-             params.append('totalprice', total+3500);
+             params.append('totalprice', this.최종결제금액);
            
-             axios.post('JavaquaServlet',params)
+             axios.post('/cart/cartOrder',params)
              .then(res=>{
-            	 if(res.data==1){	                	  
-            		location.href="order_ok.jsp";
+            	 if(res.data==200){	         	  
+            		location.href="/order/order_ok";
             	 }else{
             		 alert("재고가 부족합니다.");
             	 }

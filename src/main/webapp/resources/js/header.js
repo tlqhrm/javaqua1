@@ -228,6 +228,4 @@ $(function(){
         $('#mypage').find("ul").css('visibility','hidden');
     })
     $('#mypage ul').hover()
-    
-    console.log("얼럿");
 });     

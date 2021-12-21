@@ -10,8 +10,8 @@
 	    <title>JavaQua</title>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="이미지/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-	    <link rel="stylesheet" type="text/css" href="css/order.css">
-	    <link rel="stylesheet" type="text/css" href="css/mypage_orderlist.css">
+	    <link rel="stylesheet" type="text/css" href="/resources/css/order.css">
+	    <link rel="stylesheet" type="text/css" href="/resources/css/mypage_orderlist.css">
 	   	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
 
@@ -32,7 +32,7 @@
 						 	<c:forEach var="detail" items="${detail_list}"> 
 						 		<c:if test="${order.od_num == detail.od_num}">
 							 		<div class="order_goods">
-										<div class="name" onclick="location.href='JavaquaServlet?command=product_detail&pd_num=${detail.pd_num}'"> ${detail.title}<span style="float:right">＞</span></div>
+										<div class="name" onclick="location.href='/product/productDetail?&pd_num=${detail.pd_num}'"> ${detail.title}<span style="float:right">＞</span></div>
 										<div class="order_info">
 											<div class="thumb"><img style="margin-top:20px" width="80;" src="upload/${detail.file1}"></div>
 											<div class="desc">

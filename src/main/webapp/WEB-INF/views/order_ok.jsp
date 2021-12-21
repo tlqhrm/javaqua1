@@ -23,7 +23,7 @@
 			<div class="sub">	
 				<div style="margin-top:200px">		
 					<h3 class="tit">주문이 정상적으로 완료되었습니다.</h3>		
-					<div class="cashbox_btn1"><a style="text-decoration:none; color:#fff" href="JavaquaServlet?command=order_list">주문내역 확인</a></div>	
+					<div class="cashbox_btn1"><a style="text-decoration:none; color:#fff" href="/order/order_list">주문내역 확인</a></div>	
 				</div>												
 			</div>
 		</div>
