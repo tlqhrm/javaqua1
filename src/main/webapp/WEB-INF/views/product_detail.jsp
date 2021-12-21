@@ -40,7 +40,7 @@
          			<c:if test="${size == 0 }"><c:set var="size" value="1" /></c:if> 
          			<c:if test="${size > 4 }"><c:set var="size" value="5" /></c:if> 
 					<c:forEach var="i" begin="0" end="${size - 1}">					
-					    <span class="prev_img" style="margin-right:-5px;"><img  src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/images/이미지준비중.jpg'"> </span> 
+					    <span class="prev_img" style="margin-right:-5px;"><img  src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/resources/images/이미지준비중.jpg'"> </span> 
 					
 					</c:forEach>
         
