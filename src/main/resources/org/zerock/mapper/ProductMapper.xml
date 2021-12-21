@@ -20,7 +20,7 @@
 			select product_seq.nextval from dual
 		</selectKey>
 		<![CDATA[insert into Product(pd_num, category1, category2, title, price, content, file1, stock, discount)
-				 values(#{pd_num}, #{category1}, #{category2}, #{title}, #{price}, #{content}, #{file1}, #{stock}, #{discount})]]>
+				 values(#{pd_num}, #{category1, jdbcType=VARCHAR}, #{category2}, #{title}, #{price}, #{content}, #{file1}, #{stock}, #{discount})]]>
 	</insert>
 	
 
@@ -32,8 +32,9 @@
 		delete board where bd_id = #{bd_id}
 	</delete>
 	
-	<update id="update">
-		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1} where bd_id=#{bd_id}
+	<update id="productUpdate">
+		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
+		 		content=#{content}, file1=#{file1}, stock=#{stock}, discount=#{stock} where pd_num=#{pd_num}]]>
 	</update>
 	<update id="updateCount">
 		update board set hit=hit+1 where bd_id=#{bd_id}

@@ -37,17 +37,18 @@
                         <ul class="list_1" style=" position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
                         	<c:forEach items="${pdList }" var="pd">
                         	
-                            <li class="cut" id=list_1><span id="list_img"><a href='/product/productDetail?pd_num=${pd.pd_num }'><img src="/resources/upload/product/${pd.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></a>
-                            	</span>
+                            <li class="cut" id=list_1><a href='/product/productDetail?pd_num=${pd.pd_num }'><span id="list_img"><span style="display:inline-block"><img src="/resources/upload/product/${pd.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="max-width:249px; max-height:249px;"></span>
+                            	</span></a>
                                 <div class="info_goods" >
                                     <span class="name">                              
                                         <a class="txt" href='/product/productDetail?pd_num=${pd.pd_num }'>${pd.title }</a>
                                     </span><br>
-                                    <span class="price">
-                                    	<c:if test="${pd.discount ne 0 }">
+                                    <c:if test="${pd.discount ne 0 }">
                                         <span class="discount">${pd.discount }%</span>
                                         </c:if>
-                                        ${pd.strPrice }원
+                                    <span class="price">
+                                    	
+                                        ${pd.price }원
                                     </span>  
                                     <c:forEach items="${pd.category1Arr }" var="ca1">
                                     	<c:if test="${ca1 eq 'new' }">
@@ -64,14 +65,14 @@
                                     		<span class="icon_stock"></span>
                                     	</c:if>
                                         
-                                        <span class="cost" style="display:block;"><c:if test="${pd.discount ne 0 }">${pd.strPrice2 }원</c:if></span>
+                                        <span class="cost" style="display:block;"><c:if test="${pd.discount ne 0 }">${pd.price2 }원</c:if></span>
                                         
                                     <span class="under">
                                         <a href='#none' class=under_cart></a>
                                         <a href='#none' class=under_wish></a>
                                         <c:if test="${admin eq 1 }">
                                         <span >
-                                        <button type="button" onClick="location.href='JavaquaServlet?command=product_update_form&pd_num=${pd.pd_num}'">수정</button>
+                                        <button type="button" onClick="location.href='/product/productUpdateForm?pd_num=${pd.pd_num}'">수정</button>
                                         <button type="button" onClick="deleteCheck('${pd.title}','${pd.pd_num }')">삭제</button>
                                         </span>
                                         </c:if>
@@ -126,6 +127,23 @@ function deleteCheck(t,n){
 	confirm("'"+t+"'"+" 를 삭제 합니다.");
 	location.href='JavaquaServlet?command=product_delete&pd_num='+n;
 }
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+$(document).ready(function(){
+
+	let price = document.querySelectorAll(".price");
+	let cost = document.querySelectorAll(".cost");
+	for (var i=price.length; i--;){
+		price[i].textContent = numberWithCommas(price[i].textContent);
+	}
+	for (var i=cost.length; i--;){
+		cost[i].textContent = numberWithCommas(cost[i].textContent);
+	}
+
+});
+
 </script>
 </body>
 </html>

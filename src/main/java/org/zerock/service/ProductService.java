@@ -22,4 +22,6 @@ public interface ProductService {
 
 	public int productRegist(ProductVO pvo);
 
+	public int productUpdate(ProductVO pvo);
+
 }

@@ -82,6 +82,12 @@ public class ProductServiceimpl implements ProductService {
 		return result;
 	}
 
+	@Override
+	public int productUpdate(ProductVO pvo) {
+		int result = mapper.productUpdate(pvo);
+		return result;
+	}
+
 
 	
 }

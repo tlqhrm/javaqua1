@@ -36,19 +36,11 @@
          		<div id="bg2" style="text-align:center; display:inline-block;">     
          			<span id="main_img" ><img src="/resources/upload/product/${pvo.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="margin-left:auto; margin-right:auto;"></span>
          			<div id="bg3" style=" float:left;">
-         			<c:set var="size" value="${fn:length(pvo.file1Arr)}" />
-         			
-         			<c:choose>
-         				<c:when test="${size > 3 }">
-         					<c:set var="size" value="5" />
-         				</c:when>
-         				<c:otherwise>
-         					<c:set var="size" value="2" />
-         				</c:otherwise>
-         			</c:choose>
- 
+					<c:set var="size" value="${fn:length(pvo.file1Arr)}" />
+         			<c:if test="${size == 0 }"><c:set var="size" value="1" /></c:if> 
+         			<c:if test="${size > 4 }"><c:set var="size" value="5" /></c:if> 
 					<c:forEach var="i" begin="0" end="${size - 1}">					
-					    <span class="prev_img" style=""><img src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/resources/images/이미지준비중.jpg'"> </span> 
+					    <span class="prev_img" style="margin-right:-5px;"><img  src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/images/이미지준비중.jpg'"> </span> 
 					
 					</c:forEach>
         
@@ -138,7 +130,7 @@
                 	<div>
                     <img src="/resources/images/detail/이용매뉴얼.png">
                     </div>
-                	<div style="float:left">${pvo.content }</div>
+                	<div style="float:left; font-size:20px;">${pvo.content }</div>
 
                     <!-- <img src="/resources/images/detail/상품결제정보.png"> -->
                     <img src="/resources/images/detail/배송정보.png">

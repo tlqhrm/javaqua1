@@ -7,11 +7,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">  
+    <link href="images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="/resources/image/x-icon">  
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
-    <link rel="stylesheet" type="text/css" href="css/product_regist.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/product_regist.css">
 </head>
 
 <body>
@@ -34,12 +34,12 @@
 	            	<c:forEach items="${pvo.file1Arr}" var="file" varStatus="i">   
 	            	    <c:if test="${i.index < 5 }">                                                      
                     	<span class="prev_img" id="prev_img_id_${i.index }" style="width:70px; height:70px; display:inline-block; border:1px solid gray">
-	            			<img src="/upload/${file }" data-file="${file }" class="selProductFile" style="">
+	            			<img src="/resources/upload/product/${file }" data-file="${file }" class="selProductFile" style="">
 	            		</span> 
 	            		</c:if>
 	            		<c:if test="${i.index >= 5 }">                                                      
                     	<span class="prev_img" id="prev_img_id_${i.index }" style="width:70px; height:70px; display:inline-block; border:1px solid gray; display:none;">
-	            			<img src="/upload/${file }" data-file="${file }" class="selProductFile" style="">
+	            			<img src="/resources/upload/product/${file }" data-file="${file }" class="selProductFile" style="">
 	            		</span> 
 	            		</c:if>
 			        </c:forEach>   
@@ -71,10 +71,10 @@
        							</td> 				
        	                    </tr>
                             <tr>
-                                <th class="info2">분류</th>
+                                <th class="info2">카테고리</th>
                                 <td class="info2">
                                 <select name="category2" id="category2" data-ca2="${pvo.category2 }">
-	                                <option value = "123" >선택해주세요</option>
+	                                <option value = "select" selected >선택해주세요</option>
 				                    <option value = "랜덤금붕어" >랜덤금붕어</option>
 				                    <option value = "최상급 금붕어">최상급 금붕어</option>
 				                    <option value = "오란다">오란다</option>
@@ -121,7 +121,7 @@
                                 <td class="info4" id="img_controll" style="overflow:scroll;width:490px; height:300px; vertical-align: top; display:inline-block;">
                                 <c:forEach items="${pvo.file1Arr}" var="file" varStatus="i">                                                             
                              		<div class="controll_div" id="img_controll_id_${i.index }" data-file1="${file }" data-file2="${file }">
-						        	<span class="controll_span_1"><img src="/upload/${file }" data-file="${file }" class="selProductFile" title="Click to remove" style="max-width:73px; max-height:73px;\"></span>
+						        	<span class="controll_span_1"><img src="/resources/upload/product/${file }" data-file="${file }" class="selProductFile" title="Click to remove" style="max-width:73px; max-height:73px;\"></span>
 						        	<span class="controll_span_2">&nbsp;&nbsp;${file }</span>
 						        	<span class="controll_span_3"><button type="button" onClick="deleteImageAction(${i.index})" id="removeImg_${i.index }" style="cursor:not-allowed">삭제</button></span>
 						        	</div>
@@ -144,10 +144,7 @@
             <section><hr>
             	<h2><br>-----------------------본문 입력-------------------------</h2><Br><hr>
 
-                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;">
-                	<div class="place_h" placeholder="내용을 입력하세요."></div>
-                	${pvo.content}
-				</div>
+                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;"><div class="place_h" placeholder="내용을 입력하세요.">${pvo.content}</div></div>
             </section>
             
 		
@@ -157,16 +154,19 @@
 <span class="target"></span>
 <script>
 
-
 var sel_files = [];
+var sel_files2 = [];
 var content_box = document.getElementById("content_box");
 var files = document.getElementById("files");
 var index=document.getElementsByClassName("controll_div").length;
 
 
-console.log(index);
-
-
+function guid() {
+	  function _s4() {
+	    return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+	  }
+	  return _s4() + _s4() + '-' + _s4() + '-' + _s4() + '-' + _s4() + '-' + _s4() + _s4() + _s4();
+}
 
 document.addEventListener('keydown', event => {
 	  if (event.key === 'Enter') {
@@ -179,14 +179,10 @@ document.addEventListener('keydown', event => {
 $(document).ready(function(){
 	var modicon = [];
 	modicon = document.getElementById("hidden").value.split("<span id='split'></span>");
-	//.replace(/<xmp>/gi,"")
+
 	
 	for(var i=0; i<index; i++){
-		document.querySelector("#img_id_"+i+" > span").innerHTML += "<xmp id='xmp_"+i+"'>" +modicon[i] + "<span id='split'></span></xml>";
-		console.log(document.querySelector("#img_id_"+i+" > span").contentText);
-		console.log("modicon"+i+" : " + modicon[i]);
-		console.log(content_box.textContent);
-		
+		document.querySelector("#img_id_"+i+" > span").innerHTML += "<xmp id='xmp_"+i+"'>" +modicon[i] + "<span id='split'></span></xmp>";
 	}
 	
 	$(document).keydown(function(e){
@@ -209,12 +205,11 @@ $(document).ready(function(){
 	for(var i=0; i<index; i++){
 		var f = document.querySelector("#prev_img_id_"+i+" > img").getAttribute('data-file');
 		
-		sel_files.push(f);
+		sel_files.push(f+";");
 	}
 	
 	var ca2 = document.querySelector("#category2").getAttribute('data-ca2');
 	$('#category2').val(ca2).prop("selected",true);
-	console.log(ca2);
 	var ca1 = [];
 	var check_ca1 = document.getElementsByClassName("check_ca1");
 	var ca1 = check_ca1[0].getAttribute("data-ca1").split(";");
@@ -240,11 +235,8 @@ $(document).ready(function(){
 		
 
 
-console.log(document.getElementsByClassName('prev_img'));
-
 content_box.addEventListener("blur",function(){
 	document.getElementById("hidden").value = content_box.textContent;
-	console.log(document.getElementById("hidden").value);
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
@@ -258,9 +250,6 @@ document.getElementById("img_controll").addEventListener("click",function(){
 		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
 		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
 	}
-	console.log(document.getElementById("hidden").value)
-	console.log(document.getElementById("file_names1").value)
-	console.log(document.getElementById("file_names2").value)
 });
 
 
@@ -277,11 +266,9 @@ var discount = document.querySelector("#tmain > table > tbody > tr.info > td > i
 var price2 = document.querySelector("#tmain > table > tbody > tr.info > td > span > span");
 
 price.addEventListener("change",function(){
-	console.log(price.value);
 	price2.innerText = (parseInt(price.value) + (parseInt(price.value) * parseInt(discount.value)) / 100)+"원" ;
 });
 discount.addEventListener("change",function(){
-	console.log(price.value);
 	price2.innerText = (parseInt(price.value) + (parseInt(price.value) * parseInt(discount.value)) / 100)+"원" ;
 });
 
@@ -289,40 +276,27 @@ discount.addEventListener("change",function(){
 function fileUploadAction(){	
 	
 	files.value='';	
-	console.log(files.files); 
-	console.log("fileUploadAction");
 	$("#files").trigger("click");
 }
 
 var cnt=0;
 
 function handleImgFileSelect(e){
-
-	
-	
-	console.log("handleImgFileSelect");
-	console.log(files.files); 
-	
 	
 	var filesArr = Array.prototype.slice.call(files.files);
-	console.log("filesArr.length" + filesArr.length);
-	console.log(filesArr[0].name);
-	
+
 	filesArr.forEach(function(f) {
-		console.log("f.name: "+f.name);
 		var nameArr = f.name.split(".");
 		var date1 = new Date();
-		var fileName = date1.getTime()+index+cnt+"."+nameArr[1];  
+		var fileName = guid()+f.name;  
 		cnt++
-		
-		console.log(fileName);
 		for(var i=0; i<sel_files.length; i++){
 			if(sel_files[i].name === f.name){
 				alert("같은파일은 업로드 할 수 없습니다.");
 				return;
 			}
 		}
-		sel_files.push(f);
+		sel_files2.push(f);
 		var html;
 		var reader = new FileReader();
 		reader.onload = function(e){
@@ -336,7 +310,7 @@ function handleImgFileSelect(e){
 				document.getElementById("bg3").innerHTML = document.getElementById("bg3").innerHTML + html;	
 
 			}
-			var text = "<div id=\"img_id_"+index+"\"><img src=\"/upload/"+fileName+"\" style='max-width:900px; display:block'><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\"></div></div><span id='split'></span>";
+			var text = "<div id=\"img_id_"+index+"\"><img src=\"/resources/upload/product/"+fileName+"\" style='max-width:900px; display:block'><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\" style=\"font-size:20px;\"></div></div><span id='split'></span>";
 			
 		//	html = "<div id=\"img_id_"+index+"\" style=\"\"><img src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"><xmp>"+text+"<br></xmp></span></div><div>&nbsp</div>";
 		//	html = "<input type=\"image\" src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" readonly width=\"900px\"><br><span style=\"display:none\">"+f.name+"</span><div placeholder=\"여기에 글자를 입력해주세요.\" style=\"font-size:12px;\"></div>"
@@ -359,20 +333,14 @@ function handleImgFileSelect(e){
 			index++;								
 		}
 		reader.readAsDataURL(f);	
-		
-			
-		console.log(index);
-		console.log(sel_files);
+
 	});
 	
 	
 }
 
 function deleteImageAction(index1){
-	console.log("index : " +index);
-	console.log("index1 : " +index1);
-	
-	
+
 	sel_files.splice(index1, 1);
 
 	var img_id = "#img_id_"+index1;
@@ -396,7 +364,6 @@ function deleteImageAction(index1){
 	if(index1 < 5 && index > 5){
 		document.getElementById("prev_img_id_"+4).style.display = 'inline-block';
 	}
-	console.log("index : " + index + " : after");
 	index--;
 	
 	if(index1 == 0){
@@ -405,41 +372,63 @@ function deleteImageAction(index1){
 	if(index == 0){
    		$("#main_img").attr("src","");   
 	}
-	console.log("index : " + index + " : after");
-	
-
-	console.log(files.files); 
-	console.log(sel_files);
-	
-	
 }
 
 function submitAction(){
+	if($("input[name=title]").val()==null || $("input[name=title]").val() == ''){
+		alert("제목을 입력해 주세요.");
+		return false;
+	}
+	if($("input[name=price]").val()==null || $("input[name=price]").val() == ''){
+		alert("가격을 입력해 주세요.");
+		return false;
+	}
+	if($("#category2").val()=='select'){
+		alert("카테고리를 선택해 주세요.");
+		return false;
+	}
+	if($("input[name=stock]").val()==null || $("input[name=stock]").val() == ''){
+		alert("재고를 입력해 주세요.");
+		return false;
+	}
+	if($("#hidden").val()==null || $("#hidden").val() == ''){
+		alert("내용을 입력해 주세요.");
+		return false;
+	}
+	
+	
 	let form1 = document.getElementById("form1");
 
 	let formData = new FormData(form1);
 
-	for(let i=0, len=sel_files.length; i<len; i++){
-		let name = "image_"+i;
+	for(let i=0; i<sel_files.length ; i++){
 		formData.append("files",sel_files[i]);		
+		
+	}
+	for(let i=0; i<sel_files2.length; i++){
+		formData.append("files2",sel_files2[i]);		
 		
 	}
 	formData.append("files_length",sel_files.length);
 	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST","JavaquaServlet");
-	//xhr.setRequestHeader("Content-type", "multipart/form-data");
-	xhr.onload = function(e){
-		if(this.status == 200){
-			console.log("Result : " + e.currentTarget.responseText);
+	$.ajax({
+		url : "/product/productUpdate",
+		type : "post",
+		data : formData,
+		cache : false,
+		contentType : false,
+		processData : false,
+		dataType: "text",
+		success : function(data){
+			location.href = "/product/productDetail?pd_num="+data;
+			console.log(data);
+		},
+		error : function(data){
+			console.log("send formData error.");
 		}
-	}
-	xhr.send(formData);
-	
-	location.href = "index.jsp";
+		
+	})
 }
-
-
 
 
 

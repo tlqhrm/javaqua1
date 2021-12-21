@@ -309,8 +309,11 @@
 .controll_span_2{
 	display:inline-block; 
 	width:300px; height:73px; 
-	font-size:20px; position:absolute; 
+	position:absolute; 
 	top:0px; 
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
 	line-height:70px;
 }
 .controll_span_3{

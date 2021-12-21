@@ -86,22 +86,20 @@ public class ProductController {
 	@ResponseBody
 	@PostMapping("/productRegist")
 	public String writepvo(ProductVO pvo, Model model, MultipartHttpServletRequest mhsr ){
-//		try {
-//			mhsr.setCharacterEncoding("UTF-8");
-//		} catch (UnsupportedEncodingException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
+
 		System.out.println(1);
 		String category1 = null;
 		String[] category1_arr = mhsr.getParameterValues("category1");
-		for( String c1 : category1_arr) {
-			if(category1 == null) {
-				category1 = (c1+";");
-			}else {
-				category1 += (c1+";");
+		if(category1_arr != null) {
+			for( String c1 : category1_arr) {
+				if(category1 == null) {
+					category1 = (c1+";");
+				}else {
+					category1 += (c1+";");
+				}
 			}
+		}else {
+			category1=";";
 		}
 		System.out.println(2);
 		pvo.setCategory1(category1);
@@ -112,37 +110,33 @@ public class ProductController {
 		String path = ImagePath.get();
 		System.out.println(3);
 		List<MultipartFile> files = mhsr.getFiles("files");
+
 		StringBuffer sb = new StringBuffer();
 		System.out.println(4);
-//		UUID uuid;
 		int i = 0;
 		for(MultipartFile f : files) {
 			System.out.println(11);
-//			uuid = UUID.randomUUID();
 			String fileName = pvo.getFile1Arr()[i];
 			System.out.println(11.5);
 			System.out.println(fileName);
 			sb.append(fileName+";");
 			System.out.println(sb);
 			System.out.println(12);
-//			MultipartFile mFile = mhsr.getFile(f.getOriginalFilename());
 			File file = new File(path+"product", fileName);
 			System.out.println(path+"product"+ fileName);
 			System.out.println(13);
-//			if(mFile.getSize() != 0) {
-				System.out.println(14);
-				if(!file.exists()) {
-					System.out.println(15);
-					if(file.getParentFile().mkdirs()) {
-						System.out.println(16);
-						try {
-							file.createNewFile();
-							System.out.println(17);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+			System.out.println(14);
+			if(!file.exists()) {
+				System.out.println(15);
+				if(file.getParentFile().mkdirs()) {
+					System.out.println(16);
+					try {
+						file.createNewFile();
+						System.out.println(17);
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-//				}
+				}
 				System.out.println(18);
 				try {
 					f.transferTo(file);
@@ -170,59 +164,113 @@ public class ProductController {
 		
 		ProductVO pvo = service.productDetail(pd_num);
 
-		pvo.setPrice2(pvo.getPrice() - (pvo.getPrice() / pvo.getDiscount()));
+		pvo.setPrice2((pvo.getPrice()+(pvo.getPrice()*pvo.getDiscount()))/100);
+
 		
 		pvo.pvoInit();
 		model.addAttribute("pvo",pvo);
 		
 		return "/product_detail.jsp";
 	}
-	@PostMapping("/modifyForm")
-	public String modifypvoForm(ProductVO pvo,Model model) {
-		log.info("modifyForm:" + pvo);
+	@GetMapping("/productUpdateForm")
+	public String modifypvoForm(int pd_num,Model model) {
+		log.info("productUpdateForm:" + pd_num);
 				
+		ProductVO pvo = service.productDetail(pd_num);
+		pvo.pvoInit();
 		model.addAttribute("pvo",pvo);
-		return "/pvo_update.jsp";
+		return "/product_update.jsp";
 	}
 	
-//	@PostMapping("/modify")
-//	public String modifypvo(ProductVO pvo,Model model, MultipartFile file) {
-//		log.info("modify:" + pvo);
-//		int bd_id = pvo.getBd_id();
-//		
-//		boolean result = service.modify(pvo);
-//		if(result) {
-//		
-//			if(pvo.getFile1() == null) {
-//					
-//			String uploadFolder = "C:\\sts\\spring_study\\ex021\\src\\main\\webapp\\resources\\upload\\pvo";
-//			log.info("-----------------------");
-//			log.info("Upload File Name: "+file.getOriginalFilename());
-//			log.info("Upload File Size: "+file.getSize());
-//			pvo.setFile1(file.getOriginalFilename());
-//			File saveFile = new File(uploadFolder, file.getOriginalFilename());
-//			
-//				try {
-//					file.transferTo(saveFile);
-//				}catch (Exception e) {
-//					log.error(e.getMessage());
-//				}		
-//			}
-//			else {
-//				log.info("파일변경 X");
-//			}	
-//			
-//			model.addAttribute("pvo",pvo);
-//			log.info(bd_id+"번 게시글 수정 완료");
-//			return "redirect:/pvo/read?bd_id="+bd_id;
-//		}else {
-//			log.info(bd_id+"번 게시글 수정 실패");
-//		}
-//		
-//
-//		return "redirect:/pvo/read?bd_id="+bd_id;
-//	}
-//	
+	@ResponseBody
+	@PostMapping("/productUpdate")
+	public String productUpdate(ProductVO pvo, Model model, MultipartHttpServletRequest mhsr ){
+
+		System.out.println(1);
+		String category1 = null;
+		String[] category1_arr = mhsr.getParameterValues("category1");
+		
+		if(category1_arr != null) {
+			for( String c1 : category1_arr) {
+				if(category1 == null) {
+					category1 = (c1+";");
+				}else {
+					category1 += (c1+";");
+				}
+			}
+		}else {
+			category1=";";
+		}
+		System.out.println(2);
+		pvo.setCategory1(category1);
+		
+		pvo.pvoInit();
+		
+		StringBuffer sb = new StringBuffer();
+		
+		String path = ImagePath.get();
+		System.out.println(3);
+		
+		int i = 0;
+		String[] files = mhsr.getParameterValues("files");
+		if (files != null) {
+			for(String f : files) {
+				System.out.println(f);
+				sb.append(f);
+			}
+			i = files.length;
+		}
+		List<MultipartFile> files2 = mhsr.getFiles("files2");
+		int files_length = Integer.parseInt(mhsr.getParameter("files_length"));
+		
+
+		System.out.println(files_length);
+		
+		System.out.println(4);
+		
+		for(MultipartFile f : files2) {
+			System.out.println(11);
+			String fileName = pvo.getFile1Arr()[i];
+			System.out.println(11.5);
+			System.out.println(fileName);
+			sb.append(fileName+";");
+			System.out.println(sb);
+			System.out.println(12);
+			File file = new File(path+"product", fileName);
+			System.out.println(path+"product"+ fileName);
+			System.out.println(13);
+			System.out.println(14);
+			if(!file.exists()) {
+				System.out.println(15);
+				if(file.getParentFile().mkdirs()) {
+					System.out.println(16);
+					try {
+						file.createNewFile();
+						System.out.println(17);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				System.out.println(18);
+				try {
+					f.transferTo(file);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			i++;
+		}
+		System.out.println(19);
+		log.info(sb);
+		String file1 = sb.toString();
+		pvo.setFile1(file1);
+		
+		service.productUpdate(pvo);
+		
+		String pd_num = Integer.toString(pvo.getPd_num());
+
+		return pd_num;
+	}
 //	
 //	@PostMapping("/remove")
 //	public String remove(ProductVO pvo) {

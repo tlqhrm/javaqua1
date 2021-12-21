@@ -50,7 +50,7 @@
                             <tr class="info">
                                 <th class="info1">판매가</th>
                                 <td ><input type="text" size="5" name="price" style="height:20px;font-size:15px;">원 &nbsp&nbsp
-                                 	할인율 <input type="text" size="2" name="discount">% <span>&nbsp&nbsp&nbsp 할인 전 가격:<span></span></span></span> <br>&nbsp<br>
+                                 	할인율 <input type="text" size="2" name="discount" value=0>% <span>&nbsp&nbsp&nbsp 할인 전 가격:<span></span></span></span> <br>&nbsp<br>
                                 	<input class="check_ca1" type="checkbox" name="category1" value="new" data-ca1="${pvo.category1}">신상품
       								  <input class="check_ca1" type="checkbox" name="category1" value="sale">세일
        								  <input class="check_ca1" type="checkbox" name="category1" value="best">베스트
@@ -59,8 +59,8 @@
                             <tr>
                                 <th class="info2">분류</th>
                                 <td class="info2">
-                                <select name="category2">
-	                                <option value = "123" >선택해주세요</option>
+                                <select name="category2" id="category2">
+	                                <option value = "select" >선택해주세요</option>
 				                    <option value = "랜덤 금붕어">랜덤 금붕어</option>
 				                    <option value = "최상급 금붕어">최상급 금붕어</option>
 				                    <option value = "오란다">오란다</option>
@@ -124,9 +124,7 @@
             <section><hr>
             	<h2><br>-----------------------본문 입력-------------------------</h2><Br><hr>
 
-                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;">
-                	<div class="place_h" placeholder="내용을 입력하세요."></div>
-				</div>
+                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;"><div class="place_h" placeholder="내용을 입력하세요."></div></div>
             </section>
             
 		
@@ -147,7 +145,7 @@ function guid() {
 	    return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
 	  }
 	  return _s4() + _s4() + '-' + _s4() + '-' + _s4() + '-' + _s4() + '-' + _s4() + _s4() + _s4();
-	}
+}
 
 document.addEventListener('keydown', event => {
 	  if (event.key === 'Enter') {
@@ -179,11 +177,8 @@ $(document).ready(function(){
 		
 
 
-console.log(document.getElementsByClassName('prev_img'));
-
 content_box.addEventListener("blur",function(){
 	document.getElementById("hidden").value = content_box.textContent;
-	console.log(document.getElementById("hidden").value);
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
@@ -197,8 +192,6 @@ document.getElementById("img_controll").addEventListener("click",function(){
 		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
 		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
 	}
-	console.log(document.getElementById("file_names1").value)
-	console.log(document.getElementById("file_names2").value)
 });
 
 
@@ -215,11 +208,9 @@ var discount = document.querySelector("#tmain > table > tbody > tr.info > td > i
 var price2 = document.querySelector("#tmain > table > tbody > tr.info > td > span > span");
 
 price.addEventListener("change",function(){
-	console.log(price.value);
 	price2.innerText = (parseInt(price.value) + (parseInt(price.value) * parseInt(discount.value)) / 100)+"원" ;
 });
 discount.addEventListener("change",function(){
-	console.log(price.value);
 	price2.innerText = (parseInt(price.value) + (parseInt(price.value) * parseInt(discount.value)) / 100)+"원" ;
 });
 
@@ -227,8 +218,6 @@ discount.addEventListener("change",function(){
 function fileUploadAction(){	
 	
 	files.value='';	
-	console.log(files.files); 
-	console.log("fileUploadAction");
 	$("#files").trigger("click");
 }
 
@@ -236,24 +225,14 @@ var cnt=0;
 
 function handleImgFileSelect(e){
 
-	
-	
-	console.log("handleImgFileSelect");
-	console.log(files.files); 
-	
-	
 	var filesArr = Array.prototype.slice.call(files.files);
-	console.log("filesArr.length" + filesArr.length);
-	console.log(filesArr[0].name);
-	
+
 	filesArr.forEach(function(f) {
-		console.log("f.name: "+f.name);
 		var nameArr = f.name.split(".");
 		var date1 = new Date();
 		var fileName = guid()+f.name;  
 		cnt++
-		
-		console.log(fileName);
+
 		for(var i=0; i<sel_files.length; i++){
 			if(sel_files[i].name === f.name){
 				alert("같은파일은 업로드 할 수 없습니다.");
@@ -298,19 +277,14 @@ function handleImgFileSelect(e){
 		}
 		reader.readAsDataURL(f);	
 		
-			
-		console.log(index);
-		console.log(sel_files);
+
 	});
 	
 	
 }
 
 function deleteImageAction(index1){
-	console.log("index : " +index);
-	console.log("index1 : " +index1);
-	
-	
+
 	sel_files.splice(index1, 1);
 
 	var img_id = "#img_id_"+index1;
@@ -345,16 +319,33 @@ function deleteImageAction(index1){
 	if(index == 0){
    		$("#main_img").attr("src","");   
 	}
-	console.log("index : " + index + " : after");
-	
 
-	console.log(files.files); 
-	console.log(sel_files);
-	
 	
 }
 
 function submitAction(){
+	if($("input[name=title]").val()==null || $("input[name=title]").val() == ''){
+		alert("제목을 입력해 주세요.");
+		return false;
+	}
+	if($("input[name=price]").val()==null || $("input[name=price]").val() == ''){
+		alert("가격을 입력해 주세요.");
+		return false;
+	}
+	if($("#category2").val()=='select'){
+		alert("카테고리를 선택해 주세요.");
+		return false;
+	}
+	if($("input[name=stock]").val()==null || $("input[name=stock]").val() == ''){
+		alert("재고를 입력해 주세요.");
+		return false;
+	}
+	if($("#hidden").val()==null || $("#hidden").val() == ''){
+		alert("내용을 입력해 주세요.");
+		return false;
+	}
+	
+	
 	
 	let form1 = document.getElementById("form1");
 
@@ -384,21 +375,6 @@ function submitAction(){
 		}
 		
 	})
-	
-	
-	/*
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST","/product/productRegist");
-	xhr.setRequestHeader("Content-type", "multipart/form-data");
-	xhr.onload = function(e){
-		if(this.status == 200){
-			console.log("Result : " + e.currentTarget.responseText);
-		}
-	}
-	xhr.send(formData);
-	
-	location.href = "index.jsp";*/
-	
 	
 }
 
