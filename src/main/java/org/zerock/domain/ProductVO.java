@@ -25,19 +25,27 @@ public class ProductVO {
 	int price2;
 	String strPrice;
 	String strPrice2;
-	
+	String file_names2;
+
 	
 	public void pvoInit() {
-		strPrice = Integer.toString(price).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-		strPrice2 = Integer.toString(price+((price*discount)/100)).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+
+		if(discount != 0)
+		price2 = price+((price*discount)/100);
 		
-		
-		try {
-			file2 = (file1.split(";")[0]);
-		} catch (Exception e) {
-			file2 = ";";
+		if(file1 != null) {
+			file1Arr = file1.split(";");
 		}
 		
+		if(category1 != null) {
 		category1Arr = category1.split(";");
+		}
+		
+		
+		if(file_names2 != null) {
+			file1Arr = file_names2.split(";");
+
+		}
+	
 	}
 }

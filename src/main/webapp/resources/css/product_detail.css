@@ -277,12 +277,27 @@
     transition: all .35s ease-in-out;
     
 }
-.prev_img img{	
-	max-width:73px;
-	max-height:73px
+.prev_img{
+	width:78px;
+	height:78px;
+	border:1px solid gray;
+	display:inline-block;
+	vertical-align: middle;
+	line-height:70px;
 }
-
+.prev_img img{	
+	max-width:70px;
+	max-height:70px;
+	vertical-align: middle;
+	
+}
 #main_img{
+	width:405px;
+	height:405px;
+	display:inline-block;
+	line-height:405px;
+}
+#main_img img{
 	max-width:400px;
 	max-height:400px;
 }
@@ -313,5 +328,7 @@
 	display:inline-block;
 	border:1px solid gray;
 }
-
+.place_h{
+	font-size:20px;
+}
 /* /////////////////////////////////////////////// */

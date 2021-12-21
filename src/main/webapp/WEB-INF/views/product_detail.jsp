@@ -10,10 +10,10 @@
     <link href="/resources/css/suport_page.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="/resources/css/header.css">    
+   
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="/resources/js/header.js"></script>
+    
     <script src="/resources/js/loginCheck.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
@@ -34,21 +34,13 @@
         <div id="detail">
             <div id="bg1">
          		<div id="bg2" style="text-align:center; display:inline-block;">     
-         			<span ><img id="main_img" src="/resources/upload/${pvo.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="margin-left:auto; margin-right:auto;"></span>
+         			<span id="main_img" ><img src="/resources/upload/product/${pvo.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="margin-left:auto; margin-right:auto;"></span>
          			<div id="bg3" style=" float:left;">
-         			<c:set var="size" value="${fn:length(pvo.file1Arr)}" />
-         			
-         			<c:choose>
-         				<c:when test="${size > 3 }">
-         					<c:set var="size" value="5" />
-         				</c:when>
-         				<c:otherwise>
-         					<c:set var="size" value="2" />
-         				</c:otherwise>
-         			</c:choose>
- 
+					<c:set var="size" value="${fn:length(pvo.file1Arr)}" />
+         			<c:if test="${size == 0 }"><c:set var="size" value="1" /></c:if> 
+         			<c:if test="${size > 4 }"><c:set var="size" value="5" /></c:if> 
 					<c:forEach var="i" begin="0" end="${size - 1}">					
-					    <span class="prev_img" style=""><img src="/resources/upload/${pvo.file1Arr[i] }" onerror="this.src='/resources/images/이미지준비중.jpg'"> </span> 
+					    <span class="prev_img" style="margin-right:-5px;"><img  src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/images/이미지준비중.jpg'"> </span> 
 					
 					</c:forEach>
         
@@ -138,7 +130,7 @@
                 	<div>
                     <img src="/resources/images/detail/이용매뉴얼.png">
                     </div>
-                	<div style="float:left">${pvo.content }</div>
+                	<div style="float:left; font-size:20px;">${pvo.content }</div>
 
                     <!-- <img src="/resources/images/detail/상품결제정보.png"> -->
                     <img src="/resources/images/detail/배송정보.png">

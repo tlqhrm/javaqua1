@@ -29,4 +29,8 @@ public interface ProductMapper {
 		public int update(ProductVO board);
 		
 		public int updateCount(int pd_num);
+
+		public int productRegist(ProductVO pvo);
+
+		public int productUpdate(ProductVO pvo);
 }

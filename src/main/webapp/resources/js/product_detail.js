@@ -37,5 +37,5 @@ $("#down").on("click",function(){
 	$("#price").text(numberWithCommas($("#ori_price").text()*$("#count").val()));
 });
 $(".prev_img").on("mouseover",function(){
-	$("#main_img").attr("src",$(this).children("img").attr("src"));
+	$("#main_img img").attr("src",$(this).children("img").attr("src"));
 });

@@ -7,18 +7,13 @@
 <head>
     <meta charset="utf-8">
     
-    <link href="/resources/css/common.css" rel="stylesheet" type="text/css">
     <link href="/resources/css/suport_page.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="/resources/css/header.css">    
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/resources/js/header.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
- <!--    <script type="text/javascript" src="/resources/js/comment.js"></script> -->
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 </head>
 <c:choose>
 	<c:when test="${admin ne 1 and id ne bvo.user_id and bvo.bd_category2 eq 'contact' }">
@@ -277,7 +272,8 @@ var v_comments = new Vue({
 		},
 		
 		commentReg(bd_id, id){
-			const admin = ${admin};
+			let admin = 0;				
+			if(${admin}1 == 11) admin = 1;
 			const bd_category2 = '${bvo.bd_category2}';
 			const comment1 = document.getElementById("input_comment").value;
 			if(comment1 == ""){
