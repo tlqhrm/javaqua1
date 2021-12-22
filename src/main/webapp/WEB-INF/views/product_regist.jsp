@@ -180,11 +180,11 @@ $(document).ready(function(){
 
 
 content_box.addEventListener("blur",function(){
+	content_box2.innerHTML = content_box.innerHTML;
+	
 	for(var i=0; i<index; i++){
 		let img_id = document.getElementsByClassName("img_id_"+i);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;
-
-		
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
 	}
 	document.getElementById("hidden").value = content_box2.innerHTML;
 	console.log(content_box.innerHTML);
@@ -197,17 +197,15 @@ content_box.addEventListener("blur",function(){
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
-/*
-	for(var i=0; i<index; i++){
-		console.log(i);
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		console.log(img_id[0]);
-		console.log(img_id[1]);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;
-	}	
-	*/
-	document.getElementById("hidden").value = content_box2.innerHTML;
+
+//	document.getElementById("hidden").value = content_box2.innerHTML;
+	content_box2.innerHTML = content_box.innerHTML;
 	
+	for(var i=0; i<index; i++){
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
+	}
+	document.getElementById("hidden").value = content_box2.innerHTML;
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
@@ -320,13 +318,12 @@ function deleteImageAction(index1){
 	for( var i = index1+1; i < index; i++ ){
 		document.getElementById("removeImg_"+i).setAttribute("onClick", "deleteImageAction("+(i-1)+")");
 		document.getElementById("removeImg_"+i).id = "removeImg_"+(i-1);
-		
+		document.getElementById("prev_img_id_"+i).id = "prev_img_id_"+(i-1);
 //		let img_id_i = ".img_id"+i;
 //		$(img_id_i).attr("class","img_id_"+(i-1));
 		
 		let img_id_i = document.getElementsByClassName("img_id_"+i);
 		img_id_i[0].className = "img_id_"+(i-1);
-//		document.getElementsByClassName("img_id_"+i)
 		document.getElementById("img_controll_id_"+i).id = "img_controll_id_"+(i-1);
 		
 		
@@ -343,16 +340,15 @@ function deleteImageAction(index1){
 	if(index == 0){
    		$("#main_img").attr("src","");   
 	}
-/*	
-	for(var i=0; i<index; i++){
-		console.log(i);
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		console.log(img_id[0]);
-		console.log(img_id[1]);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;
-	}	
+
+	content_box2.innerHTML = content_box.innerHTML;
 	document.getElementById("hidden").value = content_box2.innerHTML;
-*/	
+	for(var i=0; i<index; i++){
+		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
+		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
+	}
+	
+	
 	console.log("after index"+index);
 	console.log("after index1"+index1);
 }

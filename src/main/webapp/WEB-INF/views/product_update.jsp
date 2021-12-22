@@ -144,7 +144,8 @@
             <section><hr>
             	<h2><br>-----------------------본문 입력-------------------------</h2><Br><hr>
 
-                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;">${pvo.content}</div>
+                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;">${pvo.content }</div>
+                <div id="content_box2" contentEditable="true" style="display:none;"><div id="placehloder" class="place_h" placeholder="내용을 입력하세요."></div></div>
             </section>
             
 		
@@ -157,6 +158,7 @@
 var sel_files = [];
 var sel_files2 = [];
 var content_box = document.getElementById("content_box");
+var content_box2 = document.getElementById("content_box2");
 var files = document.getElementById("files");
 var index=document.getElementsByClassName("controll_div").length;
 
@@ -177,32 +179,14 @@ document.addEventListener('keydown', event => {
 
 
 $(document).ready(function(){
-	var first_text = $(".first_text");
-//	first_text.innerHTML = "<xmp class=\"first_text\" style=\"display:none\"></xmp>";
-	
-	first_text.after("<xmp class=\"first_text\" style=\"display:none;\"></xmp>");
-	
-	var modicon = [];
-	modicon = document.getElementById("hidden").value.split("<span id=\"split\"></span>");
-
-	
-	for(var i=0; i<index; i++){
-		console.log(modicon[0]);
-		console.log(modicon[1]);
-		console.log(modicon.length);
-		document.querySelector("#img_id_"+i+" > span").innerHTML += "<xmp id='xmp_"+i+"'>" +modicon[i+1] + "<span id=\"split\"></span></xmp>";
-	}
-
+	content_box2.innerHTML = content_box.innerHTML;
 	
 	$(document).keydown(function(e){
 		var backspace = 8;
 	    
 	    if (e.keyCode == backspace) {
-	    	console.log($('#hidden').val());
-	    	console.log(content_box.textContent);
-	    	console.log($('#hidden2').val());
 	    	var selection = window.getSelection();
-	    	alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
+	    	//alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
 	    	// INPUT, TEXTAREA, SELECT 가 아닌곳에서 backspace 키 누른경우  
 	    	if(selection.anchorNode.previousSibling.nodeName == "SPAN" && selection.anchorOffset == 0){
 	    		e.stopPropagation();
@@ -241,7 +225,10 @@ $(document).ready(function(){
 	for(var i=0; i<index; i++){
 		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
 		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
+
 	}
+
+	
 });		
 		
 		
@@ -249,21 +236,32 @@ $(document).ready(function(){
 
 
 content_box.addEventListener("blur",function(){
-	document.getElementById("hidden").value = content_box.textContent;
-	document.getElementById("hidden2").value = content_box.innerHTML;
+	content_box2.innerHTML = content_box.innerHTML;
+	
+	for(var i=0; i<index; i++){
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
+	}
+	document.getElementById("hidden").value = content_box2.innerHTML;	
+	
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
-	document.getElementById("hidden").value = content_box.textContent;
+
+//	document.getElementById("hidden").value = content_box2.innerHTML;
+	
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
 	document.getElementById("file_names1").value = "";
 	document.getElementById("file_names2").value = "";
+	content_box2.innerHTML = content_box.innerHTML;
+	
 	for(var i=0; i<index; i++){
-		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
-		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
 	}
+	document.getElementById("hidden").value = content_box2.innerHTML;
 });
 
 
@@ -296,24 +294,8 @@ function fileUploadAction(){
 var cnt=0;
 
 function handleImgFileSelect(e){
-	
-	/*
-	var first_text = $(".first_text");
-	
-	first_text[1].innerHTML = "<span class=\"first_text\">"+first_text[0].innerHTML;
-	first_text[1].after("<xmp class=\"first_text\" style=\"display:none;\"></xmp>");
-	
-	first_text[0].innerHTML = "";
-	document.getElementById("hidden").value = content_box.textContent;
-	
-	console.log(first_text[1].innerHTML);
-	console.log(first_text[1].text);
-	console.log(first_text[1].textContent);
-	console.log(first_text[1].innerText);
-	console.log($("#hidden").val());
-	console.log(content_box.textContent);
-	*/
-	
+
+
 	var filesArr = Array.prototype.slice.call(files.files);
 
 	filesArr.forEach(function(f) {
@@ -321,13 +303,14 @@ function handleImgFileSelect(e){
 		var date1 = new Date();
 		var fileName = guid()+f.name;  
 		cnt++
+
 		for(var i=0; i<sel_files.length; i++){
 			if(sel_files[i].name === f.name){
 				alert("같은파일은 업로드 할 수 없습니다.");
 				return;
 			}
 		}
-		sel_files2.push(f);
+		sel_files.push(f);
 		var html;
 		var reader = new FileReader();
 		reader.onload = function(e){
@@ -341,16 +324,9 @@ function handleImgFileSelect(e){
 				document.getElementById("bg3").innerHTML = document.getElementById("bg3").innerHTML + html;	
 
 			}
-			var text = "<div id=\"img_id_"+index+"\"><img src=\"/resources/upload/product/"+fileName+"\" style='max-width:900px; display:block'><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\" style=\"font-size:20px;\"></div></div><span id=\"split\"></span>";
-			
-		//	html = "<div id=\"img_id_"+index+"\" style=\"\"><img src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"><xmp>"+text+"<br></xmp></span></div><div>&nbsp</div>";
-		//	html = "<input type=\"image\" src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" readonly width=\"900px\"><br><span style=\"display:none\">"+f.name+"</span><div placeholder=\"여기에 글자를 입력해주세요.\" style=\"font-size:12px;\"></div>"
-		//	html = "<img src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" width=\"900px\">"
-		//	html = "<div id=\"img_id_"+index+"\" style=\"background-image:url(\""+e.target.result+"\"); background-repeat:no-repeat; background-size:cover;\"><span style=\"display:none\">"+f.name+"</span></div><div><br></div>";
-			html = "<div id=\"img_id_"+index+"\"><img  src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"><xmp id='xmp_"+index+"'>"+text+"</xmp></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\"></div></div>";
-			content_box.innerHTML = content_box.innerHTML + html;	
-			
-			
+			html = "<div class=\"img_id_"+index+"\"><img src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\"></div></div>";
+			content_box.innerHTML += html;
+			content_box2.innerHTML += html;
 			
 			html = "<div class=\"controll_div\" id=\"img_controll_id_"+index+"\" data-file1=\""+f.name+"\" data-file2=\""+fileName+"\">"+
 		        	"<span class=\"controll_span_1\"><img src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:73px; max-height:73px;\"></span>"+
@@ -361,10 +337,13 @@ function handleImgFileSelect(e){
 		    if(index == 0){
 		   		$("#main_img").attr("src",$("#prev_img_id_0 > img").attr("src"));
 		    }
-			index++;								
+			index++;	
+			console.log("after index"+index);
 		}
 		reader.readAsDataURL(f);	
-
+		
+		
+		
 	});
 	
 	
@@ -372,9 +351,11 @@ function handleImgFileSelect(e){
 
 function deleteImageAction(index1){
 
+	console.log("before index"+index);
+	console.log("before index1"+index1);
 	sel_files.splice(index1, 1);
 
-	var img_id = "#img_id_"+index1;
+	var img_id = ".img_id_"+index1;
 	$(img_id).remove();
 	var prev_img_id = "#prev_img_id_"+index1;
 	$(prev_img_id).remove();
@@ -383,18 +364,20 @@ function deleteImageAction(index1){
 	for( var i = index1+1; i < index; i++ ){
 		document.getElementById("removeImg_"+i).setAttribute("onClick", "deleteImageAction("+(i-1)+")");
 		document.getElementById("removeImg_"+i).id = "removeImg_"+(i-1);
-		
-		document.getElementById("img_id_"+i).id = "img_id_"+(i-1);
-		
 		document.getElementById("prev_img_id_"+i).id = "prev_img_id_"+(i-1);
-		document.getElementById("xmp_"+i).innerText = document.getElementById("xmp_"+i).innerText.replace("img_id_"+i,"img_id_"+(i-1));
-		document.getElementById("xmp_"+i).id = "xmp_"+(i-1);
+//		let img_id_i = ".img_id"+i;
+//		$(img_id_i).attr("class","img_id_"+(i-1));
 		
+		let img_id_i = document.getElementsByClassName("img_id_"+i);
+		img_id_i[0].className = "img_id_"+(i-1);
 		document.getElementById("img_controll_id_"+i).id = "img_controll_id_"+(i-1);
+		
+		
 	}
 	if(index1 < 5 && index > 5){
 		document.getElementById("prev_img_id_"+4).style.display = 'inline-block';
 	}
+	
 	index--;
 	
 	if(index1 == 0){
@@ -403,6 +386,12 @@ function deleteImageAction(index1){
 	if(index == 0){
    		$("#main_img").attr("src","");   
 	}
+
+	content_box2.innerHTML = content_box.innerHTML;
+	document.getElementById("hidden").value = content_box2.innerHTML;
+	
+	console.log("after index"+index);
+	console.log("after index1"+index1);
 }
 
 function submitAction(){
@@ -423,29 +412,17 @@ function submitAction(){
 		return false;
 	}
 	if($("#hidden").val()==null || $("#hidden").val() == ''){
-		alert("내용을 입력해 주세요.");
 		return false;
 	}
 	
-	var first_text = $(".first_text");
-	
-	first_text[1].innerHTML = "<span class=\"first_text\">"+first_text[0].innerHTML+"</span>";
 
-	
-	first_text[0].innerHTML = "";
-	document.getElementById("hidden").value = content_box.textContent;		
-	
-	
 	let form1 = document.getElementById("form1");
 
 	let formData = new FormData(form1);
 
-	for(let i=0; i<sel_files.length ; i++){
+	for(let i=0, len=sel_files.length; i<len; i++){
+		let name = "image_"+i;
 		formData.append("files",sel_files[i]);		
-		
-	}
-	for(let i=0; i<sel_files2.length; i++){
-		formData.append("files2",sel_files2[i]);		
 		
 	}
 	formData.append("files_length",sel_files.length);
@@ -467,8 +444,8 @@ function submitAction(){
 		}
 		
 	})
+	
 }
-
 
 
 
