@@ -165,9 +165,10 @@ $(document).ready(function(){
 	    if (e.keyCode == backspace) {
 	    	
 	    	var selection = window.getSelection();
-	    	//alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
+	    	alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
 	    	// INPUT, TEXTAREA, SELECT 가 아닌곳에서 backspace 키 누른경우  
 	    	if(selection.anchorNode.previousSibling.nodeName === "SPAN" && selection.anchorOffset == 0){
+	    		console.log("111111111");
 	    		e.stopPropagation();
 	    		e.preventDefault();	    		
 	    	}
@@ -180,41 +181,15 @@ $(document).ready(function(){
 
 
 content_box.addEventListener("blur",function(){
-	content_box2.innerHTML = content_box.innerHTML;
-	
-	for(var i=0; i<index; i++){
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
-	}
-	document.getElementById("hidden").value = content_box2.innerHTML;
-	console.log(content_box.innerHTML);
-	console.log(content_box2.innerHTML);
-	console.log(document.getElementById("hidden").value);
-	
-
-		
 	
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
 
-//	document.getElementById("hidden").value = content_box2.innerHTML;
-	content_box2.innerHTML = content_box.innerHTML;
-	
-	for(var i=0; i<index; i++){
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
-	}
-	document.getElementById("hidden").value = content_box2.innerHTML;
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
-	document.getElementById("file_names1").value = "";
-	document.getElementById("file_names2").value = "";
-	for(var i=0; i<index; i++){
-		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
-		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
-	}
+	
 });
 
 
@@ -319,9 +294,7 @@ function deleteImageAction(index1){
 		document.getElementById("removeImg_"+i).setAttribute("onClick", "deleteImageAction("+(i-1)+")");
 		document.getElementById("removeImg_"+i).id = "removeImg_"+(i-1);
 		document.getElementById("prev_img_id_"+i).id = "prev_img_id_"+(i-1);
-//		let img_id_i = ".img_id"+i;
-//		$(img_id_i).attr("class","img_id_"+(i-1));
-		
+
 		let img_id_i = document.getElementsByClassName("img_id_"+i);
 		img_id_i[0].className = "img_id_"+(i-1);
 		document.getElementById("img_controll_id_"+i).id = "img_controll_id_"+(i-1);
@@ -341,19 +314,11 @@ function deleteImageAction(index1){
    		$("#main_img").attr("src","");   
 	}
 
-	content_box2.innerHTML = content_box.innerHTML;
-	document.getElementById("hidden").value = content_box2.innerHTML;
-	for(var i=0; i<index; i++){
-		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
-		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
-	}
-	
-	
-	console.log("after index"+index);
-	console.log("after index1"+index1);
+
 }
 
 function submitAction(){
+	console.log("씨팔");
 	if($("input[name=title]").val()==null || $("input[name=title]").val() == ''){
 		alert("제목을 입력해 주세요.");
 		return false;
@@ -370,10 +335,30 @@ function submitAction(){
 		alert("재고를 입력해 주세요.");
 		return false;
 	}
+	
+	console.log("씨팔4");
+	content_box2.innerHTML = content_box.innerHTML;
+	console.log("씨팔5");
+	for(var i=0; i<index; i++){
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
+	}
+	console.log("씨팔6");
+	document.getElementById("hidden").value = content_box2.innerHTML;
+	console.log("씨팔2");
+	document.getElementById("file_names1").value = "";
+	document.getElementById("file_names2").value = "";
+	for(var i=0; i<index; i++){
+		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
+		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
+
+	}
+	console.log("씨팔3");
+	console.log(document.getElementById("file_names2").value);
+	
 	if($("#hidden").val()==null || $("#hidden").val() == ''){
 		return false;
 	}
-	
 
 	let form1 = document.getElementById("form1");
 

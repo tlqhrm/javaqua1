@@ -33,4 +33,6 @@ public interface ProductMapper {
 		public int productRegist(ProductVO pvo);
 
 		public int productUpdate(ProductVO pvo);
+
+		public int productDelete(int pd_num);
 }

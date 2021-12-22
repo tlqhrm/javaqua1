@@ -41,18 +41,6 @@ public class ProductServiceimpl implements ProductService {
 		return mapper.productDetail(pd_num);
 	}
 
-	@Override
-	public boolean modify(ProductVO pvo) {
-		
-		log.info("modify......" + pvo);
-		return mapper.update(pvo) == 1;
-	}
-
-	@Override
-	public boolean remove(int pd_num) {
-		log.info("remove......" + pd_num);
-		return mapper.delete(pd_num) == 1;
-	}
 
 	@Override
 	public List<ProductVO> getList(ProductCriteria cri) {
@@ -85,6 +73,13 @@ public class ProductServiceimpl implements ProductService {
 	@Override
 	public int productUpdate(ProductVO pvo) {
 		int result = mapper.productUpdate(pvo);
+		return result;
+	}
+
+	@Override
+	public int productDelete(int pd_num) {
+
+		int result = mapper.productDelete(pd_num);
 		return result;
 	}
 
