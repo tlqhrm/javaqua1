@@ -124,7 +124,8 @@
             <section><hr>
             	<h2><br>-----------------------본문 입력-------------------------</h2><Br><hr>
 
-                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;"><span class="first_text"><div id="placehloder" class="place_h" placeholder="내용을 입력하세요."></div><span id="split"></span></span><xmp class="first_text" style="display:none"></xmp></div>
+                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;"><div id="placehloder" class="place_h" placeholder="내용을 입력하세요."></div></div>
+                <div id="content_box2" contentEditable="true" style="display:none;"><div id="placehloder" class="place_h" placeholder="내용을 입력하세요."></div></div>
             </section>
             
 		
@@ -137,6 +138,7 @@
 
 var sel_files = [];
 var content_box = document.getElementById("content_box");
+var content_box2 = document.getElementById("content_box2");
 var files = document.getElementById("files");
 var index=0;
 
@@ -178,13 +180,34 @@ $(document).ready(function(){
 
 
 content_box.addEventListener("blur",function(){
-	document.getElementById("hidden").value = content_box.textContent;
+	for(var i=0; i<index; i++){
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;
 
+		
+	}
+	document.getElementById("hidden").value = content_box2.innerHTML;
+	console.log(content_box.innerHTML);
+	console.log(content_box2.innerHTML);
+	console.log(document.getElementById("hidden").value);
+	
+
+		
 	
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
-	document.getElementById("hidden").value = content_box.textContent;
+/*
+	for(var i=0; i<index; i++){
+		console.log(i);
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		console.log(img_id[0]);
+		console.log(img_id[1]);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;
+	}	
+	*/
+	document.getElementById("hidden").value = content_box2.innerHTML;
+	
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
@@ -227,21 +250,7 @@ var cnt=0;
 
 function handleImgFileSelect(e){
 
-	/*
-	var first_text = $(".first_text");
-	
-	first_text[1].innerHTML = "<span class=\"first_text\">"+first_text[0].innerHTML+"</span>";
-	first_text[1].after("<xmp class=\"first_text\" style=\"display:none;\"></xmp>");
-	
-	first_text[0].innerHTML = "";
 
-	console.log(first_text[1].innerHTML);
-	console.log(first_text[1].text);
-	console.log(first_text[1].textContent);
-	console.log(first_text[1].innerText);
-	console.log($("#hidden").val());
-	console.log(content_box.textContent);
-	*/
 	var filesArr = Array.prototype.slice.call(files.files);
 
 	filesArr.forEach(function(f) {
@@ -249,7 +258,8 @@ function handleImgFileSelect(e){
 		var date1 = new Date();
 		var fileName = guid()+f.name;  
 		cnt++
-
+		console.log(fileName);
+		
 		for(var i=0; i<sel_files.length; i++){
 			if(sel_files[i].name === f.name){
 				alert("같은파일은 업로드 할 수 없습니다.");
@@ -270,16 +280,9 @@ function handleImgFileSelect(e){
 				document.getElementById("bg3").innerHTML = document.getElementById("bg3").innerHTML + html;	
 
 			}
-			var text = "<div id=\"img_id_"+index+"\"><img src=\"/resources/upload/product/"+fileName+"\" style='max-width:900px; display:block'><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\" style=\"font-size:20px;\"></div></div><span id=\"split\"></span>";
-			
-		//	html = "<div id=\"img_id_"+index+"\" style=\"\"><img src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"><xmp>"+text+"<br></xmp></span></div><div>&nbsp</div>";
-		//	html = "<input type=\"image\" src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" readonly width=\"900px\"><br><span style=\"display:none\">"+f.name+"</span><div placeholder=\"여기에 글자를 입력해주세요.\" style=\"font-size:12px;\"></div>"
-		//	html = "<img src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" width=\"900px\">"
-		//	html = "<div id=\"img_id_"+index+"\" style=\"background-image:url(\""+e.target.result+"\"); background-repeat:no-repeat; background-size:cover;\"><span style=\"display:none\">"+f.name+"</span></div><div><br></div>";
-			html = "<div id=\"img_id_"+index+"\"><img  src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"><xmp id='xmp_"+index+"'>"+text+"</xmp></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\"></div></div>";
-			content_box.innerHTML = content_box.innerHTML + html;	
-			
-			
+			html = "<div class=\"img_id_"+index+"\"><img src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\"></div></div>";
+			content_box.innerHTML += html;
+			content_box2.innerHTML += html;
 			
 			html = "<div class=\"controll_div\" id=\"img_controll_id_"+index+"\" data-file1=\""+f.name+"\" data-file2=\""+fileName+"\">"+
 		        	"<span class=\"controll_span_1\"><img src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:73px; max-height:73px;\"></span>"+
@@ -290,11 +293,13 @@ function handleImgFileSelect(e){
 		    if(index == 0){
 		   		$("#main_img").attr("src",$("#prev_img_id_0 > img").attr("src"));
 		    }
-			index++;								
+			index++;	
+			console.log("after index"+index);
 		}
 		reader.readAsDataURL(f);	
 		
-
+		
+		
 	});
 	
 	
@@ -302,9 +307,11 @@ function handleImgFileSelect(e){
 
 function deleteImageAction(index1){
 
+	console.log("before index"+index);
+	console.log("before index1"+index1);
 	sel_files.splice(index1, 1);
 
-	var img_id = "#img_id_"+index1;
+	var img_id = ".img_id_"+index1;
 	$(img_id).remove();
 	var prev_img_id = "#prev_img_id_"+index1;
 	$(prev_img_id).remove();
@@ -314,12 +321,12 @@ function deleteImageAction(index1){
 		document.getElementById("removeImg_"+i).setAttribute("onClick", "deleteImageAction("+(i-1)+")");
 		document.getElementById("removeImg_"+i).id = "removeImg_"+(i-1);
 		
-		document.getElementById("img_id_"+i).id = "img_id_"+(i-1);
+//		let img_id_i = ".img_id"+i;
+//		$(img_id_i).attr("class","img_id_"+(i-1));
 		
-		document.getElementById("prev_img_id_"+i).id = "prev_img_id_"+(i-1);
-		document.getElementById("xmp_"+i).innerText = document.getElementById("xmp_"+i).innerText.replace("img_id_"+i,"img_id_"+(i-1));
-		document.getElementById("xmp_"+i).id = "xmp_"+(i-1);
-		
+		let img_id_i = document.getElementsByClassName("img_id_"+i);
+		img_id_i[0].className = "img_id_"+(i-1);
+//		document.getElementsByClassName("img_id_"+i)
 		document.getElementById("img_controll_id_"+i).id = "img_controll_id_"+(i-1);
 		
 		
@@ -336,8 +343,18 @@ function deleteImageAction(index1){
 	if(index == 0){
    		$("#main_img").attr("src","");   
 	}
-
-	
+/*	
+	for(var i=0; i<index; i++){
+		console.log(i);
+		let img_id = document.getElementsByClassName("img_id_"+i);
+		console.log(img_id[0]);
+		console.log(img_id[1]);
+		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;
+	}	
+	document.getElementById("hidden").value = content_box2.innerHTML;
+*/	
+	console.log("after index"+index);
+	console.log("after index1"+index1);
 }
 
 function submitAction(){
@@ -361,15 +378,7 @@ function submitAction(){
 		return false;
 	}
 	
-	var first_text = $(".first_text");
-	
-	first_text[1].innerHTML = "<span class=\"first_text\">"+first_text[0].innerHTML+"</span>";
 
-	
-	first_text[0].innerHTML = "";
-	document.getElementById("hidden").value = content_box.textContent;	
-	
-	
 	let form1 = document.getElementById("form1");
 
 	let formData = new FormData(form1);
