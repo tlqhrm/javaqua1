@@ -144,7 +144,7 @@
             <section><hr>
             	<h2><br>-----------------------본문 입력-------------------------</h2><Br><hr>
 
-                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;"><div class="place_h" placeholder="내용을 입력하세요.">${pvo.content}</div></div>
+                <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;">${pvo.content}</div>
             </section>
             
 		
@@ -177,28 +177,41 @@ document.addEventListener('keydown', event => {
 
 
 $(document).ready(function(){
+	var first_text = $(".first_text");
+//	first_text.innerHTML = "<xmp class=\"first_text\" style=\"display:none\"></xmp>";
+	
+	first_text.after("<xmp class=\"first_text\" style=\"display:none;\"></xmp>");
+	
 	var modicon = [];
-	modicon = document.getElementById("hidden").value.split("<span id='split'></span>");
+	modicon = document.getElementById("hidden").value.split("<span id=\"split\"></span>");
 
 	
 	for(var i=0; i<index; i++){
-		document.querySelector("#img_id_"+i+" > span").innerHTML += "<xmp id='xmp_"+i+"'>" +modicon[i] + "<span id='split'></span></xmp>";
+		console.log(modicon[0]);
+		console.log(modicon[1]);
+		console.log(modicon.length);
+		document.querySelector("#img_id_"+i+" > span").innerHTML += "<xmp id='xmp_"+i+"'>" +modicon[i+1] + "<span id=\"split\"></span></xmp>";
 	}
+
 	
 	$(document).keydown(function(e){
 		var backspace = 8;
 	    
 	    if (e.keyCode == backspace) {
-	    	
+	    	console.log($('#hidden').val());
+	    	console.log(content_box.textContent);
+	    	console.log($('#hidden2').val());
 	    	var selection = window.getSelection();
-	    	//alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
+	    	alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
 	    	// INPUT, TEXTAREA, SELECT 가 아닌곳에서 backspace 키 누른경우  
-	    	if(selection.anchorNode.previousSibling.nodeName === "SPAN" && selection.anchorOffset == 0){
+	    	if(selection.anchorNode.previousSibling.nodeName == "SPAN" && selection.anchorOffset == 0){
 	    		e.stopPropagation();
 	    		e.preventDefault();	    		
 	    	}
 	    }
 	});
+	
+
 	
 	$("#main_img").attr("src",$("#prev_img_id_0 > img").attr("src"));
 
@@ -237,6 +250,7 @@ $(document).ready(function(){
 
 content_box.addEventListener("blur",function(){
 	document.getElementById("hidden").value = content_box.textContent;
+	document.getElementById("hidden2").value = content_box.innerHTML;
 });
 
 document.getElementById("img_controll").addEventListener("click",function(){
@@ -283,6 +297,23 @@ var cnt=0;
 
 function handleImgFileSelect(e){
 	
+	/*
+	var first_text = $(".first_text");
+	
+	first_text[1].innerHTML = "<span class=\"first_text\">"+first_text[0].innerHTML;
+	first_text[1].after("<xmp class=\"first_text\" style=\"display:none;\"></xmp>");
+	
+	first_text[0].innerHTML = "";
+	document.getElementById("hidden").value = content_box.textContent;
+	
+	console.log(first_text[1].innerHTML);
+	console.log(first_text[1].text);
+	console.log(first_text[1].textContent);
+	console.log(first_text[1].innerText);
+	console.log($("#hidden").val());
+	console.log(content_box.textContent);
+	*/
+	
 	var filesArr = Array.prototype.slice.call(files.files);
 
 	filesArr.forEach(function(f) {
@@ -310,7 +341,7 @@ function handleImgFileSelect(e){
 				document.getElementById("bg3").innerHTML = document.getElementById("bg3").innerHTML + html;	
 
 			}
-			var text = "<div id=\"img_id_"+index+"\"><img src=\"/resources/upload/product/"+fileName+"\" style='max-width:900px; display:block'><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\" style=\"font-size:20px;\"></div></div><span id='split'></span>";
+			var text = "<div id=\"img_id_"+index+"\"><img src=\"/resources/upload/product/"+fileName+"\" style='max-width:900px; display:block'><span style=\"display:none\"></span><div class=\"place_h\" placeholder=\"내용을 입력하세요.\" style=\"font-size:20px;\"></div></div><span id=\"split\"></span>";
 			
 		//	html = "<div id=\"img_id_"+index+"\" style=\"\"><img src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:900px; display:block;\"><span style=\"display:none\"><xmp>"+text+"<br></xmp></span></div><div>&nbsp</div>";
 		//	html = "<input type=\"image\" src=\""+e.target.result+"\" data-file=\""+f.name+"\" class=\"selProductFile\" readonly width=\"900px\"><br><span style=\"display:none\">"+f.name+"</span><div placeholder=\"여기에 글자를 입력해주세요.\" style=\"font-size:12px;\"></div>"
@@ -395,6 +426,14 @@ function submitAction(){
 		alert("내용을 입력해 주세요.");
 		return false;
 	}
+	
+	var first_text = $(".first_text");
+	
+	first_text[1].innerHTML = "<span class=\"first_text\">"+first_text[0].innerHTML+"</span>";
+
+	
+	first_text[0].innerHTML = "";
+	document.getElementById("hidden").value = content_box.textContent;		
 	
 	
 	let form1 = document.getElementById("form1");
