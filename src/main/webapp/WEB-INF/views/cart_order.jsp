@@ -29,19 +29,17 @@
 
 		<!-- Contents -->
 		<div id="contents">
-			<div class="sub">		
-				
+			<div class="sub">						
 				<h3 class="tit">주문서</h3>														
 				<div class="tb_tit">주문상품 </div>
 					<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">	
 						<c:set var = "total" value = "0" />				
 						<c:forEach var="cart" items="${cartList}"> 	
-						<c:set var= "total" value="${total + (cart.price*cart.amount)}"/>  		
-							<tr>
+							<c:set var= "total" value="${total + (cart.price*cart.amount)}"/>  		
+							<tr height="100" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'" style="cursor:pointer">
+								<td><img width="70" src="/resources/upload/product/${cart.file1}"></td>
 								<td class="txtb" width="500px">${cart.title} / 수량 ${cart.amount}</td>
-								<td style="text-align:right">
-									<fmt:formatNumber value="${cart.price*cart.amount}" pattern="#,###" />원
-								</td>
+								<td><fmt:formatNumber value="${cart.price*cart.amount}" pattern="#,###" />원</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -99,7 +97,7 @@
 		<%@include file="footer.jsp"%>	
 		<script>
 			let id="${id}";	
-			let total="${total}";	
+			let total="${total}";
 		</script>
 		<script src="/resources/js/cart_order.js"></script>
 	</body>

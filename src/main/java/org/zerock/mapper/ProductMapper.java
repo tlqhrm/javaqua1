@@ -2,6 +2,7 @@ package org.zerock.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.ProductCriteria;
@@ -33,4 +34,6 @@ public interface ProductMapper {
 		public int productRegist(ProductVO pvo);
 
 		public int productUpdate(ProductVO pvo);
+		
+		public int stockChk(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
 }

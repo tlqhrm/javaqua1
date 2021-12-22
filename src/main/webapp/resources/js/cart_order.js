@@ -34,6 +34,7 @@ const v=new Vue({
 		},
 		결제하기 : function(){
 			//product 리스트 받아와서 cart리스트랑 비교 후 재고 체크 해야함
+		
              const params = new URLSearchParams();
              params.append('user_id', id);
              params.append('totalprice', this.최종결제금액);
@@ -43,7 +44,7 @@ const v=new Vue({
             	 if(res.data==200){	         	  
             		location.href="/order/order_ok";
             	 }else{
-            		 alert("재고가 부족합니다.");
+            		 alert("재고가 부족합니다. 재고 수량을 확인해 주세요.");
             	 }
              })
              .catch(err=>{

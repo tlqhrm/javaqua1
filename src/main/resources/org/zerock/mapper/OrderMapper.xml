@@ -28,6 +28,6 @@
 	
 	<!-- 주문상세내역 가져오기 (order_detail 테이블) -->
 	<select id="orderDetailList" resultType="org.zerock.domain.OrderDetailVO">
-		select a.*,(select file1 from product where pd_num=a.pd_num) img from order_detail a where user_id=#{user_id}
+		select a.*,(select file1 from product where pd_num=a.pd_num) file1 from order_detail a where user_id=#{user_id}
 	</select>
 </mapper>

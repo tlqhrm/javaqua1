@@ -34,7 +34,7 @@
 							 		<div class="order_goods">
 										<div class="name" onclick="location.href='/product/productDetail?&pd_num=${detail.pd_num}'"> ${detail.title}<span style="float:right">＞</span></div>
 										<div class="order_info">
-											<div class="thumb"><img style="margin-top:20px" width="80;" src="upload/${detail.file1}"></div>
+											<div class="thumb"><img style="margin-top:20px" width="80;" src="/resources/upload/product/${detail.file1.split(";")[0]}"/></div>
 											<div class="desc">
 												<dl>
 													<dt>주문가격</dt>

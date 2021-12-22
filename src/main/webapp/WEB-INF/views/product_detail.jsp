@@ -48,13 +48,11 @@
          			<c:if test="${size == 0 }"><c:set var="size" value="1" /></c:if> 
          			<c:if test="${size > 4 }"><c:set var="size" value="5" /></c:if> 
 					<c:forEach var="i" begin="0" end="${size - 1}">					
-					    <span class="prev_img" style="margin-right:-5px;"><img  src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/resources/images/이미지준비중.jpg'"> </span> 
-					
+					    <span class="prev_img" style="margin-right:-5px;"><img  src="/resources/upload/product/${pvo.file1Arr[i] }" onerror="this.src='/resources/images/이미지준비중.jpg'"> </span> 				
 					</c:forEach>
-        
 	            </div>
 	            </div>
-          
+          	</div>
 	                <div id="name" style="position:relative">
 	                <div style="height:27px;">
 	                <c:forEach items="${pvo.category1Arr }" var="ca1">
@@ -148,33 +146,6 @@
 	        </div>
 	    </section>
 	</detail>
-</div>
-
-                
-                <div class="clear"></div>
-
-                <!-- 제품상세섹션 -->
-
-            <section style="margin-top:50px;">
-               
-                	<div>
-                    <img src="/resources/images/detail/이용매뉴얼.png">
-                    </div>
-                	<div style="float:left; font-size:20px;">${pvo.content }</div>
-
-                    <!-- <img src="/resources/images/detail/상품결제정보.png"> -->
-                    <img src="/resources/images/detail/배송정보.png">
-                    <img src="/resources/images/detail/교환및반품정보.png">
-               
-                
-              
-
-            </section>
-
-        </div>
-    </section>
-</detail>
-<!-- app 닫기 -->
 </div>
 
 <span class="target"></span>
