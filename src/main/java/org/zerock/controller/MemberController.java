@@ -2,13 +2,13 @@ package org.zerock.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -153,5 +153,14 @@ public class MemberController {
 		}else {
 			return "useable";
 		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/selectMember")
+	public MemberVO selectMember(String user_id) {	
+		log.info("selectMember....");
+		MemberVO mvo = new MemberVO();
+		mvo = service.selectMember(user_id);
+		return mvo;
 	}
 }

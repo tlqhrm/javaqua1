@@ -8,8 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/resources/js/header.js"></script>
-    <link rel="stylesheet" href="/resources/css/header.css"> 
-    
+    <link rel="stylesheet" href="/resources/css/header.css">   
 </head>
 <body>
 <c:if test="${serTitle eq '%%'}"><c:set var="serTitle" value=""></c:set></c:if>
@@ -30,7 +29,7 @@
                 <ul id='join_login'>
                     <li class="no_mypage"><a href='/member/joinForm' class="right_border red">회원가입</a></li>
                     <li class="no_mypage"><a href='/member/login' class="right_border">로그인</a></li>       
-                    <li class="no_mypage"><a href='basket.html' class="right_border">장바구니</a></li>
+                    <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
                     <li id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span></span>
                     <ul>
                         <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>
@@ -44,11 +43,11 @@
                 <li class="no_mypage"><a href='/member/logout' class="right_border">로그아웃</a></li>
                     <li id="mypage"><a href='JavaquaServlet?command=join_form' class="right_border blue">${name } 님&nbsp;&nbsp;</a><span id="un1"></span>
                         <ul>
-                            <li><a href="#none">주문내역 조회</a></li>
+                            <li><a href='/order/order_list'>주문내역 조회</a></li>
                             <li><a href="#none">개인정보 수정</a></li>
                         </ul></li>
                     
-                    <li class="no_mypage"><a href='basket.html' class="right_border">장바구니</a></li>
+                    <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
                     <li class="no_mypage" id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span id="un2"></span>
                     <ul>
                         <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>

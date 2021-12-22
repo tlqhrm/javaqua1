@@ -25,6 +25,10 @@
 		<![CDATA[select count(*) from member where user_email = #{email}]]>
 			
 	</select>
+	
+	<select id="selectMember" resultType="org.zerock.domain.MemberVO">
+		select * from member where user_id = #{user_id}	
+	</select>
 	<!--
 	
 	<insert id="insertSelectKey">

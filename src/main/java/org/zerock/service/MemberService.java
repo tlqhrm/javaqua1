@@ -18,4 +18,6 @@ public interface MemberService {
 	public boolean getId(String id);
 	
 	public boolean getEmail(String email);
+	
+	public MemberVO selectMember(String user_id);
 }
