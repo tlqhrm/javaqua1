@@ -11,11 +11,7 @@ public interface ProductService {
 	public int register(ProductVO board);
 	
 	public ProductVO productDetail(int pd_num);
-	
-	public boolean modify(ProductVO board);
-	
-	public boolean remove(int pd_num);
-	
+
 	public int[] getPages(ProductCriteria cri);
 
 	public List<ProductVO> getList(ProductCriteria cri);
@@ -23,5 +19,7 @@ public interface ProductService {
 	public int productRegist(ProductVO pvo);
 
 	public int productUpdate(ProductVO pvo);
+
+	public int productDelete(int pd_num);
 
 }

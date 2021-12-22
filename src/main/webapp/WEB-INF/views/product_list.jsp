@@ -123,9 +123,34 @@
     </div>
     <jsp:include page="footer.jsp"></jsp:include>
 <script>
-function deleteCheck(t,n){
+function deleteCheck(t,pd_num){
 	confirm("'"+t+"'"+" 를 삭제 합니다.");
-	location.href='JavaquaServlet?command=product_delete&pd_num='+n;
+	console.log(pd_num);
+	$.ajax({
+		url : "/product/productDelete",
+		type : "post",
+		data : {pd_num : pd_num},
+		dataType: "text",
+		success : function(data){
+			console.log(data);
+			if(data == 1){
+				
+				alert("'"+t+"'"+" 삭제완료");
+				location.reload();
+			}
+			else{
+				alert("'"+t+"'"+" 삭제실패");
+				
+			}
+			
+		},
+		error : function(data){
+			console.log("send formData error.");
+		}
+		
+	})
+	
+	//location.href='/product/productDelete?pd_num='+n;
 }
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

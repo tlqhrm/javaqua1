@@ -28,8 +28,8 @@
 		<![CDATA[select * from Product where pd_num = #{pd_num}]]>
 	</select>
 	
-	<delete id="delete">
-		delete board where bd_id = #{bd_id}
+	<delete id="productDelete">
+		delete product where pd_num = #{pd_num}
 	</delete>
 	
 	<update id="productUpdate">

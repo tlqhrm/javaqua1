@@ -271,13 +271,16 @@ public class ProductController {
 
 		return pd_num;
 	}
-//	
-//	@PostMapping("/remove")
-//	public String remove(ProductVO pvo) {
-//		log.info("remove..." + pvo);
-//		String bd_category2 = pvo.getBd_category2();
-//		service.remove(pvo.getBd_id());
-//		log.info("삭제완료..." + pvo + bd_category2);
-//		return "redirect:/pvo/list?bd_category2="+bd_category2+"&page=1";
-//	}
+	
+	@ResponseBody
+	@PostMapping("/productDelete")
+	public String remove(int pd_num) {
+		log.info("productDelete..." + pd_num);
+		
+		System.out.println(pd_num);
+		int result = service.productDelete(pd_num);
+		System.out.println(result);
+		log.info("삭제완료..." + pd_num);
+		return Integer.toString(result);
+	}
 }
