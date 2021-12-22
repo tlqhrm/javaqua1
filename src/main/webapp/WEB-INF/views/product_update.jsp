@@ -420,9 +420,12 @@ function submitAction(){
 
 	let formData = new FormData(form1);
 
-	for(let i=0, len=sel_files.length; i<len; i++){
-		let name = "image_"+i;
+	for(let i=0; i<sel_files.length ; i++){
 		formData.append("files",sel_files[i]);		
+		
+	}
+	for(let i=0; i<sel_files2.length; i++){
+		formData.append("files2",sel_files2[i]);		
 		
 	}
 	formData.append("files_length",sel_files.length);
@@ -444,7 +447,6 @@ function submitAction(){
 		}
 		
 	})
-	
 }
 
 
