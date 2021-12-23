@@ -1,44 +1,3 @@
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-var cnt = 1;
-function changeCount(x){
-	if(x === 'up'){
-		if(cnt == parseInt($("#stock").text()) && parseInt($("#stock").text()) != 0){
-			alert("최대수량입니다.");
-			return false;
-		}
-		$("#count").val(parseInt($("#count").val())+1)
-		cnt++;
-	}else if(x === 'down'){
-		if($("#count").val() != 1)
-		$("#count").val(parseInt($("#count").val())-1)
-		if(cnt != 1){
-			cnt--;
-		}
-	}
-}
-
-$(document).ready(function(){
-	console.log($(".price").text());
-	$(".price").text(numberWithCommas($(".price").text()));
-	$(".cost").text(numberWithCommas($(".cost").text()));
-	$("#price").text(numberWithCommas($(".price").text()));
-});
-
-$("#count").on("change",function(){
-	$("#price").text(numberWithCommas($("#ori_price").text()*$("#count").val()));
-});
-$("#up").on("click",function(){
-	$("#price").text(numberWithCommas($("#ori_price").text()*$("#count").val()));
-});
-$("#down").on("click",function(){
-	$("#price").text(numberWithCommas($("#ori_price").text()*$("#count").val()));
-});
-$(".prev_img").on("mouseover",function(){
-	$("#main_img img").attr("src",$(this).children("img").attr("src"));
-});
 
 
 
@@ -52,7 +11,8 @@ const v=new Vue({
 	computed : {
 		합계금액 : function(){
 			return this.수량 * this.금액;
-		}	
+		}
+		
 	},
 	methods : {
 		즉시구매 : function(){
@@ -83,7 +43,28 @@ const v=new Vue({
 			if(this.수량<1){
 				this.수량=1;
 			}
+			if(this.수량 >stock){
+				alert("최대수량 초과입니다");
+				this.수량 = stock;
+			}
 		},
+		수량업 : function(){
+			if(this.수량 >stock-1){
+				alert("최대수량 초과입니다");
+				this.수량 = stock;
+			}else{
+				this.수량 ++;
+			}
+		},
+		수량다운 : function(){
+			if(this.수량 > 1){
+				this.수량 --;
+			}
+		},
+		미리보기 : function(i){
+		let bg3=$("#bg3 span img")[i].src;
+		$("#main_img img").attr("src",bg3);
+		}	
 	},			
 	filters : {
 		콤마표시 : function(value){
