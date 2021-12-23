@@ -56,7 +56,6 @@ public class OrderController {
 	@PostMapping("/directOrder")
 	public int directOrder(OrderDetailVO odvo, int totalprice) {
 		log.info("directOrder......" );
-		
 		int result = orderService.directOrder(odvo,totalprice);
 		return result;
 	}

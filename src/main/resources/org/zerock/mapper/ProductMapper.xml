@@ -36,6 +36,10 @@
 		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
 		 		content=#{content}, file1=#{file1}, stock=#{stock}, discount=#{stock} where pd_num=#{pd_num}]]>
 	</update>
+	<update id="salesCountPlus">
+			update product set salescount = salescount+#{cart_amount}, stock = stock-#{cart_amount} where pd_num = #{pd_num}
+	</update>
+	
 	<update id="updateCount">
 		update board set hit=hit+1 where bd_id=#{bd_id}
 	</update>

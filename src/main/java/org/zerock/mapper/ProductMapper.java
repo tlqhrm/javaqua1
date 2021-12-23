@@ -38,5 +38,7 @@ public interface ProductMapper {
 		public int stockChk(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
 
 		public int productDelete(int pd_num);
+		
+		public int salesCountPlus(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
 
 }

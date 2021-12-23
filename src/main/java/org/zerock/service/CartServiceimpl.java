@@ -2,7 +2,7 @@ package org.zerock.service;
 
 import java.util.List;
 
-
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.CartVO;
@@ -75,6 +75,8 @@ public class CartServiceimpl implements CartService{
 		    }
 		}
 		
+		
+		
 		//전부 재고가 있는 경우 하단 로직 계속 수행
 		//order1 테이블 insert 후 od_num 값  얻음
 		int result = mapper.insertOd(ovo);
@@ -83,6 +85,12 @@ public class CartServiceimpl implements CartService{
 		//주문이 완료되었으므로 장바구니 전체 삭제
 		mapper.cartAllDel(ovo);	
 		//리턴값 1
+		
+		if(result == 1) {
+			for(CartVO i : cList){
+				rs = pmapper.SalesCountPlus(i.getPd_num(),i.getAmount());
+			}
+		}
 		return result;	
 	}
 }
