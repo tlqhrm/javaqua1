@@ -157,6 +157,7 @@
 
 var sel_files = [];
 var sel_files2 = [];
+var deleted_files = [];
 var content_box = document.getElementById("content_box");
 var content_box2 = document.getElementById("content_box2");
 var files = document.getElementById("files");
@@ -226,15 +227,7 @@ $(document).ready(function(){
 			check_ca1[2].checked = true;
 		}
 	}
-	/*
-	document.getElementById("file_names1").value = "";
-	document.getElementById("file_names2").value = "";
-	for(var i=0; i<index; i++){
-		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
-		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
 
-	}
-	*/
 	
 });		
 		
@@ -242,46 +235,9 @@ $(document).ready(function(){
 		
 
 
-content_box.addEventListener("blur",function(){
-	/*
-	content_box2.innerHTML = content_box.innerHTML;
-	
-	for(var i=0; i<index; i++){
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
-	}
-	document.getElementById("hidden").value = content_box2.innerHTML;	
-	*/
-	
-});
 
-document.getElementById("img_controll").addEventListener("click",function(){
 
-//	document.getElementById("hidden").value = content_box2.innerHTML;
-	
-});
 
-document.getElementById("img_controll").addEventListener("click",function(){
-	/*
-	document.getElementById("file_names1").value = "";
-	document.getElementById("file_names2").value = "";
-	for(var i=0; i<index; i++){
-		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
-		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
-
-	}
-	
-	content_box2.innerHTML = content_box.innerHTML;
-	
-	for(var i=0; i<index; i++){
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
-	}
-	document.getElementById("hidden").value = content_box2.innerHTML;
-	
-	console.log(document.getElementById("file_names2").value);
-	*/
-});
 
 
 files.addEventListener("change",handleImgFileSelect);
@@ -372,7 +328,10 @@ function deleteImageAction(index1){
 
 	console.log("before index"+index);
 	console.log("before index1"+index1);
-	sel_files.splice(index1, 1);
+	
+	let sp = sel_files.splice(index1, 1);
+	sp = sp[0].replace(";",'');
+	deleted_files.push(sp);
 
 	var img_id = ".img_id_"+index1;
 	$(img_id).remove();
@@ -403,17 +362,7 @@ function deleteImageAction(index1){
 	if(index == 0){
    		$("#main_img").attr("src","");   
 	}
-/*
-	content_box2.innerHTML = content_box.innerHTML;
-	
-	for(var i=0; i<index; i++){
-		let img_id = document.getElementsByClassName("img_id_"+i);
-		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
-	}
-	document.getElementById("hidden").value = content_box2.innerHTML;
-	console.log("after index"+index);
-	console.log("after index1"+index1);
-	*/
+
 }
 
 function submitAction(){
@@ -468,8 +417,10 @@ function submitAction(){
 		
 	}
 	for(let i=0; i<sel_files2.length; i++){
-		formData.append("files2",sel_files2[i]);		
-		
+		formData.append("files2",sel_files2[i]);			
+	}
+	for(let i=0; i<deleted_files.length; i++){
+		formData.append("deleted_files",deleted_files[i]);			
 	}
 	formData.append("files_length",sel_files.length);
 	

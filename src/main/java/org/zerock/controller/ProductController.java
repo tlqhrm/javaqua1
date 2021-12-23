@@ -113,7 +113,7 @@ public class ProductController {
 		int i = 0;
 		for(MultipartFile f : files) {
 			String fileName = pvo.getFile1Arr()[i];
-
+			sb.append(fileName+";");
 			File file = new File(path+"product", fileName);
 
 			if(!file.exists()) {
@@ -202,35 +202,62 @@ public class ProductController {
 			i = files.length;
 		}
 		List<MultipartFile> files2 = mhsr.getFiles("files2");
-		int files_length = Integer.parseInt(mhsr.getParameter("files_length"));
-		
-
-		System.out.println(files_length);
+		String[] deletedFiles = mhsr.getParameterValues("deleted_files");
 		
 		for(MultipartFile f : files2) {
 			String fileName = pvo.getFile1Arr()[i];
-			File file = new File(path+"product", fileName);
-			if(!file.exists()) {
-				if(file.getParentFile().mkdirs()) {
-					try {
-						file.createNewFile();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				try {
-					f.transferTo(file);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			i++;
+			sb.append(fileName+";");
 		}
+		
+		
 		log.info(sb);
 		String file1 = sb.toString();
 		pvo.setFile1(file1);
 		
-		service.productUpdate(pvo);
+		int result = service.productUpdate(pvo);
+		
+		log.info(deletedFiles[0]);
+		log.info("result : "+result);
+		log.info(deletedFiles.length);
+		if(result == 1 ) {
+			for(int j=0; j<deletedFiles.length; j++){
+				log.info(j);
+				File file = new File(path+"product", deletedFiles[j]);
+				
+				if (file.exists()) {
+	
+				      if (file.delete()){
+	
+				        log.info("파일 삭제 성공 : "+deletedFiles[j]);
+	
+				      }else{
+				    	  log.info("파일 삭제 실패");
+				      }
+				}
+			}
+		}
+		
+		if(result == 1) {
+			for(MultipartFile f : files2) {
+				String fileName = pvo.getFile1Arr()[i];
+				File file = new File(path+"product", fileName);
+				if(!file.exists()) {
+					if(file.getParentFile().mkdirs()) {
+						try {
+							file.createNewFile();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					try {
+						f.transferTo(file);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				i++;
+			}	
+		}
 		
 		String pd_num = Integer.toString(pvo.getPd_num());
 
@@ -244,24 +271,26 @@ public class ProductController {
 		pvo.pvoInit();
 		String path = ImagePath.get();
 		
+		int result = service.productDelete(pvo.getPd_num());
 		
-		String[] file1Arr = pvo.getFile1Arr();
-		for(int i=0; i<file1Arr.length; i++){
-			
-			File file = new File(path+"product", file1Arr[i]);
-			
-			if (file.exists()) {
-
-			      if (file.delete()){
-
-			        log.info("파일 삭제 성공 : "+file1Arr[i]);
-
-			      }else{
-			    	  log.info("파일 삭제 실패");
-			      }
+		if(result == 1) {
+			String[] file1Arr = pvo.getFile1Arr();
+			for(int i=0; i<file1Arr.length; i++){
+				
+				File file = new File(path+"product", file1Arr[i]);
+				
+				if (file.exists()) {
+	
+				      if (file.delete()){
+	
+				        log.info("파일 삭제 성공 : "+file1Arr[i]);
+	
+				      }else{
+				    	  log.info("파일 삭제 실패");
+				      }
+				}
 			}
 		}
-		int result = service.productDelete(pvo.getPd_num());
 		log.info("삭제완료..." + pvo.getPd_num());
 		return Integer.toString(result);
 	}
