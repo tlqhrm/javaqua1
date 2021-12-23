@@ -57,7 +57,7 @@ const v=new Vue({
 	methods : {
 		즉시구매 : function(){
 			if(!id){alert("회원만 이용할수 있습니다.");return;}
-			location.href="/order/direct_order?pd_num="+pd_num+"&title="+title+"&amount="+this.수량+"&price="+price;
+			location.href="/order/direct_order?pd_num="+pd_num+"&title="+title+"&amount="+this.수량+"&price="+price+"&file1="+file1;
 		},
 		장바구니담기: function(){
 			if(!id){alert("회원만 이용할수 있습니다.");return;}
