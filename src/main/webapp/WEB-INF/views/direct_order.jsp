@@ -36,7 +36,7 @@
 				<h3 class="tit">주문서 </h3>														
 				<div class="tb_tit">주문상품</div>
 				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">				
-					<tr height="100" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'" style="cursor:pointer">
+					<tr height="100" onclick="location.href='/product/productDetail?&pd_num=${param.pd_num}'" style="cursor:pointer">
 						<td><img width="70" src="/resources/upload/product/${param.file1}"></td>
 						<td class="txtb" width="500px">${param.title} / 수량 ${param.amount}</td>
 						<td style="text-align:right">
