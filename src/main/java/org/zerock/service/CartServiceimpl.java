@@ -88,7 +88,7 @@ public class CartServiceimpl implements CartService{
 		
 		if(result == 1) {
 			for(CartVO i : cList){
-				rs = pmapper.SalesCountPlus(i.getPd_num(),i.getAmount());
+				rs = pmapper.salesCountPlus(i.getPd_num(),i.getAmount());
 			}
 		}
 		return result;	

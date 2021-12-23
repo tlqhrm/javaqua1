@@ -24,8 +24,8 @@ public class OrderServiceimpl implements OrderService{
 			mapper.insertOd(odvo,totalprice); //order1 테이블 insert
 			mapper.insertOdt(odvo); //order_detail 테이블 insert
 
-			int result = pmapper.salesCountPlus(odvo.getPd_num(),odvo.getAmount());
-			System.out.println(result);
+			pmapper.salesCountPlus(odvo.getPd_num(),odvo.getAmount());
+
 
 			return 1;
 		}else { //재고 없음

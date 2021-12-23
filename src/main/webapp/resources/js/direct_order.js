@@ -47,7 +47,7 @@ const v=new Vue({
              axios.post('/order/directOrder',params)
              .then(res=>{
             	 if(res.data==1){	                	  
-            		location.href="/order/order_ok";
+            		windows.location.href="/order/order_ok";
             	 }else{
             		 alert("재고가 부족합니다.");
             	 }
