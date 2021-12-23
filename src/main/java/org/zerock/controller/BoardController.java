@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.ReplyVO;
+import org.zerock.etc.ImagePath;
 import org.zerock.service.BoardService;
 import org.zerock.service.ReplyService;
 
@@ -61,20 +63,22 @@ public class BoardController {
 	@PostMapping("/boardWrite")
 	public String writeBoard(BoardVO bvo, Model model,@SessionAttribute("id") String id,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {
 		
-		String path2 = "C:\\git\\javaqua1\\src\\main\\webapp\\resources\\upload\\board";
+
 		context = request.getServletContext();
-		String path = context.getRealPath("resources/upload/board");
+		String path = ImagePath.get();
 		
-		System.out.println(admin);
 		if(admin == null) admin = "0";
 		
 		log.info(path);
 		log.info("-----------------------");
 		log.info("Upload File Name: "+file.getOriginalFilename());
 		log.info("Upload File Size: "+file.getSize());
-		bvo.setFile1(file.getOriginalFilename());
+		String uuid = UUID.randomUUID().toString();
+		String fileName = uuid+file.getOriginalFilename();
+		System.out.println(fileName);
+		bvo.setFile1(fileName);
 		
-		File saveFile = new File(path2, file.getOriginalFilename());
+		File saveFile = new File(path+"board", fileName);
 					
 		log.info("/write.....");
 		bvo.setUser_id(id);
@@ -104,14 +108,14 @@ public class BoardController {
 		if(page == null) {
 			page = 1;
 		}
-		int id = 0;
+
 		
 		log.info("read:" + bd_id);
 		
 		BoardVO bvo = bdService.readBoard(bd_id,ip);
 		
 		List<ReplyVO> commentList = reService.getReplyList(bd_id);
-		bvo.setBd_id(id);	
+	
 		model.addAttribute("bvo",bvo);
 		model.addAttribute("page",page);
 		model.addAttribute("commentList",commentList);
@@ -153,7 +157,13 @@ public class BoardController {
 	public String modifyBoard(BoardVO bvo,Model model, MultipartFile file) {
 		log.info("modify:" + bvo);
 		
-		String fileName = file.getOriginalFilename();
+		String path = ImagePath.get();
+		
+		String ogFileName = bvo.getFile1();
+		File ogFile = new File(path+"board\\"+ogFileName);
+		
+		String uuid = UUID.randomUUID().toString();
+		String fileName = uuid+file.getOriginalFilename();
 		bvo.setFile1(fileName);
 		int bd_id = bvo.getBd_id();
 		
@@ -162,15 +172,26 @@ public class BoardController {
 		
 			if(bvo.getFile1() != null) {
 					
-			String uploadFolder = "C:\\sts\\spring_study\\ex021\\src\\main\\webapp\\resources\\upload\\board";
+			
 			log.info("-----------------------");
 			log.info("Upload File Name: "+fileName);
 			log.info("Upload File Size: "+file.getSize());
 			bvo.setFile1(file.getOriginalFilename());
-			File saveFile = new File(uploadFolder, file.getOriginalFilename());
+			File saveFile = new File(path+"board", fileName);
 			
 				try {
 					file.transferTo(saveFile);
+					
+					if (ogFile.exists()) {
+
+					      if (ogFile.delete()){
+
+					        log.info("기존 파일 삭제  : "+ogFileName);
+
+					      }else{
+					    	  log.info("파일 삭제 실패");
+					      }
+					}
 				}catch (Exception e) {
 					log.error(e.getMessage());
 				}		
@@ -200,9 +221,9 @@ public class BoardController {
 
 		if(file_name.length() > 0){
 			
-			String path = "C:\\sts\\spring_study\\ex021\\src\\main\\webapp\\resources\\upload\\board";
+			String path = ImagePath.get();
 		
-			File file = new File(path+"\\"+file_name);
+			File file = new File(path+"board\\"+file_name);
 			
 			if (file.exists()) {
 

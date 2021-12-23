@@ -73,7 +73,7 @@
                                         <c:if test="${admin eq 1 }">
                                         <span >
                                         <button type="button" onClick="location.href='/product/productUpdateForm?pd_num=${pd.pd_num}'">수정</button>
-                                        <button type="button" onClick="deleteCheck('${pd.title}','${pd.pd_num }')">삭제</button>
+                                        <button type="button" onClick="deleteCheck('${pd.title}','${pd.pd_num }','${pd.file1 }')">삭제</button>
                                         </span>
                                         </c:if>
                                     </span>                                                                                                             
@@ -123,13 +123,14 @@
     </div>
     <jsp:include page="footer.jsp"></jsp:include>
 <script>
-function deleteCheck(t,pd_num){
+function deleteCheck(t,pd_num,file1){
 	confirm("'"+t+"'"+" 를 삭제 합니다.");
 	console.log(pd_num);
 	$.ajax({
 		url : "/product/productDelete",
 		type : "post",
-		data : {pd_num : pd_num},
+		data : {pd_num : pd_num,
+				file1 : file1},
 		dataType: "text",
 		success : function(data){
 			console.log(data);

@@ -162,16 +162,21 @@ $(document).ready(function(){
 	$(document).keydown(function(e){
 		var backspace = 8;
 	    
-	    if (e.keyCode == backspace) {
-	    	
+		if (e.keyCode == backspace) {
 	    	var selection = window.getSelection();
-	    	alert(selection.anchorNode.previousSibling.nodeName +"\n"+ selection.anchorOffset);
+	    	//alert(selection.focusNode.firstChild.nodeName +"\n"+ selection.anchorOffset);
 	    	// INPUT, TEXTAREA, SELECT 가 아닌곳에서 backspace 키 누른경우  
-	    	if(selection.anchorNode.previousSibling.nodeName === "SPAN" && selection.anchorOffset == 0){
-	    		console.log("111111111");
-	    		e.stopPropagation();
-	    		e.preventDefault();	    		
-	    	}
+	    	try{
+		    	if(selection.anchorNode.previousSibling.nodeName == "SPAN" && selection.anchorOffset == 0){
+		    		e.stopPropagation();
+		    		e.preventDefault();	    		
+		    	}else if(selection.focusNode.firstChild.nodeName == "IMG" && selection.anchorOffset == 1){
+		    		e.stopPropagation();
+		    		e.preventDefault();	    		
+		    	}
+		    }catch(e){
+		    	
+		    }
 	    }
 	});
 });		
