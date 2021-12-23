@@ -87,7 +87,7 @@ public class ProductController {
 	@PostMapping("/productRegist")
 	public String writepvo(ProductVO pvo, Model model, MultipartHttpServletRequest mhsr ){
 
-		System.out.println(1);
+
 		String category1 = null;
 		String[] category1_arr = mhsr.getParameterValues("category1");
 		if(category1_arr != null) {
@@ -101,43 +101,29 @@ public class ProductController {
 		}else {
 			category1=";";
 		}
-		System.out.println(2);
+
 		pvo.setCategory1(category1);
 		
 		pvo.pvoInit();
 		
 		
 		String path = ImagePath.get();
-		System.out.println(3);
 		List<MultipartFile> files = mhsr.getFiles("files");
-
 		StringBuffer sb = new StringBuffer();
-		System.out.println(4);
 		int i = 0;
 		for(MultipartFile f : files) {
-			System.out.println(11);
 			String fileName = pvo.getFile1Arr()[i];
-			System.out.println(11.5);
-			System.out.println(fileName);
-			sb.append(fileName+";");
-			System.out.println(sb);
-			System.out.println(12);
+
 			File file = new File(path+"product", fileName);
-			System.out.println(path+"product"+ fileName);
-			System.out.println(13);
-			System.out.println(14);
+
 			if(!file.exists()) {
-				System.out.println(15);
 				if(file.getParentFile().mkdirs()) {
-					System.out.println(16);
 					try {
 						file.createNewFile();
-						System.out.println(17);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-				System.out.println(18);
 				try {
 					f.transferTo(file);
 				}catch (Exception e) {
@@ -146,7 +132,6 @@ public class ProductController {
 			}
 			i++;
 		}
-		System.out.println(19);
 		log.info(sb);
 		String file1 = sb.toString();
 		pvo.setFile1(file1);
@@ -186,7 +171,6 @@ public class ProductController {
 	@PostMapping("/productUpdate")
 	public String productUpdate(ProductVO pvo, Model model, MultipartHttpServletRequest mhsr ){
 
-		System.out.println(1);
 		String category1 = null;
 		String[] category1_arr = mhsr.getParameterValues("category1");
 		
@@ -201,7 +185,6 @@ public class ProductController {
 		}else {
 			category1=";";
 		}
-		System.out.println(2);
 		pvo.setCategory1(category1);
 		
 		pvo.pvoInit();
@@ -209,13 +192,11 @@ public class ProductController {
 		StringBuffer sb = new StringBuffer();
 		
 		String path = ImagePath.get();
-		System.out.println(3);
 		
 		int i = 0;
 		String[] files = mhsr.getParameterValues("files");
 		if (files != null) {
 			for(String f : files) {
-				System.out.println(f);
 				sb.append(f);
 			}
 			i = files.length;
@@ -226,32 +207,17 @@ public class ProductController {
 
 		System.out.println(files_length);
 		
-		System.out.println(4);
-		
 		for(MultipartFile f : files2) {
-			System.out.println(11);
 			String fileName = pvo.getFile1Arr()[i];
-			System.out.println(11.5);
-			System.out.println(fileName);
-			sb.append(fileName+";");
-			System.out.println(sb);
-			System.out.println(12);
 			File file = new File(path+"product", fileName);
-			System.out.println(path+"product"+ fileName);
-			System.out.println(13);
-			System.out.println(14);
 			if(!file.exists()) {
-				System.out.println(15);
 				if(file.getParentFile().mkdirs()) {
-					System.out.println(16);
 					try {
 						file.createNewFile();
-						System.out.println(17);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-				System.out.println(18);
 				try {
 					f.transferTo(file);
 				}catch (Exception e) {
@@ -260,7 +226,6 @@ public class ProductController {
 			}
 			i++;
 		}
-		System.out.println(19);
 		log.info(sb);
 		String file1 = sb.toString();
 		pvo.setFile1(file1);
@@ -274,13 +239,30 @@ public class ProductController {
 	
 	@ResponseBody
 	@PostMapping("/productDelete")
-	public String remove(int pd_num) {
-		log.info("productDelete..." + pd_num);
+	public String remove(ProductVO pvo) {
+		log.info("productDelete..." + pvo);
+		pvo.pvoInit();
+		String path = ImagePath.get();
 		
-		System.out.println(pd_num);
-		int result = service.productDelete(pd_num);
-		System.out.println(result);
-		log.info("삭제완료..." + pd_num);
+		
+		String[] file1Arr = pvo.getFile1Arr();
+		for(int i=0; i<file1Arr.length; i++){
+			
+			File file = new File(path+"product", file1Arr[i]);
+			
+			if (file.exists()) {
+
+			      if (file.delete()){
+
+			        log.info("파일 삭제 성공 : "+file1Arr[i]);
+
+			      }else{
+			    	  log.info("파일 삭제 실패");
+			      }
+			}
+		}
+		int result = service.productDelete(pvo.getPd_num());
+		log.info("삭제완료..." + pvo.getPd_num());
 		return Integer.toString(result);
 	}
 }
