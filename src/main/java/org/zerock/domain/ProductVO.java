@@ -23,16 +23,16 @@ public class ProductVO {
 	String file2;
 	String content2;
 	int price2;
-	String strPrice;
-	String strPrice2;
+//	String strPrice;
+//	String strPrice2;
 	String file_names2;
 
 	
 	public void pvoInit() {
 
 		if(discount != 0)
-		price2 = price+((price*discount)/100);
-		
+			price2= (int) Math.ceil(price / (1 - (((double)discount) / 100))) ;
+
 		if(file1 != null) {
 			file1Arr = file1.split(";");
 		}

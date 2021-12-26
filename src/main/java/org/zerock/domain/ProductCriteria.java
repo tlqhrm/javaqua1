@@ -24,13 +24,16 @@ public class ProductCriteria {
 	private String criCategory1;
 	private String criCategory2;
 	
+//	public ProductCriteria() {}
 	public ProductCriteria(int page) {
 		
-		pagePerList = 12;
-		pagingCount = 10;		
-		
-		startPage = (page - 1) * pagePerList +1;
-		endPage = startPage + pagePerList -1;
+		if(page != 0) {
+			pagePerList = 12;
+			pagingCount = 10;		
+			
+			startPage = (page - 1) * pagePerList +1;
+			endPage = startPage + pagePerList -1;
+		}
 	}
 
 	public void initCri(){
@@ -71,11 +74,11 @@ public class ProductCriteria {
 	
 	public void initCategory2() {
 		if(category2.equals("금붕어")) {
-			criCategory2 = "랜덤 금붕어||최상급 금붕어||오란다||난주||점보||진주린";
+			criCategory2 = "^랜덤 금붕어|^최상급 금붕어|^오란다|^난주|^점보|^진주린";
 		}else if (category2.equals("베타/구라미")) {
-			criCategory2 = "랜덤베타||실물베타||야생베타||구라미";
+			criCategory2 = "^랜덤 베타|^실물 베타|^야생 베타|^구라미";
 		}else if (category2.equals("애완새우/달팽이")) {
-			criCategory2 = "생이새우||비쉬림프||패각류";
+			criCategory2 = "^생이새우|^비쉬림프|^패각류";
 		}
 	}
 }

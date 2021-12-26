@@ -394,6 +394,9 @@ margin-right: auto;
     height: 250px;
     line-height: 250px;
 }
+#list_img > span{
+	vertical-align : middle;
+}
 
 .prev_img{
 	vertical-align:middle;

@@ -41,4 +41,6 @@ public interface ProductMapper {
 		
 		public int salesCountPlus(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
 
+		public List<ProductVO> getIndexList(ProductCriteria cri);
+
 }

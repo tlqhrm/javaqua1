@@ -12,7 +12,11 @@
 	</select>
 	
 	<select id="getList" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from (select ROWNUM as rnum, A.* from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
+		<![CDATA[select * from (select ROWNUM as rnum,  A.title, A.price, A.category1, A.file1, A.discount, A.pd_num, A.stock from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
+	</select>
+	
+	<select id="getIndexList" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * from (select ROWNUM as rnum, A.title, A.price, A.category1, A.file1, A.discount, A.pd_num, A.stock from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) order by registdate desc)A) where rnum >=#{startPage} and rnum <= #{endPage} ]]>		
 	</select>
 	
 	<insert id="productRegist">

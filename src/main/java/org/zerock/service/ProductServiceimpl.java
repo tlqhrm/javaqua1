@@ -83,6 +83,12 @@ public class ProductServiceimpl implements ProductService {
 		return result;
 	}
 
+	@Override
+	public List<ProductVO> getIndexList(ProductCriteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getIndexList(cri);
+	}
+
 
 	
 }

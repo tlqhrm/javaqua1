@@ -70,9 +70,9 @@
 				                    <option value = "구피">구피</option>
 				                    <option value = "플래티/몰리">플래티/몰리</option>
 				                    <option value = "테트라">테트라</option>
-				                    <option value = "랜덤베타">랜덤베타</option>
-				                    <option value = "실물베타">실물베타</option>
-				                    <option value = "야생베타">야생베타</option>
+				                    <option value = "랜덤 베타">랜덤 베타</option>
+				                    <option value = "실물 베타">실물 베타</option>
+				                    <option value = "야생 베타">야생 베타</option>
 				                    <option value = "구라미">구라미</option>
 				                    <option value = "라스보라/레인보우">라스보라/레인보우</option>
 				                    <option value = "코리/플레코/캣">코리/플레코/캣</option>
@@ -211,10 +211,10 @@ var discount = document.querySelector("#tmain > table > tbody > tr.info > td > i
 var price2 = document.querySelector("#tmain > table > tbody > tr.info > td > span > span");
 
 price.addEventListener("change",function(){
-	price2.innerText = (parseInt(price.value) + (parseInt(price.value) * parseInt(discount.value)) / 100)+"원" ;
+	price2.innerText = Math.ceil(((parseInt(price.value) / (1 - ((parseInt(discount.value)) / 100)))))+"원" ;
 });
 discount.addEventListener("change",function(){
-	price2.innerText = (parseInt(price.value) + (parseInt(price.value) * parseInt(discount.value)) / 100)+"원" ;
+	price2.innerText = Math.ceil(((parseInt(price.value) / (1 - ((parseInt(discount.value)) / 100)))))+"원" ;
 });
 
 

@@ -55,6 +55,7 @@ public class ProductController {
 		List<ProductVO> list = new ArrayList<>();
 		int[] paging = new int[3];
 		if(admin == null) admin = "0";
+		
 		cri.setAdmin(admin);	
 		
 		cri.initCri();
@@ -64,7 +65,7 @@ public class ProductController {
 		for(ProductVO lst : list) {
 			lst.pvoInit();
 		}
-		
+		log.info(cri);
 		paging = service.getPages(cri);
 		
 		model.addAttribute("paging", paging);
@@ -216,27 +217,29 @@ public class ProductController {
 		
 		int result = service.productUpdate(pvo);
 		
-		log.info(deletedFiles[0]);
-		log.info("result : "+result);
-		log.info(deletedFiles.length);
-		if(result == 1 ) {
-			for(int j=0; j<deletedFiles.length; j++){
-				log.info(j);
-				File file = new File(path+"product", deletedFiles[j]);
-				
-				if (file.exists()) {
-	
-				      if (file.delete()){
-	
-				        log.info("파일 삭제 성공 : "+deletedFiles[j]);
-	
-				      }else{
-				    	  log.info("파일 삭제 실패");
-				      }
+		if(deletedFiles != null) {
+			
+			log.info(deletedFiles[0]);
+			log.info("result : "+result);
+			log.info(deletedFiles.length);
+			if(result == 1 ) {
+				for(int j=0; j<deletedFiles.length; j++){
+					log.info(j);
+					File file = new File(path+"product", deletedFiles[j]);
+					
+					if (file.exists()) {
+		
+					      if (file.delete()){
+		
+					        log.info("파일 삭제 성공 : "+deletedFiles[j]);
+		
+					      }else{
+					    	  log.info("파일 삭제 실패");
+					      }
+					}
 				}
 			}
 		}
-		
 		if(result == 1) {
 			for(MultipartFile f : files2) {
 				String fileName = pvo.getFile1Arr()[i];

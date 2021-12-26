@@ -22,4 +22,6 @@ public interface ProductService {
 
 	public int productDelete(int pd_num);
 
+	public List<ProductVO> getIndexList(ProductCriteria cri);
+
 }

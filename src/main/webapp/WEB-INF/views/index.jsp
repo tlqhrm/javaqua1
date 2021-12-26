@@ -47,7 +47,7 @@
         </div>
         <div class = "product_list">
         	
-            <div class = "tit_goods"><h3><a class="list_name" href='#none'>&nbsp;&nbsp; NEW 열대어 &nbsp;></a></h3></div>
+            <div class = "tit_goods"><h3><a class="list_name" href="/product/productList?page=1&category1=new">&nbsp;&nbsp; NEW 열대어 &nbsp;></a></h3></div>
             <div class = "list_goods">
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
@@ -247,7 +247,7 @@
             </div>
         </div>       
         <div class = "product_list">
-            <div class = "tit_goods"><h3><a class="list_name" href='#none'> &nbsp;&nbsp;&nbsp; 인기상품 &nbsp;> </a></div>
+            <div class = "tit_goods"><h3><a class="list_name" href='/product/productList?page=1&category1=best'> &nbsp;&nbsp;&nbsp; 인기상품 &nbsp;> </a></div>
             <div class = "list_goods">
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
@@ -496,7 +496,7 @@
             <div class = "list_goods">
                 <div class="bx-wrapper" style="margin-bottom: 120px;">
                     <div class="bx-viewport">                    
-                        <ul class="list" id="list_md" style="width: 2136px; position:relative; list-style: none; margin: auto; float: left; padding: 0px; height: 550px;">
+                        <ul class="list" id="list_md" style="width: 1050px; position:relative; list-style: none; margin: auto; float: left; padding: 0px; height: 550px;">
                             <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 버블아이 *수포안 금붕어*</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold01.jpg"></a>
                             </li>
                             <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 젤리캡 볼 오란다 8 - 9m전후급</span><span style="line-height: 300px;">43,000원</span><img src="/resources/images/금붕어/gold02.jpg"></a>
@@ -513,35 +513,18 @@
                             </li>
                             <li class="cut"><a class="md" href='#none'><span></span><span>아에이오우</span><img src="/resources/images/금붕어/gold08.jpeg"></a>
                             </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>흑 난주 3 - 4cm전후</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold05.png"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>칼리코 난주 4cm 전후</span><span style="line-height: 300px;">9,900원</span><img src="/resources/images/금붕어/gold06.png"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>(RANDOM)색상 랜덤 베이비 오란다 ( 3cm급 )</span><span style="line-height: 300px;">9,900원</span><img src="/resources/images/금붕어/gold07.jpeg"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 블랙 테일 밀크 오란다 베이비</span><span style="line-height: 300px;">14,000원</span><img src="/resources/images/금붕어/gold08.jpeg"></a>
-                                <li class="cut"><a class="md" href='#none'><span></span><span>흑 난주 3 - 4cm전후</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold05.png"></a>
-                                </li>
-                                <li class="cut"><a class="md" href='#none'><span></span><span>칼리코 난주 4cm 전후</span><span style="line-height: 300px;">9,900원</span><img src="/resources/images/금붕어/gold06.png"></a>
-                                </li>
-                                <li class="cut"><a class="md" href='#none'><span></span><span>(RANDOM)색상 랜덤 베이비 오란다 ( 3cm급 )</span><span style="line-height: 300px;">9,900원</span><img src="/resources/images/금붕어/gold07.jpeg"></a>
-                                </li>
-                                <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 블랙 테일 밀크 오란다 베이비</span><span style="line-height: 300px;">14,000원</span><img src="/resources/images/금붕어/gold08.jpeg"></a>
+                            
                         </ul>                    
                     </div>
                                             
                     <h4 style="width: 1050px; height: 60px; margin-left: auto; margin-right: auto; float: none; text-align: center; font-size: 30px; line-height: 40px; margin-top: 12px; margin-bottom: 50px;">
-                        <a href="#none" style="border: #d3d8da 1px solid; background-color: #e5e8e9; color: #000000; padding: 10px 30px 10px 30px; "> 금붕어 더보기 ></a>
+                        <a href="/product/productList?page=1&category2=금붕어" style="border: #d3d8da 1px solid; background-color: #e5e8e9; color: #000000; padding: 10px 30px 10px 30px; "> 금붕어 더보기 ></a>
                        </h4> 
-                    <div class="bx-controls" style="margin-top: -445px;">
-                        <a class="bx-prev_3" href="#none" ><img src="/resources/images/화살표/이전버튼.png"></a>
-                        <a class="bx-next_3" href="#none" ><img src="/resources/images/화살표/다음버튼.png"></a>
-                    </div>
                 </div>
             </div>
         </div>
         <div class = "product_list">
-            <div class = "tit_goods"><h3><a class="list_name" href='#none'> &nbsp;&nbsp;&nbsp; 베타 - 실물개체 &nbsp;> </a></div>
+            <div class = "tit_goods"><h3><a class="list_name" href='/product/productList?page=1&category2=실물 베타'> &nbsp;&nbsp;&nbsp; 베타 - 실물개체 &nbsp;> </a></div>
             <div class = "list_goods">
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
@@ -738,7 +721,7 @@
                 </div>
             </div>
             <div class = "product_list">
-                <div class = "tit_goods"><h3><a class="list_name" href='#none'> &nbsp;&nbsp;&nbsp; 프리미엄 오란다 &nbsp;> </a></div>
+                <div class = "tit_goods"><h3><a class="list_name" href='/product/productList?page=1&category2=오란다'> &nbsp;&nbsp;&nbsp; 프리미엄 오란다 &nbsp;> </a></div>
                 <div class = "list_goods">
                     <div class="bx-wrapper">
                         <div class="bx-viewport">                    
@@ -963,5 +946,15 @@
     </div>      
     <!-- <div class="clear"></div> -->
     <jsp:include page="footer.jsp"></jsp:include>
+<script>
+var pdList1 = '${pdList1}';
+var pdList2 = '${pdList2}';
+var pdList3 = '${pdList3}';
+var pdList4 = '${pdList4}';
+var pdListMd = '${pdListMd}';
+
+console.log(pdList1);
+</script>
+
 </body>
 </html>
