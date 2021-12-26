@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/resources/css/index.css">
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script type="text/javascript" src="/resources/js/jquery.js"></script> -->
     <script src="/resources/js/mouse.js"></script>
     <script src="/resources/js/move_new.js"></script>
@@ -52,189 +54,27 @@
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
                         <ul class="list_1" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                            <li class="cut" id=list_1><a href='detail.html'><img src="/resources/images/new 열대어/new01.jpg"></a>
+                            <li v-for="(item,index) in pdList1" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
-                                        <a class="txt" href='detail.html'>레인보우 뽀뽄데타 / 1.5cm 전후</a>
+                                        <a class="txt" href='detail.html'>{{item.title}}</a>
                                     </span><br>
+                                    <span v-if="item.discount != 0" class="discount">{{item.discount }}%</span>
                                     <span class="price">
-                                        3,000원
-                                        <span class="cost">4,500원</span>
-                                        
+                                        	{{item.strPrice}}원
                                     </span>  
-                                    <span class="icon_sale"></span> 
-                                    <span class="icon_hot"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new02.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt">하프블랙 옐로우 글라스벨리 리본 구피 / 3마리 + 유어 서비스 / 1세트</a>
-                                    </span><br>
-                                    <span class="price">
-                                        45,000원
-                                    </span>
+                                    <span v-if="item.category1Arr[0] == 'new'" class="icon_new"></span>
+                                    <span v-if="item.category1Arr[1] == 'sale'" class="icon_sale"></span>  
+                                    <span v-if="item.category1Arr[2] == 'best'" class="icon_best"></span> 
+                                    <span v-if="item.category1Arr[0] == 'sale'" class="icon_sale"></span>
+                                    <span v-if="item.category1Arr[1] == 'best'" class="icon_best"></span>
+                                    <span v-if="item.category1Arr[0] == 'best'" class="icon_best"></span>   
+                                    <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
                                         <a href='#none' class=under_cart></a>
                                         <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                               
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new03.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>플래티넘 코이구피 / 준성어 / 1쌍 (2마리)</a>
-                                    </span><br>
-                                    <span class="price">
-                                        14,000원
-                                        <!-- <span class="cost">73,500원</span> -->
-                                    </span>
-                                    <span class="icon_hot"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                            
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new04.png"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>[특별가 이벤트]오셀라투스 골드 3~4cm 전후</a>
-                                    </span><br>
-                                    <span class="price">
-                                        10,000원
-                                        <span class="cost">16,000원</span>
-                                    </span>
-                                    <span class="icon_sale"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                                
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new05.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new06.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                          
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new07.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new08.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new09.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new10.png"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new11.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>      
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                          
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new12.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>                
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                
+                                    </span>                                                                                                             
                                 </div>
                             </li>
                         </ul>
@@ -252,191 +92,27 @@
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
                         <ul class="list_2" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                            <li class="cut" id=list_1><a href='#none'><img src="/resources/images/베스트/best01.jpg"></a>
+                            <li v-for="(item,index) in pdList2" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
-                                        <a class="txt" href='#none'>네온블루 슈퍼화이트 구피 준성어 한쌍</a>
+                                        <a class="txt" href='detail.html'>{{item.title}}</a>
                                     </span><br>
+                                    <span v-if="item.discount != 0" class="discount">{{item.discount }}%</span>
                                     <span class="price">
-                                        9,900원
-                                        <span class="cost">16,500원</span>
-                                    </span>   
-                                    <span class="icon_sale"><span></span></span>
-                                    <span class="icon_hot"></span>
-                                    <span class="icon_best"></span>
+                                        	{{item.strPrice}}원
+                                    </span>  
+                                    <span v-if="item.category1Arr[0] == 'new'" class="icon_new"></span>
+                                    <span v-if="item.category1Arr[1] == 'sale'" class="icon_sale"></span>  
+                                    <span v-if="item.category1Arr[2] == 'best'" class="icon_best"></span> 
+                                    <span v-if="item.category1Arr[0] == 'sale'" class="icon_sale"></span>
+                                    <span v-if="item.category1Arr[1] == 'best'" class="icon_best"></span>
+                                    <span v-if="item.category1Arr[0] == 'best'" class="icon_best"></span>   
+                                    <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
+                                    
                                     <span class="under">
                                         <a href='#none' class=under_cart></a>
                                         <a href='#none' class=under_wish></a>
                                     </span>                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/베스트/best02.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt">골든 볼 라미네지 / 2cm전후 / 1마리</a>
-                                    </span><br>
-                                    <span class="price">
-                                        5,900원
-                                        <span class="cost">7,500원</span>
-                                    </span>
-                                    <span class="icon_best"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                               
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/베스트/best03.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>팬더 코리도라스 / 2~3cm전후 / 2마리</a>
-                                    </span><br>
-                                    <span class="price">
-                                        4,000원
-                                        <!-- <span class="cost">73,500원</span> -->
-                                    </span>
-                                    <span class="icon_best"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                            
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/베스트/best04.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>왁 플래티 / 2cm전후 / 1마리</a>
-                                    </span><br>
-                                    <span class="price">
-                                        900원
-                                        <span class="cost">2,000원</span>
-                                    </span>
-                                    <span class="icon_sale"><span></span></span>
-                                    <span class="icon_best"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                                
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new05.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new06.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                          
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new07.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new08.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new09.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new10.png"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new11.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>      
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                          
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new12.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>                
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                
                                 </div>
                             </li>
                         </ul>
@@ -481,45 +157,38 @@
             <div class = "tit_goods" style="padding-bottom: 0px; margin-top: 10px;"><h3> MD 추천상품 </h3></div>
             <div class = "category" style="position: relative; height: 80px; margin-right: auto; margin-left: auto; width: 1050px;">
                 <ul class="list_category" style="width: 1050px; margin-left: 40px; margin-right: auto; list-style: none; padding: 0px 0px 0px 0px; position: relative;">
-                    <li style=" background-color: #def1f3; "><a href='#none' style="padding: 5px 70px 5px 70px; font-weight: 700;">금붕어</a></li>
-                    <li><a href='#none' style="padding: 5px 73px 5px 73px;">구피</a></li>
-                    <li><a href='#none' style="padding: 5px 55px 5px 55px;">플래티/몰리</a></li>
-                    <li><a href='#none' style="padding: 5px 70px 5px 70px;">테트라</a></li>
-                    <li><a href='#none' style="padding: 5px 55px 5px 55px;">베타/구라미</a></li>
-                    <li><a href='#none'>라스보라/레인보우</a></li>
-                    <li><a href='#none' style="padding: 5px 40px 5px 40px;">코리/플레코/캣</a></li>
-                    <li><a href='#none' style="padding: 5px 40px 5px 40px;">엔젤/디스커스</a></li>
-                    <li><a href='#none'>라미네지/시클리드</a></li>
-                    <li><a href='#none'>애완새우/달팽이</a></li>
+                    <li style=" background-color: #def1f3; "><a href='#none' @click="엠디('금붕어')" style="padding: 5px 70px 5px 70px; font-weight: 700;">금붕어</a></li>
+                    <li><a href='#none' @click="엠디('구피')" style="padding: 5px 73px 5px 73px;">구피</a></li>
+                    <li><a href='#none' @click="엠디('플래티/몰리')" style="padding: 5px 55px 5px 55px;">플래티/몰리</a></li>
+                    <li><a href='#none' @click="엠디('테트라')" style="padding: 5px 70px 5px 70px;">테트라</a></li>
+                    <li><a href='#none' @click="엠디('베타/구라미')" style="padding: 5px 55px 5px 55px;">베타/구라미</a></li>
+                    <li><a href='#none' @click="엠디('라스보라/레인보우')" >라스보라/레인보우</a></li>
+                    <li><a href='#none' @click="엠디('코리/플레코/캣')" style="padding: 5px 40px 5px 40px;">코리/플레코/캣</a></li>
+                    <li><a href='#none' @click="엠디('엔젤/디스커스')" style="padding: 5px 40px 5px 40px;">엔젤/디스커스</a></li>
+                    <li><a href='#none' @click="엠디('라미네지/시클리드')" >라미네지/시클리드</a></li>
+                    <li><a href='#none' @click="엠디('애완새우/달팽이')" >애완새우/달팽이</a></li>
                 </ul>
             </div>
             <div class = "list_goods">
                 <div class="bx-wrapper" style="margin-bottom: 120px;">
                     <div class="bx-viewport">                    
                         <ul class="list" id="list_md" style="width: 1050px; position:relative; list-style: none; margin: auto; float: left; padding: 0px; height: 550px;">
-                            <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 버블아이 *수포안 금붕어*</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold01.jpg"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 젤리캡 볼 오란다 8 - 9m전후급</span><span style="line-height: 300px;">43,000원</span><img src="/resources/images/금붕어/gold02.jpg"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 몬스터바디 로즈테일 오란다</span><span style="line-height: 300px;">200,000원</span><img src="/resources/images/금붕어/gold03.jpg"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>[RANDOM D/C] 사쿠라 라운드바디 빈금 8 - 9cm 전후급</span><span style="line-height: 300px;">70,000원</span><img src="/resources/images/금붕어/gold04.jpg"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>흑 난주 3 - 4cm전후</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold05.png"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>아에이오우</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold06.png"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>아에이오우</span><span style="line-height: 300px;">9,000원</span><img src="/resources/images/금붕어/gold07.jpeg"></a>
-                            </li>
-                            <li class="cut"><a class="md" href='#none'><span></span><span>아에이오우</span><img src="/resources/images/금붕어/gold08.jpeg"></a>
-                            </li>
-                            
+                            <li v-for="item in pdListMd" class="cut">
+                            	<a class="md" :href="'/product/productDetail?pd_num='+item.pd_num">
+									<span></span>
+                            		<span style="top:65px;">{{item.title}}</span>
+                            		<span v-if="item.discount == 0" style="top:165px;">{{item.strPrice}}원</span>
+                            	 	<span v-else style="top:140px;">{{item.strPrice2}}원</span><img :src="'/resources/upload/product/'+item.file1Arr[0]">
+
+                            	</a>
+                            </li>  
                         </ul>                    
                     </div>
                                             
                     <h4 style="width: 1050px; height: 60px; margin-left: auto; margin-right: auto; float: none; text-align: center; font-size: 30px; line-height: 40px; margin-top: 12px; margin-bottom: 50px;">
-                        <a href="/product/productList?page=1&category2=금붕어" style="border: #d3d8da 1px solid; background-color: #e5e8e9; color: #000000; padding: 10px 30px 10px 30px; "> 금붕어 더보기 ></a>
+                        <a :href="'/product/productList?page=1&category2='+category2" style="border: #d3d8da 1px solid; background-color: #e5e8e9; color: #000000; padding: 10px 30px 10px 30px; "> {{category2}} 더보기 ></a>
                        </h4> 
+                       
                 </div>
             </div>
         </div>
@@ -529,187 +198,27 @@
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
                         <ul class="list_3" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                            <li class="cut" id=list_1><a href='#none'><img src="/resources/images/베타_실물개체/beta01.jpg"></a>
+                            <li v-for="(item,index) in pdList3" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
-                                        <a class="txt" href='#none'>DTPK NEMO tigercamo🐯    Color : red / yellow / blue Size : 5cm 전후</a>
+                                        <a class="txt" href='detail.html'>{{item.title}}</a>
                                     </span><br>
+                                    <span v-if="item.discount != 0" class="discount">{{item.discount }}%</span>
                                     <span class="price">
-                                        42,000원
-                                    </span>   
-                                    <span class="icon_hot"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/베타_실물개체/beta02.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt">HMPK WHITEFANCY    Color : white / blue Size : 5cm 전후</a>
-                                    </span><br>
-                                    <span class="price">
-                                        18,000원
-                                        <span class="cost">35,000원</span>
-                                    </span>
-                                    <span class="icon_sale"><span></span></span>
-                                    <span class="icon_hot"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                               
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/베타_실물개체/beta03.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>HMPK 24K GOLD bigtail    Color : gold Size : 5cm 전후</a>
-                                    </span><br>
-                                    <span class="price">
-                                        48,000원
-                                        <!-- <span class="cost">73,500원</span> -->
-                                    </span>
+                                        	{{item.strPrice}}원
+                                    </span>  
+                                    <span v-if="item.category1Arr[0] == 'new'" class="icon_new"></span>
+                                    <span v-if="item.category1Arr[1] == 'sale'" class="icon_sale"></span>  
+                                    <span v-if="item.category1Arr[2] == 'best'" class="icon_best"></span> 
+                                    <span v-if="item.category1Arr[0] == 'sale'" class="icon_sale"></span>
+                                    <span v-if="item.category1Arr[1] == 'best'" class="icon_best"></span>
+                                    <span v-if="item.category1Arr[0] == 'best'" class="icon_best"></span>   
+                                    <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
                                         <a href='#none' class=under_cart></a>
                                         <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                            
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/베타_실물개체/beta04.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>HMPK RED GALAXY CANDY    Color : red / white / blue Size : 5cm 전후</a>
-                                    </span><br>
-                                    <span class="price">
-                                        22,000원
-                                    </span>
-                                    <span class="icon_hot"></span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                                
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new05.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new06.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                          
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new07.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                             
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new08.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new09.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new10.png"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>       
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                         
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new11.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>      
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                          
-                                </div>
-                            </li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new12.jpg"></a>
-                                <div class="info_goods" >
-                                    <span class="name">
-                                        <a class="txt" href='#none'>장조림</a>
-                                    </span><br>
-                                    <span class="price">
-                                        61,700원
-                                        <span class="cost">73,500원</span>
-                                    </span>                
-                                    <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
-                                    </span>                                                                                                                
+                                    </span>                                                                                                             
                                 </div>
                             </li>
                         </ul>
@@ -726,187 +235,29 @@
                     <div class="bx-wrapper">
                         <div class="bx-viewport">                    
                             <ul class="list_4" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                                <li class="cut" id=list_1><a href='#none'><img src="/resources/images/프리미엄 오란다/oranda01.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>BP MENG) A GRADE SELECTION 사쿠라 로즈테일 오란다 / 12cm 급 / 암컷추정</a>
-                                        </span><br>
-                                        <span class="price">
-                                            230,000원
-                                        </span>   
-                                        <span class="icon_hot"></span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                             
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/프리미엄 오란다/oranda02.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt">LILI KAZ SELECTION) 펭귄같은 로즈테일 오란다 / Size : 11 cm 급 / 암컷추정</a>
-                                        </span><br>
-                                        <span class="price">
-                                            285,000원
-                                        </span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                               
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/프리미엄 오란다/oranda03.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>BP MENG) 화이트바디 사쿠라 로즈테일 오란다 / MENG-0726-ma / 13cm 전후 / 수컷추정</a>
-                                        </span><br>
-                                        <span class="price">
-                                            300,000원
-                                            <!-- <span class="cost">73,500원</span> -->
-                                        </span>
-                                        <span class="icon_hot"></span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                            
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/프리미엄 오란다/oranda04.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>LILI GOLDFISH ) 홍백 로즈테일 오란다 / Size : 14cm 전후 / 암컷 추정</a>
-                                        </span><br>
-                                        <span class="price">
-                                            248,000원
-                        
-                                        </span>
-                                        <span class="icon_hot"></span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                                
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new05.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                             
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new06.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                          
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new07.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                             
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new08.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>       
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                         
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new09.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>       
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                         
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new10.png"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>       
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                         
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new11.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>      
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                          
-                                    </div>
-                                </li>
-                                <li class="cut"><a href='#none'><img src="/resources/images/new 열대어/new12.jpg"></a>
-                                    <div class="info_goods" >
-                                        <span class="name">
-                                            <a class="txt" href='#none'>장조림</a>
-                                        </span><br>
-                                        <span class="price">
-                                            61,700원
-                                            <span class="cost">73,500원</span>
-                                        </span>                
-                                        <span class="under">
-                                            <a href='#none' class=under_cart></a>
-                                            <a href='#none' class=under_wish></a>
-                                        </span>                                                                                                                
-                                    </div>
-                                </li>
+                                <li v-for="(item,index) in pdList4" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
+                                <div class="info_goods" >
+                                    <span class="name">
+                                        <a class="txt" href='detail.html'>{{item.title}}</a>
+                                    </span><br>
+                                    <span v-if="item.discount != 0" class="discount">{{item.discount }}%</span>
+                                    <span class="price">
+                                        	{{item.strPrice}}원
+                                    </span>  
+                                    <span v-if="item.category1Arr[0] == 'new'" class="icon_new"></span>
+                                    <span v-if="item.category1Arr[1] == 'sale'" class="icon_sale"></span>  
+                                    <span v-if="item.category1Arr[2] == 'best'" class="icon_best"></span> 
+                                    <span v-if="item.category1Arr[0] == 'sale'" class="icon_sale"></span>
+                                    <span v-if="item.category1Arr[1] == 'best'" class="icon_best"></span>
+                                    <span v-if="item.category1Arr[0] == 'best'" class="icon_best"></span>   
+                                    <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
+                                    
+                                    <span class="under">
+                                        <a href='#none' class=under_cart></a>
+                                        <a href='#none' class=under_wish></a>
+                                    </span>                                                                                                             
+                                </div>
+                            </li>
                             </ul>
                         </div>
                         <div class="bx-controls">
@@ -953,7 +304,36 @@ var pdList3 = '${pdList3}';
 var pdList4 = '${pdList4}';
 var pdListMd = '${pdListMd}';
 
-console.log(pdList1);
+const v_pdList = new Vue({
+	el:"#main",
+	data:{
+		pdList1 : JSON.parse(pdList1),
+		pdList2 : JSON.parse(pdList2),
+		pdList3 : JSON.parse(pdList3),
+		pdList4 : JSON.parse(pdList4),
+		pdListMd : JSON.parse(pdListMd),
+		category2 : '금붕어'
+	},
+	methods : {
+		엠디 : function(category2){
+			
+			const params = new URLSearchParams();
+			params.append("category2", category2);
+			axios.post('/pdListMd',params)
+			.then(res=>{
+				console.log(category2);
+				this.pdListMd = res.data;		
+				this.category2 = category2;
+			})
+			.catch(err=>{
+				console.log("md리스트 에러");
+				console.log(err);
+			});		
+			
+		}
+	}
+})
+
 </script>
 
 </body>

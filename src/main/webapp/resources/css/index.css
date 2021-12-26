@@ -184,13 +184,20 @@ margin-right: auto;
     padding-left: 10px;
 }
 .cost{
-    padding-left: 8px;
     font-size: 14px;
     color: #999999;
     text-decoration-line: line-through;
     display: inline-block;
     text-decoration-color: red;
+    height:17px;
 }
+.discount{
+
+    font-size: 14px;
+    color: #fa622f;
+    display: inline-block;
+}
+
 .txt{
     display: inline-block;
     width: 249px;
@@ -297,7 +304,6 @@ margin-right: auto;
     position: absolute;
     z-index: 1;
     text-align: center;
-    line-height: 249px;  
     color: white; 
     font-weight: 600; 
     visibility:hidden;
@@ -339,7 +345,16 @@ margin-right: auto;
  font-size: 12px;
  height: 50px;
 }
-
+.icon_new{
+    background-image: url("../images/상품아래/신상품.gif");
+    width: 34px;
+    height: 16px;
+    display: inline-block;
+    margin-top: 8px;
+    background-repeat: no-repeat;
+    float: right;
+    margin-right: 2px;
+}
 .icon_sale{
     background-image: url("../images/상품아래/세일.gif");
     width: 34px;

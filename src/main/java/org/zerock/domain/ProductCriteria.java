@@ -24,19 +24,18 @@ public class ProductCriteria {
 	private String criCategory1;
 	private String criCategory2;
 	
-//	public ProductCriteria() {}
-	public ProductCriteria(int page) {
+	public ProductCriteria() {}
+
+
+	public void initCri(){
 		
-		if(page != 0) {
+		if(page > 0) {
 			pagePerList = 12;
 			pagingCount = 10;		
 			
 			startPage = (page - 1) * pagePerList +1;
 			endPage = startPage + pagePerList -1;
 		}
-	}
-
-	public void initCri(){
 		if(order == null) {
 			order = "registdate";
 		}

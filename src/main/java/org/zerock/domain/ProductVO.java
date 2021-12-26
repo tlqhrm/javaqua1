@@ -20,19 +20,25 @@ public class ProductVO {
 	
 	String[] category1Arr;
 	String[] file1Arr;
-	String file2;
-	String content2;
 	int price2;
-//	String strPrice;
-//	String strPrice2;
+	String strPrice;
+	String strPrice2;
 	String file_names2;
 
 	
 	public void pvoInit() {
-
+		
+		
 		if(discount != 0)
 			price2= (int) Math.ceil(price / (1 - (((double)discount) / 100))) ;
 
+		if(price != 0) {
+			strPrice = Integer.toString(price).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		}
+		if(price2 != 0) {
+			strPrice2 = Integer.toString(price2).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		}
+		
 		if(file1 != null) {
 			file1Arr = file1.split(";");
 		}
@@ -48,4 +54,5 @@ public class ProductVO {
 		}
 	
 	}
+
 }
