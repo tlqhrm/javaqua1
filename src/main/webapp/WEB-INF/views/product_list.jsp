@@ -11,6 +11,7 @@
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" href="/resources/css/product_list.css">
     <title>JavaQua</title>
+    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/resources/js/mouse.js"></script>
 
@@ -68,8 +69,8 @@
                                         <span class="cost" style="display:block;"><c:if test="${pd.discount ne 0 }">${pd.price2 }원</c:if></span>
                                         
                                     <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
+                                        <a href='#none' @click="장바구니담기(${pd.pd_num}, '${pd.title}', ${pd.price}, '${pd.file1Arr[0]}', '${id}')" class=under_cart></a>
+                                        
                                         <c:if test="${admin eq 1 }">
                                         <span >
                                         <button type="button" onClick="location.href='/product/productUpdateForm?pd_num=${pd.pd_num}'">수정</button>
@@ -121,7 +122,10 @@
         <a class="last" href="/product/productList?page=${paging[2] }&category1=${cri.category1}&category2=${cri.category2}&order=${cri.order}&serTitle=${cri.serTitle}"></a>
     </div>  
     </div>
+    </div>
     <jsp:include page="footer.jsp"></jsp:include>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 function deleteCheck(t,pd_num,file1){
 	confirm("'"+t+"'"+" 를 삭제 합니다.");
@@ -150,8 +154,7 @@ function deleteCheck(t,pd_num,file1){
 		}
 		
 	})
-	
-	//location.href='/product/productDelete?pd_num='+n;
+
 }
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -169,6 +172,36 @@ $(document).ready(function(){
 	}
 
 });
+
+const v_pdList = new Vue({
+	el:"#main",
+	data:{
+		id : '${id}'
+	},
+	methods : {
+		장바구니담기: function(pd_num, title, price, file1, id){
+			console.log(id);
+			if(!id){alert("회원만 이용할수 있습니다.");return;}
+             const params = new URLSearchParams();
+             params.append('pd_num', pd_num);
+             params.append('title', title);
+             params.append('price', price);
+             params.append('amount', 1);
+             params.append('file1', file1);
+             params.append('user_id', id);
+           
+             axios.post('/cart/cart_add',params)
+             .then(res=>{
+            	 alert(res.data);
+             })
+             .catch(err=>{
+            	alert("오류가 발생했습니다.");
+              	console.log(err);
+             });				
+		}
+		
+	}
+})
 
 </script>
 </body>

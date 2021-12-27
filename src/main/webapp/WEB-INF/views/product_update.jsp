@@ -56,7 +56,7 @@
                     <input type="hidden" name="index" id="index" value="">
                     <input type="hidden" name="file_names2" id="file_names2" value="">
                     <textarea id="hidden" name="content" style="display:none">${pvo.content }</textarea>
-                    <span id="hidden2" style="display:none;">${pvo.content2 }</span>
+                   
                	 	제품명 : <input type="text" name="title" size="50" style="height:20px;font-size:15px;" value="${pvo.title }">
                     <div id="tmain">
                    	

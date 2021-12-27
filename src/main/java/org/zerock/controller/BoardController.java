@@ -47,8 +47,7 @@ public class BoardController {
 	private BoardService bdService;
 	@Autowired
 	private ReplyService reService;
-	@Autowired
-	private ServletContext context;
+
 
 	
 	@GetMapping("/boardWriteForm")
@@ -64,7 +63,6 @@ public class BoardController {
 	public String writeBoard(BoardVO bvo, Model model,@SessionAttribute("id") String id,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {
 		
 
-		context = request.getServletContext();
 		String path = ImagePath.get();
 		
 		if(admin == null) admin = "0";

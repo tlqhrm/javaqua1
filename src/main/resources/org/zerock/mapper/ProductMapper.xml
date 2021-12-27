@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="getIndexList" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from (select ROWNUM as rnum, A.title, A.price, A.category1, A.file1, A.discount, A.pd_num, A.stock from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) order by salescount)A) where rnum >=#{startPage} and rnum <= #{endPage} ]]>		
+		<![CDATA[select * from (select ROWNUM as rnum, A.title, A.price, A.category1, A.file1, A.discount, A.pd_num, A.stock from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and stock > 0 order by salescount)A) where rnum >=#{startPage} and rnum <= #{endPage} ]]>		
 	</select>
 	
 	<insert id="productRegist">
@@ -38,7 +38,7 @@
 	
 	<update id="productUpdate">
 		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
-		 		content=#{content}, file1=#{file1}, stock=#{stock}, discount=#{stock} where pd_num=#{pd_num}]]>
+		 		content=#{content}, file1=#{file1}, stock=#{stock}, discount=#{discount} where pd_num=#{pd_num}]]>
 	</update>
 	<update id="salesCountPlus">
 			update product set salescount = salescount+#{cart_amount}, stock = stock-#{cart_amount} where pd_num = #{pd_num}

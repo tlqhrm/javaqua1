@@ -32,7 +32,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 @Controller
-@RequestMapping( value = "/" , produces = "application/text; charset=UTF-8")
+@RequestMapping( value = "/" , produces = "application/json; charset=UTF-8")
 public class HomeController {
 	
 	@Autowired
@@ -90,13 +90,13 @@ public class HomeController {
 		model.addAttribute("pdList3",result3);
 		model.addAttribute("pdList4",result4);
 		model.addAttribute("pdListMd",result5);
-			
+		
 		return "index.jsp";
 	}
 	
 	@ResponseBody
 	@PostMapping("/pdListMd")
-	public String pdListMd(ProductCriteria cri) {
+	public List<ProductVO> pdListMd(ProductCriteria cri) {
 		
 		cri.initCri();
 		cri.setStartPage(1);
@@ -107,10 +107,7 @@ public class HomeController {
 			pvo.pvoInit();
 		}
 		
-		String result = new Gson().toJson(pdListMd);
-
-		System.out.println(result);
-		return result;
+		return pdListMd;
 	}
 	
 }

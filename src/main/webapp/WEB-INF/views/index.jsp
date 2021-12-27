@@ -13,7 +13,7 @@
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script type="text/javascript" src="/resources/js/jquery.js"></script> -->
     <script src="/resources/js/mouse.js"></script>
     <script src="/resources/js/move_new.js"></script>
@@ -72,8 +72,8 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        
                                     </span>                                                                                                             
                                 </div>
                             </li>
@@ -110,8 +110,8 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
+										<a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        
                                     </span>                                                                                                             
                                 </div>
                             </li>
@@ -216,8 +216,8 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        
                                     </span>                                                                                                             
                                 </div>
                             </li>
@@ -253,8 +253,8 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' class=under_cart></a>
-                                        <a href='#none' class=under_wish></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        
                                     </span>                                                                                                             
                                 </div>
                             </li>
@@ -268,21 +268,21 @@
                 </div>
             </div>
             <div class = "tit_goods" style="margin-bottom: 20px;"><h3> 수초 </h3></div>
-            <div id="sucho" style="margin-right: auto; margin-left: auto; width: 1050px; margin-top: -30px;"><a href="#"><span></span><span>수초 더보기</span><img src="/resources/images/스페셜/flowr02.jpg" width="1050px"></a></div>
+            <div id="sucho" style="margin-right: auto; margin-left: auto; width: 1050px; margin-top: -30px;"><a href="/product/productList?page=1&category2=수초"><span></span><span>수초 더보기</span><img src="/resources/images/스페셜/flowr02.jpg" width="1050px"></a></div>
             <div class = "list_goods"  style="margin-top: 5px; height: 320px; padding-bottom: 150px;">
                 <div class="bx-wrapper">
                     <div class="bx-viewport bx-sale">
                         
                         <ul class="list" id="link" style="width: 3300px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px; margin-left: 1px;"  >
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/후경수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/부상수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/씨앗수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/전경수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/중경수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/후경수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/부상수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/씨앗수초.jpg"></a></li>
-                            <li class="cut"><a href='#none'><img src="/resources/images/수초/전경수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=후경수초"><img src="/resources/images/수초/후경수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=부상수초"><img src="/resources/images/수초/부상수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=씨앗수초"><img src="/resources/images/수초/씨앗수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=전경수초"><img src="/resources/images/수초/전경수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=중경수초"><img src="/resources/images/수초/중경수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=후경수초"><img src="/resources/images/수초/후경수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=부상수초"><img src="/resources/images/수초/부상수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=씨앗수초"><img src="/resources/images/수초/씨앗수초.jpg"></a></li>
+                            <li class="cut"><a href="/product/productList?page=1&category2=전경수초"><img src="/resources/images/수초/전경수초.jpg"></a></li>
                         </ul>
                         
                     </div>
@@ -303,25 +303,25 @@ var pdList2 = '${pdList2}';
 var pdList3 = '${pdList3}';
 var pdList4 = '${pdList4}';
 var pdListMd = '${pdListMd}';
-
 const v_pdList = new Vue({
 	el:"#main",
 	data:{
+		
 		pdList1 : JSON.parse(pdList1),
 		pdList2 : JSON.parse(pdList2),
 		pdList3 : JSON.parse(pdList3),
 		pdList4 : JSON.parse(pdList4),
 		pdListMd : JSON.parse(pdListMd),
-		category2 : '금붕어'
+		category2 : '금붕어',	
+		id : '${id}'
 	},
 	methods : {
 		엠디 : function(category2){
-			
+
 			const params = new URLSearchParams();
 			params.append("category2", category2);
 			axios.post('/pdListMd',params)
 			.then(res=>{
-				console.log(category2);
 				this.pdListMd = res.data;		
 				this.category2 = category2;
 			})
@@ -330,7 +330,28 @@ const v_pdList = new Vue({
 				console.log(err);
 			});		
 			
+		},
+		장바구니담기: function(pd_num, title, price, file1, id){
+			console.log(id);
+			if(!id){alert("회원만 이용할수 있습니다.");return;}
+             const params = new URLSearchParams();
+             params.append('pd_num', pd_num);
+             params.append('title', title);
+             params.append('price', price);
+             params.append('amount', 1);
+             params.append('file1', file1);
+             params.append('user_id', id);
+           
+             axios.post('/cart/cart_add',params)
+             .then(res=>{
+            	 alert(res.data);
+             })
+             .catch(err=>{
+            	alert("오류가 발생했습니다.");
+              	console.log(err);
+             });				
 		}
+		
 	}
 })
 
