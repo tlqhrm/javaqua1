@@ -61,8 +61,8 @@
 	                    <c:set var = "total" value = "0" />      
 	                    <c:forEach var="cart" items="${cartList}">  
 		                    <c:set var= "total" value="${total + (cart.price*cart.amount)}"/>    
-		                    <div class="row data" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
-		                        <div class="subdiv">
+		                    <div class="row data">
+		                        <div class="subdiv" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
 		                            <div class="img"><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
 		                            <div class="pname">
 		                                <span>${cart.title}</span>

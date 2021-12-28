@@ -1,20 +1,66 @@
-
-
-
 const v=new Vue({
     el : "#app",
-    data : {		
+    data : {	
 		수량:1,
 		금액:price,
-		배송비:3500	
+		배송비:3500,
+		리뷰데이터 : [{
+			rv_num : 0,
+			pd_num : 0,
+			user_id : "",
+			content : "",
+			writedate : ""	
+		}],
+		페이징정보 : {
+			endPage:0,
+			page:0,
+			pagePerList:0,
+			pagingCount:0,
+			startEnd:[],
+			startPage:0,
+			totalContent:0,
+			totalPage:0
+		},		
+		pagePerList : 5, //한 화면에 보여줄 데이터 수
+		현재페이지 : 1
 	},	
+	
+	created : function(){
+		this.리뷰데이터가져오기();
+	},
 	computed : {
 		합계금액 : function(){
 			return this.수량 * this.금액;
+		},
+		페이징리스트(){
+			let list = [];
+			for (let i = this.페이징정보.startEnd[0]; i <= this.페이징정보.startEnd[1]; i++) {
+				list.push(i);
+			}
+			return list;
 		}
-		
 	},
 	methods : {
+		리뷰데이터가져오기 : function(){
+			 const params = new URLSearchParams();
+             params.append('pd_num', pd_num);
+             params.append('page', this.현재페이지);      
+             params.append('pagePerList', this.pagePerList);
+           
+             axios.post('/review/review_list',params)
+             .then(res=>{
+             	this.리뷰데이터 = res.data[0];
+             	this.페이징정보 = res.data[1];                   	
+             })
+             .catch(err=>{
+            	alert("오류가 발생했습니다.");
+              	console.log(err);
+             });
+		},
+		페이징(val){
+			if(val <=0 || val > this.페이징정보.startEnd[2]){return;}
+			this.현재페이지 = val;
+		},
 		즉시구매 : function(){
 			if(!id){alert("회원만 이용할수 있습니다.");return;}
 			location.href="/order/direct_order?pd_num="+pd_num+"&title="+title+"&amount="+this.수량+"&price="+price+"&file1="+file1;
@@ -62,13 +108,89 @@ const v=new Vue({
 			}
 		},
 		미리보기 : function(i){
-		let bg3=$("#bg3 span img")[i].src;
-		$("#main_img img").attr("src",bg3);
+			let bg3=$("#bg3 span img")[i].src;
+			$("#main_img img").attr("src",bg3);
 		}	
-	},			
+	},		
+	watch : {
+		현재페이지(){
+			this.리뷰데이터가져오기();
+		}
+	},	
 	filters : {
 		콤마표시 : function(value){
 			return numeral(value).format('0,0');
+		}
+	}
+});
+
+const qna = new Vue({
+    el : "#qapp",
+    data : {	
+		문의데이터 : [{
+			qna_num : 0,
+			pd_num : 0,
+			user_id : "",
+			title : "",
+			content : "",
+			status : "",
+			reply : "",
+			writedate : ""	
+		}],
+		페이징정보 : {
+			endPage:0,
+			page:0,
+			pagePerList:0,
+			pagingCount:0,
+			startEnd:[],
+			startPage:0,
+			totalContent:0,
+			totalPage:0
+		},		
+		pagePerList : 5, //한 화면에 보여줄 데이터 수
+		현재페이지 : 1
+	},	
+	
+	created : function(){
+		this.문의데이터가져오기();
+	},
+	computed : {
+		페이징리스트(){
+			let list = [];
+			for (let i = this.페이징정보.startEnd[0]; i <= this.페이징정보.startEnd[1]; i++) {
+				list.push(i);
+			}
+			return list;
+		}
+	},
+	methods : {
+		문의하기새창(pd_num){
+			window.open("/qna/qna_write?pd_num="+pd_num,width=100,height=200);
+		},
+		문의데이터가져오기 : function(){
+			 const params = new URLSearchParams();
+             params.append('pd_num', pd_num);
+             params.append('page', this.현재페이지);      
+             params.append('pagePerList', this.pagePerList);
+           
+             axios.post('/qna/qna_list',params)
+             .then(res=>{
+             	this.문의데이터 = res.data[0];
+             	this.페이징정보 = res.data[1];                   	
+             })
+             .catch(err=>{
+            	alert("오류가 발생했습니다.");
+              	console.log(err);
+             });
+		},
+		페이징(val){
+			if(val <=0 || val > this.페이징정보.startEnd[2]){return;}
+			this.현재페이지 = val;
+		}
+	},		
+	watch : {
+		현재페이지(){
+			this.문의데이터가져오기();
 		}
 	}
 });

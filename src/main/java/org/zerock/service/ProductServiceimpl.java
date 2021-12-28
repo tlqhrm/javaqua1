@@ -2,13 +2,12 @@ package org.zerock.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.domain.ProductVO;
+import org.zerock.domain.PagingDTO;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
-import org.zerock.domain.PagingDTO;
+import org.zerock.domain.ReviewVO;
 import org.zerock.mapper.ProductMapper;
 
 import lombok.Setter;
@@ -82,7 +81,4 @@ public class ProductServiceimpl implements ProductService {
 		int result = mapper.productDelete(pd_num);
 		return result;
 	}
-
-
-	
 }

@@ -15,8 +15,7 @@
 	</properties>
 	
 	
-	<dependencies>
-	
+	<dependencies>	
 		<dependency>
 	    <!-- com.googlecode.json-simple -->
 	    <groupId>com.googlecode.json-simple</groupId>

@@ -19,14 +19,14 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping( value = "/cart/*" , produces = "application/text; charset=UTF-8")
+@RequestMapping( value = "/cart/*")
 @AllArgsConstructor
 public class CartController {
 	@Autowired
 	private CartService cartService;
 	
 	@ResponseBody
-	@PostMapping("/cart_add")
+	@PostMapping( value = "/cart_add", produces = "application/text; charset=UTF-8")
 	public String cart_add(CartVO cvo) {
 		log.info("controller............ "+ cvo);
 		if(cartService.cart_add(cvo) == 1) {

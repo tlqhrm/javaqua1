@@ -14,4 +14,5 @@ public class OrderDetailVO {
 	private String odt_status;
 	private String title;
 	private String file1;
+	private String review;
 }

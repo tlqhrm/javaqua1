@@ -7,8 +7,14 @@ ul{list-style:none;}
 
 .list_oerder .thumb{float:left; margin-right: 20px}
 .list_oerder .desc{overflow:hidden; padding-top:1px}
+.list_oerder .reviewdiv{display: table; position: absolute; right: 37px; bottom: 0; height: 99px; vertical-align: middle;}
+ .list_oerder .reviewdiv .btn{width: 100px; height: 40px; border: 1px solid rgb(3, 140, 232); background: rgb(3, 140, 232); color: #fff; letter-spacing:-1px; cursor: pointer;}
+
 .desc dt {float:left; padding-right:15px; font-size:12px; color:#000; line-height:20px;}
 .desc dd {font-size:14px; font-weight:700; color:#000}
+
+
+
 
     
     

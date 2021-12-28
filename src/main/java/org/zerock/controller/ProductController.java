@@ -2,23 +2,13 @@ package org.zerock.controller;
 
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
 import org.zerock.etc.ImagePath;
-import org.zerock.domain.ProductCriteria;
 import org.zerock.service.ProductService;
 
 import lombok.AllArgsConstructor;
@@ -148,11 +138,9 @@ public class ProductController {
 		log.info("read:" + pd_num);
 		
 		ProductVO pvo = service.productDetail(pd_num);
-
-		pvo.setPrice2((pvo.getPrice()+(pvo.getPrice()*pvo.getDiscount()))/100);
-
-		
+		pvo.setPrice2((pvo.getPrice()+(pvo.getPrice()*pvo.getDiscount()))/100);	
 		pvo.pvoInit();
+	
 		model.addAttribute("pvo",pvo);
 		
 		return "/product_detail.jsp";
@@ -294,4 +282,5 @@ public class ProductController {
 		log.info("삭제완료..." + pvo.getPd_num());
 		return Integer.toString(result);
 	}
+	
 }
