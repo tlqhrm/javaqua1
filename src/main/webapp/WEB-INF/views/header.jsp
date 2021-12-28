@@ -6,16 +6,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Insert title here</title>
 <script src="/resources/js/header.js"></script>
+<!-- 자바스크립트 쿠키 cdn -->
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/resources/css/header.css">   
+    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <c:if test="${serTitle eq '%%'}"><c:set var="serTitle" value=""></c:set></c:if>
 
   <div id="header">
         <div id="header2">
-            <div id="header_logo" style="width: 1050px;margin: 0px; margin-left: auto; margin-right: auto; ">
+            <div id="header_logo"">
                 <div class="logo" style="margin: 0px;"> 
                     <a href='/'></a>
                 </div>
@@ -30,7 +40,7 @@
                     <li class="no_mypage"><a href='/member/joinForm' class="right_border red">회원가입</a></li>
                     <li class="no_mypage"><a href='/member/login' class="right_border">로그인</a></li>       
                     <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
-                    <li id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span></span>
+                    <li id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span id="un3"></span>
                     <ul>
                         <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>
                         <li><a href="/board/boardList?bd_category2=faq&page=1">자주하는 질문</a></li>
@@ -156,5 +166,36 @@
             </div>
         </div>       
     </div>
+	    <div id="recent_div_1"> 
+		<h3 style="position:relative; background-color:rgb(244, 244, 244); z-index:2; margin:0px; padding:18.72px 0px 18.72px 0;">최근 본 상품</h3>
+			<div id="recent_div_1-2">
+				<div id="recent_div_2" >
+					<ul id="recent_ul" >
+
+						<li @click="상세페이지(item.pd_num)" v-for="item in cookieArr" class="recent_box_1" >
+							<div class="recent_box_2"  :style="{'background-image':'url(/resources/upload/product/'+item.file1+')'}"></div>
+							<div class="recent_title">{{품명(item.title)}}</div>
+							<div v-if="item.price2 == null" class="recent_price2">{{item.price}}원</div>
+							<div v-if="item.price2 != null" class="recent_price">{{item.price}}원</div>
+							<div v-if="item.price2 != null" class="recent_price2">{{item.price2}}원</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<ul id="recent_updown" style="z-index:3; display:inline-block; width:90px; height:30px; float:left; margin:0px; border-top:1px #f4f4f4 solid">
+			    <li @click="위로()" id="recent_up">
+			    	<img src="/resources/images/화살표/최근상품 위에.gif" width=30px height=20px style="padding:5px 17.5px 5px 17.5px">
+			    </li>
+			    <li @click="아래로()" id="recent_down" >
+			    	<img src="/resources/images/화살표/최근상품 아래.gif" width=30px height=20px style="padding:5px 17.5px 5px 17.5px">
+			    </li>
+   			</ul>
+		</div>
+<script>
+ 
+
+
+
+</script>
 </body>
 </html>

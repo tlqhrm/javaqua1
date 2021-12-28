@@ -39,11 +39,11 @@
                     <a class="bx-next_2" href="#none" ><img src="/resources/images/화살표/다음버튼.png" style="margin-right: 40px; opacity: 0; float: right"></a>
                 </span>
                 <ul id="main_banner">
-                    <li class="moving sale" id="mb3"><a href='#none'><img src="/resources/images/배너/배너03.png"></a></li>
-                    <li class="moving sale" id="mb1"><a href='#none'><img src="/resources/images/배너/배너02.png"></a></li>
-                    <li class="moving sale" id="mb2"><a href='#none'><img src="/resources/images/배너/배너01.png"></a></li>
-                    <li class="moving sale" id="mb3"><a href='#none'><img src="/resources/images/배너/배너03.png"></a></li>
-                    <li class="moving sale" id="mb2"><a href='#none'><img src="/resources/images/배너/배너02.png"></a></li>
+                    <li class="moving sale" id="mb3"><a href='/product/productList?page=1&category2=베타/구라미'><img src="/resources/images/배너/배너03.png"></a></li>
+                    <li class="moving sale" id="mb1"><a href='/product/productList?page=1&category2=구피'><img src="/resources/images/배너/배너02.png"></a></li>
+                    <li class="moving sale" id="mb2"><a href='/product/productList?page=1&category2=난주'><img src="/resources/images/배너/배너01.png"></a></li>
+                    <li class="moving sale" id="mb3"><a href='/product/productList?page=1&category2=베타/구라미'><img src="/resources/images/배너/배너03.png"></a></li>
+                    <li class="moving sale" id="mb2"><a href='/product/productList?page=1&category2=구피'><img src="/resources/images/배너/배너02.png"></a></li>
                 </ul>
             </div>          
         </div>

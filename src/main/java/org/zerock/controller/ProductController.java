@@ -1,18 +1,26 @@
 package org.zerock.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.omg.CORBA.Request;
@@ -33,6 +41,8 @@ import org.zerock.domain.ProductVO;
 import org.zerock.etc.ImagePath;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.service.ProductService;
+
+import com.google.gson.Gson;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -145,17 +155,55 @@ public class ProductController {
 	}
 	
 	@GetMapping("/productDetail")
-	public String readpvo(int pd_num,Model model) {
+	public String readpvo(int pd_num,Model model, HttpServletRequest requst, HttpServletResponse response) throws UnsupportedEncodingException {
 		log.info("read:" + pd_num);
 		
 		ProductVO pvo = service.productDetail(pd_num);
 
 		pvo.setPrice2((pvo.getPrice()+(pvo.getPrice()*pvo.getDiscount()))/100);
 
-		
 		pvo.pvoInit();
 		model.addAttribute("pvo",pvo);
 		
+		
+		//최근본상품
+		Map<String,Object> map = new HashMap<>();
+		map.put("pd_num", pvo.getPd_num());
+		map.put("title",pvo.getTitle());
+		map.put("price",pvo.getStrPrice());
+		map.put("price2",pvo.getStrPrice2());
+		map.put("file1",pvo.getFile1Arr()[0]);
+		
+		String recentPd = new Gson().toJson(map);
+		
+		String cName = "pd_num"+pvo.getPd_num();
+		Cookie cookie = new Cookie("pd_num" + Integer.toString(pvo.getPd_num()), URLEncoder.encode(recentPd,"UTF-8"));
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		cookie.setPath("/");
+		cookie.setMaxAge(60*60*24*7);
+		response.addCookie(cookie);
+		
+		Cookie[] cookies = requst.getCookies();
+
+		int count = 0;
+		int cookieNum = 10;
+		int[] index = new int[12];
+		for(int i=0; i< cookies.length; i++) {
+			if(cookies[i].getName().contains("pd_num")) {
+				index[count] = i ;
+				count++;
+				if(cookies[i].getName().equals(cName)) {
+					cookieNum++;
+				}
+			}
+		}
+		if(count >= cookieNum) {
+			cookies[index[0]].setMaxAge(0);
+			cookies[index[0]].setPath("/");
+			response.addCookie(cookies[index[0]]);
+		}
 		return "/product_detail.jsp";
 	}
 	@GetMapping("/productUpdateForm")

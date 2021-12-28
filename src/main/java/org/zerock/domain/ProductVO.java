@@ -28,16 +28,15 @@ public class ProductVO {
 	
 	public void pvoInit() {
 		
-		
-		if(discount != 0)
-			price2= (int) Math.ceil(price / (1 - (((double)discount) / 100))) ;
 
+		if(discount > 0) {
+			price2= (int) Math.ceil(price / (1 - (((double)discount) / 100))) ;
+			strPrice2 = Integer.toString(price2).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		}
 		if(price != 0) {
 			strPrice = Integer.toString(price).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
 		}
-		if(price2 != 0) {
-			strPrice2 = Integer.toString(price2).replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-		}
+
 		
 		if(file1 != null) {
 			file1Arr = file1.split(";");

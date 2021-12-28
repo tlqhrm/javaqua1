@@ -16,6 +16,12 @@ h3{
     font-weight: 600;
     font-size: 13px;
 
+	
+}
+
+.cut{
+	transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
 }
 
 .product_list_color{
@@ -168,9 +174,10 @@ margin-right: auto;
 }
 .name{
     margin-top: 12px;
-    display: inline-block;
+    display: block;
     
 }
+
 .price{
     padding-top: 7px;
     font-weight: bold;

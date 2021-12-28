@@ -1,5 +1,8 @@
+
+
 html{
     width: 100%;
+    font-family: 'Gothic A1', sans-serif;
 }
 body{
     width: 100%;
@@ -160,6 +163,12 @@ body{
     transition-duration: 0.3s;
     transition-timing-function: ease-in;
 }
+#header #header_logo{
+	 width: 1050px;
+	 margin: 0px; 
+	 margin-left: auto; 
+	 margin-right: auto; 
+}
 #header .logo a:hover{
     background-image: url('../images/로고/잡아쿠아\ 영어.png');
 }
@@ -220,8 +229,18 @@ body{
     height: 17px;
     display: inline-block;
     position: absolute;
-    top: 23px;
+    top: 21px;
     right: -8px;
+    background-image: url("../images/헤더/고객센터화살표.webp");
+    background-repeat: no-repeat;
+}
+#header #un3{
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    position: absolute;
+    top: 21px;
+    right: -20px;
     background-image: url("../images/헤더/고객센터화살표.webp");
     background-repeat: no-repeat;
 }
@@ -250,7 +269,7 @@ body{
     height: 17px;
     display: inline-block;
     position: absolute;
-    top: 23px;
+    top: 21px;
     right: 139px;
     background-image: url("../images/헤더/고객센터화살표.webp");
     background-repeat: no-repeat;
@@ -283,7 +302,7 @@ body{
 }
 
 #header .right_border{
-    padding: 0px 10px 0px 0px;
+    padding: 0px 13px 0px 0px;
     border-right: 1px solid rgb(208, 207, 207);
 }
 #header #notice{
@@ -344,6 +363,7 @@ body{
     margin: 0px;
     font-size: 12px;
     text-align: right;
+    height: 16px;
 }
 #header .menu{
     width: 1050px;
@@ -489,3 +509,115 @@ body{
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
 }
+
+#recent_div_1{
+	 display:inline-block; 
+	 overflow:hidden; 
+	 width:130px; 
+	 height:573px; 
+	 position:fixed; 
+	 top:22%; 
+	 right:5%; 
+	 background-color:#f4f4f4; 
+	 text-align:center; 
+	 border:1px solid #ddd;
+}
+#recent_div_1-2{
+	 display:inline-block; 
+	 overflow:hidden; 
+	 width:130px; 
+	 height:480px;  
+	 text-align:center; 
+}
+
+#recent_div_2{
+	width:100px; 
+	height:479px; 
+	margin:0px auto 0px auto;
+}
+#recent_ul{
+	width:100px; 
+	height:1600px; 
+	margin:0px auto 0px auto;
+	list-style:none;
+	padding:0px;
+	transform: translate3d(0px, 0px,0px);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+.recent_box_1{
+	width:100px; 
+	height:160px; 
+	margin:0px auto 0px auto;
+	cursor:pointer;
+}
+.recent_box_2{
+	 width:100px; 
+	 height:100px; 
+	 margin:0px auto 0px auto;
+	 background-size:contain;
+	 
+}
+.recent_title{
+	 width:100px; 
+	 height:18px; 
+	 margin:0px auto 0px auto; 
+	 overflow:hidden;
+	 white-space:nowrap;
+	 text-overflow:ellipsis;
+	 font-size:12px;
+	 margin-top:4px;
+}
+.recent_price{
+	 width:100px; 
+	 height:18px; 
+	 margin:0px auto 0px auto; 
+	 overflow:hidden;
+	 font-size:12px;
+	 color:gray;
+	 text-decoration:line-through;
+}
+.recent_price2{
+	 width:100px; 
+	 height:18px; 
+	 margin:0px auto 0px auto; 
+	 overflow:hidden;
+	 font-size:12px;
+	 
+}
+#recent_up{
+	cursor:pointer; 
+	border-right: 1px solid #f4f4f4; 
+	display:inline-block; 
+	width:65px; 
+	height:30px; 
+	background-color:white; 
+	position:absolute; 
+	left:0px; 
+	text-align:center; 
+	line-height:35px;
+}
+#recent_down{
+	cursor:pointer; 
+	height:30px; 
+	display:inline-block; 
+	width:65px; 
+	height:30px; 
+	background-color:white; 
+	position:absolute; 
+	left:65px; 
+	text-align:center; 
+	line-height:35px;
+}
+
+@media (max-width: 1400px) {
+  #recent_div_1{
+    display: none;
+    top : 50%;
+    font-size:50px
+  }
+}
+
+
+
+
