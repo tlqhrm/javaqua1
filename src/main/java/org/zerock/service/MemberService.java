@@ -7,8 +7,6 @@ import org.zerock.domain.MemberVO;
 public interface MemberService {
 	public void register(MemberVO member);
 	
-	public boolean modify(BoardVO board);
-	
 	public boolean remove(Long bno);
 		
 	public int[] getPages(BoardCriteria cri);
@@ -16,8 +14,12 @@ public interface MemberService {
 	public MemberVO get(MemberVO member);
 	
 	public boolean getId(String id);
-	
-	public boolean getEmail(String email);
-	
+
 	public MemberVO selectMember(String user_id);
+
+	public int updateMember(MemberVO mvo);
+
+	public int getEmail(String email, String user_id);
+
+	public int getEmail(String email);
 }

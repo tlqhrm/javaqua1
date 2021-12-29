@@ -6,6 +6,7 @@ const v=new Vue({
 			name : '',
 			user_email : '',
 			user_address : '',
+			user_address2 : '',
 			user_phone : ''
 		}
 	},	

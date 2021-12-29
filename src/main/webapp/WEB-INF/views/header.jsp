@@ -2,25 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>      
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Insert title here</title>
-<script src="/resources/js/header.js"></script>
-<!-- 자바스크립트 쿠키 cdn -->
 
+<!-- 자바스크립트 쿠키 cdn -->
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/resources/js/header.js"></script>
+
     <link rel="stylesheet" href="/resources/css/header.css">   
     
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
 </head>
-<body>
+
 <c:if test="${serTitle eq '%%'}"><c:set var="serTitle" value=""></c:set></c:if>
 
   <div id="header">
@@ -54,7 +50,7 @@
                     <li id="mypage"><a href='JavaquaServlet?command=join_form' class="right_border blue">${name } 님&nbsp;&nbsp;</a><span id="un1"></span>
                         <ul>
                             <li><a href='/order/order_list'>주문내역 조회</a></li>
-                            <li><a href="#none">개인정보 수정</a></li>
+                            <li><a href="/member/updateMemberForm?user_id=${id }">개인정보 수정</a></li>
                         </ul></li>
                     
                     <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
@@ -191,11 +187,3 @@
 			    </li>
    			</ul>
 		</div>
-<script>
- 
-
-
-
-</script>
-</body>
-</html>

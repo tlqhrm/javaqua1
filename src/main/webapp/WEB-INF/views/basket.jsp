@@ -83,7 +83,29 @@
 		                            <div class="basketcmd"><a @click="상품삭제(${cart.cart_num})" class="abutton">삭제</a></div>
 		                        </div>
 		                    </div>    
-	                    </c:forEach>       
+	                    </c:forEach>
+	                    <div v-for="(item,index) in cartList" class="row data" onclick="location.href='/product/productDetail?&pd_num=${item.pd_num}'">
+		                        <div class="subdiv">
+		                            <div class="img"><img :src="'/resources/upload/product/'+item.file1" width="60"/></div>
+		                            <div class="pname">
+		                                <span>{{item.title}}</span>
+		                            </div>
+		                        </div>
+		                        <div class="subdiv">
+		                            <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price"><fmt:formatNumber :value="item.price" pattern="#,###" />원</div>
+		                            <div class="num">
+		                                <div class="updown">
+		                                    <input type="text" size="2" maxlength="3" class="p_num" :value="item.amount" readonly>
+		                                    <span @click="수량업(item.cart_num, index)"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+		                                    <span @click="수량다운(item.cart_num, index)"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+		                                </div>
+		                            </div>
+		                            <div class="sum"><fmt:formatNumber :value="item.price*item.amount" pattern="#,###" />원 </div>
+		                        </div>
+		                        <div class="subdiv">
+		                            <div class="basketcmd"><a @click="상품삭제(item.car_num)" class="abutton">삭제</a></div>
+		                        </div>
+		                    </div>    
 	                </div>
 	        
 	                <div class="right-align basketrowcmd">
@@ -108,6 +130,8 @@
 		
 		<script>
 			let id="${id}";	
+			var cartList = JSON.parse('${cartList1}');
+			
 		</script>
 		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 

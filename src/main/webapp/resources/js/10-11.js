@@ -9,11 +9,12 @@ Number.prototype.formatNumber = function(){
 
 const v=new Vue({
     el : "#app",
+    data:{cartList : cartList},
 	methods : {
 		주문하기: function(){	
 			location.href="/cart/cart_order";						
 		},
-		수량업: function(cart_num){	
+		수량업: function(cart_num,index){	
 			
 			const params = new URLSearchParams();
 			params.append('cart_num', cart_num);
@@ -23,7 +24,7 @@ const v=new Vue({
 			axios.post('/cart/cart_modify',params)
 			.then(res=>{
 				if(res.data==200){
-					history.go(0);
+					this.amount++;
 				}else{
 					alert("오류가 발생했씁니다.");
 				}		
@@ -45,7 +46,7 @@ const v=new Vue({
 			axios.post('/cart/cart_modify',params)
 			.then(res=>{
 				if(res.data==200){
-					history.go(0);
+					this.amount--;
 				}else{
 					alert("오류가 발생했씁니다.");
 				}	

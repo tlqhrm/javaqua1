@@ -20,12 +20,12 @@
 	</head>
 
 	<body>
-
+	<!-- 헤더 -->
+		<%@include file="header.jsp"%>
 		
 		<!-- app 열기 -->
 		<div id="app" v-clock>
-		<!-- 헤더 -->
-		<%@include file="header.jsp"%>
+		
 
 		<!-- Contents -->
 		<div id="contents">
@@ -68,7 +68,7 @@
 					<tr>
 						<td class="txtb" width="110px">배송지</td> 
 						<td>
-							{{회원정보.user_address}}
+							{{회원정보.user_address}}, {{회원정보.user_address2}}
 						</td>
 					</tr>
 				</table>

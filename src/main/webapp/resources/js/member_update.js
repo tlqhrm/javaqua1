@@ -27,7 +27,7 @@
 
 //아이디,이메일 중복확인검증 (최종적으로 ture 이여야만 가입가능 , 값이바뀌면 다시 false)
 let idConf = true;
-let emailConf = false;
+let emailConf = true;
 
 
 //휴대폰 자릿수 맞으면 인증번호버튼 활성화
@@ -97,19 +97,13 @@ $('input[name=user_id]').focusout(function(){
 
     if (id==""){
 		msg.text("아이디를 입력해 주세요");
-		msg.show()
 		idConf=false; 
 		return;
-	}else{
-		msg.hide();
 	}
     if (id.length < 6){
 		msg.text("아이디는 6자 이상만 가능합니다.");
-		msg.show()
 		idConf=false; 
 		return;
-	}else{
-		msg.hide();
 	}
 
 	$.ajax({
@@ -118,6 +112,7 @@ $('input[name=user_id]').focusout(function(){
 		datatype:'text',
 		data:{id:id},
 		success: function(data){
+			console.log(data);
 			if(data ==='useable'){
 				msg.hide();			
 				idConf=true;
@@ -189,8 +184,10 @@ $('input[name=user_email]').focusout(function(){
 		type:'post',
 		url:'/member/emailCheck',
 		datatype:'text',
-		data:{email:email},
+		data:{email:email,
+			  user_id:user_id},
 		success: function(data){
+			console.log(data);
 			if(data ==='useable'){
 				msg.hide();			
 				emailConf=true;
@@ -221,6 +218,6 @@ function frm_check(){
     if ($("input[name=user_address2]").val()=="" || $("input[name=user_address2]").val()=="" ){alert("상세주소를 입력해 주세요."); return false;}
     if($("input[name=chk1]").is(":checked") == false || $("input[name=chk2]").is(":checked") == false){alert("필수 이용약관동의에 체크해 주세요.");return false;}
     
-    alert("회원가입이 완료되었습니다.");
+    alert("회원정보 수정이 완료되었습니다.");
     document.fmData.submit();
 }

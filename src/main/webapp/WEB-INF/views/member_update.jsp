@@ -18,7 +18,7 @@
     </head>
 	
 	<c:choose>
-		<c:when test="${not empty id }">
+		<c:when test="${empty id }">
 			<script>history.go(-1)</script>
 		</c:when>
 		<c:otherwise>
@@ -32,13 +32,13 @@
         <div id="wrap">
             <div class="container">
                 <h3 class="tit">회원가입</h3>
-                <form name="fmData" method="post" action="/member/join">  
+                <form name="fmData" method="post" action="/member/updateMember">  
                     <table class="tbl_comm">
                         <tbody>
                             <tr>
                                 <th>아이디</th>
                                 <td>
-                                    <input type="text" name="user_id" maxlength="16" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합" class="inputText">                              
+                                    <input type="text" name="user_id" maxlength="16" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합" class="inputText" value="${mvo.user_id }" readonly="readonly">                              
                                    <br><div id="msg_id">아이디를 입력해주세요.</div> 
                                 </td>
                             </tr>
@@ -58,14 +58,14 @@
                             <tr>
                                 <th>이름</th>
                                 <td>
-                                    <input type="text" name="name" maxlength="6" placeholder="이름을 입력해주세요" class="inputText">
+                                    <input type="text" name="name" maxlength="6" placeholder="이름을 입력해주세요" class="inputText" value="${mvo.name }">
                                    <br><div id="msg_name">이름은 한글 2자 이상 6자 이하만 가능합니다.</div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
                                 <td>
-                                    <input type="text" name="user_email" maxlength="20" placeholder="예:javacua@javacua.com" class="inputText">
+                                    <input type="text" name="user_email" maxlength="20" placeholder="예:javacua@javacua.com" class="inputText" value="${mvo.user_email }">
                                   
                                     <br><div id="msg_email"></div>
                                 </td>
@@ -73,7 +73,7 @@
                             <tr>
                                 <th>휴대폰</th>
                                 <td>
-                                    <input type="text" name="user_phone" maxlength="11" placeholder="숫자만 입력해주세요" class="inputText">
+                                    <input type="text" name="user_phone" maxlength="11" placeholder="숫자만 입력해주세요" class="inputText" value="${mvo.user_phone }">
                                 </td>
                             </tr>
 
@@ -81,8 +81,8 @@
                                 <th>주소</th>
                                 <td>
                                     <button type="button" class="btn_address" name="user_address" onclick="execDaumPostcode()">주소 검색</button>
-									<input type="text" class="inputText" name="user_address" id="address" placeholder="주소" readonly="readonly" style="margin-top:10px">
-									<input type="text" class="inputText" name="user_address2" id="detailAddress" style="margin-top:10px" placeholder="상세주소">
+									<input type="text" class="inputText" name="user_address" id="address" placeholder="주소" readonly="readonly" style="margin-top:10px" value="${mvo.user_address}">
+									<input type="text" class="inputText" name="user_address2" id="detailAddress" style="margin-top:10px" placeholder="상세주소" value="${mvo.user_address2}">
 									
                                 </td>
                             </tr>
@@ -134,12 +134,11 @@
         <jsp:include page="footer.jsp"></jsp:include>
         <!--//footer-->
         <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-       		<script src="/resources/js/join.js"></script>
-        	<script src="/resources/js/header.js"></script>
 		<script>
+		var user_id = '${mvo.user_id}';
 		</script>
 
-     	<script src="/resources/js/join.js"></script> 
+     	<script src="/resources/js/member_update.js"></script> 
      	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </body>
     		</c:otherwise>
