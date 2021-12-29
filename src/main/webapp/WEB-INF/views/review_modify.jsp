@@ -38,7 +38,7 @@
 	               </tbody>
 	           </table>
 	        <div style="text-align: center; margin-top: 30px;">
-	           	<button type="button" class="btn" @click="리뷰등록(${param.pd_num})">등록하기</button>
+	           	<button type="button" class="btn" @click="리뷰수정(${param.pd_num})">수정하기</button>
 	        </div> 
 	       </form>	    	
 	   </div>
@@ -50,27 +50,48 @@
 	const v=new Vue({
 	    el : "#app",
 	    data : {		
-			상세리뷰 : ""
+			상세리뷰 : "",
+			리뷰데이터 : {
+				rv_num : 0,
+				pd_num : 0,
+				user_id : "",
+				content : "",
+				writedate : ""	
+			},
 		},	
 		created : function(){
-	
+			this.등록리뷰정보();		
 		},	
 		computed : {
 		
 		},
 		methods : {
-			
-			리뷰등록(pd_num){
+			등록리뷰정보(){
+				 const params = new URLSearchParams();
+	             params.append('user_id', "${id}");
+	             params.append('pd_num', ${param.pd_num});
+	                 
+	             axios.post('/review/mywrite',params)
+	             .then(res=>{         
+           			this.리뷰데이터 = res.data;
+           			this.상세리뷰 = this.리뷰데이터.content;
+	             })
+	             .catch(err=>{
+	            	alert("오류가 발생했습니다!");	            	
+	              	console.log(err);
+	             });
+			},
+			리뷰수정(pd_num){
 				if(!this.상세리뷰){alert("내용을 입력해주세요");return;}
 	             const params = new URLSearchParams();
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', pd_num);
 	             params.append('content', this.상세리뷰);
 	                 
-	             axios.post('/review/write',params)
+	             axios.post('/review/modify',params)
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
-	            		 alert("등록되었습니다.");
+	            		 alert("수정되었습니다.");
 	            		 window.close();
 	            		 window.opener.location.href="/order/order_list";
 	            	 }else{

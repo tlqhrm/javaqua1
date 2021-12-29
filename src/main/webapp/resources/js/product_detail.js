@@ -1,3 +1,59 @@
+$(window).scroll(function(){
+	if( $(window).scrollTop()>=600 ){
+		$('#btfTab').addClass('add_fixed');
+	}
+	else{
+		$('#btfTab').removeClass('add_fixed');			
+	}
+});
+
+$(function(){
+	 $(".li1").click(function(){ 
+	 
+		let offset = $("#target1").offset();
+		offset.top = offset.top - 140;
+        $('html, body').animate({scrollTop : offset.top}, 300);
+
+        $('.li1').addClass('add_active');
+        $('.li2').removeClass('add_active');	
+        $('.li3').removeClass('add_active');	
+        $('.li4').removeClass('add_active');	
+    });
+ 	$(".li2").click(function(){ 
+		
+		let offset = $("#target2").offset();
+		offset.top = offset.top - 110;
+        $('html, body').animate({scrollTop : offset.top}, 300);
+		
+        $('.li1').removeClass('add_active');
+        $('.li2').addClass('add_active');
+        $('.li3').removeClass('add_active');	
+        $('.li4').removeClass('add_active');	
+    });
+ 	$(".li3").click(function(){ 
+ 	
+ 		let offset = $("#target3").offset();
+		offset.top = offset.top - 110 ;
+        $('html, body').animate({scrollTop : offset.top}, 300);
+ 	
+        $('.li1').removeClass('add_active');
+        $('.li2').removeClass('add_active');	
+        $('.li3').addClass('add_active');
+        $('.li4').removeClass('add_active');	
+    });
+ 	$(".li4").click(function(){ 
+ 	
+ 		let offset = $("#target3").offset();
+		offset.top = offset.top + 550 ;
+        $('html, body').animate({scrollTop : offset.top}, 300);
+ 	
+        $('.li1').removeClass('add_active');
+        $('.li2').removeClass('add_active');	
+        $('.li3').removeClass('add_active');	
+        $('.li4').addClass('add_active');	
+    });
+});
+
 const v=new Vue({
     el : "#app",
     data : {	

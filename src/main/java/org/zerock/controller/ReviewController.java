@@ -41,6 +41,14 @@ public class ReviewController {
 		return "/review_write.jsp";
 	}
 	
+	@GetMapping("/review_modify")
+	public String review_modify(int pd_num, Model model) {
+		log.info("review_modify............" );
+		ProductVO pvo = pvservice.productDetail(pd_num);
+		model.addAttribute("pvo", pvo);
+		return "/review_modify.jsp";
+	}
+	
 	@ResponseBody
 	@PostMapping("/write")
 	public String write(ReviewVO rvo) {
@@ -54,18 +62,50 @@ public class ReviewController {
 	}
 	
 	@ResponseBody
+	@PostMapping("/modify")
+	public String modify(ReviewVO rvo) {
+		log.info("modify............" );
+	
+		if(rvservice.modify(rvo)!=0) {
+			return "200";
+		}else {
+			return "500";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/delete")
+	public String delete(ReviewVO rvo) {
+		log.info("delete............" );
+	
+		if(rvservice.delete(rvo)!=0) {
+			return "200";
+		}else {
+			return "500";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/mywrite")
+	public ReviewVO mywrite(ReviewVO rvo) {
+		log.info("mywrite............" );
+		log.info(rvo);
+		return rvservice.mywrite(rvo);
+	}
+	
+	@ResponseBody
 	@PostMapping("/review_list")
 	public List<ReviewVO> review_list(int pd_num, int page, int pagePerList) {
 		log.info("review_list............" );
 		
 		int totalContnet = rvservice.review_cnt(pd_num);
-		PagingDTO pvo = new PagingDTO(totalContnet, page, pagePerList, 2);
-		log.info(pvo);
-		List<ReviewVO> reviewlist = rvservice.review_list(pd_num,pvo);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 2);
+		log.info(pdto);
+		List<ReviewVO> reviewlist = rvservice.review_list(pd_num,pdto);
 		
 		List rs = new ArrayList();
 		rs.add(reviewlist);
-		rs.add(pvo);
+		rs.add(pdto);
 		return rs;
 	}
 }

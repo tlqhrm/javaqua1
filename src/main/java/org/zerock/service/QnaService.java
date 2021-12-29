@@ -8,6 +8,9 @@ import org.zerock.domain.ReviewVO;
 
 public interface QnaService {
 	public int write(QnaVO qvo);
-	public List<QnaVO> qna_list(int pd_num,PagingDTO pvo);
+	public int modify(QnaVO qvo);
+	public int delete(QnaVO qvo);
+	public List<QnaVO> qna_list(int pd_num,PagingDTO pdto);
 	public int qna_cnt(int pd_num);
+	public QnaVO myqna(QnaVO qvo);
 }

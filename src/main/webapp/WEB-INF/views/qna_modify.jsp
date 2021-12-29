@@ -19,7 +19,7 @@
 <div id="app" v-clock>
    <div id="wrap">
 	   <div class="container">
-	       <h3 class="tit">리뷰작성 </h3>
+	       <h3 class="tit">상품문의 </h3>
 	       <form>  
 	           <table class="tbl_comm">
 	               <tbody>
@@ -30,15 +30,21 @@
 	                       </td>
 	                   </tr>  
 	                   <tr>
-	                       <th>상세리뷰 </th>
+	                       <th>제목 </th>
 	                       <td>
-	                       		<textarea v-model="상세리뷰" class="review_detail" cols="100%" rows="15" maxlength="800"></textarea>                             
+	                       		<input v-model="제목" type="text" class="inputText" maxlength="40"/>                            
+	                       </td>
+	                   </tr>  
+	                   <tr>
+	                       <th>내용</th>
+	                       <td>
+	                       		<textarea v-model="내용" class="review_detail" cols="100%" rows="15" maxlength="800"></textarea>                             
 	                       </td>
 	                   </tr>  
 	               </tbody>
 	           </table>
 	        <div style="text-align: center; margin-top: 30px;">
-	           	<button type="button" class="btn" @click="리뷰등록(${param.pd_num})">등록하기</button>
+	           	<button type="button" class="btn" @click="문의수정(${param.pd_num})">수정하기</button>
 	        </div> 
 	       </form>	    	
 	   </div>
@@ -49,30 +55,58 @@
 <script>
 	const v=new Vue({
 	    el : "#app",
-	    data : {		
-			상세리뷰 : ""
+	    data : {	
+	    	제목 : "",
+	    	내용 : "",
+			문의데이터 : {
+				qna_num : 0,
+				pd_num : 0,
+				user_id : "",
+				title : "",
+				content : "",
+				status : "",
+				reply : "",
+				writedate : ""	
+			}
 		},	
 		created : function(){
-	
+			this.내문의정보();
 		},	
 		computed : {
 		
 		},
 		methods : {
-			
-			리뷰등록(pd_num){
-				if(!this.상세리뷰){alert("내용을 입력해주세요");return;}
+			내문의정보(){
+				 const params = new URLSearchParams();
+	             params.append('user_id', "${id}");
+	             params.append('pd_num', ${param.pd_num});
+	                 
+	             axios.post('/qna/myqna',params)
+	             .then(res=>{      
+          			this.문의데이터 = res.data;
+          			this.제목 = this.문의데이터.title;
+          			this.내용 = this.문의데이터.content;
+	             })
+	             .catch(err=>{
+	            	alert("오류가 발생했습니다!");	            	
+	              	console.log(err);
+	             });
+			},
+			문의수정(pd_num){
 	             const params = new URLSearchParams();
+				if(!this.제목){alert("제목을 입력해주세요");return;}
+				if(!this.내용){alert("내용을 입력해주세요");return;}
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', pd_num);
-	             params.append('content', this.상세리뷰);
+	             params.append('title', this.제목);
+	             params.append('content', this.내용);
 	                 
-	             axios.post('/review/write',params)
+	             axios.post('/qna/modify',params)
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
-	            		 alert("등록되었습니다.");
+	            		 alert("수정되었습니다.");
 	            		 window.close();
-	            		 window.opener.location.href="/order/order_list";
+	            		 window.opener.location.href="/product/productDetail?pd_num="+pd_num;
 	            	 }else{
 	            		 alert("오류가 발생했습니다");
 	            	 }

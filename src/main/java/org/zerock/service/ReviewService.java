@@ -7,6 +7,9 @@ import org.zerock.domain.ReviewVO;
 
 public interface ReviewService {
 	public int write(ReviewVO rvo);
-	public List<ReviewVO> review_list(int pd_num,PagingDTO pvo);
+	public int modify(ReviewVO rvo);
+	public int delete(ReviewVO rvo);
+	public List<ReviewVO> review_list(int pd_num,PagingDTO pdto);
 	public int review_cnt(int pd_num);
+	public ReviewVO mywrite(ReviewVO rvo);
 }

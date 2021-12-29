@@ -19,15 +19,30 @@ public class ReviewServiceimpl implements ReviewService{
 	}	
 	
 	@Override
-	public List<ReviewVO> review_list(int pd_num, PagingDTO pvo) {
+	public int modify(ReviewVO rvo) {
+		return mapper.modify(rvo);
+	}	
+	
+	@Override
+	public int delete(ReviewVO rvo) {
+		return mapper.delete(rvo);
+	}	
+	
+	@Override
+	public List<ReviewVO> review_list(int pd_num, PagingDTO pdto) {
         //int startNum = page*listNumber-(listNumber-1); // 페이징 시작넘버
         //int endNum = startNum+(listNumber-1); // 페이징 끝넘버
 
-		return mapper.review_list(pd_num,pvo.getStartNum(),pvo.getEndNum());
+		return mapper.review_list(pd_num,pdto);
 	}	
 	
 	@Override
 	public int review_cnt(int pd_num) { 
 		return mapper.review_cnt(pd_num);
 	}	
+	
+	@Override
+	public ReviewVO mywrite(ReviewVO rvo) {
+		return mapper.mywrite(rvo);
+	}
 }

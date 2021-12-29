@@ -18,17 +18,30 @@ public class QnaServiceimpl implements QnaService{
 	public int write(QnaVO qvo) {
 		return mapper.write(qvo);
 	}	
+	@Override
+	public int modify(QnaVO qvo) {
+		return mapper.modify(qvo);
+	}	
+	@Override
+	public int delete(QnaVO qvo) {
+		return mapper.delete(qvo);
+	}	
 	
 	@Override
-	public List<QnaVO> qna_list(int pd_num, PagingDTO pvo) {
+	public List<QnaVO> qna_list(int pd_num, PagingDTO pdto) {
         //int startNum = page*listNumber-(listNumber-1); // 페이징 시작넘버
         //int endNum = startNum+(listNumber-1); // 페이징 끝넘버
 
-		return mapper.qna_list(pd_num,pvo.getStartNum(),pvo.getEndNum());
+		return mapper.qna_list(pd_num,pdto);
 	}	
 	
 	@Override
 	public int qna_cnt(int pd_num) { 
 		return mapper.qna_cnt(pd_num);
+	}	
+	
+	@Override
+	public QnaVO myqna(QnaVO qvo) { 
+		return mapper.myqna(qvo);
 	}	
 }

@@ -10,7 +10,6 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/css/suport_page.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/product_detail.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/order.css">
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
  
     <title>JavaQua</title>
@@ -105,6 +104,7 @@
                        </tr>
                    </table>
 	            </div>
+
                 <table id="money">
                     <tr>
                        <th class="tmoney">합계금액</th>
@@ -118,30 +118,43 @@
 	       	</div>
 	                
           <div class="clear"></div>
+          
+			<div id="btfTab" class="tab tab-dock-top">
+				<ul class="tab-titles">
+					<li class="li1">상품상세</li>
+					<li class="li2">배송정보</li>
+					<li class="li3">리뷰 ({{페이징정보.totalContent}})</li>
+					<li class="li4">문의</li>
+				</ul>
+			</div>
+			
+			<div class="clear"></div>
            
+          
           <!-- 제품상세섹션 -->
            <section style="margin-top:50px;">	               
-              <div>
+              <div id="target1">
               	<img src="/resources/images/detail/이용매뉴얼.png">
               </div>
               <div style="float:left">${pvo.content }</div>	
-                 <!-- <img src="/resources/images/detail/상품결제정보.png"> -->
-                 <img src="/resources/images/detail/배송정보.png">
-                 <img src="/resources/images/detail/교환및반품정보.png">	               	                	         
+                 <!-- <img src="/resources/images/detail/상품결제정보.png"> -->   
+                 <img id="target2" src="/resources/images/detail/배송정보.png">
+                 <img src="/resources/images/detail/교환및반품정보.png">	                            	                	         
            </section>
+            
                      
             <!-- 리뷰 구역 -->
-	        <div class="tb_tit">리뷰</div>
+	        <div class="tb_tit" id="target3">리뷰 ({{페이징정보.totalContent}})</div>
 	        
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">				
 				<tr height="100" v-for="(item,i) in 리뷰데이터" :key="i">
-					<td>{{item.user_id}}</td>
-					<td class="txtb" width="800px"><span style="white-space: pre-line;">{{item.content}}</span></td>
+					<td width="100">{{item.user_id}}</td>
+					<td class="txtb" width="800"><span style="white-space: pre-line;">{{item.content}}</span></td>
 					<td>{{item.writedate}}</td>
 				</tr>
 			</table>    
 			
-			<!--리뷰 page_div-->
+			<!--리뷰 page_div-->			
 		    <div id="page_div">
 			    <div id="page_select">
 			    	<!-- << 버튼 -->
@@ -164,11 +177,11 @@
 				        </span>  
 					</span>
 			        <!-- // -->
-			        
+			        			        
 			        <!-- > 버튼 -->
 			        	<a class="next" @click="페이징(현재페이지+1)"></a>
 			        <!-- // -->
-					
+			        			     					
 					<!-- >> 버튼 -->
 			        <a class="last" @click="페이징(페이징정보.startEnd[2])"></a>
 			        <!-- // -->
@@ -180,22 +193,32 @@
 			<!-- app닫기 -->  
 			
 			
+			
 			<!-- qapp 열기 -->
 			<!-- 상품문의 구역 -->
 			<div id="qapp" v-clock>
-		        <div class="tb_tit">
+		        <div class="tb_tit" target4>
 		        	상품문의
 		        	<span style="float:right">
 						<button type="button" class="btn" @click="문의하기새창(${pvo.pd_num})">문의하기</button>
 					</span>
 		        </div>
 		        
-		        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">				
-					<tr height="100" v-for="(item,i) in 문의데이터" :key="i">
-						<td>{{item.user_id}}</td>
+		        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table" v-for="(item,i) in 문의데이터" :key="i">				
+					<tr height="100">
+						<td width="40">질문</td>
+						<td width="100">{{item.user_id}}</td>
 						<td class="txtb" width="800px">
 							<span style="white-space: pre-line;">{{item.title}}</span><br><br>
 							<span style="white-space: pre-line;">{{item.content}}</span>
+						</td>
+						<td>{{item.writedate}}</td>
+					</tr>
+					<tr v-if="item.status=='답변완료'" class="replytr" height="100">
+						<td class="fontred">└ &nbsp;답변</td>
+						<td class="replytd">[운영자]</td>
+						<td class="txtb replytd" width="800px">
+							<span style="white-space: pre-line;">{{item.reply}}</span>
 						</td>
 						<td>{{item.writedate}}</td>
 					</tr>

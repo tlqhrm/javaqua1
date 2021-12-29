@@ -6,6 +6,13 @@
 		insert into review(rv_num, pd_num, user_id, content)
 	 	values(REVIEW_SEQ.NEXTVAL,#{pd_num},#{user_id}, #{content})
 	</insert>
+	<update id="modify">
+		update review set content=#{content} where pd_num=#{pd_num} and user_id=#{user_id}
+	</update>
+	
+	<delete id="delete">
+		delete review where pd_num=#{pd_num} and user_id=#{user_id}
+	</delete>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
 		<![CDATA[ SELECT * FROM ( 
@@ -13,10 +20,14 @@
 	        ROWNUM AS RNUM FROM (
 	            SELECT * FROM review WHERE pd_num=#{pd_num} order by writedate desc
 	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+        ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
 	</select>
 
 	<select id="review_cnt" resultType="int">
 		select count(*) from review where pd_num=#{pd_num}
+	</select>
+	
+	<select id="mywrite" resultType="org.zerock.domain.ReviewVO">
+		select * from review where user_id=#{user_id} and pd_num=#{pd_num}
 	</select>
 </mapper>
