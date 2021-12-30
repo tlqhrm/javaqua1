@@ -13,7 +13,7 @@
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	    <link rel="stylesheet" href="/resources/css/10-11.css" />
-	    <link href="images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">	    
+	    <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">   
 	    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	    
 	     	    
@@ -28,7 +28,7 @@
 		<%@include file="header.jsp"%>  
 		
 		<!-- app 열기 -->
-		<div id="app" v-clock>     
+		<div id="app" >     
 		
 		
 		    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
@@ -61,11 +61,9 @@
 	                    <c:set var = "total" value = "0" />      
 	                    <c:forEach var="cart" items="${cartList}" varStatus="status">  
 		                    <c:set var= "total" value="${total + (cart.price*cart.amount)}"/>    
-<<<<<<< HEAD
-		                    <div class="row data">
-=======
+
 		                    <div class="row data" >
->>>>>>> feature/memberUpdate
+
 		                        <div class="subdiv" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
 		                            <div class="img"><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
 		                            <div class="pname">
@@ -74,14 +72,15 @@
 		                        </div>
 		                        <div class="subdiv">
 		                            <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price"><fmt:formatNumber value="${cart.price}" pattern="#,###" />원</div>
+		                            <div class="p_price1" style="display:none" >${cart.price }</div>
 		                            <div class="num">
 		                                <div class="updown">
 		                                    <input type="text" size="2" maxlength="3" class="p_num" value="${cart.amount}" readonly>
-		                                    <span @click="수량업(${cart.cart_num},${status.index })"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-		                                    <span @click="수량다운(${cart.cart_num},${status.index })"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+		                                    <span @click="수량업(${cart.cart_num},${status.index },${cart.price })"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+		                                    <span @click="수량다운(${cart.cart_num},${status.index },${cart.price })"><i class="fas fa-arrow-alt-circle-down down"></i></span>
 		                                </div>
 		                            </div>
-		                            <div class="sum"><fmt:formatNumber value="${cart.price*cart.amount}" pattern="#,###" />원 </div>
+		                            <div class="sum1"><fmt:formatNumber value="${cart.price*cart.amount}" pattern="#,###" />원 </div>
 		                        </div>
 		                        <div class="subdiv">
 		                            <div class="basketcmd"><a @click="상품삭제(${cart.cart_num})" class="abutton">삭제</a></div>
@@ -112,6 +111,7 @@
 		<%@include file="footer.jsp"%> 
 		<script>
 		let id = '${id }';
+		var totalPrice = ${total};
 		</script>
 		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 

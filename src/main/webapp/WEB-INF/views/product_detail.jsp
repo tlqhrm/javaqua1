@@ -37,7 +37,7 @@
     <section id="detailmain">
         <div id="detail">
         	<!-- app 열기 -->
-			<div id="app" v-clock>
+			<div id="app" >
             <div id="bg1">
          		<div id="bg2" style="text-align:center; display:inline-block;">     
          			<span id="main_img" ><img src="/resources/upload/product/${pvo.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="margin-left:auto; margin-right:auto;"></span>
@@ -196,7 +196,7 @@
 			
 			<!-- qapp 열기 -->
 			<!-- 상품문의 구역 -->
-			<div id="qapp" v-clock>
+			<div id="qapp" >
 		        <div class="tb_tit" target4>
 		        	상품문의
 		        	<span style="float:right">

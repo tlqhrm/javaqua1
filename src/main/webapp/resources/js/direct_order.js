@@ -1,3 +1,5 @@
+window.onload;
+
 const v=new Vue({
     el : "#app",
     data : {		
@@ -48,7 +50,7 @@ const v=new Vue({
              axios.post('/order/directOrder',params)
              .then(res=>{
             	 if(res.data==1){	                	  
-            		windows.location.href="/order/order_ok";
+            		window.location.href="/order/order_ok";
             	 }else{
             		 alert("재고가 부족합니다.");
             	 }

@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<title>JavaQua</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/review_write.css" />
-	
+	<link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
 	<!-- axios 추가 -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>	
     <!-- vuejs 추가 -->
@@ -16,7 +16,7 @@
 </head>
 <body>
 <!-- app 열기 -->
-<div id="app" v-clock>
+<div id="app" >
    <div id="wrap">
 	   <div class="container">
 	       <h3 class="tit">상품문의 </h3>

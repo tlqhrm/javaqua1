@@ -303,7 +303,7 @@ var pdList3 = '${pdList3}';
 var pdList4 = '${pdList4}';
 var pdListMd = '${pdListMd}';
 
-console.log(pdList1);
+
 </script>
 <script src="/resources/js/index.js"></script>
 </body>
