@@ -59,10 +59,10 @@
 	                    </div>
 	                          
 	                    <c:set var = "total" value = "0" />      
-	                    <c:forEach var="cart" items="${cartList}">  
+	                    <c:forEach var="cart" items="${cartList}" varStatus="status">  
 		                    <c:set var= "total" value="${total + (cart.price*cart.amount)}"/>    
-		                    <div class="row data" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
-		                        <div class="subdiv">
+		                    <div class="row data" >
+		                        <div class="subdiv" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
 		                            <div class="img"><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
 		                            <div class="pname">
 		                                <span>${cart.title}</span>
@@ -73,8 +73,8 @@
 		                            <div class="num">
 		                                <div class="updown">
 		                                    <input type="text" size="2" maxlength="3" class="p_num" value="${cart.amount}" readonly>
-		                                    <span @click="수량업(${cart.cart_num})"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-		                                    <span @click="수량다운(${cart.cart_num},${cart.amount})"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+		                                    <span @click="수량업(${cart.cart_num},${status.index })"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+		                                    <span @click="수량다운(${cart.cart_num},${status.index })"><i class="fas fa-arrow-alt-circle-down down"></i></span>
 		                                </div>
 		                            </div>
 		                            <div class="sum"><fmt:formatNumber value="${cart.price*cart.amount}" pattern="#,###" />원 </div>
@@ -84,29 +84,7 @@
 		                        </div>
 		                    </div>    
 	                    </c:forEach>
-	                    <div v-for="(item,index) in cartList" class="row data" onclick="location.href='/product/productDetail?&pd_num=${item.pd_num}'">
-		                        <div class="subdiv">
-		                            <div class="img"><img :src="'/resources/upload/product/'+item.file1" width="60"/></div>
-		                            <div class="pname">
-		                                <span>{{item.title}}</span>
-		                            </div>
-		                        </div>
-		                        <div class="subdiv">
-		                            <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price"><fmt:formatNumber :value="item.price" pattern="#,###" />원</div>
-		                            <div class="num">
-		                                <div class="updown">
-		                                    <input type="text" size="2" maxlength="3" class="p_num" :value="item.amount" readonly>
-		                                    <span @click="수량업(item.cart_num, index)"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-		                                    <span @click="수량다운(item.cart_num, index)"><i class="fas fa-arrow-alt-circle-down down"></i></span>
-		                                </div>
-		                            </div>
-		                            <div class="sum"><fmt:formatNumber :value="item.price*item.amount" pattern="#,###" />원 </div>
-		                        </div>
-		                        <div class="subdiv">
-		                            <div class="basketcmd"><a @click="상품삭제(item.car_num)" class="abutton">삭제</a></div>
-		                        </div>
-		                    </div>    
-	                </div>
+	         
 	        
 	                <div class="right-align basketrowcmd">
 	                    <a class="abutton" @click="전체삭제()">장바구니비우기</a>
@@ -121,17 +99,15 @@
 	                    </div>
 	                </div>
 	            </div>
+	            </div>
 			</form>   
 		   
 		</div>
 		<!-- app 닫기 -->
 	     <!-- 푸터 -->
 		<%@include file="footer.jsp"%> 
-		
 		<script>
-			let id="${id}";	
-			var cartList = JSON.parse('${cartList1}');
-			
+		let id = '${id }';
 		</script>
 		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 
