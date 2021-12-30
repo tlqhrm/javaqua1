@@ -2,10 +2,9 @@ package org.zerock.service;
 
 import java.util.List;
 
-import org.zerock.domain.ProductVO;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
-import org.zerock.domain.BoardCriteria;
+import org.zerock.domain.ReviewVO;
 
 public interface ProductService {
 	public int register(ProductVO board);

@@ -3,11 +3,9 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.zerock.domain.ProductVO;
 import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
-import org.zerock.domain.BoardCriteria;
+import org.zerock.domain.ReviewVO;
 
 public interface ProductMapper {
 

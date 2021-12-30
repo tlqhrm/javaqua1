@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.http.Cookie;
@@ -159,8 +160,10 @@ public class MemberController {
 	@PostMapping("/selectMember")
 	public MemberVO selectMember(String user_id) {	
 		log.info("selectMember....");
-		MemberVO mvo = new MemberVO();
-		mvo = service.selectMember(user_id);
+		//MemberVO mvo = new MemberVO();
+		//mvo = service.selectMember(user_id);
+		MemberVO mvo = service.selectMember(user_id);	
+		log.info(mvo);
 		return mvo;
 	}
 }

@@ -3,7 +3,9 @@ package org.zerock.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+
 import java.io.File;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -23,10 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
-import org.springframework.aop.scope.ScopedProxyUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,9 +37,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductVO;
 import org.zerock.etc.ImagePath;
-import org.zerock.domain.ProductCriteria;
 import org.zerock.service.ProductService;
 
 import com.google.gson.Gson;
@@ -160,9 +160,9 @@ public class ProductController {
 		
 		ProductVO pvo = service.productDetail(pd_num);
 
-		pvo.setPrice2((pvo.getPrice()+(pvo.getPrice()*pvo.getDiscount()))/100);
-
+		pvo.setPrice2((pvo.getPrice()+(pvo.getPrice()*pvo.getDiscount()))/100);	
 		pvo.pvoInit();
+	
 		model.addAttribute("pvo",pvo);
 		
 		
@@ -345,4 +345,5 @@ public class ProductController {
 		log.info("삭제완료..." + pvo.getPd_num());
 		return Integer.toString(result);
 	}
+	
 }

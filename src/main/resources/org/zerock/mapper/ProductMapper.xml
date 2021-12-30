@@ -52,5 +52,4 @@
 	<select id="stockChk" resultType="int">
 		<![CDATA[ select count(*) as cnt from product where pd_num=#{pd_num} and stock>= #{cart_amount} ]]>
 	</select>
-	
 </mapper>

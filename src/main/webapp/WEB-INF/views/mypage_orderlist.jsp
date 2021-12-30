@@ -13,54 +13,69 @@
 	    <link rel="stylesheet" type="text/css" href="/resources/css/order.css">
 	    <link rel="stylesheet" type="text/css" href="/resources/css/mypage_orderlist.css">
 	   	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	   		    	    
+	    <!-- vuejs 추가 -->
+	   	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 	</head>
 
 	<body>
 		<!-- 헤더 -->
 		<%@include file="header.jsp"%>
 
+		<!-- app 열기 -->
+		<div id="app" v-clock>
 		<!-- Contents -->
-		<div id="contents">
-			<div class="sub">		
+			<div id="contents">
+				<div class="sub">		
+					
+					<h3 class="tit">주문내역</h3>														
 				
-				<h3 class="tit">주문내역</h3>														
-			
-				<c:forEach var="order" items="${orderlist}">  
-					<ul class="list_oerder">
-						<li>
-						 	<div class="date">${order.orderdate.substring(0,10)} &nbsp;<span style="font-size:14px">( 주문번호 ${order.od_num} )</span></div>
-						 	<c:forEach var="detail" items="${detail_list}"> 
-						 		<c:if test="${order.od_num == detail.od_num}">
-							 		<div class="order_goods">
-										<div class="name" onclick="location.href='/product/productDetail?&pd_num=${detail.pd_num}'"> ${detail.title}<span style="float:right">＞</span></div>
-										<div class="order_info">
-											<div class="thumb"><img style="margin-top:20px" width="80;" src="/resources/upload/product/${detail.file1.split(";")[0]}"/></div>
-											<div class="desc">
-												<dl>
-													<dt>주문가격</dt>
-													<dd><fmt:formatNumber value="${detail.price}" pattern="#,###" />원</dd>
-												</dl>
-												<dl>
-													<dt>주문수량</dt>
-													<dd>${detail.amount}</dd>
-												</dl>
-												<dl>
-													<dt>주문상태</dt>
-													<dd>${detail.odt_status}</dd>
-												</dl>
-											</div>
-										</div>		
-									</div>
-								</c:if>
-							</c:forEach>
-						</li>
-					</ul>	
-					<br>
-				</c:forEach>	
+					<c:forEach var="order" items="${orderlist}">  
+						<ul class="list_oerder">
+							<li>
+							 	<div class="date">${order.orderdate.substring(0,10)} &nbsp;<span style="font-size:14px">( 주문번호 ${order.od_num} )</span></div>
+							 	<c:forEach var="detail" items="${detail_list}"> 
+							 		<c:if test="${order.od_num == detail.od_num}">
+								 		<div class="order_goods">
+											<div class="name" onclick="location.href='/product/productDetail?&pd_num=${detail.pd_num}'"> ${detail.title}<span style="float:right">＞</span></div>
+											<div class="order_info">
+												<div class="thumb"><img style="margin-top:20px" width="80;" src="/resources/upload/product/${detail.file1.split(";")[0]}"/></div>
+												<div class="desc">
+													<dl>
+														<dt>주문가격</dt>
+														<dd><fmt:formatNumber value="${detail.price}" pattern="#,###" />원</dd>
+													</dl>
+													<dl>
+														<dt>주문수량</dt>
+														<dd>${detail.amount}</dd>
+													</dl>
+													<dl>
+														<dt>주문상태</dt>
+														<dd>${detail.odt_status}</dd>
+													</dl>
+												</div>											
+											</div>		
+											<c:if test="${detail.odt_status == '주문완료' && detail.review == 0}">
+											
+												<div class="reviewdiv">
+													<button type="button" class="btn" @click="리뷰작성새창(${detail.pd_num})">리뷰작성</button>
+												</div>
+											</c:if>
+										</div>
+									</c:if>
+								</c:forEach>
+							</li>
+						</ul>	
+						<br>
+					</c:forEach>	
+				</div>
 			</div>
+			<!--//Contents -->	
 		</div>
-		<!--//Contents -->		
+		<!-- app 닫기 -->	
+		
 		<!-- 푸터 -->
 		<%@include file="footer.jsp"%>	
+		<script src="/resources/js/mypage_orderlist.js"></script> 
 	</body>
 </html>
