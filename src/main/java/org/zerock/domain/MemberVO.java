@@ -11,6 +11,7 @@ public class MemberVO {
 	private String user_pw;
 	private String user_email;
 	private String user_address;
+	private String user_address2;
 	private String user_phone;
 	private int admin;
 	

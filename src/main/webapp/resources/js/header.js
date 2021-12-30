@@ -236,30 +236,20 @@ $(function(){
     var ul_name = "#recent_ul";
     var count = 0;
 	var cookieArr = [];
-	var cookies = Cookies.get();
 	
-	
-	console.log(listCookies());
-	
-	
-	function listCookies() {
+	(function () {
 	    var theCookies = document.cookie.split(';');
-	    var aString = '';
 	    for (var i = 1 ; i <= theCookies.length; i++) {
-	        aString += i + ' ' + theCookies[i-1] + "\n";
-	        
 	        var pd_num = theCookies[i-1].split("=")[0];
 	      
 	        if(pd_num.includes("pd_num")){
 	        	cookieArr.push(JSON.parse(Cookies.get(pd_num.replace(" ",""))));
-	        	console.log(pd_num.replace(" ",""));
-	        	console.log(cookieArr[i-1]);
+
 	        }
 	        
 	    }
 	    cookieArr.reverse();
-	    return aString;
-	}
+	})();
 	
 	const v_recent = new Vue({
 		el:"#recent_div_1",
@@ -295,18 +285,16 @@ $(function(){
 		}
 	})
 	
-	console.log(cookieArr.length);
-	console.log(v_recent.cookieArr[0]);
-	
+
 	
 	$("#recent_ul").css("height",cookieArr.length * 160);
 	if(cookieArr.length > 3){
 		$("#recent_div_1").css("height",(3*160) + 91);
 	}else if(cookieArr.length == 0){
-        $("#recent_div_1").css("height",115);
+        $("#recent_div_1").css("height",111);
     }
     else{
-		$("#recent_div_1").css("height",(cookieArr.length*160) + 93);
+		$("#recent_div_1").css("height",(cookieArr.length*160) + 92);
 	}
 	if(cookieArr.length > 3){
 		$("#recent_div_2").css("height",(3*160) + 91);
@@ -318,5 +306,6 @@ $(function(){
 	}else{
 		$("#recent_div_1-2").css("height",(cookieArr.length*160)-5);
 	}
+
 
 });

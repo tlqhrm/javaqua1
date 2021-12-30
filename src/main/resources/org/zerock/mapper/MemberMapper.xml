@@ -8,8 +8,8 @@
 	
 	</select> -->	
 	<insert id="insert">	
-		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_phone, admin)
-		 		values(member_seq.nextval, #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_phone}, '0')]]>
+		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_address2, user_phone, admin)
+		 		values(member_seq.nextval, #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone}, '0')]]>
 	</insert>
 	
 	<select id="get" resultType="org.zerock.domain.MemberVO">
@@ -22,13 +22,21 @@
 			
 	</select>
 	<select id="getEmail" resultType="_int">
-		<![CDATA[select count(*) from member where user_email = #{email}]]>
-			
+		<![CDATA[select count(*) from member where user_email = #{user_email} and 
+			user_email != (select user_email from member where user_id = #{user_id})]]>
+	</select>
+	<select id="getEmail2" resultType="_int">
+		<![CDATA[select count(*) from member where user_email = #{user_email}]]>
 	</select>
 	
 	<select id="selectMember" resultType="org.zerock.domain.MemberVO">
 		select * from member where user_id = #{user_id}	
 	</select>
+	 
+	<update id="updateMember">
+		update member set user_pw= #{user_pw}, user_email=#{user_email}, user_address=#{user_address}, user_address2=#{user_address2},
+		user_phone=#{user_phone} where user_num=#{user_num}
+	</update>
 	<!--
 	
 	<insert id="insertSelectKey">
@@ -48,8 +56,6 @@
 		delete from tbl_board where bno = #{bno}
 	</delete>
 	
-	<update id="update">
-		update tbl_board set title= #{title}, content=#{content}, writer=#{writer}, updatedate=sysdate where bno=#{bno}
-	</update> -->
+	 -->
 	
 </mapper>

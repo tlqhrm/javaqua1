@@ -59,9 +59,13 @@
 	                    </div>
 	                          
 	                    <c:set var = "total" value = "0" />      
-	                    <c:forEach var="cart" items="${cartList}">  
+	                    <c:forEach var="cart" items="${cartList}" varStatus="status">  
 		                    <c:set var= "total" value="${total + (cart.price*cart.amount)}"/>    
+<<<<<<< HEAD
 		                    <div class="row data">
+=======
+		                    <div class="row data" >
+>>>>>>> feature/memberUpdate
 		                        <div class="subdiv" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
 		                            <div class="img"><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
 		                            <div class="pname">
@@ -73,8 +77,8 @@
 		                            <div class="num">
 		                                <div class="updown">
 		                                    <input type="text" size="2" maxlength="3" class="p_num" value="${cart.amount}" readonly>
-		                                    <span @click="수량업(${cart.cart_num})"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-		                                    <span @click="수량다운(${cart.cart_num},${cart.amount})"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+		                                    <span @click="수량업(${cart.cart_num},${status.index })"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+		                                    <span @click="수량다운(${cart.cart_num},${status.index })"><i class="fas fa-arrow-alt-circle-down down"></i></span>
 		                                </div>
 		                            </div>
 		                            <div class="sum"><fmt:formatNumber value="${cart.price*cart.amount}" pattern="#,###" />원 </div>
@@ -83,8 +87,8 @@
 		                            <div class="basketcmd"><a @click="상품삭제(${cart.cart_num})" class="abutton">삭제</a></div>
 		                        </div>
 		                    </div>    
-	                    </c:forEach>       
-	                </div>
+	                    </c:forEach>
+	         
 	        
 	                <div class="right-align basketrowcmd">
 	                    <a class="abutton" @click="전체삭제()">장바구니비우기</a>
@@ -99,15 +103,15 @@
 	                    </div>
 	                </div>
 	            </div>
+	            </div>
 			</form>   
 		   
 		</div>
 		<!-- app 닫기 -->
 	     <!-- 푸터 -->
 		<%@include file="footer.jsp"%> 
-		
 		<script>
-			let id="${id}";	
+		let id = '${id }';
 		</script>
 		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 

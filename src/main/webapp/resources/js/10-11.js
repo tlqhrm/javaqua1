@@ -6,14 +6,14 @@ Number.prototype.formatNumber = function(){
     while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
     return nstr;
 };
-
+var classes = document.getElementsByClassName("p_num");
 const v=new Vue({
     el : "#app",
 	methods : {
 		주문하기: function(){	
 			location.href="/cart/cart_order";						
 		},
-		수량업: function(cart_num){	
+		수량업: function(cart_num,index){	
 			
 			const params = new URLSearchParams();
 			params.append('cart_num', cart_num);
@@ -23,9 +23,10 @@ const v=new Vue({
 			axios.post('/cart/cart_modify',params)
 			.then(res=>{
 				if(res.data==200){
-					history.go(0);
+					classes[index].value ++;
+					
 				}else{
-					alert("오류가 발생했씁니다.");
+					alert("오류가 발생했습니다.");
 				}		
 			})
 			.catch(err=>{
@@ -33,9 +34,9 @@ const v=new Vue({
 			 	console.log(err);
 			});				
 		},
-		수량다운: function(cart_num,amount){	
+		수량다운: function(cart_num,index){	
 				
-			if(amount==1){alert("수량은 최소 1개입니다.");return;}
+			if(classes[index].value<=1)return;
 		
 			const params = new URLSearchParams();
 			params.append('cart_num', cart_num);
@@ -45,7 +46,7 @@ const v=new Vue({
 			axios.post('/cart/cart_modify',params)
 			.then(res=>{
 				if(res.data==200){
-					history.go(0);
+					classes[index].value --;
 				}else{
 					alert("오류가 발생했씁니다.");
 				}	

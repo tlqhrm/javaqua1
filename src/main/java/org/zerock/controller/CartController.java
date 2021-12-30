@@ -14,6 +14,8 @@ import org.zerock.domain.CartVO;
 import org.zerock.domain.Order1VO;
 import org.zerock.service.CartService;
 
+import com.google.gson.Gson;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -40,7 +42,10 @@ public class CartController {
 	public String cart_list(@SessionAttribute("id") String user_id , Model model) {
 		log.info("controller............ ");		
 		List<CartVO> list = cartService.cart_list(user_id);
+		
+		String result = new Gson().toJson(list);
 		model.addAttribute("cartList", list);
+		model.addAttribute("cartList1", result);
 		return "/basket.jsp";
 	}
 	

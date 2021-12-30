@@ -124,8 +124,7 @@
     </div>
     </div>
     <jsp:include page="footer.jsp"></jsp:include>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
 function deleteCheck(t,pd_num,file1){
 	confirm("'"+t+"'"+" 를 삭제 합니다.");

@@ -143,13 +143,17 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping("/emailCheck")
-	public String emailCheck(String email) {
-				
-		boolean result = service.getEmail(email);
+	public String emailCheck(String email,String user_id) {
 		
+		int result;
+		if(user_id != null) {
+			result = service.getEmail(email, user_id);
+		}else {		
+			result = service.getEmail(email);
+		}
 		log.info("emailCheck....."+result);
 		
-		if(result) {
+		if(result > 0) {
 			return "not-useable";
 		}else {
 			return "useable";
@@ -165,5 +169,22 @@ public class MemberController {
 		MemberVO mvo = service.selectMember(user_id);	
 		log.info(mvo);
 		return mvo;
+	}
+	
+	@GetMapping("/updateMemberForm")
+	public String updateForm(Model model, String user_id) {
+		log.info("updateMemberForm....");
+		MemberVO mvo = new MemberVO();
+		mvo = service.selectMember(user_id);
+		log.info(mvo);
+		model.addAttribute("mvo",mvo);
+		return "/member_update.jsp";
+	}
+	
+	@PostMapping("/updateMember")
+	public String updateForm(MemberVO mvo) {
+		
+		service.updateMember(mvo);
+		return "redirect:/";
 	}
 }

@@ -36,12 +36,6 @@ public class MemeberServiceimpl implements MemberService {
 		return mapper.get(member);
 	}
 
-	@Override
-	public boolean modify(BoardVO board) {
-		
-		log.info("modify......" + board);
-		return mapper.update(board) == 1;
-	}
 
 	@Override
 	public boolean remove(Long bno) {
@@ -63,9 +57,20 @@ public class MemeberServiceimpl implements MemberService {
 	}
 	
 	@Override
-	public boolean getEmail(String email) {
+	public int getEmail(String email, String user_id) {
 		
-		return mapper.getEmail(email) !=0 ;
+		int result = mapper.getEmail(email,user_id);
+		
+		return result ;
+		
+	}
+	
+	@Override
+	public int getEmail(String email) {
+		
+		int result = mapper.getEmail2(email);
+		
+		return result ;
 		
 	}
 	
@@ -73,4 +78,15 @@ public class MemeberServiceimpl implements MemberService {
 	public MemberVO selectMember(String user_id) {
 		return mapper.selectMember(user_id);
 	}
+
+	@Override
+	public int updateMember(MemberVO mvo) {
+		int result = mapper.updateMember(mvo);
+		return result;
+	}
+
+
+
+
+
 }
