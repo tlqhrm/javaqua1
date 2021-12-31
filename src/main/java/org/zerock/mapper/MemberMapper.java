@@ -34,4 +34,6 @@ public interface MemberMapper {
 		public MemberVO selectMember(String user_id);
 
 		public int getEmail2(String email);
+
+		public MemberVO passwordCheck(MemberVO mvo);
 }

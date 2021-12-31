@@ -50,7 +50,7 @@
                     <li id="mypage"><a href='JavaquaServlet?command=join_form' class="right_border blue">${name } 님&nbsp;&nbsp;</a><span id="un1"></span>
                         <ul>
                             <li><a href='/order/order_list'>주문내역 조회</a></li>
-                            <li><a href="/member/updateMemberForm?user_id=${id }">개인정보 수정</a></li>
+                            <li><a href="/member/passwordCheckForm">개인정보 수정</a></li>
                         </ul></li>
                     
                     <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>

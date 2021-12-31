@@ -31,7 +31,7 @@
 
         <div id="wrap">
             <div class="container">
-                <h3 class="tit">회원가입</h3>
+                <h3 class="tit">회원정보 수정</h3>
                 <form name="fmData" method="post" action="/member/updateMember">  
                     <table class="tbl_comm">
                         <tbody>
@@ -58,7 +58,7 @@
                             <tr>
                                 <th>이름</th>
                                 <td>
-                                    <input type="text" name="name" maxlength="6" placeholder="이름을 입력해주세요" class="inputText" value="${mvo.name }">
+                                    <input type="text" name="name" maxlength="6" placeholder="이름을 입력해주세요" class="inputText" value="${mvo.name }"  readonly>
                                    <br><div id="msg_name">이름은 한글 2자 이상 6자 이하만 가능합니다.</div>
                                 </td>
                             </tr>

@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.IOException;
 
 import java.io.PrintWriter;
@@ -186,5 +188,29 @@ public class MemberController {
 		
 		service.updateMember(mvo);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/passwordCheckForm")
+	public String passwordCheckForm() {
+		
+		return "/password_check.jsp";
+	}
+	@PostMapping("/passwordCheck")
+	public String passwordCheck(MemberVO mvo, HttpServletResponse response, Model model) throws IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		mvo = service.passwordCheck(mvo);
+		model.addAttribute("mvo",mvo);
+		log.info(mvo);
+		if(mvo == null) {
+			out.print("<script>alert('비밀번호가 일치하지 않습니다.');location.href = document.referrer;</script>");
+			out.flush();
+			out.close();
+		}
+		
+		
+		return "/member_update.jsp";
+		
 	}
 }

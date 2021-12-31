@@ -22,4 +22,6 @@ public interface MemberService {
 	public int getEmail(String email, String user_id);
 
 	public int getEmail(String email);
+
+	public MemberVO passwordCheck(MemberVO mvo);
 }

@@ -90,43 +90,7 @@ $(function(){
 	$('#msg_email').hide();
 
 });
-// 아이디 중복검사
-$('input[name=user_id]').focusout(function(){
-	const id = $(this).val();	
-	const msg = $('#msg_id');
 
-    if (id==""){
-		msg.text("아이디를 입력해 주세요");
-		idConf=false; 
-		return;
-	}
-    if (id.length < 6){
-		msg.text("아이디는 6자 이상만 가능합니다.");
-		idConf=false; 
-		return;
-	}
-
-	$.ajax({
-		type:'post',
-		url:'/member/idCheck',
-		datatype:'text',
-		data:{id:id},
-		success: function(data){
-			console.log(data);
-			if(data ==='useable'){
-				msg.hide();			
-				idConf=true;
-			}else{
-				msg.show();
-				msg.text(`${id}는 이미 사용중인 아이디 입니다.`);
-				idConf=false;
-			}
-		},
-		error: function(data, textStatus){
-			console.log('error');
-		}
-	});
-});
 
 // 비밀번호 일치 검사
 var msg_pw2 = $('#msg_pw2');
@@ -187,7 +151,6 @@ $('input[name=user_email]').focusout(function(){
 		data:{email:email,
 			  user_id:user_id},
 		success: function(data){
-			console.log(data);
 			if(data ==='useable'){
 				msg.hide();			
 				emailConf=true;

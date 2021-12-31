@@ -85,6 +85,12 @@ public class MemeberServiceimpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public MemberVO passwordCheck(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return mapper.passwordCheck(mvo);
+	}
+
 
 
 
