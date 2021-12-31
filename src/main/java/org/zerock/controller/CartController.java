@@ -2,6 +2,9 @@ package org.zerock.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +42,16 @@ public class CartController {
 	}
 	
 	@GetMapping("/cart_list")
-	public String cart_list(@SessionAttribute("id") String user_id , Model model) {
+	public String cart_list(HttpServletRequest request, Model model) {
 		log.info("controller............ ");		
+		
+		HttpSession Session = request.getSession();
+		String user_id = (String) Session.getAttribute("id");
+		
+		if(user_id == null) {
+			return "/login.jsp";	
+		}
+		
 		List<CartVO> list = cartService.cart_list(user_id);
 		
 		String result = new Gson().toJson(list);

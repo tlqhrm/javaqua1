@@ -29,9 +29,24 @@
         <jsp:include page="header.jsp"></jsp:include>
         <!--//header-->
 
-        <div id="wrap">
-            <div class="container">
-                <h3 class="tit">회원정보 수정</h3>
+
+<div id="wrap_update">
+   <div style="padding-top:65px;">
+      <div id="snb">
+         <h2>마이페이지</h2>
+          <ul>
+            <a href="/order/order_list"><li>주문내역</li></a>
+            <a href="/review/review_list"><li>리뷰내역</li></a>
+            <a href="/qna/qna_list"><li>Q&A내역</li></a>
+            <a href="/member/passwordCheckForm"><li id="now">개인정보수정</li></a>
+          </ul>
+      </div> 
+                   
+       <div class="contents">
+   			<div class="container">
+	           	<div class="tb_tit">
+		        	회원정보수정
+		        </div>
                 <form name="fmData" method="post" action="/member/updateMember">  
                     <table class="tbl_comm">
                         <tbody>
@@ -123,24 +138,28 @@
                         </tbody>
                     </table>
                 <div style="text-align: center; margin-top: 30px;">
-                    <button type="button" class="btn_join" onclick="frm_check()">가입하기</button>
+                    <button type="button" class="btn_join" onclick="frm_check()">수정하기</button>
                 </div> 
-                </form>
-             
+                </form>  
+                <br><br>        
             </div>
-        </div>
+       </div>  
+       <!--contents-->
+   </div>  <!--main-->
+</div>  <!--wrap -->
 
-        <!--footer-->
-        <jsp:include page="footer.jsp"></jsp:include>
-        <!--//footer-->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<script>
-		var user_id = '${mvo.user_id}';
-		</script>
 
-     	<script src="/resources/js/member_update.js"></script> 
-     	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    </body>
-    		</c:otherwise>
+<!--footer-->
+<jsp:include page="footer.jsp"></jsp:include>
+<!--//footer-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+var user_id = '${mvo.user_id}';
+</script>
+
+<script src="/resources/js/member_update.js"></script> 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		</body>
+    	</c:otherwise>
 	</c:choose>
 </html>

@@ -27,7 +27,7 @@
     <body>
         <!---header-->
         <jsp:include page="header.jsp"></jsp:include>
-        <!--//header-->
+        <!--//header-->z
 
     <div id="login" style="height: 300px; margin-top:100px">
         <h3 >회원정보 확인</h3>

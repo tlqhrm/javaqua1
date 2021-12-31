@@ -32,7 +32,7 @@
 						<a href="/order/order_list"><li>주문내역</li></a>
 						<a href="/review/review_list"><li>리뷰내역</li></a>
 						<a href="/qna/qna_list"><li id="now">Q&A내역</li></a>
-				        <a href="/member/updateMemberForm?user_id=${id }"><li>개인정보수정</li></a>
+				        <a href="/member/passwordCheckForm"><li>개인정보수정</li></a>
 				    </ul>
 				</div> 
 		                 

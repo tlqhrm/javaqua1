@@ -32,7 +32,7 @@
 						<a href="/order/order_list"><li id="now">주문내역</li></a>
 						<a href="/review/review_list"><li>리뷰내역</li></a>
 						<a href="/qna/qna_list"><li>Q&A내역</li></a>
-				        <a href="/member/updateMemberForm?user_id=${id }"><li>개인정보수정</li></a>
+				        <a href="/member/passwordCheckForm"><li>개인정보수정</li></a>
 				    </ul>
 				</div> 
 		                 
@@ -41,9 +41,10 @@
 					<div id="app" >
 					<!-- Contents -->
 						<div id="contents">
-							<div class="sub">		
-								
-								<h3 class="tit">주문내역</h3>														
+							<div class="sub">								
+								<div class="tb_tit">
+						        	주문내역
+						        </div>														
 							
 								<c:forEach var="order" items="${orderlist}">  
 									<ul class="list_oerder">

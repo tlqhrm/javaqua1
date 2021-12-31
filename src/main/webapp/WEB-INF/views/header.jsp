@@ -30,37 +30,43 @@
                 <div id="takbae">
                     <a href="#none">※ <span class="red">생물 </span>배송안내 > ※</a>
                 </div>
+                &nbsp;&nbsp;&nbsp; github : <a href="https://github.com/tlqhrm/javaqua1.git" style="color:rgb(3, 140, 232)">github.com/tlqhrm/javaqua1.git</a>
                 <c:choose>
                 <c:when test="${name == null}">
-                <ul id='join_login'>
-                    <li class="no_mypage"><a href='/member/joinForm' class="right_border red">회원가입</a></li>
-                    <li class="no_mypage"><a href='/member/login' class="right_border">로그인</a></li>       
-                    <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
-                    <li id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span id="un3"></span>
-                    <ul>
-                        <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>
-                        <li><a href="/board/boardList?bd_category2=faq&page=1">자주하는 질문</a></li>
-                        <li><a href='/board/boardList?bd_category2=contact&page=1'>1:1 문의</a></li>
-                    </ul></li>
-                </ul>
+	                <ul id='join_login'>
+	                    <li class="no_mypage"><a href='/member/joinForm' class="right_border red">회원가입</a></li>
+	                    <li class="no_mypage"><a href='/member/login' class="right_border">로그인</a></li>       
+	                    <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
+	                    <li id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span id="un3"></span>
+		                    <ul>
+		                        <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>
+		                        <li><a href="/board/boardList?bd_category2=faq&page=1">자주하는 질문</a></li>
+		                        <li><a href='/board/boardList?bd_category2=contact&page=1'>1:1 문의</a></li>
+		                    </ul>
+	                    </li>
+	                </ul>
                 </c:when>
                 <c:otherwise>
-                <ul id='join_login'>
-                <li class="no_mypage"><a href='/member/logout' class="right_border">로그아웃</a></li>
-                    <li id="mypage"><a href='JavaquaServlet?command=join_form' class="right_border blue">${name } 님&nbsp;&nbsp;</a><span id="un1"></span>
-                        <ul>
-                            <li><a href='/order/order_list'>주문내역 조회</a></li>
-                            <li><a href="/member/passwordCheckForm">개인정보 수정</a></li>
-                        </ul></li>
-                    
-                    <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
-                    <li class="no_mypage" id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span id="un2"></span>
-                    <ul>
-                        <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>
-                        <li><a href="/board/boardList?bd_category2=faq&page=1">자주하는 질문</a></li>
-                        <li><a href='/board/boardList?bd_category2=contact&page=1'>1:1 문의</a></li>
-                    </ul></li>
-                </ul>
+	                <ul id='join_login'>
+	                <li class="no_mypage"><a href='/member/logout' class="right_border">로그아웃</a></li>
+	                    <li id="mypage"><a href="/order/order_list" class="right_border blue">${name } 님&nbsp;&nbsp;</a><span id="un1"></span>
+	                        <ul>
+	                            <li><a href="/order/order_list">주문내역</a></li>
+	                            <li><a href="/review/review_list">리뷰내역</a></li>
+	                            <li><a href="/qna/qna_list">Q&A내역</a></li>
+	                            <li><a href="/member/passwordCheckForm">개인정보 수정</a></li>
+	                        </ul>
+	                    </li>
+	                    
+	                    <li class="no_mypage"><a href='/cart/cart_list' class="right_border">장바구니</a></li>
+	                    <li class="no_mypage" id="consumer_center"><a href='/board/boardList?bd_category2=notice&page=1' >고객센터</a><span id="un2"></span>
+		                    <ul>
+		                        <li><a href="/board/boardList?bd_category2=notice&page=1">공지사항</a></li>
+		                        <li><a href="/board/boardList?bd_category2=faq&page=1">자주하는 질문</a></li>
+		                        <li><a href='/board/boardList?bd_category2=contact&page=1'>1:1 문의</a></li>
+		                    </ul>
+	                    </li>
+	                </ul>
                 </c:otherwise>
                 </c:choose>
             </div>
@@ -82,10 +88,7 @@
                     <li><a href="#none">베타 코이 암컷입고</a></li>
                     <li><a href="#none">직원 & 아르바이트생 모집</a></li>
                 </ul>
-            </div>         
-            <c:if test="${admin eq 1}">
-            	<div><h1 style="display: inline-block;">관리자 로그인 입니다.</h1><span style="position: absolute;right: 10px; z-index:10;"><button type="button" onClick="location.href='/product/productRegistForm'">상품등록</button></span></div>
-            </c:if>         
+            </div>                 
         </div>
         <div id="header3">
             <div class="frame">
