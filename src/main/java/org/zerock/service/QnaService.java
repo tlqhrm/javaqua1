@@ -12,5 +12,7 @@ public interface QnaService {
 	public int delete(QnaVO qvo);
 	public List<QnaVO> qna_list(int pd_num,PagingDTO pdto);
 	public int qna_cnt(int pd_num);
-	public QnaVO myqna(QnaVO qvo);
+	public List<QnaVO> myqna(String user_id,PagingDTO pdto);
+	public int myqna_cnt(String user_id);
+	public QnaVO mywrite(QnaVO qvo);
 }

@@ -22,12 +22,23 @@
 	        ) A
         ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
 	</select>
-
 	<select id="qna_cnt" resultType="int">
 		select count(*) from qna where pd_num=#{pd_num}
 	</select>
 	
-	<select id="myqna" resultType="org.zerock.domain.QnaVO">
+	<select id="myqna" resultType="org.zerock.domain.QnaVO">	
+		<![CDATA[ SELECT * FROM ( 
+	        SELECT A.*, 
+	        ROWNUM AS RNUM FROM (
+	            SELECT * FROM qna WHERE user_id=#{user_id} order by writedate desc
+	        ) A
+        ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
+	</select>
+	<select id="myqna_cnt" resultType="int">
+		select count(*) from qna where user_id=#{user_id}
+	</select>
+	
+	<select id="mywrite" resultType="org.zerock.domain.QnaVO">
 		select * from qna where user_id=#{user_id} and pd_num=#{pd_num}
 	</select>
 </mapper>

@@ -33,15 +33,23 @@ public class QnaServiceimpl implements QnaService{
         //int endNum = startNum+(listNumber-1); // 페이징 끝넘버
 
 		return mapper.qna_list(pd_num,pdto);
-	}	
-	
+	}		
 	@Override
 	public int qna_cnt(int pd_num) { 
 		return mapper.qna_cnt(pd_num);
 	}	
 	
 	@Override
-	public QnaVO myqna(QnaVO qvo) { 
-		return mapper.myqna(qvo);
+	public List<QnaVO> myqna(String user_id,PagingDTO pdto){
+		return mapper.myqna(user_id,pdto);
+	}
+	@Override
+	public int myqna_cnt(String user_id) {
+		return mapper.myqna_cnt(user_id);
+	}
+	
+	@Override
+	public QnaVO mywrite(QnaVO qvo) { 
+		return mapper.mywrite(qvo);
 	}	
 }

@@ -22,9 +22,20 @@
 	        ) A
         ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
 	</select>
-
 	<select id="review_cnt" resultType="int">
 		select count(*) from review where pd_num=#{pd_num}
+	</select>
+	
+	<select id="myreview" resultType="org.zerock.domain.ReviewVO">	
+		<![CDATA[ SELECT * FROM ( 
+	        SELECT A.*, 
+	        ROWNUM AS RNUM FROM (
+	            SELECT * FROM review WHERE user_id=#{user_id} order by writedate desc
+	        ) A
+        ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
+	</select>
+	<select id="myreview_cnt" resultType="int">
+		select count(*) from review where user_id=#{user_id}
 	</select>
 	
 	<select id="mywrite" resultType="org.zerock.domain.ReviewVO">

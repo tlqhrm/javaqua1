@@ -197,7 +197,7 @@
 			<!-- qapp 열기 -->
 			<!-- 상품문의 구역 -->
 			<div id="qapp" >
-		        <div class="tb_tit" target4>
+		        <div class="tb_tit" id="target4">
 		        	상품문의
 		        	<span style="float:right">
 						<button type="button" class="btn" @click="문의하기새창(${pvo.pd_num})">문의하기</button>
