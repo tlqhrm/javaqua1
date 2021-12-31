@@ -60,6 +60,7 @@ const v=new Vue({
 		수량:1,
 		금액:price,
 		배송비:3500,
+		재고:stock,
 		리뷰데이터 : [{
 			rv_num : 0,
 			pd_num : 0,
@@ -82,6 +83,7 @@ const v=new Vue({
 	},	
 	
 	created : function(){
+
 		this.리뷰데이터가져오기();
 	},
 	computed : {
@@ -151,7 +153,9 @@ const v=new Vue({
 			}
 		},
 		수량업 : function(){
-			if(this.수량 >stock-1){
+			if(this.재고  < 1){
+				alert("품절 상품입니다.");
+			}else if(this.수량 >stock-1){
 				alert("최대수량 초과입니다");
 				this.수량 = stock;
 			}else{

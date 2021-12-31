@@ -234,7 +234,7 @@ function handleImgFileSelect(e){
 	filesArr.forEach(function(f) {
 		var nameArr = f.name.split(".");
 		var date1 = new Date();
-		var fileName = guid()+f.name;  
+		var fileName = guid()+(f.name.replace(/\s/gi,""));
 		cnt++
 		console.log(fileName);
 		
@@ -323,7 +323,6 @@ function deleteImageAction(index1){
 }
 
 function submitAction(){
-	console.log("씨팔");
 	if($("input[name=title]").val()==null || $("input[name=title]").val() == ''){
 		alert("제목을 입력해 주세요.");
 		return false;
@@ -341,16 +340,12 @@ function submitAction(){
 		return false;
 	}
 	
-	console.log("씨팔4");
 	content_box2.innerHTML = content_box.innerHTML;
-	console.log("씨팔5");
 	for(var i=0; i<index; i++){
 		let img_id = document.getElementsByClassName("img_id_"+i);
 		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
 	}
-	console.log("씨팔6");
 	document.getElementById("hidden").value = content_box2.innerHTML;
-	console.log("씨팔2");
 	document.getElementById("file_names1").value = "";
 	document.getElementById("file_names2").value = "";
 	for(var i=0; i<index; i++){
@@ -358,7 +353,6 @@ function submitAction(){
 		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
 
 	}
-	console.log("씨팔3");
 	console.log(document.getElementById("file_names2").value);
 	
 	if($("#hidden").val()==null || $("#hidden").val() == ''){

@@ -236,14 +236,14 @@ $(function(){
     var ul_name = "#recent_ul";
     var count = 0;
 	var cookieArr = [];
-	
+	var cookie;
 	(function () {
 	    var theCookies = document.cookie.split(';');
 	    for (var i = 1 ; i <= theCookies.length; i++) {
 	        var pd_num = theCookies[i-1].split("=")[0];
 	      
 	        if(pd_num.includes("pd_num")){
-	        	cookieArr.push(JSON.parse(Cookies.get(pd_num.replace(" ",""))));
+	       	cookieArr.push(JSON.parse(Cookies.get(pd_num.replace(" ",""))));
 
 	        }
 	        
