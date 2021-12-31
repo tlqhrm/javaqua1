@@ -112,7 +112,8 @@
                     </tr>
                 </table>
                 <ul>
-                    <li class="lname"><a @click="즉시구매()" style="color:#fff; cursor:pointer">즉시구매</a></li>
+                    <li v-if="재고 > 0" class="lname"><a @click="즉시구매()" style="color:#fff; cursor:pointer">즉시구매</a></li>
+                    <li v-else class="lname"><span style="color:black; ">품절</span></li>
                     <li><a @click="장바구니담기()" style="color:#fff; cursor:pointer">장바구니담기</a></li>
                 </ul>	
 	       	</div>

@@ -121,6 +121,8 @@ table tbody tr td.title{
 	left : 10px;
     text-align:left;
 	margin-left:-20px;
+
+	
 }
 
 table tbody tr td.title a{
@@ -129,6 +131,8 @@ table tbody tr td.title a{
 	text-overflow:ellipsis;
     overflow:hidden;
     white-space:nowrap;
+    	height:20px;
+	line-height:26px;
 }
 
 #page_div{

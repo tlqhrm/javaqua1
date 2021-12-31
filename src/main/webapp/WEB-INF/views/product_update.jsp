@@ -163,6 +163,9 @@ var content_box2 = document.getElementById("content_box2");
 var files = document.getElementById("files");
 var index=document.getElementsByClassName("controll_div").length;
 
+var price = document.querySelector("#tmain > table > tbody > tr.info > td > input[type=text]:nth-child(1)");
+var discount = document.querySelector("#tmain > table > tbody > tr.info > td > input[type=text]:nth-child(2)");
+var price2 = document.querySelector("#tmain > table > tbody > tr.info > td > span > span");
 
 function guid() {
 	  function _s4() {
@@ -228,7 +231,7 @@ $(document).ready(function(){
 		}
 	}
 
-	
+	price2.innerText = Math.ceil(((parseInt(price.value) / (1 - ((parseInt(discount.value)) / 100)))))+"원" ;
 });		
 		
 		
@@ -248,9 +251,7 @@ files.addEventListener("change",function(){
 		},1000);
 });
 
-var price = document.querySelector("#tmain > table > tbody > tr.info > td > input[type=text]:nth-child(1)");
-var discount = document.querySelector("#tmain > table > tbody > tr.info > td > input[type=text]:nth-child(2)");
-var price2 = document.querySelector("#tmain > table > tbody > tr.info > td > span > span");
+
 
 price.addEventListener("change",function(){
 	price2.innerText = Math.ceil(((parseInt(price.value) / (1 - ((parseInt(discount.value)) / 100)))))+"원" ;
