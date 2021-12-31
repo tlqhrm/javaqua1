@@ -8,7 +8,9 @@ a:link, a:visited, a:hover, a:active{text-decoration-line:none; color:black;}
 
 #main{
     padding-top:65px;
+    /*
     float:right;
+    */
 
 }
 

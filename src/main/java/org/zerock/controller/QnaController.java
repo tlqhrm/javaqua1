@@ -49,6 +49,11 @@ public class QnaController {
 		model.addAttribute("pvo", pvo);
 		return "/qna_modify.jsp";
 	}
+	@GetMapping("/qna_list")
+	public String qna_list() {
+		log.info("get qna_list............ ");		
+		return "/mypage_qnalist.jsp";
+	}
 	
 	@ResponseBody
 	@PostMapping("/write")
@@ -87,10 +92,10 @@ public class QnaController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/myqna")
-	public QnaVO myqna(QnaVO qvo) {
-		log.info("myqna............" );
-		return qnaservice.myqna(qvo);
+	@PostMapping("/mywrite")
+	public QnaVO mywrite(QnaVO qvo) {
+		log.info("mywrite............" );
+		return qnaservice.mywrite(qvo);
 	}
 	
 	@ResponseBody
@@ -105,6 +110,22 @@ public class QnaController {
 		
 		List rs = new ArrayList();
 		rs.add(qnalist);
+		rs.add(pdto);
+		return rs;
+	}
+	
+	@ResponseBody
+	@PostMapping("/myqna")
+	public List<QnaVO> myqna(String user_id, int page, int pagePerList) {
+		log.info("myqna............" );
+		
+		int totalContnet = qnaservice.myqna_cnt(user_id);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 2);
+		log.info(pdto);
+		List<QnaVO> myqna = qnaservice.myqna(user_id,pdto);
+		
+		List rs = new ArrayList();
+		rs.add(myqna);
 		rs.add(pdto);
 		return rs;
 	}

@@ -42,6 +42,15 @@ public class ReviewServiceimpl implements ReviewService{
 	}	
 	
 	@Override
+	public List<ReviewVO> myreview(String user_id,PagingDTO pdto){
+		return mapper.myreview(user_id,pdto);
+	}
+	@Override
+	public int myreview_cnt(String user_id) {
+		return mapper.myreview_cnt(user_id);
+	}
+	
+	@Override
 	public ReviewVO mywrite(ReviewVO rvo) {
 		return mapper.mywrite(rvo);
 	}

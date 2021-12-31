@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.zerock.domain.Order1VO;
+import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.ReviewVO;
@@ -47,6 +50,11 @@ public class ReviewController {
 		ProductVO pvo = pvservice.productDetail(pd_num);
 		model.addAttribute("pvo", pvo);
 		return "/review_modify.jsp";
+	}
+	@GetMapping("/review_list")
+	public String review_list() {
+		log.info("get review_list............ ");		
+		return "/mypage_reviewlist.jsp";
 	}
 	
 	@ResponseBody
@@ -105,6 +113,22 @@ public class ReviewController {
 		
 		List rs = new ArrayList();
 		rs.add(reviewlist);
+		rs.add(pdto);
+		return rs;
+	}
+	
+	@ResponseBody
+	@PostMapping("/myreview")
+	public List<ReviewVO> myreview(String user_id, int page, int pagePerList) {
+		log.info("myreview............" );
+		
+		int totalContnet = rvservice.myreview_cnt(user_id);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 2);
+		log.info(pdto);
+		List<ReviewVO> myreview = rvservice.myreview(user_id,pdto);
+		
+		List rs = new ArrayList();
+		rs.add(myreview);
 		rs.add(pdto);
 		return rs;
 	}
