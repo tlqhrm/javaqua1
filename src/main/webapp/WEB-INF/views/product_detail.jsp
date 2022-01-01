@@ -37,7 +37,7 @@
     <section id="detailmain">
         <div id="detail">
         	<!-- app 열기 -->
-			<div id="app" >
+			<div id="app"  v-cloak>
             <div id="bg1">
          		<div id="bg2" style="text-align:center; display:inline-block;">     
          			<span id="main_img" ><img src="/resources/upload/product/${pvo.file1Arr[0] }" onerror="this.src='/resources/images/이미지준비중.jpg'" style="margin-left:auto; margin-right:auto;"></span>
@@ -93,8 +93,8 @@
                            <td class="info3">3,500원(50,000원 이상 구매 시 무료)</td>
                        </tr>
                        <tr>
-                           <th class="info4">수량</th>
-                           <td class="info4">
+                           <th class="info4" style="border-bottom:0px">수량</th>
+                           <td class="info4" style="border-bottom:0px">
 	                           <span style="display:inline-block; height:27px; position:relative;">
 									<input v-model="수량" type="text" maxlength="3" @change="문자제거(수량)" size="2">
 									<a href="#none" @click="수량업()" id="up" style="position: absolute; left:54px; top:-3px;"><img src="/resources/images/수량업.gif"></a>
@@ -108,7 +108,7 @@
                 <table id="money">
                     <tr>
                        <th class="tmoney">합계금액</th>
-                       <td class="tmoney">{{합계금액|콤마표시}}원</td>
+                       <td v-cloak class="tmoney">{{합계금액|콤마표시}}원</td>
                     </tr>
                 </table>
                 <ul>
@@ -124,7 +124,7 @@
 				<ul class="tab-titles">
 					<li class="li1">상품상세</li>
 					<li class="li2">배송정보</li>
-					<li class="li3">리뷰 ({{페이징정보.totalContent}})</li>
+					<li v-cloak class="li3">리뷰 ({{페이징정보.totalContent}})</li>
 					<li class="li4">문의</li>
 				</ul>
 			</div>
@@ -145,7 +145,7 @@
             
                      
             <!-- 리뷰 구역 -->
-	        <div class="tb_tit" id="target3">리뷰 ({{페이징정보.totalContent}})</div>
+	        <div v-cloak class="tb_tit" id="target3">리뷰 ({{페이징정보.totalContent}})</div>
 	        
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">				
 				<tr height="100" v-for="(item,i) in 리뷰데이터" :key="i">
@@ -197,7 +197,7 @@
 			
 			<!-- qapp 열기 -->
 			<!-- 상품문의 구역 -->
-			<div id="qapp" >
+			<div id="qapp" v-cloak>
 		        <div class="tb_tit" id="target4">
 		        	상품문의
 		        	<span style="float:right">

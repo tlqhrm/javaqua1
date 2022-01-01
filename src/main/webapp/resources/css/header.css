@@ -1,4 +1,6 @@
-
+[v-cloak] {
+    display: none;
+}
 
 html{
     width: 100%;

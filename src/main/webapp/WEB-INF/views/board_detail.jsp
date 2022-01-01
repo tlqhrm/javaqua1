@@ -95,7 +95,7 @@
         </tbody>
     </table>
 </div>  <!--contents-->
-<div class="contents" style="float:right"  id="comments"> 
+<div v-cloak class="contents" style="float:right"  id="comments"> 
 
     <table>
         <tbody>     
@@ -120,44 +120,7 @@
 			<td v-if="('${id}' == item.user_id || ${admin} == 1) && item.status == true" :id="'btn'+index" ><button  @click="updateComment(index, item.re_num , ${bvo.bd_id })">수정</button><button @click="deleteComment(index, item.re_num , ${bvo.bd_id })">삭제</button></td>	
 			<td v-if="('${id}' == item.user_id || ${admin} == 1) && item.status == false" :id="'btn'+index" ><button @click="updateReg(index,item.re_num,item.bd_id)">등록</button><button @click="updateCancle(index)">취소</button></td>
 			
-		</tr>
-
-<!-- <tbody>     
-        
-        <c:if test="${bvo.bd_category2 eq 'contact' }">
-        <tr><td id="comment_count" style="max-width:fit-content; margin-top:5px; border-bottom:0px">댓글(${bvo.reply })</td></tr>
-        <tr style=margin-bottom:50px;>
-        	<td style="max-width:fit-content; margin-top:5px; border-bottom:0px">${id }</td>
-            <td  style="max-width:fit-content; margin-top:5px; border-bottom:0px; width:50px"><textarea required id="input_comment" name = "comment" rows="4" cols = "80" required style="max-width:fit-content; margin-top:5px; resize:none;"></textarea></td>
-            <td style="max-width:fit-content; margin-top:5px; border-bottom:0px; "><button id="regButton" onClick="commentReg(${bvo.bd_id },'${id}')">등록</button></td>
-        </tr>
-       <c:choose>
-			<c:when test="${not empty commentList }">
-				<c:forEach items="${commentList }" var="cl" varStatus="i" begin="0" end="${fn:length(commentList) }" step="1">
-					<tr class="comment">
-						<td>
-							<c:choose>
-								<c:when test="${bvo.user_id eq cl.user_id }">
-									<b>${cl.user_id}<br>(글쓴이)</b>
-								</c:when>
-								<c:otherwise>
-									<b>${cl.user_id }</b>
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td id = "comment${i.index + 1}"><div style="width:570px; word-break:break-all">${cl.writeDate }<br><br><span id = "comment_text${i.index + 1}"style='font-size:17px;'><b>${cl.comment1}</b></span></div></td>
-						<c:choose>
-							<c:when test="${cl.user_id eq id  or admin eq 1}">
-								<td id="btn${i.index + 1}" ><button  onClick="updateComment(${i.index + 1}, ${cl.re_num }, ${bvo.bd_num },'${bvo.bd_category2 }')">수정</button><button onClick="deleteComment(${i.index + 1},${cl.re_num },${bvo.bd_num },'${bvo.bd_category2 }')">삭제</button></td>
-							</c:when>
-						</c:choose>			
-					</tr>
-				</c:forEach>
-			</c:when>
-		</c:choose>  
-		</c:if>
-    </tbody> --> 
-		
+		</tr>		
     </tbody>
 </table>
 </div>

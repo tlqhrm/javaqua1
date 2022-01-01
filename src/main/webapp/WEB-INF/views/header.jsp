@@ -164,18 +164,18 @@
             </div>
         </div>       
     </div>
-	    <div id="recent_div_1"> 
+	    <div id="recent_div_1" > 
 		<h3 style="position:relative; background-color:rgb(244, 244, 244); z-index:2; margin:0px; padding:18.72px 0px 18.72px 0;">최근 본 상품</h3>
-			<div id="recent_div_1-2">
+			<div id="recent_div_1-2" >
 				<div id="recent_div_2" >
 					<ul id="recent_ul" >
 				
-						<li @click="상세페이지(item.pd_num)" v-for="item in cookieArr" class="recent_box_1" >
+						<li  v-cloak @click="상세페이지(item.pd_num)" v-for="item in cookieArr" class="recent_box_1" >
 							<div class="recent_box_2"  :style="{'backgroundImage':'url(/resources/upload/product/'+item.file1+')'}"></div>
-							<div class="recent_title">{{품명(item.title)}}</div>
-							<div v-if="item.price2 == null" class="recent_price2">{{item.price}}원</div>
-							<div v-if="item.price2 != null" class="recent_price">{{item.price}}원</div>
-							<div v-if="item.price2 != null" class="recent_price2">{{item.price2}}원</div>
+							<div  class="recent_title">{{품명(item.title)}}</div>
+							<div  v-if="item.price2 == null" class="recent_price2">{{item.price}}원</div>
+							<div  v-if="item.price2 != null" class="recent_price">{{item.price2}}원</div>
+							<div  v-if="item.price2 != null" class="recent_price2">{{item.price}}원</div>
 						</li>
 					</ul>
 				</div>
