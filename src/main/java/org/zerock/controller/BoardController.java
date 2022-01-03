@@ -137,7 +137,7 @@ public class BoardController {
 		paging = bdService.getPages(cri);
 		model.addAttribute("paging", paging);
 		model.addAttribute("bdList", list);
-		model.addAttribute("cri", cri);
+		model.addAttribute("bdCri", cri);
 
 		return "/board_list.jsp";
 	}

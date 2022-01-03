@@ -38,7 +38,7 @@
 		                 
 			    <div class="contents">
 					<!-- app 열기 -->
-					<div id="app" >
+					<div id="app" v-cloak>
 						<div id="contents">
 							<div class="sub">																											
 								<div class="tb_tit" style="border-bottom:skyblue solid 2px;">
