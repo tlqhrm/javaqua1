@@ -95,6 +95,7 @@ public class QnaController {
 	@PostMapping("/mywrite")
 	public QnaVO mywrite(QnaVO qvo) {
 		log.info("mywrite............" );
+		log.info(qvo );
 		return qnaservice.mywrite(qvo);
 	}
 	

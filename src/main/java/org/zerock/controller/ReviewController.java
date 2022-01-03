@@ -97,7 +97,6 @@ public class ReviewController {
 	@PostMapping("/mywrite")
 	public ReviewVO mywrite(ReviewVO rvo) {
 		log.info("mywrite............" );
-		log.info(rvo);
 		return rvservice.mywrite(rvo);
 	}
 	

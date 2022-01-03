@@ -56,7 +56,7 @@
 											<span style="white-space: pre-line;">{{item.content}}</span>
 										</td>
 										<td width="200">{{item.writedate.substr(0,10)}}</td>
-										<td width="100" style="color:blue"><span style="cursor:pointer" @click="문의수정새창(item.pd_num)">수정</span> &nbsp;&nbsp;&nbsp;
+										<td width="100" style="color:blue"><span style="cursor:pointer" @click="문의수정새창(item.pd_num,item.qna_num)">수정</span> &nbsp;&nbsp;&nbsp;
 											<span style="cursor:pointer" @click="문의삭제(item.qna_num)">삭제</span>
 										</td>
 									</tr>
@@ -170,7 +170,7 @@
 			             params.append('pagePerList', this.pagePerList);
 			           
 			             axios.post('/qna/myqna',params)
-			             .then(res=>{
+			             .then(res=>{			       
 			             	this.문의데이터 = res.data[0];
 			             	this.페이징정보 = res.data[1];                   	
 			             })
@@ -179,8 +179,8 @@
 			              	console.log(err);
 			             });
 					},
-					문의수정새창(pd_num){
-						window.open("/qna/qna_modify?pd_num="+pd_num ,"open" ,"height=750 , width=1100");
+					문의수정새창(pd_num,qna_num){
+						window.open("/qna/qna_modify?pd_num="+pd_num+"&qna_num="+qna_num ,"open" ,"height=750 , width=1100");
 					},
 					문의삭제(qna_num){
 						 const params = new URLSearchParams();
