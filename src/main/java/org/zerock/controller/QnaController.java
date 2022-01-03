@@ -124,6 +124,8 @@ public class QnaController {
 		log.info(pdto);
 		List<QnaVO> myqna = qnaservice.myqna(user_id,pdto);
 		
+		log.info(myqna);
+		
 		List rs = new ArrayList();
 		rs.add(myqna);
 		rs.add(pdto);

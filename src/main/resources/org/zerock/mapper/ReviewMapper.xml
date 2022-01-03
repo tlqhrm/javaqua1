@@ -7,11 +7,11 @@
 	 	values(REVIEW_SEQ.NEXTVAL,#{pd_num},#{user_id}, #{content})
 	</insert>
 	<update id="modify">
-		update review set content=#{content} where pd_num=#{pd_num} and user_id=#{user_id}
+		update review set content=#{content} where rv_num=#{rv_num} and user_id=#{user_id}
 	</update>
 	
 	<delete id="delete">
-		delete review where pd_num=#{pd_num} and user_id=#{user_id}
+		delete review where rv_num=#{rv_num} and user_id=#{user_id}
 	</delete>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
@@ -29,6 +29,8 @@
 	<select id="myreview" resultType="org.zerock.domain.ReviewVO">	
 		<![CDATA[ SELECT * FROM ( 
 	        SELECT A.*, 
+	        	(select title from product where pd_num = A.pd_num ) title,
+                (select file1 from product where pd_num = A.pd_num ) file1,
 	        ROWNUM AS RNUM FROM (
 	            SELECT * FROM review WHERE user_id=#{user_id} order by writedate desc
 	        ) A

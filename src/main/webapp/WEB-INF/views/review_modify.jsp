@@ -19,7 +19,7 @@
 <div id="app" >
    <div id="wrap">
 	   <div class="container">
-	       <h3 class="tit">리뷰작성 </h3>
+	       <h3 class="tit">리뷰수정 </h3>
 	       <form>  
 	           <table class="tbl_comm">
 	               <tbody>
@@ -38,7 +38,7 @@
 	               </tbody>
 	           </table>
 	        <div style="text-align: center; margin-top: 30px;">
-	           	<button type="button" class="btn" @click="리뷰수정(${param.pd_num})">수정하기</button>
+	           	<button type="button" class="btn" @click="리뷰수정()">수정하기</button>
 	        </div> 
 	       </form>	    	
 	   </div>
@@ -81,11 +81,11 @@
 	              	console.log(err);
 	             });
 			},
-			리뷰수정(pd_num){
+			리뷰수정(){
 				if(!this.상세리뷰){alert("내용을 입력해주세요");return;}
 	             const params = new URLSearchParams();
 	             params.append('user_id', "${id}");
-	             params.append('pd_num', pd_num);
+	             params.append('rv_num', this.리뷰데이터.rv_num);
 	             params.append('content', this.상세리뷰);
 	                 
 	             axios.post('/review/modify',params)
@@ -93,7 +93,7 @@
 	            	 if(res.data==200){	                	  
 	            		 alert("수정되었습니다.");
 	            		 window.close();
-	            		 window.opener.location.href="/order/order_list";
+	            		 window.opener.location.href="/review/review_list";
 	            	 }else{
 	            		 alert("오류가 발생했습니다");
 	            	 }

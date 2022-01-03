@@ -19,7 +19,7 @@
 <div id="app" >
    <div id="wrap">
 	   <div class="container">
-	       <h3 class="tit">상품문의 </h3>
+	       <h3 class="tit">상품문의수정 </h3>
 	       <form>  
 	           <table class="tbl_comm">
 	               <tbody>
@@ -44,7 +44,7 @@
 	               </tbody>
 	           </table>
 	        <div style="text-align: center; margin-top: 30px;">
-	           	<button type="button" class="btn" @click="문의수정(${param.pd_num})">수정하기</button>
+	           	<button type="button" class="btn" @click="문의수정()">수정하기</button>
 	        </div> 
 	       </form>	    	
 	   </div>
@@ -62,7 +62,7 @@
 				qna_num : 0,
 				pd_num : 0,
 				user_id : "",
-				title : "",
+				subject : "",
 				content : "",
 				status : "",
 				reply : "",
@@ -81,10 +81,10 @@
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', ${param.pd_num});
 	                 
-	             axios.post('/qna/myqna',params)
+	             axios.post('/qna/mywrite',params)
 	             .then(res=>{      
           			this.문의데이터 = res.data;
-          			this.제목 = this.문의데이터.title;
+          			this.제목 = this.문의데이터.subject;
           			this.내용 = this.문의데이터.content;
 	             })
 	             .catch(err=>{
@@ -92,13 +92,13 @@
 	              	console.log(err);
 	             });
 			},
-			문의수정(pd_num){
+			문의수정(){
 	             const params = new URLSearchParams();
 				if(!this.제목){alert("제목을 입력해주세요");return;}
 				if(!this.내용){alert("내용을 입력해주세요");return;}
 	             params.append('user_id', "${id}");
-	             params.append('pd_num', pd_num);
-	             params.append('title', this.제목);
+	             params.append('qna_num', this.문의데이터.qna_num);
+	             params.append('subject', this.제목);
 	             params.append('content', this.내용);
 	                 
 	             axios.post('/qna/modify',params)
@@ -106,7 +106,7 @@
 	            	 if(res.data==200){	                	  
 	            		 alert("수정되었습니다.");
 	            		 window.close();
-	            		 window.opener.location.href="/product/productDetail?pd_num="+pd_num;
+	            		 window.opener.location.href="/qna/qna_list";
 	            	 }else{
 	            		 alert("오류가 발생했습니다");
 	            	 }

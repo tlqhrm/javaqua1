@@ -9,4 +9,6 @@ public class ReviewVO {
 	private String user_id;
 	private String content;
 	private String writedate;
+	private String title;
+	private String file1;
 }
