@@ -49,7 +49,7 @@
 									<tr height="100" v-for="(item,i) in 리뷰데이터" :key="i">
 										<td width="100">{{item.user_id}}</td>
 										<td class="txtb" width="800"><span style="white-space: pre-line;">{{item.content}}</span></td>
-										<td width="200">{{item.writedate}}</td>
+										<td width="150">{{item.writedate.substr(0,10)}}</td>
 									</tr>
 								</table>    
 								

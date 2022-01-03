@@ -53,7 +53,7 @@
 	                        <ul>
 	                            <li><a href="/order/order_list">주문내역</a></li>
 	                            <li><a href="/review/review_list">리뷰내역</a></li>
-	                            <li><a href="/qna/qna_list">Q&A내역</a></li>
+	                            <li><a href="/qna/qna_list">상품문의내역</a></li>
 	                            <li><a href="/member/passwordCheckForm">개인정보 수정</a></li>
 	                        </ul>
 	                    </li>
