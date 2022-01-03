@@ -127,6 +127,8 @@ public class ReviewController {
 		log.info(pdto);
 		List<ReviewVO> myreview = rvservice.myreview(user_id,pdto);
 		
+		log.info(myreview);
+		
 		List rs = new ArrayList();
 		rs.add(myreview);
 		rs.add(pdto);

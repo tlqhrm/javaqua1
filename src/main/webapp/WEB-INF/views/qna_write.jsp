@@ -72,7 +72,7 @@
 				if(!this.내용){alert("내용을 입력해주세요");return;}
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', pd_num);
-	             params.append('title', this.제목);
+	             params.append('subject', this.제목);
 	             params.append('content', this.내용);
 	                 
 	             axios.post('/qna/write',params)

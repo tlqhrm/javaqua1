@@ -191,7 +191,7 @@ const qna = new Vue({
 			qna_num : 0,
 			pd_num : 0,
 			user_id : "",
-			title : "",
+			subject : "",
 			content : "",
 			status : "",
 			reply : "",
@@ -225,7 +225,7 @@ const qna = new Vue({
 	},
 	methods : {
 		문의하기새창(pd_num){
-			window.open("/qna/qna_write?pd_num="+pd_num,width=100,height=200);
+			window.open("/qna/qna_write?pd_num="+pd_num,"open","height=750 , width=1100");
 		},
 		문의데이터가져오기 : function(){
 			 const params = new URLSearchParams();

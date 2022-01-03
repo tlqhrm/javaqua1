@@ -21,7 +21,7 @@
 	</head>
 
 	<body>
-		<!-- 헤더 -->
+		<!-- 헤더 -->'
 		<%@include file="header.jsp"%>
 			
 		<div id="wrap">
@@ -47,9 +47,15 @@
 						        
 								<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">				
 									<tr height="100" v-for="(item,i) in 리뷰데이터" :key="i">
-										<td width="100">{{item.user_id}}</td>
+										<td width="100">
+											<img width="80;" :src="'/resources/upload/product/'+item.file1.split(';')[0]"/><br>
+											{{item.title}}
+										</td>
 										<td class="txtb" width="800"><span style="white-space: pre-line;">{{item.content}}</span></td>
-										<td width="200">{{item.writedate}}</td>
+										<td width="130">{{item.writedate.substr(0,10)}}</td>
+										<td width="100" style="color:blue"><span style="cursor:pointer" @click="리뷰수정새창(item.pd_num)">수정</span> &nbsp;&nbsp;&nbsp;
+											<span style="cursor:pointer" @click="리뷰삭제(item.rv_num)">삭제</span>
+										</td>
 									</tr>
 								</table>    
 								
@@ -112,7 +118,9 @@
 						pd_num : 0,
 						user_id : "",
 						content : "",
-						writedate : ""	
+						writedate : "",
+						title : "",
+						file1 : ""
 					}],
 					페이징정보 : {
 						endPage:0,
@@ -144,13 +152,35 @@
 					리뷰데이터가져오기 : function(){
 						 const params = new URLSearchParams();
 			             params.append('user_id', '${id}');
-			             params.append('page', this.현재페이지);      
+			             params.append('page', this.현재페이지);  
 			             params.append('pagePerList', this.pagePerList);
 			           
 			             axios.post('/review/myreview',params)
 			             .then(res=>{
 			             	this.리뷰데이터 = res.data[0];
-			             	this.페이징정보 = res.data[1];                   	
+			             	this.페이징정보 = res.data[1];    
+			             })
+			             .catch(err=>{
+			            	alert("오류가 발생했습니다.");
+			              	console.log(err);
+			             });
+					},
+					리뷰수정새창(pd_num){
+						window.open("/review/review_modify?pd_num="+pd_num ,"open" ,"height=750 , width=1100");
+					},
+					리뷰삭제(rv_num){
+						 const params = new URLSearchParams();
+			             params.append('user_id', '${id}');
+			             params.append('rv_num', rv_num);  
+			           
+			             axios.post('/review/delete',params)
+			             .then(res=>{
+			          		if(res.data==200){
+			          			alert("삭제 했습니다.");
+			          			this.리뷰데이터가져오기();
+			          		}else{
+			          			alert("오류가 발생했습니다!");
+			          		}
 			             })
 			             .catch(err=>{
 			            	alert("오류가 발생했습니다.");

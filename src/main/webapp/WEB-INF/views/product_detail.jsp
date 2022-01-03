@@ -210,7 +210,7 @@
 						<td width="40">질문</td>
 						<td width="100">{{item.user_id}}</td>
 						<td class="txtb" width="800px">
-							<span style="white-space: pre-line;">{{item.title}}</span><br><br>
+							<span style="white-space: pre-line;">{{item.subject}}</span><br><br>
 							<span style="white-space: pre-line;">{{item.content}}</span>
 						</td>
 						<td>{{item.writedate}}</td>

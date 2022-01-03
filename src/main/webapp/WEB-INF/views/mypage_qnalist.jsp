@@ -47,13 +47,18 @@
 						        
 						        <table style="border-top:none;" width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table" v-for="(item,i) in 문의데이터" :key="i">				
 									<tr height="100">
-										<td width="40">질문</td>
-										<td width="100">{{item.user_id}}</td>
+										<td width="100">
+											<img width="80;" :src="'/resources/upload/product/'+item.file1.split(';')[0]"/><br>
+											{{item.title}}
+										</td>
 										<td class="txtb" width="800px">
-											<span style="white-space: pre-line;">{{item.title}}</span><br><br>
+											<span style="white-space: pre-line;">{{item.subject}}</span><br><br>
 											<span style="white-space: pre-line;">{{item.content}}</span>
 										</td>
-										<td width="200">{{item.writedate}}</td>
+										<td width="200">{{item.writedate.substr(0,10)}}</td>
+										<td width="100" style="color:blue"><span style="cursor:pointer" @click="문의수정새창(item.pd_num)">수정</span> &nbsp;&nbsp;&nbsp;
+											<span style="cursor:pointer" @click="문의삭제(item.qna_num)">삭제</span>
+										</td>
 									</tr>
 									<tr v-if="item.status=='답변완료'" class="replytr" height="100">
 										<td class="fontred">└ &nbsp;답변</td>
@@ -61,7 +66,7 @@
 										<td class="txtb replytd" width="800px">
 											<span style="white-space: pre-line;">{{item.reply}}</span>
 										</td>
-										<td width="200">{{item.writedate}}</td>
+										<td width="130">{{item.writedate.substr(0,10)}}</td>
 									</tr>
 								</table> 
 								
@@ -123,11 +128,13 @@
 						qna_num : 0,
 						pd_num : 0,
 						user_id : "",
-						title : "",
+						subject : "",
 						content : "",
 						status : "",
 						reply : "",
-						writedate : ""	
+						writedate : "",
+						title : "",
+						file1 : ""
 					}],
 					페이징정보 : {
 						endPage:0,
@@ -166,6 +173,28 @@
 			             .then(res=>{
 			             	this.문의데이터 = res.data[0];
 			             	this.페이징정보 = res.data[1];                   	
+			             })
+			             .catch(err=>{
+			            	alert("오류가 발생했습니다.");
+			              	console.log(err);
+			             });
+					},
+					문의수정새창(pd_num){
+						window.open("/qna/qna_modify?pd_num="+pd_num ,"open" ,"height=750 , width=1100");
+					},
+					문의삭제(qna_num){
+						 const params = new URLSearchParams();
+			             params.append('user_id', '${id}');
+			             params.append('qna_num', qna_num);  
+			           
+			             axios.post('/qna/delete',params)
+			             .then(res=>{
+			          		if(res.data==200){
+			          			alert("삭제 했습니다.");
+			          			this.문의데이터가져오기();
+			          		}else{
+			          			alert("오류가 발생했습니다!");
+			          		}
 			             })
 			             .catch(err=>{
 			            	alert("오류가 발생했습니다.");
