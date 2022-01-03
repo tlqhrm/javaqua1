@@ -45,6 +45,18 @@ const v_pdList = new Vue({
             	alert("오류가 발생했습니다.");
               	console.log(err);
              });				
+		},
+		오버 : function(index){
+			this.$refs.span1[index].style.visibility = "visible";
+			this.$refs.span2[index].style.visibility = "visible";
+			this.$refs.span3[index].style.visibility = "visible";
+			this.$refs.img[index].style.transform = "scale(1.1)";
+		},
+		아웃 : function(index){
+			this.$refs.span1[index].style.visibility = "hidden";
+			this.$refs.span2[index].style.visibility = "hidden";
+			this.$refs.span3[index].style.visibility = "hidden";
+			this.$refs.img[index].style.transform = "scale(1.0)";
 		}
 		
 	}

@@ -77,12 +77,12 @@ $(function(){
     $(function(){            
     $('.cut').mouseover(function(){
         $(this).find('img').css('transform','scale(1.1)');
-        $(this).find('.md span').css('visibility', 'visible');
+ //       $(this).find('.md span').css('visibility', 'visible');
         });
         
     $('.cut').mouseout(function(){          
         $(this).find('img').css('transform','scale(1.0)');
-        $(this).find('.md span').css('visibility', 'hidden');
+  //      $(this).find('.md span').css('visibility', 'hidden');
         });
     $('.cut').hover(function(){
         $(this).find('.under a').css('opacity','1');

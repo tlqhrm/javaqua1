@@ -172,12 +172,12 @@
                 <div class="bx-wrapper" style="margin-bottom: 120px;">
                     <div class="bx-viewport">                    
                         <ul class="list" id="list_md" style="width: 1050px; position:relative; list-style: none; margin: auto; float: left; padding: 0px; height: 550px;">
-                            <li v-for="item in pdListMd" class="cut">
+                            <li v-for="(item,index) in pdListMd" @mouseover="오버(index)" @mouseout="아웃(index)" class="cut">
                             	<a class="md" :href="'/product/productDetail?pd_num='+item.pd_num">
-									<span></span>
-                            		<span style="top:65px;">{{item.title}}</span>
-                            		<span style="top:165px;">{{item.strPrice}}원</span>
-                            	 	<img :src="'/resources/upload/product/'+item.file1Arr[0]">
+									<span ref="span1" class="mdFirSpan" style="visibility:hidden"></span>
+                            		<span ref="span2" style="top:65px; visibility:hidden">{{item.title}}</span>
+                            		<span ref="span3" style="top:165px; visibility:hidden">{{item.strPrice}}원</span>
+                            	 	<img ref="img" :src="'/resources/upload/product/'+item.file1Arr[0]">
 
                             	</a>
                             </li>  
