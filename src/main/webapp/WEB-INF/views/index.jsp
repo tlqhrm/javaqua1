@@ -176,8 +176,8 @@
                             	<a class="md" :href="'/product/productDetail?pd_num='+item.pd_num">
 									<span></span>
                             		<span style="top:65px;">{{item.title}}</span>
-                            		<span v-if="item.discount == 0" style="top:165px;">{{item.strPrice}}원</span>
-                            	 	<span v-else style="top:140px;">{{item.strPrice2}}원</span><img :src="'/resources/upload/product/'+item.file1Arr[0]">
+                            		<span style="top:165px;">{{item.strPrice}}원</span>
+                            	 	<img :src="'/resources/upload/product/'+item.file1Arr[0]">
 
                             	</a>
                             </li>  
