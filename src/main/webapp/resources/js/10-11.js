@@ -17,6 +17,9 @@ var price1 = document.getElementsByClassName("p_price1");
 
 const v=new Vue({
     el : "#app",
+    data : {
+    	cehckbox : []
+    },
 	methods : {
 		주문하기: function(){	
 			location.href="/cart/cart_order";						

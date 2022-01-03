@@ -279,7 +279,7 @@
 	let title = "${pvo.title}";
 	let price = "${pvo.price}";
 	let file1 = "${pvo.file1}".split(";")[0];
-	let stock = "${pvo.stock}";
+	let stock = ${pvo.stock};
 	
 //	$(".prev_img").on("mouseover",function(){
 //		$("#main_img img").attr("src",$(this).children("img").attr("src"));

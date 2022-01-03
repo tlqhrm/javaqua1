@@ -71,7 +71,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id}')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -109,7 +109,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-										<a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+										<a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id}')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -215,7 +215,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id }')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -252,7 +252,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id}')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
