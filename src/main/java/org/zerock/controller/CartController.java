@@ -54,9 +54,7 @@ public class CartController {
 		
 		List<CartVO> list = cartService.cart_list(user_id);
 		
-		String result = new Gson().toJson(list);
 		model.addAttribute("cartList", list);
-		model.addAttribute("cartList1", result);
 		return "/basket.jsp";
 	}
 	
