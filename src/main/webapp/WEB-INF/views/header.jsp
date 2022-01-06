@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>      
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!-- 자바스크립트 쿠키 cdn -->
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
@@ -29,8 +30,7 @@
                     <a href="#none">※ <span class="red">생물 </span>배송안내 > ※</a>
                 </div>
                 &nbsp;&nbsp;&nbsp; github : <a href="https://github.com/tlqhrm/javaqua1.git" style="color:rgb(3, 140, 232)">github.com/tlqhrm/javaqua1.git</a>
-                <c:choose>
-                <c:when test="${name == null}">
+                <sec:authorize access="isAnonymous()">
 	                <ul id='join_login'>
 	                    <li class="no_mypage"><a href='/member/joinForm' class="right_border red">회원가입</a></li>
 	                    <li class="no_mypage"><a href='/member/login' class="right_border">로그인</a></li>       
@@ -43,11 +43,15 @@
 		                    </ul>
 	                    </li>
 	                </ul>
-                </c:when>
-                <c:otherwise>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
 	                <ul id='join_login'>
-	                <li class="no_mypage"><a href='/member/logout' class="right_border">로그아웃</a></li>
-	                    <li id="mypage"><a href="/order/order_list" class="right_border blue">${name } 님&nbsp;&nbsp;</a><span id="un1"></span>
+	                <li class="no_mypage">
+	                	<form action="/member/logout" method='post' id="frm">
+							<input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>
+							<span class="right_border" onClick="document.getElementById('frm').submit()" style="cursor:pointer">로그아웃</span>
+						</form></li>
+	                    <li id="mypage"><a href="/order/order_list" class="right_border blue"><sec:authentication property="principal.member.name" /> 님&nbsp;&nbsp;</a><span id="un1"></span>
 	                        <ul>
 	                            <li><a href="/order/order_list">주문내역</a></li>
 	                            <li><a href="/review/review_list">리뷰내역</a></li>
@@ -65,8 +69,8 @@
 		                    </ul>
 	                    </li>
 	                </ul>
-                </c:otherwise>
-                </c:choose>
+                </sec:authorize>
+               
             </div>
             <div id="notice">
                 <div class="title">

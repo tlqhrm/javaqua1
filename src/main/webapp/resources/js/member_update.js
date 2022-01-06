@@ -148,6 +148,9 @@ $('input[name=user_email]').focusout(function(){
 		type:'post',
 		url:'/member/emailCheck',
 		datatype:'text',
+		beforeSend: function(xhr){
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+		},
 		data:{email:email,
 			  user_id:user_id},
 		success: function(data){

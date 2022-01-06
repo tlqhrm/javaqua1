@@ -24,7 +24,7 @@
 		<%@include file="header.jsp"%>
 		
 		<!-- app 열기 -->
-		<div id="app" v-clock>
+		<div id="app" v-cloak>
 		
 
 		<!-- Contents -->
@@ -98,6 +98,11 @@
 		<script>
 			let id="${id}";	
 			let total="${total}";
+			var config = {
+					headers:{
+						"${_csrf.headerName}":"${_csrf.token}"
+					}	
+			}
 		</script>
 		<script src="/resources/js/cart_order.js"></script>
 	</body>

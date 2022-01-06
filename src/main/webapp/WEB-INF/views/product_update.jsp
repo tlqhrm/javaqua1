@@ -49,6 +49,7 @@
                 <div id="name">
                 <div style="height:33px;"></div>
                     <form id="form1" action = "JavaquaServlet" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     
                     <input type="hidden" name="command" value="product_update">
                     <input type="hidden" name="pd_num" value="${pvo.pd_num }">
@@ -166,6 +167,9 @@ var index=document.getElementsByClassName("controll_div").length;
 var price = document.querySelector("#tmain > table > tbody > tr.info > td > input[type=text]:nth-child(1)");
 var discount = document.querySelector("#tmain > table > tbody > tr.info > td > input[type=text]:nth-child(2)");
 var price2 = document.querySelector("#tmain > table > tbody > tr.info > td > span > span");
+
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
 
 function guid() {
 	  function _s4() {
@@ -432,6 +436,9 @@ function submitAction(){
 		cache : false,
 		contentType : false,
 		processData : false,
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+		},
 		dataType: "text",
 		success : function(data){
 			location.href = "/product/productDetail?pd_num="+data;

@@ -37,7 +37,7 @@
                 <div id="name">
      				<div style="height:33px;"></div>
                     <form id="form1" action = "/product/productRegist" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
-                    
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <input type="hidden" name="command" value="product_regist">
                     <input type="hidden" name="file_names1" id="file_names1" value="">
                     <input type="hidden" name="index" id="index" value="">
@@ -141,6 +141,9 @@ var content_box = document.getElementById("content_box");
 var content_box2 = document.getElementById("content_box2");
 var files = document.getElementById("files");
 var index=0;
+
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
 
 function guid() {
 	  function _s4() {
@@ -376,6 +379,9 @@ function submitAction(){
 		data : formData,
 		cache : false,
 		contentType : false,
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+		},
 		processData : false,
 		dataType: "text",
 		success : function(data){

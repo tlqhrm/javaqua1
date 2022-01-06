@@ -8,9 +8,14 @@
 	
 	</select> -->	
 	<insert id="insert">	
-		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_address2, user_phone, admin)
-		 		values(member_seq.nextval, #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone}, '0')]]>
+		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_address2, user_phone)
+		 		values(member_seq.nextval, #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone})]]>
 	</insert>
+	<insert id="insertAuth">
+		insert into member_auth(user_id, auth) values(#{user_id}, #{auth})
+	</insert>
+	
+	
 	
 	<select id="get" resultType="org.zerock.domain.MemberVO">
 		<![CDATA[select name,admin from member where user_id = #{user_id} and user_pw = #{user_pw}]]>
@@ -33,7 +38,7 @@
 		select * from member where user_id = #{user_id}	
 	</select>
 	<select id="passwordCheck" resultType="org.zerock.domain.MemberVO">
-		select * from member where user_id = #{user_id}	and user_pw = #{user_pw}
+		select * from member where user_id = #{user_id}
 	</select>
 	<update id="updateMember">
 		update member set user_pw= #{user_pw}, user_email=#{user_email}, user_address=#{user_address}, user_address2=#{user_address2},
@@ -59,5 +64,25 @@
 	</delete>
 	
 	 -->
-	
+	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+    <id property="user_id" column="user_id"/>
+    <result property="user_id" column="user_id"/>
+    <result property="user_pw" column="user_pw"/>
+    <result property="name" column="name"/>
+    <collection property="authList" resultMap="authMap">
+    </collection> 
+  </resultMap>
+  
+  <resultMap type="org.zerock.domain.AuthVO" id="authMap">
+    <result property="user_id" column="user_id"/>
+    <result property="auth" column="auth"/>
+  </resultMap>
+  
+  <select id="read" resultMap="memberMap">
+		SELECT 
+		  mem.user_id,  user_pw, name, auth
+		FROM 
+		  member mem LEFT OUTER JOIN member_auth auth on mem.user_id = auth.user_id 
+		WHERE mem.user_id = #{user_id} 
+  </select>
 </mapper>

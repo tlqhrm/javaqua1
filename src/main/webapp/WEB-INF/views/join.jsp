@@ -16,14 +16,7 @@
 	
 	
     </head>
-	
-	<c:choose>
-		<c:when test="${not empty id }">
-			<script>history.go(-1)</script>
-		</c:when>
-		<c:otherwise>
 
-	
     <body>
         <!---header-->
         <jsp:include page="header.jsp"></jsp:include>
@@ -33,6 +26,8 @@
             <div class="container">
                 <h3 class="tit">회원가입</h3>
                 <form name="fmData" method="post" action="/member/join">  
+                
+					
                     <table class="tbl_comm">
                         <tbody>
                             <tr>
@@ -125,6 +120,8 @@
                 <div style="text-align: center; margin-top: 30px;">
                     <button type="button" class="btn_join" onclick="frm_check()">가입하기</button>
                 </div> 
+                <input type="hidden" name="${_csrf.parameterName}"
+					    		value="${_csrf.token}" />
                 </form>
              
             </div>
@@ -136,12 +133,12 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
        		<script src="/resources/js/join.js"></script>
         	<script src="/resources/js/header.js"></script>
-		<script>
-		</script>
 
-     	<script src="/resources/js/join.js"></script> 
      	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+     	<script>
+     	var csrfHeaderName = "${_csrf.headerName}";
+     	var csrfTokenValue = "${_csrf.token}";
+     	</script>
     </body>
-    		</c:otherwise>
-	</c:choose>
+
 </html>

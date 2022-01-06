@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,12 +47,14 @@ public class CartController {
 	public String cart_list(HttpServletRequest request, Model model) {
 		log.info("controller............ ");		
 		
-		HttpSession Session = request.getSession();
-		String user_id = (String) Session.getAttribute("id");
+		HttpSession session = request.getSession();
 		
-		if(user_id == null) {
-			return "/login.jsp";	
-		}
+
+		String user_id = (String) session.getAttribute("id");
+		
+//		if(user_id == null) {
+//			return "/login.jsp";	
+//		}
 		
 		List<CartVO> list = cartService.cart_list(user_id);
 		
@@ -61,13 +65,14 @@ public class CartController {
 	}
 	
 	@GetMapping("/cart_order")
-	public String cart_order(@SessionAttribute("id") String user_id , Model model) {
+	public String cart_order(HttpServletRequest request , Model model) {
 		log.info("cart_order............" );
+		String user_id = request.getRemoteUser();
 		List<CartVO> list = cartService.cart_list(user_id);
 		model.addAttribute("cartList", list);
 		return "/cart_order.jsp";
 	}
-	
+	 
 	@ResponseBody
 	@PostMapping("/cart_modify")
 	public String cart_modify(int cart_num, String mode , String user_id) {

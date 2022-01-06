@@ -17,12 +17,6 @@
 	
     </head>
 	
-	<c:choose>
-		<c:when test="${empty id }">
-			<script>history.go(-1)</script>
-		</c:when>
-		<c:otherwise>
-
 	
     <body>
         <!---header-->
@@ -32,8 +26,11 @@
     <div id="login" style="height: 300px; margin-top:100px">
         <h3 >회원정보 확인</h3>
         <form method="post" action="/member/passwordCheck">
+        
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         	<input type="text" name="user_id" placeholder="아이디" id="input_id" value="${id}" readonly><br>
             <input type="password" name="user_pw" placeholder="비밀번호" id="input_password"><br>     
+            <div>${errorMsg }</div>
             <a href="로그인 버튼"><button type="submit" name="login" class="button"><span class="font_box"><b>확인</b></span></button></a><br>
         </form>
         
@@ -51,6 +48,5 @@
      	<script src="/resources/js/member_update.js"></script> 
      	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </body>
-    		</c:otherwise>
-	</c:choose>
+
 </html>

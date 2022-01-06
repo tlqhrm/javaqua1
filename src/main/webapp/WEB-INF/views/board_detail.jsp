@@ -185,6 +185,9 @@
 <script>
 
 
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+
 var v_comments = new Vue({
 	el:'#comments',
 	data:{
@@ -208,6 +211,9 @@ var v_comments = new Vue({
 					type:'post',
 					url:'/reply/getReplyList',
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					beforeSend: function(xhr){
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+					},
 					async : false,
 					datatype:'text',
 					data:{
@@ -250,6 +256,9 @@ var v_comments = new Vue({
 				type:'post',
 				url:'/reply/insertReply',
 				datatype:'text',
+				beforeSend: function(xhr){
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+				},
 				async : false,
 				data:{
 					  bd_id : bd_id,
@@ -307,6 +316,9 @@ var v_comments = new Vue({
 				type:'post',
 				url:'/reply/updateReply',
 				datatype:'text',
+				beforeSend: function(xhr){
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+				},
 				async : false,
 				data:{re_num : re_num,
 					  comment1 : comment,
@@ -339,6 +351,9 @@ var v_comments = new Vue({
 					type:'post',
 					url:'/reply/deleteReply',
 					datatype:'text',
+					beforeSend: function(xhr){
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+					},
 					data:{re_num : re_num,
 						  bd_id : bd_id},
 					success: function(data){

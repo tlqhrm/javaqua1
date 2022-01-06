@@ -12,20 +12,7 @@
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
-<c:choose>
-	<c:when test="${empty id and bvo.bd_category2 eq 'contact' }">
-		<script>
-		alert("접근권한이 없습니다.");
-		location.href="/";
-		</script>
-	</c:when>
-	<c:when test="${admin ne 1 and bvo.bd_category2 ne 'contact' }">
-		<script>
-		alert("접근권한이 없습니다1.");
-		location.href="/";
-		</script>
-	</c:when>
-	<c:otherwise>
+
 <body>
 
      <!---header-->
@@ -62,11 +49,13 @@
  
 
 
-<form action = "/board/boardWrite" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form action = "/board/boardWrite?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
 	<input type="hidden" name="group_num" value="${bvo.group_num }">
 	<input type="hidden" name="step" value="${bvo.step }">
 	<input type="hidden" name="indent" value="${bvo.indent }">
+	<input type="hidden" name="${_csrf.parameterName}"
+    		value="${_csrf.token}" />
 <table id = "write_form">
     <tbody>
         <tr> 
@@ -129,7 +118,6 @@
 </div>  <!--wrap -->
 
 <jsp:include page="footer.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+
 </body>
 </html>

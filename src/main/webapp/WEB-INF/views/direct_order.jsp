@@ -101,7 +101,12 @@
 			let pd_num="${param.pd_num}";
 			let title="${param.title}";
 			let price="${param.price}";
-			let amount="${param.amount}";		
+			let amount="${param.amount}";	
+			var config = {
+					headers:{
+						"${_csrf.headerName}":"${_csrf.token}"
+					}	
+			}
 		</script>
 		<script src="/resources/js/direct_order.js"></script>
 		

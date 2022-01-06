@@ -21,6 +21,7 @@
 	   <div class="container">
 	       <h3 class="tit">상품문의 </h3>
 	       <form>  
+	       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	           <table class="tbl_comm">
 	               <tbody>
 	                   <tr>
@@ -53,6 +54,11 @@
 <!-- app 닫기 -->	
 
 <script>
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 	const v=new Vue({
 	    el : "#app",
 	    data : {	
@@ -81,7 +87,7 @@
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', ${param.pd_num});
 	                 
-	             axios.post('/qna/myqna',params)
+	             axios.post('/qna/myqna',params, config)
 	             .then(res=>{      
           			this.문의데이터 = res.data;
           			this.제목 = this.문의데이터.title;
@@ -101,7 +107,7 @@
 	             params.append('title', this.제목);
 	             params.append('content', this.내용);
 	                 
-	             axios.post('/qna/modify',params)
+	             axios.post('/qna/modify',params,config )
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
 	            		 alert("수정되었습니다.");

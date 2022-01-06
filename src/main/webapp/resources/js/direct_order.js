@@ -29,7 +29,7 @@ const v=new Vue({
              const params = new URLSearchParams();
              params.append('user_id', id);
            
-             axios.post('/member/selectMember',params)
+             axios.post('/member/selectMember',params, config)
              .then(res=>{
             	this.회원정보 = res.data;
              })
@@ -47,7 +47,7 @@ const v=new Vue({
              params.append('totalprice', this.최종결제금액);
              params.append('title', title);
            
-             axios.post('/order/directOrder',params)
+             axios.post('/order/directOrder',params, config)
              .then(res=>{
             	 if(res.data==1){	                	  
             		window.location.href="/order/order_ok";

@@ -68,7 +68,7 @@
 
 		                        <div class="subdiv" >
 		                        	<div style="line-height:73px">
-		                        	<input type="checkbox" v-model="checkbox" style="zoom:1.7;" name="cart_num" value="${cart.cart_num }" checked>
+		                        	<input ref="check" @change="change()" type="checkbox" v-model="checkbox" style="zoom:1.7" name="cart_num" value="${cart.cart_num }" :checked="true">
 		                        	</div>
 		                            <div class="img" ><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
 		                            <div class="pname" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
@@ -118,6 +118,11 @@
 		<script>
 		let id = '${id }';
 		var totalPrice = ${total};
+		var config = {
+				headers:{
+					"${_csrf.headerName}":"${_csrf.token}"
+				}	
+		}
 		</script>
 		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 
