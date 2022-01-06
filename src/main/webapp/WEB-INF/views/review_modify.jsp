@@ -60,6 +60,7 @@
 			},
 		},	
 		created : function(){
+			alert("w")
 			this.등록리뷰정보();		
 		},	
 		computed : {

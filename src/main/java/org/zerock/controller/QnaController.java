@@ -95,6 +95,7 @@ public class QnaController {
 	@PostMapping("/mywrite")
 	public QnaVO mywrite(QnaVO qvo) {
 		log.info("mywrite............" );
+		log.info(qvo );
 		return qnaservice.mywrite(qvo);
 	}
 	
@@ -104,7 +105,7 @@ public class QnaController {
 		log.info("qna_list............" );
 		
 		int totalContnet = qnaservice.qna_cnt(pd_num);
-		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 2);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		log.info(pdto);
 		List<QnaVO> qnalist = qnaservice.qna_list(pd_num,pdto);
 		
@@ -120,7 +121,7 @@ public class QnaController {
 		log.info("myqna............" );
 		
 		int totalContnet = qnaservice.myqna_cnt(user_id);
-		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 2);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		log.info(pdto);
 		List<QnaVO> myqna = qnaservice.myqna(user_id,pdto);
 		

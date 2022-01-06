@@ -78,11 +78,13 @@
 		methods : {
 			내문의정보(){
 				 const params = new URLSearchParams();
+				 
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', ${param.pd_num});
+	             params.append('qna_num', ${param.qna_num});
 	                 
 	             axios.post('/qna/mywrite',params)
-	             .then(res=>{      
+	             .then(res=>{   
           			this.문의데이터 = res.data;
           			this.제목 = this.문의데이터.subject;
           			this.내용 = this.문의데이터.content;
