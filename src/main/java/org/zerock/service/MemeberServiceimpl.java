@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.AuthVO;
 import org.zerock.domain.BoardCriteria;
 import org.zerock.domain.MemberVO;
 
@@ -22,10 +23,11 @@ public class MemeberServiceimpl implements MemberService {
 	private MemberMapper mapper;
 	
 	@Override
-	public void register(MemberVO member) {
+	public void register(MemberVO member, AuthVO avo) {
 		
 		log.info("register......" + member);
 		
+		mapper.insertAuth(avo);
 		mapper.insert(member);
 	}
 

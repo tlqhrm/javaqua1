@@ -17,9 +17,20 @@ var price1 = document.getElementsByClassName("p_price1");
 
 const v=new Vue({
     el : "#app",
+    data : {
+    	checkbox :[],
+    },
+    created(){
+    	
+
+    },
+    mounted(){
+    	$("input:checkbox[name='cart_num']").prop("checked", true);
+    	console.log(this.checkbox);
+    },
 	methods : {
 		주문하기: function(){	
-			location.href="/cart/cart_order";						
+			location.href="/cart/cart_order";				 		
 		},
 		수량업: function(cart_num,index,price){	
 			
@@ -28,7 +39,7 @@ const v=new Vue({
 			params.append('mode', 'up');
 			params.append('user_id', id);
 			
-			axios.post('/cart/cart_modify',params)
+			axios.post('/cart/cart_modify',params,config)
 			.then(res=>{
 				if(res.data==200){
 
@@ -57,7 +68,7 @@ const v=new Vue({
 			params.append('mode', 'down');
 			params.append('user_id', id);
 			
-			axios.post('/cart/cart_modify',params)
+			axios.post('/cart/cart_modify',params,config)
 			.then(res=>{
 				if(res.data==200){
 
@@ -83,7 +94,7 @@ const v=new Vue({
              params.append('mode', 'one_del');
              params.append('user_id', id);
            
-             axios.post('/cart/cart_modify',params)
+             axios.post('/cart/cart_modify',params,config)
              .then(res=>{
 				if(res.data==200){
 					history.go(0);
@@ -103,7 +114,7 @@ const v=new Vue({
                  params.append('mode', 'all_del');
                  params.append('user_id', id);
                
-                 axios.post('/cart/cart_modify',params)
+                 axios.post('/cart/cart_modify',params,config)
                  .then(res=>{
 					if(res.data==200){
 						history.go(0);
@@ -117,5 +128,8 @@ const v=new Vue({
                  });				
 			}
 		},
+		change : function(){
+			console.log(this.checkbox);
+		}
 	}			
 });

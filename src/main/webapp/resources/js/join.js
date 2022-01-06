@@ -27,7 +27,7 @@
 
 //아이디,이메일 중복확인검증 (최종적으로 ture 이여야만 가입가능 , 값이바뀌면 다시 false)
 let idConf = true;
-let emailConf = false;
+let emailConf = true;
 
 
 //휴대폰 자릿수 맞으면 인증번호버튼 활성화
@@ -117,6 +117,9 @@ $('input[name=user_id]').focusout(function(){
 		url:'/member/idCheck',
 		datatype:'text',
 		data:{id:id},
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+		},
 		success: function(data){
 			if(data ==='useable'){
 				msg.hide();			
@@ -126,6 +129,8 @@ $('input[name=user_id]').focusout(function(){
 				msg.text(`${id}는 이미 사용중인 아이디 입니다.`);
 				idConf=false;
 			}
+			console.log(id);
+			console.log(data);
 		},
 		error: function(data, textStatus){
 			console.log('error');
@@ -190,6 +195,9 @@ $('input[name=user_email]').focusout(function(){
 		url:'/member/emailCheck',
 		datatype:'text',
 		data:{email:email},
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+		},
 		success: function(data){
 			if(data ==='useable'){
 				msg.hide();			
@@ -215,6 +223,7 @@ function frm_check(){
     if( $("input[name=user_pw]").val()!=$("input[name=password2]").val() ){alert("비밀번호가 서로 다릅니다.");return false;}
     if ($("input[name=name]").val()==""){alert("이름을 입력해 주세요."); return false;} 
     if(!regName.test($("input[name=name]").val())){alert("이름은 한글 2자 이상 6자 이하만 가능합니다."); return false;}
+    if ($("input[name=user_email]").val()==""){alert("이메일을 입력해 주세요."); return false;}
     if(!emailConf){alert("이메일 중복확인을 해주세요");return false;}       
     if ($("input[name=user_phone]").val()=="" || $("input[name=user_phone]").val().length <= 10 ){alert("휴대폰 번호를 입력해 주세요."); return false;}
     if ($("input[name=user_address]").val()=="" || $("input[name=user_address]").val()=="" ){alert("주소를 선택해 주세요."); return false;}

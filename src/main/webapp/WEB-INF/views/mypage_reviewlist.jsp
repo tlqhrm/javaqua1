@@ -110,6 +110,12 @@
 		<%@include file="footer.jsp"%>	
 		
 		<script>
+		
+		var config = {
+				headers:{
+					"${_csrf.headerName}":"${_csrf.token}"
+				}	
+		}
 			const v=new Vue({
 			    el : "#app",
 			    data : {	
@@ -155,7 +161,7 @@
 			             params.append('page', this.현재페이지);  
 			             params.append('pagePerList', this.pagePerList);
 			           
-			             axios.post('/review/myreview',params)
+			             axios.post('/review/myreview',params, config)
 			             .then(res=>{
 			             	this.리뷰데이터 = res.data[0];
 			             	this.페이징정보 = res.data[1];    

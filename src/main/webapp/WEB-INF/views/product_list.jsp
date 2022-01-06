@@ -126,6 +126,13 @@
     <jsp:include page="footer.jsp"></jsp:include>
 
 <script>
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 function deleteCheck(t,pd_num,file1){
 	confirm("'"+t+"'"+" 를 삭제 합니다.");
 	console.log(pd_num);
@@ -134,6 +141,9 @@ function deleteCheck(t,pd_num,file1){
 		type : "post",
 		data : {pd_num : pd_num,
 				file1 : file1},
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+		},
 		dataType: "text",
 		success : function(data){
 			console.log(data);
@@ -189,7 +199,7 @@ const v_pdList = new Vue({
              params.append('file1', file1);
              params.append('user_id', id);
            
-             axios.post('/cart/cart_add',params)
+             axios.post('/cart/cart_add',params, config)
              .then(res=>{
             	 alert(res.data);
              })

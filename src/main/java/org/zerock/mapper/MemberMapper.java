@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.AuthVO;
 import org.zerock.domain.BoardCriteria;
 import org.zerock.domain.MemberVO;
 
@@ -15,6 +16,8 @@ public interface MemberMapper {
 //		@Select("SELECT sysdate from dual")
 		public int insert(MemberVO member);
 	
+		public int insertAuth(AuthVO avo);
+		
 		public List<BoardVO> getList(BoardCriteria cri);
 			
 		public String getTime();
@@ -36,4 +39,6 @@ public interface MemberMapper {
 		public int getEmail2(String email);
 
 		public MemberVO passwordCheck(MemberVO mvo);
+
+		public MemberVO read(String user_id);
 }

@@ -21,6 +21,7 @@
 	   <div class="container">
 	       <h3 class="tit">상품문의 </h3>
 	       <form>  
+	       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	           <table class="tbl_comm">
 	               <tbody>
 	                   <tr>
@@ -53,6 +54,11 @@
 <!-- app 닫기 -->	
 
 <script>
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 	const v=new Vue({
 	    el : "#app",
 	    data : {		
@@ -75,7 +81,7 @@
 	             params.append('subject', this.제목);
 	             params.append('content', this.내용);
 	                 
-	             axios.post('/qna/write',params)
+	             axios.post('/qna/write',params, config)
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
 	            		 alert("등록되었습니다.");

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,16 +15,14 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/resources/js/loginCheck.js"></script>
 </head>
-<c:choose>
-	<c:when test="${empty id and bdCri.bd_category2 eq 'contact'}">
+<c:if test="${bdCri.bd_category2 eq 'contact' }">
+	<sec:authorize access="isAnonymous()">
 		<script>
-		
-		alert("로그인 후 이용해 주세요.")
-		location.href="/member/login";
-			
+			window.location.href = "/member/login";
 		</script>
-	</c:when>
-	<c:otherwise>
+	
+	</sec:authorize>
+</c:if>
 	
 <body>
 
@@ -124,14 +124,14 @@
 			</div>
     	</c:if>
 
-	<c:choose>
-		<c:when test="${not empty id and bdCri.bd_category2 eq 'contact'}">
-			<a href="/board/boardWriteForm?bd_category2=${bdCri.bd_category2}" onClick="return loginCheck(${id})"><span style="width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:10px;">글쓰기</span></a>
-		</c:when>
-		<c:when test="${admin eq 1 }">
-			<a href="/board/boardWriteForm?bd_category2=${bdCri.bd_category2}" onClick="return loginCheck(${id})"><span style="width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:10px;">글쓰기</span></a>
-		</c:when>
-	</c:choose>
+
+		<c:if test="${bdCri.bd_category2 eq 'contact'}">
+			<sec:authorize access="isAuthenticated()">
+			<a href="/board/boardWriteForm?bd_category2=${bdCri.bd_category2}"><span style="width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:10px;">글쓰기</span></a>
+			</sec:authorize>
+		</c:if>
+
+
     
 
     <div id="page_div">
@@ -208,7 +208,6 @@
 
 <jsp:include page="footer.jsp"></jsp:include>
 
-</c:otherwise>
-</c:choose>
+
 </body>
 </html>

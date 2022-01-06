@@ -47,6 +47,11 @@
 <!-- app 닫기 -->	
 
 <script>
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 	const v=new Vue({
 	    el : "#app",
 	    data : {		
@@ -72,7 +77,7 @@
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', ${param.pd_num});
 	                 
-	             axios.post('/review/mywrite',params)
+	             axios.post('/review/mywrite',params,config)
 	             .then(res=>{         
            			this.리뷰데이터 = res.data;
            			this.상세리뷰 = this.리뷰데이터.content;
@@ -89,7 +94,7 @@
 	             params.append('rv_num', this.리뷰데이터.rv_num);
 	             params.append('content', this.상세리뷰);
 	                 
-	             axios.post('/review/modify',params)
+	             axios.post('/review/modify',params,config)
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
 	            		 alert("수정되었습니다.");

@@ -105,7 +105,7 @@ const v=new Vue({
              params.append('page', this.현재페이지);      
              params.append('pagePerList', this.pagePerList);
            
-             axios.post('/review/review_list',params)
+             axios.post('/review/review_list',params, config)
              .then(res=>{
              	this.리뷰데이터 = res.data[0];
              	this.페이징정보 = res.data[1];                   	
@@ -133,7 +133,7 @@ const v=new Vue({
              params.append('file1', file1);
              params.append('user_id', id);
            
-             axios.post('/cart/cart_add',params)
+             axios.post('/cart/cart_add',params, config)
              .then(res=>{
             	 alert(res.data);
              })
@@ -233,7 +233,7 @@ const qna = new Vue({
              params.append('page', this.현재페이지);      
              params.append('pagePerList', this.pagePerList);
            
-             axios.post('/qna/qna_list',params)
+             axios.post('/qna/qna_list',params, config)
              .then(res=>{
              	this.문의데이터 = res.data[0];
              	this.페이징정보 = res.data[1];                   	

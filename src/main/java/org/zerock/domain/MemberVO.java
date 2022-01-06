@@ -1,5 +1,7 @@
 package org.zerock.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -13,6 +15,7 @@ public class MemberVO {
 	private String user_address;
 	private String user_address2;
 	private String user_phone;
-	private int admin;
 	
+	
+	private List<AuthVO> authList;
 }

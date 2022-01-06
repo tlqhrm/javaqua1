@@ -8,14 +8,14 @@ const v_pdList = new Vue({
 		pdList4 : JSON.parse(pdList4),
 		pdListMd : JSON.parse(pdListMd),
 		category2 : '금붕어',	
-		id : '${id}'
+		id : id
 	},
 	methods : {
 		엠디 : function(category2){
 
 			const params = new URLSearchParams();
 			params.append("category2", category2);
-			axios.post('/pdListMd',params)
+			axios.post('/pdListMd',params,config)
 			.then(res=>{
 				this.pdListMd = res.data;		
 				this.category2 = category2;
@@ -37,13 +37,13 @@ const v_pdList = new Vue({
              params.append('file1', file1);
              params.append('user_id', id);
            
-             axios.post('/cart/cart_add',params)
+             axios.post('/cart/cart_add',params,config)
              .then(res=>{
-            	 alert(res.data);
+            	 alert('asdasd'+res.data);
              })
              .catch(err=>{
             	alert("오류가 발생했습니다.");
-              	console.log(err);
+              	console.log('22222'+err);
              });				
 		},
 		오버 : function(index){

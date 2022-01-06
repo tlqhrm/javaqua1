@@ -47,6 +47,11 @@
 <!-- app 닫기 -->	
 
 <script>
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 	const v=new Vue({
 	    el : "#app",
 	    data : {		
@@ -67,7 +72,7 @@
 	             params.append('pd_num', pd_num);
 	             params.append('content', this.상세리뷰);
 	                 
-	             axios.post('/review/write',params)
+	             axios.post('/review/write',params,config)
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
 	            		 alert("등록되었습니다.");

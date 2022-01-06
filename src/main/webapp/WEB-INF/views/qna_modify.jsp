@@ -19,8 +19,9 @@
 <div id="app" >
    <div id="wrap">
 	   <div class="container">
-	       <h3 class="tit">상품문의수정 </h3>
+	       <h3 class="tit">상품문의 </h3>
 	       <form>  
+	       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	           <table class="tbl_comm">
 	               <tbody>
 	                   <tr>
@@ -44,7 +45,7 @@
 	               </tbody>
 	           </table>
 	        <div style="text-align: center; margin-top: 30px;">
-	           	<button type="button" class="btn" @click="문의수정()">수정하기</button>
+	           	<button type="button" class="btn" @click="문의수정(${param.pd_num})">수정하기</button>
 	        </div> 
 	       </form>	    	
 	   </div>
@@ -53,6 +54,11 @@
 <!-- app 닫기 -->	
 
 <script>
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 	const v=new Vue({
 	    el : "#app",
 	    data : {	
@@ -62,7 +68,7 @@
 				qna_num : 0,
 				pd_num : 0,
 				user_id : "",
-				subject : "",
+				title : "",
 				content : "",
 				status : "",
 				reply : "",
@@ -78,15 +84,13 @@
 		methods : {
 			내문의정보(){
 				 const params = new URLSearchParams();
-				 
 	             params.append('user_id', "${id}");
 	             params.append('pd_num', ${param.pd_num});
-	             params.append('qna_num', ${param.qna_num});
 	                 
-	             axios.post('/qna/mywrite',params)
-	             .then(res=>{   
+	             axios.post('/qna/myqna',params, config)
+	             .then(res=>{      
           			this.문의데이터 = res.data;
-          			this.제목 = this.문의데이터.subject;
+          			this.제목 = this.문의데이터.title;
           			this.내용 = this.문의데이터.content;
 	             })
 	             .catch(err=>{
@@ -94,21 +98,21 @@
 	              	console.log(err);
 	             });
 			},
-			문의수정(){
+			문의수정(pd_num){
 	             const params = new URLSearchParams();
 				if(!this.제목){alert("제목을 입력해주세요");return;}
 				if(!this.내용){alert("내용을 입력해주세요");return;}
 	             params.append('user_id', "${id}");
-	             params.append('qna_num', this.문의데이터.qna_num);
-	             params.append('subject', this.제목);
+	             params.append('pd_num', pd_num);
+	             params.append('title', this.제목);
 	             params.append('content', this.내용);
 	                 
-	             axios.post('/qna/modify',params)
+	             axios.post('/qna/modify',params,config )
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
 	            		 alert("수정되었습니다.");
 	            		 window.close();
-	            		 window.opener.location.href="/qna/qna_list";
+	            		 window.opener.location.href="/product/productDetail?pd_num="+pd_num;
 	            	 }else{
 	            		 alert("오류가 발생했습니다");
 	            	 }

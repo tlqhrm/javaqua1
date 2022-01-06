@@ -48,6 +48,8 @@
 		        	회원정보수정
 		        </div>
                 <form name="fmData" method="post" action="/member/updateMember">  
+                	<input type="hidden" name="${_csrf.parameterName}"
+    					value="${_csrf.token}" />
                     <table class="tbl_comm">
                         <tbody>
                             <tr>
@@ -155,6 +157,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 var user_id = '${mvo.user_id}';
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
 </script>
 
 <script src="/resources/js/member_update.js"></script> 

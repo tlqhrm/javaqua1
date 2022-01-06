@@ -31,7 +31,7 @@
 		<div id="app" >     
 		
 		
-		    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
+		    
 	        	<div id="frame">
 		            <div id="frame2">
 		                <span style="font-size: 16pt; font-weight: bold;">장바구니</span>
@@ -57,16 +57,21 @@
 	                        </div>
 	                        <div class="split"></div>
 	                    </div>
-	                          
+	                    
+	                    
+	                    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;"> 
 	                    <c:set var = "total" value = "0" />      
 	                    <c:forEach var="cart" items="${cartList}" varStatus="status">  
 		                    <c:set var= "total" value="${total + (cart.price*cart.amount)}"/>    
-
+							
 		                    <div class="row data" >
 
-		                        <div class="subdiv" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
-		                            <div class="img"><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
-		                            <div class="pname">
+		                        <div class="subdiv" >
+		                        	<div style="line-height:73px">
+		                        	<input ref="check" @change="change()" type="checkbox" v-model="checkbox" style="zoom:1.7" name="cart_num" value="${cart.cart_num }" :checked="true">
+		                        	</div>
+		                            <div class="img" ><img src="/resources/upload/product/${cart.file1}" width="60"/></div>
+		                            <div class="pname" onclick="location.href='/product/productDetail?&pd_num=${cart.pd_num}'">
 		                                <span>${cart.title}</span>
 		                            </div>
 		                        </div>
@@ -85,9 +90,10 @@
 		                        <div class="subdiv">
 		                            <div class="basketcmd"><a @click="상품삭제(${cart.cart_num})" class="abutton">삭제</a></div>
 		                        </div>
-		                    </div>    
+		                    </div> 
+		                      
 	                    </c:forEach>
-	         
+	         			</form>
 	        
 	                <div class="right-align basketrowcmd">
 	                    <a class="abutton" @click="전체삭제()">장바구니비우기</a>
@@ -112,6 +118,11 @@
 		<script>
 		let id = '${id }';
 		var totalPrice = ${total};
+		var config = {
+				headers:{
+					"${_csrf.headerName}":"${_csrf.token}"
+				}	
+		}
 		</script>
 		<script type="text/javascript" src="/resources/js/10-11.js"></script>
 

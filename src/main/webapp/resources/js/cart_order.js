@@ -24,7 +24,7 @@ const v=new Vue({
              const params = new URLSearchParams();
              params.append('user_id', id);
            
-             axios.post('/member/selectMember',params)
+             axios.post('/member/selectMember',params, config)
              .then(res=>{
             	this.회원정보 = res.data;
              })
@@ -40,7 +40,7 @@ const v=new Vue({
              params.append('user_id', id);
              params.append('totalprice', this.최종결제금액);
            
-             axios.post('/cart/cartOrder',params)
+             axios.post('/cart/cartOrder',params, config)
              .then(res=>{
             	 if(res.data==200){	         	  
             		location.href="/order/order_ok";

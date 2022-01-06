@@ -52,7 +52,7 @@
             <div class = "list_goods">
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
-                        <ul class="list_1" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
+                        <ul v-cloak class="list_1" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
                             <li v-for="(item,index) in pdList1" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
@@ -71,7 +71,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id}')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -91,7 +91,7 @@
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
                         <ul class="list_2" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                            <li v-for="(item,index) in pdList2" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
+                            <li v-cloak v-for="(item,index) in pdList2" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
                                         <a class="txt" href='detail.html'>{{item.title}}</a>
@@ -109,7 +109,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-										<a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+										<a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id}')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -172,7 +172,7 @@
                 <div class="bx-wrapper" style="margin-bottom: 120px;">
                     <div class="bx-viewport">                    
                         <ul class="list" id="list_md" style="width: 1050px; position:relative; list-style: none; margin: auto; float: left; padding: 0px; height: 550px;">
-                            <li v-for="(item,index) in pdListMd" @mouseover="오버(index)" @mouseout="아웃(index)" class="cut">
+                            <li v-cloak v-for="(item,index) in pdListMd" @mouseover="오버(index)" @mouseout="아웃(index)" class="cut">
                             	<a class="md" :href="'/product/productDetail?pd_num='+item.pd_num">
 									<span ref="span1" class="mdFirSpan" style="visibility:hidden"></span>
                             		<span ref="span2" style="top:65px; visibility:hidden">{{item.title}}</span>
@@ -197,7 +197,7 @@
                 <div class="bx-wrapper">
                     <div class="bx-viewport">                    
                         <ul class="list_3" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                            <li v-for="(item,index) in pdList3" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
+                            <li v-cloak v-for="(item,index) in pdList3" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
                                         <a class="txt" href='detail.html'>{{item.title}}</a>
@@ -215,7 +215,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id }')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -234,7 +234,7 @@
                     <div class="bx-wrapper">
                         <div class="bx-viewport">                    
                             <ul class="list_4" style="width: 3204px; position:relative; list-style: none; margin: 0px; float: left; padding: 0px;">
-                                <li v-for="(item,index) in pdList4" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
+                                <li v-cloak v-for="(item,index) in pdList4" class="cut" id=list_1><a :href="'/product/productDetail?pd_num='+item.pd_num"><img :src="'/resources/upload/product/'+item.file1Arr[0]"></a>
                                 <div class="info_goods" >
                                     <span class="name">
                                         <a class="txt" href='detail.html'>{{item.title}}</a>
@@ -252,7 +252,7 @@
                                     <span v-if="item.discount !=0" class="cost" style="display:block;">{{item.strPrice2}}원</span>
                                     
                                     <span class="under">
-                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], id)" class=under_cart></a>
+                                        <a href='#none' @click="장바구니담기(item.pd_num, item.title, item.price, item.file1Arr[0], '${id}')" class=under_cart></a>
                                         
                                     </span>                                                                                                             
                                 </div>
@@ -302,7 +302,15 @@ var pdList2 = '${pdList2}';
 var pdList3 = '${pdList3}';
 var pdList4 = '${pdList4}';
 var pdListMd = '${pdListMd}';
+var id = '${id}';
 
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+var config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 
 </script>
 <script src="/resources/js/index.js"></script>
