@@ -87,6 +87,10 @@ public class AdminController {
 		int totalContnet = adminservice.product_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<ProductVO> product_list = adminservice.product_list(pdto);		
+		for(ProductVO lst : product_list) {
+			lst.pvoInit();
+		}
+		
 		
 		List rs = new ArrayList();
 		rs.add(product_list);
