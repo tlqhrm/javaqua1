@@ -31,6 +31,7 @@ const v=new Vue({
            
              axios.post('/member/selectMember',params, config)
              .then(res=>{
+             console.log(res.data);
             	this.회원정보 = res.data;
              })
              .catch(err=>{

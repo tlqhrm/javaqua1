@@ -47,6 +47,11 @@
 <!-- app 닫기 -->	
 
 <script>
+config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
 	const v=new Vue({
 	    el : "#app",
 	    data : {	
@@ -63,7 +68,7 @@
 	             const params = new URLSearchParams();
 	             params.append('pd_num', ${param.pd_num});
 	                 
-	             axios.post('/admin/product_detail',params)
+	             axios.post('/admin/product_detail',params,config)
 	             .then(res=>{
 	            	 this.상품정보=res.data;              	 
 	             })
@@ -78,7 +83,7 @@
 	             params.append('qna_num', ${param.qna_num});
 	             params.append('reply', this.답변);
 	                 
-	             axios.post('/admin/qnaReply',params)
+	             axios.post('/admin/qnaReply',params,config)
 	             .then(res=>{
 	            	 if(res.data==200){	                	  
 	            		 alert("답변을 등록했습니다.");

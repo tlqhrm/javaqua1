@@ -104,6 +104,7 @@
 			let amount="${param.amount}";	
 			var config = {
 					headers:{
+						'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
 						"${_csrf.headerName}":"${_csrf.token}"
 					}	
 			}
