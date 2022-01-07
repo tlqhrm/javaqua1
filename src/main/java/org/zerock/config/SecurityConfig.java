@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/member/login").anonymous()
 		.antMatchers("/member/joinForm").anonymous()
 		.antMatchers("/member/join").anonymous()
-		.antMatchers("member/login").anonymous()
+		.antMatchers("/member/login").anonymous()
 		.antMatchers("/member/idCheck").anonymous()
 		.antMatchers("/member/emailCheck").anonymous()
 		.antMatchers("/member/*").authenticated()
