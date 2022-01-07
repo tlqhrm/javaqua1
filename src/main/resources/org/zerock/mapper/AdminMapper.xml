@@ -43,7 +43,45 @@
 	<select id="order_cnt" resultType="int">
 		select count(*) from order_detail
 	</select>
+	<update id="status_change">
+		update order_detail set odt_status=#{odt_status} where odt_num=#{odt_num}
+	</update>
 	
+	<select id="notice_list" resultType="org.zerock.domain.BoardVO">	
+		<![CDATA[ SELECT * FROM ( 
+	        SELECT A.*, 
+	        ROWNUM AS RNUM FROM (
+	            SELECT * FROM board where bd_category2='notice' order by updatedate desc
+	        ) A
+        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+	</select>
+	<select id="notice_cnt" resultType="int">
+		select count(*) from board where bd_category2='notice'
+	</select>
+	
+	<select id="faq_list" resultType="org.zerock.domain.BoardVO">	
+		<![CDATA[ SELECT * FROM ( 
+	        SELECT A.*, 
+	        ROWNUM AS RNUM FROM (
+	            SELECT * FROM board where bd_category2='faq' order by updatedate desc
+	        ) A
+        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+	</select>
+	<select id="faq_cnt" resultType="int">
+		select count(*) from board where bd_category2='faq'
+	</select>
+	
+	<select id="contact_list" resultType="org.zerock.domain.BoardVO">	
+		<![CDATA[ SELECT * FROM ( 
+	        SELECT A.*, 
+	        ROWNUM AS RNUM FROM (
+	            SELECT * FROM board where bd_category2='contact' order by updatedate desc
+	        ) A
+        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+	</select>
+	<select id="contact_cnt" resultType="int">
+		select count(*) from board where bd_category2='contact'
+	</select>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
 		<![CDATA[ SELECT * FROM ( 

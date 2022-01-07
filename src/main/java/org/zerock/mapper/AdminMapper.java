@@ -3,6 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
@@ -20,6 +21,14 @@ public interface AdminMapper {
 	
 	public List<OrderDetailVO> order_list(PagingDTO pdto);
 	public int order_cnt();
+	public int status_change(@Param("odt_num") int odt_num,@Param("odt_status") String odt_status);
+	
+	public List<BoardVO> notice_list(PagingDTO pdto);
+	public int notice_cnt();
+	public List<BoardVO> faq_list(PagingDTO pdto);
+	public int faq_cnt();
+	public List<BoardVO> contact_list(PagingDTO pdto);
+	public int contact_cnt();
 	
 	public List<ReviewVO> review_list(PagingDTO pdto);
 	public int review_cnt();

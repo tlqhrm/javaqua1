@@ -11,8 +11,6 @@
 	    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>	   		    	    
 	    <!-- vuejs 추가 -->
 	   	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-	   	<!-- numeral 추가 -->
-		<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 	</head>
 
 	<body>
@@ -21,9 +19,13 @@
 			
 		<div id="wrap">
 			<div id="snb">
-				<h2>주문관리</h2>
+				<h2>게시판관리</h2>
 			    <ul>
-			    	<a href="/admin/order"><li id="now">주문정보</li></a>
+			    	<a href="/admin/board/notice"><li>공지사항</li></a>
+			    	<a href="/admin/board/faq"><li id="now">자주하는질문</li></a>
+			    	<a href="/admin/board/contact"><li>1:1문의</li></a>
+			    	<a href="/admin/board/review"><li>리뷰</li></a>
+			    	<a href="/admin/board/qna"><li>상품문의</li></a>
 			    </ul>
 			</div> 
 		                 	
@@ -31,38 +33,32 @@
 			<div id="app" v-cloak>
 				<div id="contents">
 					<div class="sub">										
-				        <div class="tb_tit">주문정보</div>
-				        			      			        
+				        <div class="tb_tit">
+				        	자주하는질문 
+				        	<span style="float:right"><button onclick="location.href='/board/boardWriteForm?bd_category2=faq'">글등록</button></span>
+				        </div>
+				        
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">	
 						
 					        <thead>
 					            <tr>
-					                <th>번호</th>
-					                <th>주문자</th>
-					                <th>상품</th>
-					                <th>수량</th>
-					                <th>가격</th>
-					                <th>주문일</th>
-					                <th>상태</th>
+					                <th width="50">번호</th>
+					                <th>제목</th>
+					                <th width="100">작성일</th>
+					                <th width="100"></th>
 					            </tr>
 					        </thead>	
 					        <tbody>	
-								<tr v-for="(item,i) in 데이터" :key="i" @change="상태변경(item.odt_num,item.odt_status)">
-									<td>{{item.odt_num}}</td>
-									<td>{{item.user_id}}</td>
+								<tr v-for="(item,i) in 데이터" :key="i">
+									<td>{{item.bd_num}}</td>
 									<td>{{item.title}}</td>
-									<td>{{item.amount|콤마표시}}</td>
-									<td>{{item.price|콤마표시}}</td>
-									<td>{{item.orderdate}}</td>
-									<td>
-										<select v-model="item.odt_status">
-											<option value="주문완료">주문완료</option>
-											<option value="주문취소">주문취소</option>
-											<option value="배송완료">배송완료</option>
-										</select>											
-									</td>																
+									<td>{{item.updateDate}}</td>
+									<td style="color:blue; text-align:right">
+										<span style="cursor:pointer">수정</span> &nbsp;&nbsp;&nbsp;
+										<span>삭제</span>
+									</td>
 								</tr>
-							</tbody>	
+							</tbody>
 						</table>    
 						
 						<div v-if="!데이터.length" class="no_data" style="padding:150px 0 148px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;color:#4c4c4c;font-size:12px;">
@@ -102,18 +98,12 @@
 				headers:{
 					"${_csrf.headerName}":"${_csrf.token}"
 				}	
-		}		
+		}
 			const v=new Vue({
 			    el : "#app",
 			    data : {	
 					데이터 : [{
-						odt_num : 0,
-						user_id : "",
-						title : "",
-						amount : 0,
-						price : 0,
-						orderdate : "", 
-						odt_status : ""
+
 					}],
 					페이징정보 : {
 						endPage:0,
@@ -125,9 +115,10 @@
 						totalContent:0,
 						totalPage:0
 					},		
-					pagePerList : 15, //한 화면에 보여줄 데이터 수
+					pagePerList : 5, //한 화면에 보여줄 데이터 수
 					현재페이지 : 1
-				},				
+				},	
+				
 				created : function(){
 					this.데이터가져오기();
 				},
@@ -138,7 +129,7 @@
 							list.push(i);
 						}
 						return list;
-					},				
+					}
 				},
 				methods : {
 					데이터가져오기 : function(){
@@ -146,7 +137,7 @@
 			             params.append('page', this.현재페이지);  
 			             params.append('pagePerList', this.pagePerList);
 			           
-			             axios.post('/admin/order_list',params,config)
+			             axios.post('/admin/faq_list',params,config)
 			             .then(res=>{
 			             	this.데이터 = res.data[0];
 			             	this.페이징정보 = res.data[1];    
@@ -159,34 +150,11 @@
 					페이징(val){
 						if(val <=0 || val > this.페이징정보.startEnd[2]){return;}
 						this.현재페이지 = val;
-					},
-					상태변경(odt_num,odt_status){		
-						 const params = new URLSearchParams();
-			             params.append('odt_num', odt_num);  
-			             params.append('odt_status', odt_status);  
-			           			           
-			             axios.post('/admin/status_change',params,config)
-			             .then(res=>{
-			            	 if(res.data==200){
-			            		 //alert("완료");
-			            	 }else{
-			            		 alert("오류");
-			            	 }			            
-			             })
-			             .catch(err=>{
-			            	alert("오류가 발생했습니다.");
-			              	console.log(err);
-			             });			             
-					}					
+					}
 				},		
 				watch : {
 					현재페이지(){
 						this.데이터가져오기();
-					}
-				},
-				filters : {
-					콤마표시 : function(value){
-						return numeral(value).format('0,0');
 					}
 				}
 			});

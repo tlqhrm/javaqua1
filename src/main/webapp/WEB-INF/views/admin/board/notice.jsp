@@ -22,8 +22,8 @@
 				<h2>게시판관리</h2>
 			    <ul>
 			    	<a href="/admin/board/notice"><li id="now">공지사항</li></a>
-			    	<a href="/admin/board/notice"><li>자주하는질문</li></a>
-			    	<a href="/admin/board/notice"><li>1:1문의</li></a>
+			    	<a href="/admin/board/faq"><li>자주하는질문</li></a>
+			    	<a href="/admin/board/contact"><li>1:1문의</li></a>
 			    	<a href="/admin/board/review"><li>리뷰</li></a>
 			    	<a href="/admin/board/qna"><li>상품문의</li></a>
 			    </ul>
@@ -35,25 +35,25 @@
 					<div class="sub">										
 				        <div class="tb_tit">
 				        	공지사항 
-				        	<span style="float:right"><button>글등록</button></span>
+				        	<span style="float:right"><button onclick="location.href='/board/boardWriteForm?bd_category2=notice'">글등록</button></span>
 				        </div>
 				        
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">	
 						
 					        <thead>
 					            <tr>
-					                <th>번호</th>
-					                <th>카테고리</th>
+					                <th width="50">번호</th>
 					                <th>제목</th>
-					                <th>작성자</th>
+					                <th width="100">작성일</th>
+					                <th width="100"></th>
 					            </tr>
 					        </thead>	
 					        <tbody>	
 								<tr v-for="(item,i) in 데이터" :key="i">
+									<td>{{item.bd_num}}</td>
 									<td>{{item.title}}</td>
-									<td>{{item.content}}</td>
-									<td>{{item.writedate}}</td>
-									<td width="100" style="color:blue">
+									<td>{{item.updateDate}}</td>
+									<td style="color:blue; text-align:right">
 										<span style="cursor:pointer">수정</span> &nbsp;&nbsp;&nbsp;
 										<span>삭제</span>
 									</td>
@@ -94,7 +94,7 @@
 				
 
 		<script>
-		config = {
+		var config = {
 				headers:{
 					"${_csrf.headerName}":"${_csrf.token}"
 				}	
@@ -137,7 +137,7 @@
 			             params.append('page', this.현재페이지);  
 			             params.append('pagePerList', this.pagePerList);
 			           
-			             axios.post('/review/myreview',params,config)
+			             axios.post('/admin/notice_list',params,config)
 			             .then(res=>{
 			             	this.데이터 = res.data[0];
 			             	this.페이징정보 = res.data[1];    

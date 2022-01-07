@@ -21,9 +21,9 @@
 			<div id="snb">
 				<h2>게시판관리</h2>
 			    <ul>
-			    	<a href="/admin/board"><li>공지사항</li></a>
-			    	<a href="/admin/board"><li>자주하는질문</li></a>
-			    	<a href="/admin/board"><li>1:1문의</li></a>
+			    	<a href="/admin/board/notice"><li>공지사항</li></a>
+			    	<a href="/admin/board/faq"><li>자주하는질문</li></a>
+			    	<a href="/admin/board/contact"><li>1:1문의</li></a>
 			    	<a href="/admin/board/review"><li>리뷰</li></a>
 			    	<a href="/admin/board/qna"><li id="now">상품문의</li></a>
 			    </ul>
@@ -41,13 +41,13 @@
 						
 					        <thead>
 					            <tr>
-					                <th>번호</th>
-					                <th>작성자</th>
-					                <th>제목</th>
+					                <th width="50">번호</th>
+					                <th width="70">작성자</th>
+					                <th width="300">제목</th>
 					                <th>내용</th>
-					                <th>작성일</th>
-					                <th>상태</th>
-					                <th></th>
+					                <th width="100">작성일</th>
+					                <th width="70">상태</th>
+					                <th width="100"></th>
 					            </tr>
 					        </thead>	
 					        <tbody>	
@@ -58,7 +58,7 @@
 									<td>{{item.content}}</td>
 									<td>{{item.writedate}}</td>
 									<td>{{item.status}}</td>
-									<td width="100">
+									<td style="text-align:right">
 										<button v-if="item.status=='답변대기'" style="cursor:pointer" @click="이동(item.qna_num,item.pd_num)">답변</button>
 									</td>	
 								</tr>
@@ -119,7 +119,7 @@
 						totalContent:0,
 						totalPage:0
 					},		
-					pagePerList : 5, //한 화면에 보여줄 데이터 수
+					pagePerList : 15, //한 화면에 보여줄 데이터 수
 					현재페이지 : 1
 				},	
 				

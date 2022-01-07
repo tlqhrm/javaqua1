@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
@@ -50,6 +51,37 @@ public class AdminServiceimpl implements AdminService{
 	public int order_cnt() { 
 		return mapper.order_cnt();
 	}	
+	@Override
+	public int status_change(int odt_num,String odt_status) {
+		return mapper.status_change(odt_num,odt_status);
+	}
+	
+	@Override
+	public List<BoardVO> notice_list(PagingDTO pdto) {
+		return mapper.notice_list(pdto);
+	}	
+	@Override
+	public int notice_cnt() { 
+		return mapper.notice_cnt();
+	}	
+	
+	@Override
+	public List<BoardVO> faq_list(PagingDTO pdto) {
+		return mapper.faq_list(pdto);
+	}	
+	@Override
+	public int faq_cnt() { 
+		return mapper.faq_cnt();
+	}	
+	
+	@Override
+	public List<BoardVO> contact_list(PagingDTO pdto) {
+		return mapper.contact_list(pdto);
+	}	
+	@Override
+	public int contact_cnt() { 
+		return mapper.contact_cnt();
+	}	
 	
 	@Override
 	public List<ReviewVO> review_list(PagingDTO pdto) {
@@ -59,6 +91,7 @@ public class AdminServiceimpl implements AdminService{
 	public int review_cnt() { 
 		return mapper.review_cnt();
 	}	
+	
 	
 	@Override
 	public List<QnaVO> qna_list(PagingDTO pdto) {

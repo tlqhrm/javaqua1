@@ -21,9 +21,9 @@
 			<div id="snb">
 				<h2>게시판관리</h2>
 			    <ul>
-			    	<a href="/admin/board"><li>공지사항</li></a>
-			    	<a href="/admin/board"><li>자주하는질문</li></a>
-			    	<a href="/admin/board"><li>1:1문의</li></a>
+			    	<a href="/admin/board/notice"><li>공지사항</li></a>
+			    	<a href="/admin/board/faq"><li>자주하는질문</li></a>
+			    	<a href="/admin/board/contact"><li>1:1문의</li></a>
 			    	<a href="/admin/board/review"><li id="now">리뷰</li></a>
 			    	<a href="/admin/board/qna"><li>상품문의</li></a>
 			    </ul>
@@ -111,7 +111,7 @@
 						totalContent:0,
 						totalPage:0
 					},		
-					pagePerList : 5, //한 화면에 보여줄 데이터 수
+					pagePerList : 15, //한 화면에 보여줄 데이터 수
 					현재페이지 : 1
 				},	
 				

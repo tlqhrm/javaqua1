@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import java.util.List;
 
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
@@ -19,6 +20,14 @@ public interface AdminService {
 	
 	public List<OrderDetailVO> order_list(PagingDTO pdto);
 	public int order_cnt();
+	public int status_change(int odt_num,String odt_status);
+	
+	public List<BoardVO> notice_list(PagingDTO pdto);
+	public int notice_cnt();
+	public List<BoardVO> faq_list(PagingDTO pdto);
+	public int faq_cnt();
+	public List<BoardVO> contact_list(PagingDTO pdto);
+	public int contact_cnt();
 	
 	public List<ReviewVO> review_list(PagingDTO pdto);
 	public int review_cnt();

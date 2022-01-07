@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
@@ -50,6 +51,16 @@ public class AdminController {
 	public String notice() {
 		log.info("notice............" );
 		return "/admin/board/notice.jsp";
+	}
+	@GetMapping("/board/faq")
+	public String faq() {
+		log.info("faq............" );
+		return "/admin/board/faq.jsp";
+	}
+	@GetMapping("/board/contact")
+	public String contact() {
+		log.info("contact............" );
+		return "/admin/board/contact.jsp";
 	}
 	@GetMapping("/board/review")
 	public String review() {
@@ -112,6 +123,59 @@ public class AdminController {
 		
 		List rs = new ArrayList();
 		rs.add(order_list);
+		rs.add(pdto);
+		return rs;
+	}
+	
+	@ResponseBody
+	@PostMapping("/status_change")
+	public String status_change(int odt_num,String odt_status) {
+		log.info("status_change............" );
+		if(adminservice.status_change(odt_num,odt_status) != 0) {
+			return "200";
+		}else {
+			return "500";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/notice_list")
+	public List<BoardVO> notice_list(int page, int pagePerList) {
+		log.info("notice_list............" );
+		int totalContnet = adminservice.notice_cnt();
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
+		List<BoardVO> notice_list = adminservice.notice_list(pdto);		
+		
+		List rs = new ArrayList();
+		rs.add(notice_list);
+		rs.add(pdto);
+		return rs;
+	}
+	
+	@ResponseBody
+	@PostMapping("/faq_list")
+	public List<BoardVO> faq_list(int page, int pagePerList) {
+		log.info("faq_list............" );
+		int totalContnet = adminservice.faq_cnt();
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
+		List<BoardVO> faq_list = adminservice.faq_list(pdto);		
+		
+		List rs = new ArrayList();
+		rs.add(faq_list);
+		rs.add(pdto);
+		return rs;
+	}
+	
+	@ResponseBody
+	@PostMapping("/contact_list")
+	public List<BoardVO> contact_list(int page, int pagePerList) {
+		log.info("contact_list............" );
+		int totalContnet = adminservice.contact_cnt();
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
+		List<BoardVO> contact_list = adminservice.contact_list(pdto);		
+		
+		List rs = new ArrayList();
+		rs.add(contact_list);
 		rs.add(pdto);
 		return rs;
 	}
