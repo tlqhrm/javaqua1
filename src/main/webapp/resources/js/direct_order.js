@@ -32,6 +32,7 @@ const v=new Vue({
              axios.post('/member/selectMember',params, config)
              .then(res=>{
             	this.회원정보 = res.data;
+            	console.log(res.data)
              })
              .catch(err=>{
             	alert("오류가 발생했습니다.");

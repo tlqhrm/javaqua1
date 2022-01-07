@@ -30,7 +30,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @AllArgsConstructor
-@RequestMapping( value = "/member/", produces = "application/text; charset=UTF-8")
+@RequestMapping("/member/*")
 public class MemberController {
 	
 	@Autowired
