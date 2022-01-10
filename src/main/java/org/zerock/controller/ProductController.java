@@ -5,8 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 import java.io.File;
-
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -38,11 +39,17 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
 import org.zerock.etc.ImagePath;
 import org.zerock.service.ProductService;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -59,19 +66,16 @@ public class ProductController {
 
 	
 	@GetMapping("/productList")
-	public String listProduct(ProductCriteria cri, @Nullable @SessionAttribute("admin") String admin,Model model) {
+	public String listProduct(ProductCriteria cri,Model model) {
 		
 		log.info("listProduct");
 		List<ProductVO> list = new ArrayList<>();
 		int[] paging = new int[3];
-		if(admin == null) admin = "0";
-		
-		cri.setAdmin(admin);	
-		
-		cri.initCri();
+
+		cri.initCri(12);
 
 
-		list = service.getList(cri);
+		list = service.getList(cri); 
 		for(ProductVO lst : list) {
 			lst.pvoInit();
 		}
@@ -344,6 +348,30 @@ public class ProductController {
 		}
 		log.info("삭제완료..." + pvo.getPd_num());
 		return Integer.toString(result);
+	}
+	
+	@ResponseBody
+	@PostMapping("/productUpdateAll")
+	public String productUpdate(String list) throws JsonParseException, JsonMappingException, IOException{
+		
+		log.warn(list);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		List<ProductVO> data = mapper.readValue(list, new TypeReference<List<ProductVO>>(){});
+		
+		for(ProductVO lst : data) {
+			lst.setCategory1();
+		}
+		
+		int result = service.productUpdateAll(data);
+
+		if(data.size() == result) {
+			return "저장 되었습니다.";
+		}else {
+			return "오류가 발생했습니다.";
+		}
+		
+		
 	}
 	
 }

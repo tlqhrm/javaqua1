@@ -8,19 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">   
-    <title>JavaQua</title>
+    <title>상품등록</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/resources/css/product_regist.css">
 </head>
 
-<body>
-
-     <!---header-->
-        <jsp:include page="header.jsp"></jsp:include>
-        <!--//header-->
-
 
 <body>
+<h1 style="text-align:center">상품등록</h1>
 <detail id="detail"> 
     <section id="detailmain">
         <div id="detail">
@@ -399,9 +394,5 @@ function submitAction(){
 
 </script>
 </body>
-
-<!-- 푸터 -->
-
-<jsp:include page="footer.jsp"></jsp:include>
 
 </html>

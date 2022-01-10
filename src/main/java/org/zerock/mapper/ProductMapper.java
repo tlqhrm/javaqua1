@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.ReviewVO;
 
@@ -40,5 +41,11 @@ public interface ProductMapper {
 		public int salesCountPlus(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
 
 		public List<ProductVO> getIndexList(ProductCriteria cri);
+
+		public List<ProductVO> getListAdmin(ProductCriteriaAdmin cri);
+
+		public int pagingAdmin(ProductCriteriaAdmin cri);
+
+		public int productUpdateAll(ProductVO pvo);
 
 }
