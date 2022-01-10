@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.List;
 
 import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.ReviewVO;
 
@@ -22,5 +23,11 @@ public interface ProductService {
 	public int productDelete(int pd_num);
 
 	public List<ProductVO> getIndexList(ProductCriteria cri);
+
+	public List<ProductVO> getListAdmin(ProductCriteriaAdmin cri);
+
+	public int[] getPagesAdmin(ProductCriteriaAdmin cri);
+
+	public int productUpdateAll(List<ProductVO> data);
 
 }

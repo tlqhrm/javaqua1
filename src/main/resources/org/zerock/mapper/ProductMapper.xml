@@ -8,11 +8,41 @@
 	
 	</select> -->	
 	<select id="paging" resultType="_int">	
-		<![CDATA[select count(*) from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc]]>
+		<![CDATA[select count(*) from product where REGEXP_LIKE(category1, #{criCategory1}) and  REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc]]>
+	</select>
+	<select id="getList" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * from (select ROWNUM as rnum,  A.title, A.price, A.category1,A.category2, A.file1, A.discount, A.pd_num, A.stock, A.salescount from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
 	</select>
 	
-	<select id="getList" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from (select ROWNUM as rnum,  A.title, A.price, A.category1, A.file1, A.discount, A.pd_num, A.stock from (select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and REGEXP_LIKE(Title, #{criSerTitle}) order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage} ]]>		
+	<select id="pagingAdmin" resultType="_int">	
+		<![CDATA[select count(*) from product where 
+		REGEXP_LIKE(category1, #{criCategory1}) and 
+		REGEXP_LIKE(category2, #{criCategory2}) and 
+		REGEXP_LIKE(Title, #{criSerTitle})]]>
+		<if test="minPrice > 0">
+		<![CDATA[and price >= #{minPrice}]]></if>
+		<if test="maxPrice > 0">
+		<![CDATA[and price <= #{maxPrice}]]></if>
+		<if test="minStock > 0">
+		<![CDATA[and stock >= #{minStock}]]></if>
+		<if test="maxStock > 0">
+		<![CDATA[and stock <=#{maxStock}]]></if>
+		order by ${order} desc
+		
+	</select>
+	<select id="getListAdmin" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * from (select ROWNUM as rnum,  A.title, A.price, A.category1,A.category2, A.file1, A.discount, A.pd_num, A.stock, A.salescount from 
+		(select * from product where REGEXP_LIKE(category1, #{criCategory1}) and REGEXP_LIKE(category2, #{criCategory2}) and 
+		REGEXP_LIKE(Title, #{criSerTitle})]]>
+		<if test="minPrice > 0">
+		<![CDATA[and price >= #{minPrice}]]></if>
+		<if test="maxPrice > 0">
+		<![CDATA[and price <= #{maxPrice}]]></if>
+		<if test="minStock > 0">
+		<![CDATA[and stock >= #{minStock}]]></if>
+		<if test="maxStock > 0">
+		<![CDATA[and stock <=#{maxStock}]]></if>		 
+		<![CDATA[ order by ${order} desc)A) where rnum >=#{startPage} and rnum <=#{endPage}]]>		
 	</select>
 	
 	<select id="getIndexList" resultType="org.zerock.domain.ProductVO">
@@ -39,6 +69,10 @@
 	<update id="productUpdate">
 		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
 		 		content=#{content}, file1=#{file1}, stock=#{stock}, discount=#{discount} where pd_num=#{pd_num}]]>
+	</update>
+	<update id="productUpdateAll">
+		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
+		 		stock=#{stock}, discount=#{discount} where pd_num=#{pd_num}]]>
 	</update>
 	<update id="salesCountPlus">
 			update product set salescount = salescount+#{cart_amount}, stock = stock-#{cart_amount} where pd_num = #{pd_num}

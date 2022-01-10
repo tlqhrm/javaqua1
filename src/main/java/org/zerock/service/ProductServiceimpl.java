@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.PagingDTO;
 import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.ReviewVO;
 import org.zerock.mapper.ProductMapper;
@@ -86,6 +87,37 @@ public class ProductServiceimpl implements ProductService {
 	public List<ProductVO> getIndexList(ProductCriteria cri) {
 		// TODO Auto-generated method stub
 		return mapper.getIndexList(cri);
+	}
+
+	@Override
+	public List<ProductVO> getListAdmin(ProductCriteriaAdmin cri) {
+			log.info("getList.........");
+		
+		return mapper.getListAdmin(cri);
+	}
+
+	@Override
+	public int[] getPagesAdmin(ProductCriteriaAdmin cri) {
+		log.info("getPages.........");
+		
+		int page = cri.getPage();
+		int pagePerList = cri.getPagePerList();
+		int pagingCount = cri.getPagingCount();
+			
+		int totalContnet = mapper.pagingAdmin(cri);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, pagingCount);
+		return pdto.getStartEnd();
+	}
+
+	@Override
+	public int productUpdateAll(List<ProductVO> data) {
+		int result = 0;
+		for(ProductVO pvo : data) {
+			mapper.productUpdateAll(pvo);
+			result ++;
+		}
+		
+		return result;
 	}
 
 

@@ -1,23 +1,32 @@
 package org.zerock.controller;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.zerock.domain.BoardVO;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
+import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.QnaVO;
 import org.zerock.domain.ReviewVO;
 import org.zerock.service.AdminService;
+import org.zerock.service.ProductService;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,6 +40,8 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminservice;
+	@Autowired
+	private ProductService productService;
 	
 	@GetMapping("/member")
 	public String member() {
@@ -107,15 +118,34 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/product_list")
-	public List<ProductVO> product_list(int page, int pagePerList) {
-		log.info("product_list............" );
-		int totalContnet = adminservice.product_cnt();
-		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
-		List<ProductVO> product_list = adminservice.product_list(pdto);		
+	public List<MemberVO> product_list(String cri) throws JsonParseException, JsonMappingException, IOException {
+		
+		
+		log.warn(cri);
+		List<ProductVO> list = new ArrayList<>();
+		int[] paging = new int[3];
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		ProductCriteriaAdmin criAdmin = objectMapper.readValue(cri, ProductCriteriaAdmin.class);
+
+
+		criAdmin.initCri(20);
+
+		
+		list = productService.getListAdmin(criAdmin); 
+		for(ProductVO lst : list) {
+			lst.pvoInit();
+		}
+		log.info(cri);
+		paging = productService.getPagesAdmin(criAdmin);
+		
+		
 		
 		List rs = new ArrayList();
-		rs.add(product_list);
-		rs.add(pdto);
+		rs.add(list);
+		rs.add(paging);
+		rs.add(criAdmin);
 		return rs;
 	}
 	
