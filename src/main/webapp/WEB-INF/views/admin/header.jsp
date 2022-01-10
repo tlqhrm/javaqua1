@@ -14,7 +14,21 @@
               <div class="logo" style="margin: 0px;"> 
                 <a href='/'></a>
             </div>
-        </div>                         
+        </div>                       
+        <div class="frame">        
+                &nbsp;&nbsp;&nbsp; github : <a href="https://github.com/tlqhrm/javaqua1.git" style="color:rgb(3, 140, 232)">github.com/tlqhrm/javaqua1.git</a>
+                          
+	                <ul id='join_login'>
+	                <li class="no_mypage">
+	                	<form action="/member/logout" method='post' id="frm">
+							<input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>
+							<span class="right_border" onClick="document.getElementById('frm').submit()" style="cursor:pointer">로그아웃</span>
+						</form></li>
+	                    <li id="mypage"><a href="/order/order_list" class="right_border blue"><sec:authentication property="principal.member.name" /> 님&nbsp;&nbsp;</a>                       
+	                    </li>	                   
+	                </ul>
+            </div>
+            <span><h1>관리자페이지</h1></span>
     </div>
     <div id="header3">
         <div class="frame">
