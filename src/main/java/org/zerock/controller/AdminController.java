@@ -96,12 +96,12 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/member_list")
-	public List<MemberVO> member_list(int page, int pagePerList) {
+	public List<Object> member_list(int page, int pagePerList) {
 		int totalContnet = adminservice.member_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<MemberVO> member_list = adminservice.member_list(pdto);		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(member_list);
 		rs.add(pdto);
 		return rs;
@@ -118,7 +118,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/product_list")
-	public List<MemberVO> product_list(String cri) throws JsonParseException, JsonMappingException, IOException {
+	public List<Object> product_list(String cri) throws JsonParseException, JsonMappingException, IOException {
 		
 		
 		log.warn(cri);
@@ -142,7 +142,7 @@ public class AdminController {
 		
 		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(list);
 		rs.add(paging);
 		rs.add(criAdmin);
@@ -159,13 +159,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/order_list")
-	public List<OrderDetailVO> order_list(int page, int pagePerList) {
+	public List<Object> order_list(int page, int pagePerList) {
 		log.info("order_list............" );
 		int totalContnet = adminservice.order_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<OrderDetailVO> order_list = adminservice.order_list(pdto);		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(order_list);
 		rs.add(pdto);
 		return rs;
@@ -226,13 +226,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/review_list")
-	public List<ReviewVO> review_list(int page, int pagePerList) {
+	public List<Object> review_list(int page, int pagePerList) {
 		log.info("review_list............" );
 		int totalContnet = adminservice.review_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<ReviewVO> review_list = adminservice.review_list(pdto);		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(review_list);
 		rs.add(pdto);
 		return rs;
@@ -240,13 +240,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/qna_list")
-	public List<QnaVO> qna_list(int page, int pagePerList) {
+	public List<Object> qna_list(int page, int pagePerList) {
 		log.info("qna_list............" );
 		int totalContnet = adminservice.qna_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<QnaVO> qna_list = adminservice.qna_list(pdto);		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(qna_list);
 		rs.add(pdto);
 		return rs;

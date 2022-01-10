@@ -286,11 +286,6 @@
 				"${_csrf.headerName}":"${_csrf.token}"
 			}	
 	}
-	
-//	$(".prev_img").on("mouseover",function(){
-//		$("#main_img img").attr("src",$(this).children("img").attr("src"));
-//	});
-
 </script>
 <script src="/resources/js/product_detail.js"></script>
 </html>

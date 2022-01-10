@@ -62,6 +62,15 @@ public class CartController {
 		return "/basket.jsp";
 	}
 	
+	@ResponseBody
+	@PostMapping("/cart_list")
+	public List<CartVO> cart_list(String user_id) {
+		log.info("cart_list............ ");		
+				
+		List<CartVO> list = cartService.cart_list(user_id);
+		return list;
+	}
+	
 	@GetMapping("/cart_order")
 	public String cart_order(HttpServletRequest request , Model model) {
 		log.info("cart_order............" );

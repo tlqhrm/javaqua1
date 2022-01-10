@@ -1,11 +1,3 @@
-// 숫자 3자리 콤마찍기
-Number.prototype.formatNumber = function(){
-    if(this==0) return 0;
-    let regex = /(^[+-]?\d+)(\d{3})/;
-    let nstr = (this + '');
-    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
-    return nstr;
-};
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -18,15 +10,7 @@ var price1 = document.getElementsByClassName("p_price1");
 const v=new Vue({
     el : "#app",
     data : {
-    	checkbox :[],
-    },
-    created(){
-    	
-
-    },
-    mounted(){
-    	$("input:checkbox[name='cart_num']").prop("checked", true);
-    	console.log(this.checkbox);
+    
     },
 	methods : {
 		주문하기: function(){	

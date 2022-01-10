@@ -114,7 +114,6 @@
 					pagePerList : 15, //한 화면에 보여줄 데이터 수
 					현재페이지 : 1
 				},	
-				
 				created : function(){
 					this.데이터가져오기();
 				},

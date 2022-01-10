@@ -101,7 +101,7 @@ public class QnaController {
 	
 	@ResponseBody
 	@PostMapping("/qna_list")
-	public List<QnaVO> qna_list(int pd_num, int page, int pagePerList) {
+	public List<Object> qna_list(int pd_num, int page, int pagePerList) {
 		log.info("qna_list............" );
 		
 		int totalContnet = qnaservice.qna_cnt(pd_num);
@@ -109,7 +109,7 @@ public class QnaController {
 		log.info(pdto);
 		List<QnaVO> qnalist = qnaservice.qna_list(pd_num,pdto);
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(qnalist);
 		rs.add(pdto);
 		return rs;
@@ -117,7 +117,7 @@ public class QnaController {
 	
 	@ResponseBody
 	@PostMapping("/myqna")
-	public List<QnaVO> myqna(String user_id, int page, int pagePerList) {
+	public List<Object> myqna(String user_id, int page, int pagePerList) {
 		log.info("myqna............" );
 		
 		int totalContnet = qnaservice.myqna_cnt(user_id);
@@ -127,7 +127,7 @@ public class QnaController {
 		
 		log.info(myqna);
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(myqna);
 		rs.add(pdto);
 		return rs;

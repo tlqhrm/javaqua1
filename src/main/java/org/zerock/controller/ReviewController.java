@@ -41,6 +41,7 @@ public class ReviewController {
 		log.info("review_write............" );
 		ProductVO pvo = pvservice.productDetail(pd_num);
 		model.addAttribute("pvo", pvo);
+		log.info(pvo);
 		return "/review_write.jsp";
 	}
 	
@@ -102,7 +103,7 @@ public class ReviewController {
 	
 	@ResponseBody
 	@PostMapping("/review_list")
-	public List<ReviewVO> review_list(int pd_num, int page, int pagePerList) {
+	public List<Object> review_list(int pd_num, int page, int pagePerList) {
 		log.info("review_list............" );
 		
 		int totalContnet = rvservice.review_cnt(pd_num);
@@ -110,7 +111,7 @@ public class ReviewController {
 		log.info(pdto);
 		List<ReviewVO> reviewlist = rvservice.review_list(pd_num,pdto);
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(reviewlist);
 		rs.add(pdto);
 		return rs;
@@ -118,7 +119,7 @@ public class ReviewController {
 	
 	@ResponseBody
 	@PostMapping("/myreview")
-	public List<ReviewVO> myreview(String user_id, int page, int pagePerList) {
+	public List<Object> myreview(String user_id, int page, int pagePerList) {
 		log.info("myreview............" );
 		
 		int totalContnet = rvservice.myreview_cnt(user_id);
@@ -128,7 +129,7 @@ public class ReviewController {
 		
 		log.info(myreview);
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(myreview);
 		rs.add(pdto);
 		return rs;

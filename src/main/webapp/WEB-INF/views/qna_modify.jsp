@@ -25,7 +25,7 @@
 	           <table class="tbl_comm">
 	               <tbody>
 	                   <tr>
-	                       <th><img width="80" src="/resources/upload/product/${pvo.file1}"/></th>
+	                       <th><img width="80" src="/resources/upload/product/${pvo.file1.split(';')[0]}"/></th>
 	                       <td>
 	                       		${pvo.title}
 	                       </td>

@@ -11,4 +11,5 @@ public class CartVO {
 	private int amount;
 	private String user_id;
 	private String file1;
+	private int chk;
 }
