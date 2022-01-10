@@ -1,20 +1,25 @@
 package org.zerock.domain;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Data
-public class ProductCriteria {
+public class ProductCriteriaAdmin {
 	
 	private int page;
 	private String serTitle; 
 	private String order;
 	private String category1;
 	private String category2;
-
+	private String minPrice;
+	private String maxPrice;
+	private String minStock;
+	private String maxStock;
 	
 	
-	private String[] serSet = new String[3];	
-	private String listTitle;
+	
+	private String[] category1Arr;
 	private int pagePerList;
 	private int pagingCount;
 	private int startPage;
@@ -23,11 +28,33 @@ public class ProductCriteria {
 	private String criCategory1;
 	private String criCategory2;
 	
-	public ProductCriteria() {}
+	
+	public ProductCriteriaAdmin() {}
 
 
 	public void initCri(int pagePerList){
 		
+		criSerTitle = "^";
+		criCategory1 = "^";
+		
+		
+
+		if(category1Arr.length > 0) {
+			log.warn(category1Arr);
+			criCategory1 = "";
+			for(int i=0; i<category1Arr.length; i++) {	
+				if(i<category1Arr.length-1) {
+					criCategory1 += category1Arr[i]+"|";
+				}else {
+					criCategory1 += category1Arr[i];
+				}
+
+			}
+			
+		}else {
+			category1 = ";";
+		}
+
 		if(page > 0) {
 			this.pagePerList = pagePerList;
 			pagingCount = 10;		
@@ -35,38 +62,21 @@ public class ProductCriteria {
 			startPage = (page - 1) * pagePerList +1;
 			endPage = startPage + pagePerList -1;
 		}
-		if(order == null) {
+
+		if(order == null || order.equals("")) {
 			order = "registdate";
 		}
 
-		criSerTitle = "^";
-		criCategory1 = "^";
-		criCategory2 = "^";
 		
-		if( serTitle==null || serTitle.equals("null") || serTitle.equals("")){
-			if(category1 ==null || category1.equals("null") || category1.equals("") ) {		
-				if(category2 ==null || category2.equals("null") || category2.equals("")) {
-					listTitle = "전체보기";
-				}else {					
-					criCategory2 = category2;
-					listTitle = category2;
-					
-					initCategory2();
-				}
-			}else {
-				criCategory1 = category1; 
-				
-				if(category1.equals("new")) {
-					listTitle = "신상품";
-				}else if(category1.equals("best")) {
-					listTitle = "베스트";
-				}else if (category1.equals("sale")) {
-					listTitle = "할인상품";
-				}
-			}
+		if(category2.equals("") || category2.equals("select")) {
+			criCategory2 = "^";
+		
 		}else {
+			criCategory2 = category2;
+		}
+		
+		if(!serTitle.equals("")) {
 			criSerTitle = serTitle;
-			listTitle = "'"+serTitle+"' 검색결과";
 		}
 	}
 	

@@ -14,7 +14,7 @@ public class ProductVO {
 	int stock;
 	int readcount;
 	int discount;
-	int salesount;
+	int salescount;
 	String registdate;
 
 	
@@ -51,7 +51,18 @@ public class ProductVO {
 			file1Arr = file_names2.split(";");
 
 		}
+
+	}
 	
+	public void setCategory1() {
+		if(category1Arr.length > 0) {
+			 category1= "";
+			for(String c1 : category1Arr) {
+				category1 += c1+";";
+			}
+		}else{
+			category1 = ";";
+		}
 	}
 
 }
