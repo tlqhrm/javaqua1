@@ -15,6 +15,8 @@ public interface AdminMapper {
 	public List<MemberVO> member_list(PagingDTO pdto);
 	public int member_cnt();
 	
+	public MemberVO selectMember(String user_id);
+	
 	public List<ProductVO> product_list(PagingDTO pdto);
 	public int product_cnt();
 	public ProductVO product_detail(int pd_num);

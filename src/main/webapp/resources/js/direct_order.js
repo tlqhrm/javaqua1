@@ -33,7 +33,6 @@ const v=new Vue({
              .then(res=>{
              console.log(res.data);
             	this.회원정보 = res.data;
-            	console.log(res.data)
              })
              .catch(err=>{
             	alert("오류가 발생했습니다.");

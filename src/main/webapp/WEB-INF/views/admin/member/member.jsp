@@ -40,7 +40,7 @@
 					            </tr>
 					        </thead>	
 					        <tbody>	
-								<tr v-for="(item,i) in 데이터" :key="i">
+								<tr v-for="(item,i) in 데이터" :key="i" @click="회원상세보기이동(item.user_id)">
 									<td>{{item.user_num}}</td>
 									<td>{{item.user_id}}</td>
 									<td>{{item.name}}</td>
@@ -122,6 +122,9 @@
 					}
 				},
 				methods : {
+					회원상세보기이동(user_id){
+						window.open("/admin/member/member_detail?user_id="+user_id ,"open" ,"height=750 , width=1100");
+					},
 					데이터가져오기 : function(){
 						 const params = new URLSearchParams();
 			             params.append('page', this.현재페이지);  

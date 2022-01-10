@@ -28,6 +28,11 @@ public class AdminServiceimpl implements AdminService{
 		return mapper.member_cnt();
 	}	
 	
+	@Override
+	public MemberVO selectMember(String user_id) {
+		return mapper.selectMember(user_id);
+	}
+	
 	
 	@Override
 	public List<ProductVO> product_list(PagingDTO pdto) {

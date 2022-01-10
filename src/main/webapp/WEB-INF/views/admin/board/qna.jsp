@@ -88,7 +88,7 @@
 						        <a class="last" @click="페이징(페이징정보.startEnd[2])"></a>
 						    </div>  
 					    </div>  
-					    <!-- //페이징 -->						    					    			
+					    <!-- //페이징 -->	  					    			
 					</div>
 				</div>
 			</div>
@@ -103,11 +103,17 @@
 					"${_csrf.headerName}":"${_csrf.token}"
 				}	
 		}
+			
 			const v=new Vue({
 			    el : "#app",
 			    data : {	
 					데이터 : [{
-
+						qna_num: 0,
+						user_id : "",
+						subject : "",
+						content : "",
+						writedate : "",
+						status : ""
 					}],
 					페이징정보 : {
 						endPage:0,
@@ -124,7 +130,7 @@
 				},	
 				
 				created : function(){
-					this.데이터가져오기();
+					this.데이터가져오기();					
 				},
 				computed : {
 					페이징리스트(){
@@ -136,15 +142,14 @@
 					}
 				},
 				methods : {
-					데이터가져오기 : function(){
+					데이터가져오기 : async function(){
 						 const params = new URLSearchParams();
 			             params.append('page', this.현재페이지);  
 			             params.append('pagePerList', this.pagePerList);
-			           
+
 			             axios.post('/admin/qna_list',params,config)
 			             .then(res=>{
 			             	this.데이터 = res.data[0];
-			             	this.페이징정보 = res.data[1];    
 			             })
 			             .catch(err=>{
 			            	alert("오류가 발생했습니다.");

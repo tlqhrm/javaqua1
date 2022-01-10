@@ -37,6 +37,11 @@ public class AdminController {
 		log.info("member............" );
 		return "/admin/member/member.jsp";
 	}
+	@GetMapping("/member/member_detail")
+	public String member_detail() {
+		log.info("member_detail............" );
+		return "/admin/member/member_detail.jsp";
+	}
 	@GetMapping("/product")
 	public String product() {
 		log.info("product............" );
@@ -89,6 +94,15 @@ public class AdminController {
 		rs.add(member_list);
 		rs.add(pdto);
 		return rs;
+	}
+	
+	@ResponseBody
+	@PostMapping("/selectMember")
+	public MemberVO selectMember(String user_id) {	
+		log.info("selectMember....");
+		MemberVO mvo = adminservice.selectMember(user_id);	
+		log.info(mvo);
+		return mvo;
 	}
 	
 	@ResponseBody
