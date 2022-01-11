@@ -78,9 +78,6 @@ var config = {
 		created : function(){
 			this.내문의정보();
 		},	
-		computed : {
-		
-		},
 		methods : {
 			내문의정보(){
 				 const params = new URLSearchParams();

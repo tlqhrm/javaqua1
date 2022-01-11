@@ -225,6 +225,7 @@ const qna = new Vue({
 	},
 	methods : {
 		문의하기새창(pd_num){
+			if(!id){alert("회원만 이용가능합니다.");return;}
 			window.open("/qna/qna_write?pd_num="+pd_num,"open","height=750 , width=1100");
 		},
 		문의데이터가져오기 : function(){

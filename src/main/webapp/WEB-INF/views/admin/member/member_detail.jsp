@@ -79,7 +79,7 @@ config = {
 		methods : {		
 			회원정보가져오기 : function(){
 	             const params = new URLSearchParams();
-	             params.append('user_id', 'testyg');
+	             params.append('user_id', '${param.user_id}');
 	           
 	             axios.post('/admin/selectMember',params, config)
 	             .then(res=>{	             
