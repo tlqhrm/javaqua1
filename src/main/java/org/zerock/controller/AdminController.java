@@ -110,7 +110,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/selectMember")
 	public MemberVO selectMember(String user_id) {	
-		log.info("selectMember....");
+		log.info("selectMember...."+ user_id);
 		MemberVO mvo = adminservice.selectMember(user_id);	
 		log.info(mvo);
 		return mvo;
