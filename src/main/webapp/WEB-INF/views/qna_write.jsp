@@ -65,15 +65,9 @@ var config = {
 			제목 : "",
 			내용 : ""
 		},	
-		created : function(){
-	
-		},	
-		computed : {
-		
-		},
 		methods : {
 			문의등록(pd_num){
-	             const params = new URLSearchParams();
+	             const params = new URLSearchParams();	            
 				if(!this.제목){alert("제목을 입력해주세요");return;}
 				if(!this.내용){alert("내용을 입력해주세요");return;}
 	             params.append('user_id', "${id}");
