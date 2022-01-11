@@ -272,13 +272,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/contact_list")
-	public List<BoardVO> contact_list(int page, int pagePerList, String status) {
+	public List<Object> contact_list(int page, int pagePerList, String status) {
 		log.info("contact_list............" +status);
 		int totalContnet = adminservice.contact_cnt(status);
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<BoardVO> contact_list = adminservice.contact_list(pdto,status);		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(contact_list);
 		rs.add(pdto);
 		return rs;
