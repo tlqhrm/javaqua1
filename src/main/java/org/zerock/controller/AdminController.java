@@ -236,7 +236,7 @@ public class AdminController {
 	}
 	@ResponseBody
 	@PostMapping("/notice_list")
-	public List<BoardVO> notice_list(int page, int pagePerList, BoardCriteria cri, @Nullable @SessionAttribute("admin") String admin) {
+	public List<Object> notice_list(int page, int pagePerList, BoardCriteria cri, @Nullable @SessionAttribute("admin") String admin) {
 		log.info("notice_list............" );
 		int totalContnet = adminservice.notice_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
@@ -250,7 +250,7 @@ public class AdminController {
 		list = boardService.getBoardList(cri);
 		paging = boardService.getPages(cri);
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(notice_list);
 		rs.add(pdto);
 		return rs;
@@ -258,13 +258,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/faq_list")
-	public List<BoardVO> faq_list(int page, int pagePerList) {
+	public List<Object> faq_list(int page, int pagePerList) {
 		log.info("faq_list............" );
 		int totalContnet = adminservice.faq_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<BoardVO> faq_list = adminservice.faq_list(pdto);		
 		
-		List rs = new ArrayList();
+		List<Object> rs = new ArrayList<Object>();
 		rs.add(faq_list);
 		rs.add(pdto);
 		return rs;
