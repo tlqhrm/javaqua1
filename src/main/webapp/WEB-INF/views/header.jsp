@@ -175,7 +175,8 @@
 					<ul id="recent_ul" >
 				
 						<li  v-cloak @click="상세페이지(item.pd_num)" v-for="item in cookieArr" class="recent_box_1" >
-							<div class="recent_box_2"  :style="{'backgroundImage':'url(/resources/upload/product/'+item.file1+')'}"></div>
+						<!-- 	<div class="recent_box_2"  :style="{'backgroundImage':'url(/resources/upload/product/'+item.file1+')'}"></div> -->
+							<div class="recent_box_2" ><img :src="'/resources/upload/product/'+item.file1" height="100" width="100" onerror="this.src='/resources/images/이미지준비중.jpg'"></div>
 							<div  class="recent_title">{{품명(item.title)}}</div>
 							<div  v-if="item.price2 == null" class="recent_price2">{{item.price}}원</div>
 							<div  v-if="item.price2 != null" class="recent_price">{{item.price2}}원</div>

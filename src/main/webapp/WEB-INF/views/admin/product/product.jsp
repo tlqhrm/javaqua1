@@ -21,17 +21,18 @@
 		<!-- 헤더 -->'
 		<%@include file="../header.jsp"%>
 			
-		<div id="wrap">
+		
+		                 	
+			<!-- app 열기 -->
+		<div id="app" v-cloak v-on:keyup.enter="페이지1()">
+			<div id="wrap">
 			<div id="snb">
 				<h2>상품관리</h2>
 			    <ul>
 			    	<a href="/admin/product"><li id="now">상품정보</li></a>
-			    	<a href="#none" onclick="window.open('/product/productRegistForm','open','height=1000 , width=1300, left=200')"><li>상품등록</li></a>
+			    	<a href="#none" @click="상품등록()"><li>상품등록</li></a>
 			    </ul>
 			</div> 
-		                 	
-			<!-- app 열기 -->
-			<div id="app" v-cloak v-on:keyup.enter="페이지1()">
 				<div id="contents">
 					<div class="sub">										
 				        <div class="tb_tit">상품정보</div>
@@ -370,7 +371,11 @@
 						
 					},
 					상품수정 :function(pd_num){
-						window.open("/product/productUpdateForm?pd_num="+pd_num ,"open" ,"height=900 , width=1300")
+						let popup;
+						popup = window.open("/product/productUpdateForm?pd_num="+pd_num ,"open" ,"height=900 , width=1300")
+						popup.addEventListener('beforeunload', function() {
+							setTimeout(() => {v.데이터가져오기()},1000);
+						});
 					},
 					상품삭제 :function(pd_num,title){
 						if ( confirm(title+" 을 정말 삭제하시겠습니까?") ) { 
@@ -386,6 +391,15 @@
 				              	console.log(err);
 				             });
 						}
+					},
+					상품등록(){
+						let popup;
+						popup = window.open('/product/productRegistForm','open','height=1000 , width=1300, left=200');
+						
+
+						popup.addEventListener('beforeunload', function() {
+							setTimeout(() => {v.데이터가져오기()},1000);
+						});
 					},
 					전체업데이트 : function(){
 						if(updateIndex.length > 0){

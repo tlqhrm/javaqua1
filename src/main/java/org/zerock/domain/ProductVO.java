@@ -49,8 +49,12 @@ public class ProductVO {
 		
 		if(file_names2 != null) {
 			file1Arr = file_names2.split(";");
-
 		}
+		
+		if(file1Arr == null) {
+			file1Arr = new String [1];
+		}
+
 
 	}
 	
