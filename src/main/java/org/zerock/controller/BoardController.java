@@ -59,18 +59,22 @@ public class BoardController {
 		return "/board_write.jsp";
 	}
 	
+	
 	@PostMapping("/boardWrite")
-	public String writeBoard(BoardVO bvo, Model model,@SessionAttribute("id") String id,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {
+	public String writeBoard(BoardVO bvo, Model model,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {
 		
 
 		String path = ImagePath.get();
+		bvo.setUser_id(request.getRemoteUser());
+		
 		
 		if(admin == null) admin = "0";
-		
+		Map map;
 		log.info(path);
 		log.info("-----------------------");
 		log.info("Upload File Name: "+file.getOriginalFilename());
 		log.info("Upload File Size: "+file.getSize());
+		if(bvo.getFile1() != null) {
 		String uuid = UUID.randomUUID().toString();
 		String fileName = uuid+file.getOriginalFilename();
 		System.out.println(fileName);
@@ -79,9 +83,9 @@ public class BoardController {
 		File saveFile = new File(path+"board", fileName);
 					
 		log.info("/write.....");
-		bvo.setUser_id(id);
 		
-		Map map = bdService.insertBoard(bvo,admin);
+		
+		map = bdService.insertBoard(bvo,admin);
 		if((int)map.get("result") == 1) {
 			try {
 				file.transferTo(saveFile);
@@ -89,7 +93,10 @@ public class BoardController {
 				log.error(e.getMessage());
 			}
 		}
-		
+		}else {
+			log.info(bvo);
+			map = bdService.insertBoard(bvo,admin);
+		}
 		int bd_id = (int) map.get("bd_id");
 				
 
@@ -106,14 +113,15 @@ public class BoardController {
 		if(page == null) {
 			page = 1;
 		}
-
+		
 		
 		log.info("read:" + bd_id);
 		
 		BoardVO bvo = bdService.readBoard(bd_id,ip);
 		
 		List<ReplyVO> commentList = reService.getReplyList(bd_id);
-	
+		
+		model.addAttribute("id",request.getRemoteUser());
 		model.addAttribute("bvo",bvo);
 		model.addAttribute("page",page);
 		model.addAttribute("commentList",commentList);
@@ -123,7 +131,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardList")
-	public String listBoard(BoardCriteria cri, @Nullable @SessionAttribute("id") String id,@Nullable @SessionAttribute("admin") String admin,Model model, HttpServletRequest request) {
+	public String listBoard(BoardCriteria cri,@Nullable @SessionAttribute("admin") String admin,Model model, HttpServletRequest request) {
 		
 		log.info(cri.getBd_category2()+" List");
 		List<BoardVO> list = new ArrayList<>();
@@ -131,8 +139,8 @@ public class BoardController {
 		if(admin == null) admin = "0";
 		cri.setAdmin(admin);	
 		
-		if(id == null) id="";
-		cri.setId(id);
+		
+		cri.setId(request.getRemoteUser());
 		list = bdService.getBoardList(cri);
 		paging = bdService.getPages(cri);
 		model.addAttribute("paging", paging);
@@ -146,7 +154,7 @@ public class BoardController {
 	@PostMapping("/boardUpdateForm")
 	public String modifyBoardForm(BoardVO bvo,Model model) {
 		log.info("modifyForm:" + bvo);
-				
+
 		model.addAttribute("bvo",bvo);
 		return "/board_update.jsp";
 	}
@@ -160,15 +168,22 @@ public class BoardController {
 		String ogFileName = bvo.getFile1();
 		File ogFile = new File(path+"board\\"+ogFileName);
 		
+		String fileName = null;
 		String uuid = UUID.randomUUID().toString();
-		String fileName = uuid+file.getOriginalFilename();
-		bvo.setFile1(fileName);
+		if(bvo.getFile1().length() > 0) {
+			log.warn(file);
+			log.warn(bvo.getFile1());
+			log.warn(bvo.getFile1().length());
+			System.out.println("---------------"+ogFileName);
+			 fileName = uuid+file.getOriginalFilename();
+			bvo.setFile1(fileName);
+		}
 		int bd_id = bvo.getBd_id();
 		
 		boolean result = bdService.updateBoard(bvo);
 		if(result) {
 		
-			if(bvo.getFile1() != null) {
+			if(bvo.getFile1().length() >0) {
 					
 			
 			log.info("-----------------------");
@@ -211,8 +226,6 @@ public class BoardController {
 	@PostMapping("/deleteBoard")
 	public String remove(BoardVO bvo, HttpServletRequest request) {
 		log.info("remove..." + bvo);
-		String bd_category2 = bvo.getBd_category2();
-		
 		bdService.deleteBoard(bvo.getBd_id());
 			
 		String file_name = bvo.getFile1();
@@ -246,6 +259,6 @@ public class BoardController {
 			log.info("삭제 할 댓글 없음");
 		}
 				
-		return "redirect:/board/boardList?bd_category2="+bd_category2+"&page=1";
+		return "redirect:/board/boardList?bd_category2=contact&page=1";
 	}
 }

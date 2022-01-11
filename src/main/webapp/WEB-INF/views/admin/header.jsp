@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <head>
 	<link rel="stylesheet" href="/resources/css/header.css">
 	<!-- axios 추가 -->
@@ -24,7 +25,7 @@
 							<input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>
 							<span class="right_border" onClick="document.getElementById('frm').submit()" style="cursor:pointer">로그아웃</span>
 						</form></li>
-	                    <li id="mypage"><a href="/order/order_list" class="right_border blue"><sec:authentication property="principal.member.name" /> 님&nbsp;&nbsp;</a>                       
+	                    <li id="mypage"><a href="/order/order_list" class="right_border blue">님&nbsp;&nbsp;</a>                       
 	                    </li>	                   
 	                </ul>
             </div>

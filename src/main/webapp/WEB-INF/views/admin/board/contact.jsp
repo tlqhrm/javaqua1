@@ -36,13 +36,17 @@
 				        <div class="tb_tit">
 				        	1:1문의 
 				        </div>
-				        
+				        <div style="float:right">
+				        <button @click="전체보기()">전체보기</button><button @click="답변대기()">답변대기만 보기</button>
+				        </div><br>
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">	
 						
 					        <thead>
 					            <tr>
 					                <th width="50">번호</th>
+					                <th width="100">분류</th>
 					                <th>제목</th>
+					                <th width="100">작성자</th>
 					                <th width="100">작성일</th>
 					                <th width="100"></th>
 					            </tr>
@@ -50,10 +54,13 @@
 					        <tbody>	
 								<tr v-for="(item,i) in 데이터" :key="i">
 									<td>{{item.bd_num}}</td>
+									<td>{{item.bd_category1}}</td>
 									<td>{{item.title}}</td>
+									<td>{{item.user_id}}</td>
 									<td>{{item.updateDate}}</td>
 									<td style="text-align:right">
-										<button v-if="!item.reply" style="cursor:pointer">답변</button>
+										<button v-if="item.status == '[답변대기]'" style="cursor:pointer" @click="답변(item.bd_id)">답변</button>
+										<span v-else>답변완료</span>
 									</td>	
 								</tr>
 							</tbody>	
@@ -113,12 +120,13 @@
 						totalContent:0,
 						totalPage:0
 					},		
-					pagePerList : 5, //한 화면에 보여줄 데이터 수
-					현재페이지 : 1
+					pagePerList : 20, //한 화면에 보여줄 데이터 수
+					현재페이지 : 1,
+					상태 : ""
 				},	
 				
 				created : function(){
-					this.데이터가져오기();
+					this.데이터가져오기(this.상태);
 				},
 				computed : {
 					페이징리스트(){
@@ -130,10 +138,11 @@
 					}
 				},
 				methods : {
-					데이터가져오기 : function(){
+					데이터가져오기 : function(status){
 						 const params = new URLSearchParams();
 			             params.append('page', this.현재페이지);  
 			             params.append('pagePerList', this.pagePerList);
+			             params.append("status", status)
 			           
 			             axios.post('/admin/contact_list',params,config)
 			             .then(res=>{
@@ -148,11 +157,27 @@
 					페이징(val){
 						if(val <=0 || val > this.페이징정보.startEnd[2]){return;}
 						this.현재페이지 = val;
+					},
+					답변(bd_id){
+						var popup = window.open('/admin/readBoard?bd_category2=contact&bd_id='+bd_id,'open','height=900 , width=900, left=400');
+						
+						popup.addEventListener('beforeunload', function() {
+
+					   		v.데이터가져오기(v.상태);
+						});
+					},
+					답변대기(){
+						this.상태 = "[답변대기]"
+						this.데이터가져오기(this.상태);
+					},
+					전체보기(){
+						this.상태  =""
+						this.데이터가져오기(this.상태);
 					}
 				},		
 				watch : {
 					현재페이지(){
-						this.데이터가져오기();
+						this.데이터가져오기(this.상태);
 					}
 				}
 			});

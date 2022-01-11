@@ -13,11 +13,11 @@
 				<choose>
 					<when test="bd_category2.equals('contact') and admin==0">
 					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-				 	values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent}, '[답변대기]')]]>
+				 	values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
 					</when>
 					<otherwise>
 					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent)
-				 	values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent})]]>
+				 	values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent})]]>
 					</otherwise>
 				</choose>	
 			</when>
@@ -25,11 +25,11 @@
 				<choose>
 					<when test="bd_category2.equals('contact') and admin== 0">
 					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-					 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent}, '[답변대기]')]]>
+					 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
 					</when>
 					<otherwise>
 					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent)
-					 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent})]]>
+					 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent})]]>
 					</otherwise>
 				</choose>	
 			</otherwise>
@@ -88,7 +88,7 @@
 	
 <!-- 게시글 수정 -->	
 	<update id="updateBoard">
-		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1}, updatedate=to_char(sysdate,'yyyy. mm. dd. PM hh12:mi:ss') where bd_id=#{bd_id}
+		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1, jdbcType=NULL}, updatedate=to_char(sysdate,'yyyy. mm. dd. PM hh12:mi:ss') where bd_id=#{bd_id}
 	</update>
 <!-- 답글 순서변경 -->
 	<update id="increseStep">
