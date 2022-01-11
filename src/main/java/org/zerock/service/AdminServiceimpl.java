@@ -80,12 +80,12 @@ public class AdminServiceimpl implements AdminService{
 	}	
 	
 	@Override
-	public List<BoardVO> contact_list(PagingDTO pdto) {
-		return mapper.contact_list(pdto);
+	public List<BoardVO> contact_list(PagingDTO pdto, String status) {
+		return mapper.contact_list(pdto,status);
 	}	
 	@Override
-	public int contact_cnt() { 
-		return mapper.contact_cnt();
+	public int contact_cnt(String status) { 
+		return mapper.contact_cnt(status);
 	}	
 	
 	@Override

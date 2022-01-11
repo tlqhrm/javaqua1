@@ -103,6 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.rememberMe()
         .key("zerock")
         .tokenRepository(persistentTokenRepository())
+        .authenticationSuccessHandler(loginSuccessHandler())
         .tokenValiditySeconds(604800);
 	}
 	

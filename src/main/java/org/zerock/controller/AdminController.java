@@ -1,18 +1,24 @@
 package org.zerock.controller;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.zerock.domain.BoardCriteria;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.OrderDetailVO;
 import org.zerock.domain.PagingDTO;
@@ -20,9 +26,13 @@ import org.zerock.domain.ProductCriteria;
 import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
 import org.zerock.domain.QnaVO;
+import org.zerock.domain.ReplyVO;
 import org.zerock.domain.ReviewVO;
+import org.zerock.etc.ImagePath;
 import org.zerock.service.AdminService;
+import org.zerock.service.BoardService;
 import org.zerock.service.ProductService;
+import org.zerock.service.ReplyService;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -42,6 +52,10 @@ public class AdminController {
 	private AdminService adminservice;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private BoardService boardService;
+	@Autowired
+	private ReplyService replyService;
 	
 	@GetMapping("/member")
 	public String member() {
@@ -181,14 +195,60 @@ public class AdminController {
 			return "500";
 		}
 	}
-	
+	@GetMapping("/readBoard")
+	public String readBoard(int bd_id ,Model model, Integer page, String test, HttpServletRequest request) {
+		
+		String ip = request.getRemoteAddr();
+
+		if(page == null) {
+			page = 1;
+		}
+
+		
+		log.info("read:" + bd_id);
+		
+		BoardVO bvo = boardService.readBoard(bd_id,ip);
+		
+		List<ReplyVO> commentList = replyService.getReplyList(bd_id);
+		model.addAttribute("id",request.getRemoteUser());
+		model.addAttribute("bvo",bvo);
+		model.addAttribute("page",page);
+		model.addAttribute("commentList",commentList);
+		
+
+		return "/board_detail_admin.jsp";
+	}
+	@GetMapping("/boardWriteForm")
+	public String writeBoardForm(BoardVO bvo,Model model, HttpServletRequest request) {
+		
+		bvo.setUser_id(request.getRemoteUser());
+		log.info("writeBoardForm............ ");
+		
+		model.addAttribute("bvo",bvo);
+		return "/board_write_admin.jsp";
+	}
+	@PostMapping("/boardUpdateForm")
+	public String modifyBoardForm(BoardVO bvo,Model model) {
+		log.info("modifyForm:" + bvo);
+				
+		model.addAttribute("bvo",bvo);
+		return "/board_update_admin.jsp";
+	}
 	@ResponseBody
 	@PostMapping("/notice_list")
-	public List<BoardVO> notice_list(int page, int pagePerList) {
+	public List<BoardVO> notice_list(int page, int pagePerList, BoardCriteria cri, @Nullable @SessionAttribute("admin") String admin) {
 		log.info("notice_list............" );
 		int totalContnet = adminservice.notice_cnt();
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		List<BoardVO> notice_list = adminservice.notice_list(pdto);		
+		
+		List<BoardVO> list = new ArrayList<>();
+		int[] paging = new int[3];
+		if(admin == null) admin = "0";
+		cri.setAdmin(admin);	
+
+		list = boardService.getBoardList(cri);
+		paging = boardService.getPages(cri);
 		
 		List rs = new ArrayList();
 		rs.add(notice_list);
@@ -212,11 +272,11 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/contact_list")
-	public List<BoardVO> contact_list(int page, int pagePerList) {
-		log.info("contact_list............" );
-		int totalContnet = adminservice.contact_cnt();
+	public List<BoardVO> contact_list(int page, int pagePerList, String status) {
+		log.info("contact_list............" +status);
+		int totalContnet = adminservice.contact_cnt(status);
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
-		List<BoardVO> contact_list = adminservice.contact_list(pdto);		
+		List<BoardVO> contact_list = adminservice.contact_list(pdto,status);		
 		
 		List rs = new ArrayList();
 		rs.add(contact_list);
@@ -261,6 +321,49 @@ public class AdminController {
 			return "200";
 		}else {
 			return "500";
+		}
+	}
+	@ResponseBody
+	@PostMapping("/deleteBoard")
+	public String remove(BoardVO bvo, HttpServletRequest request) {
+		log.info("remove..." + bvo);
+		boolean result = boardService.deleteBoard(bvo.getBd_id());
+			
+		String file_name = bvo.getFile1();
+
+		if(file_name.length() > 0){
+			 
+			String path = ImagePath.get();
+		
+			File file = new File(path+"board\\"+file_name);
+			
+			if (file.exists()) {
+
+			      if (file.delete()){
+
+			        log.info("파일 삭제 성공 : "+file_name);
+
+			      }else{
+			    	  log.info("파일 삭제 실패");
+			      }
+			}
+		}else{
+		    
+			log.info("삭제 할 파일이 없습니다.");
+		}
+		
+		int deleteReply = replyService.deleteReplyAll(bvo.getBd_id());
+		
+		if(deleteReply > 0) {
+			log.info("댓글 "+deleteReply+"개 삭제 성공");
+		}else {
+			log.info("삭제 할 댓글 없음");
+		}
+		
+		if(result) {
+			return "삭제 되었습니다.";
+		}else {
+			return "삭제 실패했습니다.";
 		}
 	}
 }
