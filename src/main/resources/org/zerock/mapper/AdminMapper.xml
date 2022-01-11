@@ -72,15 +72,15 @@
 	</select>
 	
 	<select id="contact_list" resultType="org.zerock.domain.BoardVO">	
-		<![CDATA[ SELECT * FROM ( 
+		SELECT * FROM ( 
 	        SELECT A.*, 
 	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM board where bd_category2='contact' order by updatedate desc
+	            SELECT * FROM board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if> order by updatedate desc
 	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+        )<![CDATA[  WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
 	</select>
-	<select id="contact_cnt" resultType="int">
-		select count(*) from board where bd_category2='contact'
+	<select id="contact_cnt" resultType="int" parameterType="String">
+		select count(*) from board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if>
 	</select>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	

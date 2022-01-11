@@ -98,7 +98,7 @@ public class HomeController {
 	@PostMapping("/pdListMd")
 	public List<ProductVO> pdListMd(ProductCriteria cri) {
 		
-		cri.initCri();
+		cri.initCri(8);
 		cri.setStartPage(1);
 		cri.setEndPage(8);
 		

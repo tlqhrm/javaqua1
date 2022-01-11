@@ -27,8 +27,8 @@ public interface AdminMapper {
 	public int notice_cnt();
 	public List<BoardVO> faq_list(PagingDTO pdto);
 	public int faq_cnt();
-	public List<BoardVO> contact_list(PagingDTO pdto);
-	public int contact_cnt();
+	public List<BoardVO> contact_list(@Param("pdto") PagingDTO pdto, @Param("status") String status);
+	public int contact_cnt(@Param("status") String status);
 	
 	public List<ReviewVO> review_list(PagingDTO pdto);
 	public int review_cnt();

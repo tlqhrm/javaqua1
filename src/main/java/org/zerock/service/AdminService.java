@@ -26,8 +26,8 @@ public interface AdminService {
 	public int notice_cnt();
 	public List<BoardVO> faq_list(PagingDTO pdto);
 	public int faq_cnt();
-	public List<BoardVO> contact_list(PagingDTO pdto);
-	public int contact_cnt();
+	public List<BoardVO> contact_list(PagingDTO pdto, String status);
+	public int contact_cnt(String status);
 	
 	public List<ReviewVO> review_list(PagingDTO pdto);
 	public int review_cnt();

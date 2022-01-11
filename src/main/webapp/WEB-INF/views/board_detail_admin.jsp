@@ -15,21 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
-<c:choose>
-	<c:when test="${admin ne 1 and id ne bvo.user_id and bvo.bd_category2 eq 'contact' }">
-		<script>
-		
-		alert("접근권한이 없습니다.");
-			location.href="/";
-		
-		</script>
-	</c:when>
-	<c:otherwise>
-<body>
 
-     <!---header-->
-        <jsp:include page="header.jsp"></jsp:include>
-        <!--//header-->
+<body>
 
 
 <span id="bd_category2" style="display:none">${bvo.bd_category2}</span>
@@ -40,28 +27,8 @@
 <div id="wrap">
 
     <div id="main" >
-<div id="snb"><h2>고객센터</h2>
-	    <c:choose>
-			<c:when test="${bvo.bd_category2 eq 'notice' }">
-					<c:set var="board_name" value="공지사항"></c:set>
-			</c:when>
-			<c:when test="${bvo.bd_category2 eq 'contact' }">
-					<c:set var="board_name" value="1:1 문의"></c:set>
-			</c:when>
-			<c:when test="${bvo.bd_category2 eq 'faq' }">
-					<c:set var="board_name" value="자주하는질문"></c:set>
-			</c:when>	
-	</c:choose>
-    
-    <ul>
-		<a href="boardList?bd_category2=notice&page=1"><li <c:if test="${bvo.bd_category2 eq 'notice' }"> id="now"</c:if>>공지사항</li></a>
-       <a href="boardList?bd_category2=faq&page=1"><li <c:if test="${bvo.bd_category2 eq 'faq' }"> id="now"</c:if>>자주하는질문</li></a>
-       <a href="boardList?bd_category2=contact&page=1"><li <c:if test="${bvo.bd_category2 eq 'contact' }"> id="now"</c:if>>1:1 문의</li></a>
-       <a href=""><li>매장안내</li></a>
-    </ul><br>
-</div>  <!--snb-->
-        
-        
+
+              
 
 <div class="contents">
     <div id="contact_title"><h2>${board_name}</h2></div><br>
@@ -95,7 +62,7 @@
         </tbody>
     </table>
 </div>  <!--contents-->
-<div v-cloak class="contents" style="float:right"  id="comments"> 
+<div v-cloak class="contents" style="float:left"  id="comments"> 
 
     <table>
         <tbody>     
@@ -128,52 +95,7 @@
 
 
  
-<div style="clear:both;"></div>
-<a href="boardList?bd_category2=${bvo.bd_category2 }&page=${page}" ><span style="width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">글 목록</span></a>
-	<c:if test="${admin eq 1 and bvo.bd_category2 ne 'contact' }">
-		<form action="/board/boardUpdateForm" method="post">
-		
-		<input type="hidden" name="bd_id" value="${bvo.bd_id }">
-		<input type="hidden" name="bd_category1" value="${bvo.bd_category1 }">
-		<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
-		<input type="hidden" name="title" value="${bvo.title }">
-		<input type="hidden" name="content" value="${bvo.content }">
-		<input type="hidden" name="file1" value="${bvo.file1 }">
-		<input type="submit" value="수정하기" id="update_btn" style="cursor:pointer; height:32px; width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">
-	</form>
-	<form action="/board/deleteBoard" method="post">
-		<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
-		<input type="hidden" name="bd_id" value="${bvo.bd_id}">
-		<input type="submit" onClick="return delete_Check()" value="삭제하기" style="cursor:pointer; height:32px; width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">
-	</form>		
-		
-	</c:if>
-	<c:if test="${(id eq bvo.user_id or admin eq 1) and bvo.bd_category2 eq 'contact' }">
-	<form action="/board/boardUpdateForm" method="post">
-		<input type="hidden" name="bd_id" value="${bvo.bd_id }">
-		<input type="hidden" name="bd_category1" value="${bvo.bd_category1 }">
-		<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
-		<input type="hidden" name="title" value="${bvo.title }">
-		<input type="hidden" name="content" value="${bvo.content }">
-		<input type="hidden" name="file1" value="${bvo.file1 }">
-		<input type="submit" value="수정하기" id="update_btn" style="cursor:pointer; height:32px; width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">
-		<input type="hidden" name="${_csrf.parameterName}"
-    		value="${_csrf.token}" />
-	</form>
-	<form action="/board/deleteBoard" method="post">
-		<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
-		<input type="hidden" name="bd_id" value="${bvo.bd_id }">
-		<input type="hidden" name="file1" value="${bvo.file1 }">
-		<input type="submit" onClick="return delete_Check()" value="삭제하기" style="cursor:pointer; height:32px; width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">
-		<input type="hidden" name="${_csrf.parameterName}"
-    		value="${_csrf.token}" />
-	</form>	
-		
-		<a href="/board/boardWriteForm?step=${bvo.step + 1}&indent=${bvo.indent + 1}&group_num=${bvo.group_num}&bd_category2=${bvo.bd_category2}&bd_id=${bvo.bd_id}" ><span style="width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">답글달기</span></a>
-		
-	</c:if>
 
-<div style="clear:left;"></div>
 
 
 
@@ -185,7 +107,6 @@
 
 </div>  <!--wrap -->
 
-<jsp:include page="footer.jsp"></jsp:include>
 <script>
 
 
@@ -457,6 +378,5 @@ var row1;
 </script>
 
 </body>
-	</c:otherwise>
-</c:choose>
+
 </html>
