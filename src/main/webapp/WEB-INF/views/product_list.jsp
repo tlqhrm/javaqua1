@@ -70,13 +70,7 @@
                                         
                                     <span class="under">
                                         <a href='#none' @click="장바구니담기(${pd.pd_num}, '${pd.title}', ${pd.price}, '${pd.file1Arr[0]}', '${id}')" class=under_cart></a>
-                                        
-                                        <c:if test="${admin eq 1 }">
-                                        <span >
-                                        <button type="button" onClick="location.href='/product/productUpdateForm?pd_num=${pd.pd_num}'">수정</button>
-                                        <button type="button" onClick="deleteCheck('${pd.title}','${pd.pd_num }','${pd.file1 }')">삭제</button>
-                                        </span>
-                                        </c:if>
+
                                     </span>                                                                                                             
                                 </div>
                             </li>
