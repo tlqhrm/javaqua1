@@ -10,6 +10,7 @@ public class QnaVO {
 	private String subject;
 	private String content;
 	private String writedate;
+	private String replydate;
 	private String status;
 	private String reply;
 	private String title;

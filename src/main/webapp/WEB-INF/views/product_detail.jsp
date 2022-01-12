@@ -221,7 +221,7 @@
 						<td class="txtb replytd" width="800px">
 							<span style="white-space: pre-line;">{{item.reply}}</span>
 						</td>
-						<td>{{item.writedate}}</td>
+						<td>{{item.replydate}}</td>
 					</tr>
 				</table> 
 				

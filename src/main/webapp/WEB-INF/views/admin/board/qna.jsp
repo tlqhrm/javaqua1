@@ -109,6 +109,7 @@
 			    data : {	
 					데이터 : [{
 						qna_num: 0,
+						pd_num: 0,
 						user_id : "",
 						subject : "",
 						content : "",

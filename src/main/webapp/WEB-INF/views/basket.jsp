@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -95,11 +97,13 @@
 		                    </div> 
 		                      
 	                    </c:forEach>
-	         			</form>
-	        
-	                <div class="right-align basketrowcmd">
-	                    <a class="abutton" @click="전체삭제()">장바구니비우기</a>
-	                </div>
+	         		</form>
+	         			
+	        		<c:if test="${fn:length(cartList)!=0}">
+		                <div class="right-align basketrowcmd">
+		                    <a class="abutton" @click="전체삭제()">장바구니비우기</a>
+		                </div>
+	                </c:if>
 	        
 	                <div class="bigtext right-align box blue summoney">합계금액  <fmt:formatNumber value="${total}" pattern="#,###" />원</div>
 	        

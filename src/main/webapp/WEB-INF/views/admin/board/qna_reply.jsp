@@ -23,7 +23,7 @@
 	       		<table class="tbl_comm">
 	               <tbody>
 	                   <tr>
-	                       <th><img width="80" :src="'/resources/upload/product/'+상품정보.file1"/></th>
+	                       <th><img width="80" :src="'/resources/upload/product/'+상품정보.file1.split(';')[0]"/></th>
 	                       <td>
 	                       		{{상품정보.title}}
 	                       </td>

@@ -112,6 +112,6 @@
 		select count(*) from qna
 	</select>
 	<update id="qnaReply">
-		update QNA set reply=#{reply},status='답변완료' where qna_num=#{qna_num}
+		update QNA set reply=#{reply},status='답변완료',replydate=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS') where qna_num=#{qna_num}
 	</update>
 </mapper>

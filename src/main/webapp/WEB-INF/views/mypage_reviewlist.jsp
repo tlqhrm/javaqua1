@@ -179,7 +179,7 @@
 			             params.append('user_id', '${id}');
 			             params.append('rv_num', rv_num);  
 			           
-			             axios.post('/review/delete',params)
+			             axios.post('/review/delete',params,config)
 			             .then(res=>{
 			          		if(res.data==200){
 			          			alert("삭제 했습니다.");
