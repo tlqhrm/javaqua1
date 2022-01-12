@@ -216,7 +216,7 @@ public class AdminController {
 		model.addAttribute("commentList",commentList);
 		
 
-		return "/board_detail_admin.jsp";
+		return "/admin/board/board_detail_admin.jsp";
 	}
 	@GetMapping("/boardWriteForm")
 	public String writeBoardForm(BoardVO bvo,Model model, HttpServletRequest request) {
@@ -225,14 +225,14 @@ public class AdminController {
 		log.info("writeBoardForm............ ");
 		
 		model.addAttribute("bvo",bvo);
-		return "/board_write_admin.jsp";
+		return "/admin/board/board_write_admin.jsp";
 	}
 	@PostMapping("/boardUpdateForm")
 	public String modifyBoardForm(BoardVO bvo,Model model) {
 		log.info("modifyForm:" + bvo);
 				
 		model.addAttribute("bvo",bvo);
-		return "/board_update_admin.jsp";
+		return "/admin/board/board_update_admin.jsp";
 	}
 	@ResponseBody
 	@PostMapping("/notice_list")

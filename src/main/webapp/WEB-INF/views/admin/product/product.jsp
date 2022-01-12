@@ -140,7 +140,7 @@
 									<td>{{item.salescount}}</td>	
 									<td width="100" style="color:blue">
 										<span style="cursor:pointer" @click="상품수정(item.pd_num)">수정</span> &nbsp;&nbsp;&nbsp;
-										<span style="cursor:pointer" @click="상품삭제(item.pd_num,item.title)">삭제</span>
+										<span style="cursor:pointer" @click="상품삭제(item.pd_num,item.title,item.file1)">삭제</span>
 									</td>							
 								</tr>
 							</tbody>	
@@ -377,10 +377,11 @@
 							setTimeout(() => {v.데이터가져오기()},1000);
 						});
 					},
-					상품삭제 :function(pd_num,title){
+					상품삭제 :function(pd_num,title,file1){
 						if ( confirm(title+" 을 정말 삭제하시겠습니까?") ) { 
 							const params = new URLSearchParams();
 							params.append("pd_num",pd_num);
+							params.append("file1",file1);
 							axios.post('/product/productDelete',params,config)
 				             .then(res=>{
 				             	alert(title + "이 삭제되었습니다.");

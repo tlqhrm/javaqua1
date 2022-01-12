@@ -95,7 +95,7 @@ public class ProductController {
 		log.info("ProductRegistForm............ ");
 	
 		
-		return "/product_regist.jsp";
+		return "/admin/product/product_regist.jsp";
 	}
 	
 	@ResponseBody
@@ -217,7 +217,7 @@ public class ProductController {
 		ProductVO pvo = service.productDetail(pd_num);
 		pvo.pvoInit();
 		model.addAttribute("pvo",pvo);
-		return "/product_update.jsp";
+		return "/admin/product/product_update.jsp";
 	}
 	
 	@ResponseBody
