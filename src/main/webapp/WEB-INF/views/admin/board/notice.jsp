@@ -35,7 +35,7 @@
 					<div class="sub">										
 				        <div class="tb_tit">
 				        	공지사항 
-				        	<span style="float:right"><button onclick="window.open('/admin/boardWriteForm?bd_category2=notice','open','height=900 , width=1100, left=200')">글등록</button></span>
+				        	<span style="float:right"><button @click="글등록()">글등록</button></span>
 				        </div>
 				        
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">	
@@ -161,10 +161,20 @@
 						if(val <=0 || val > this.페이징정보.startEnd[2]){return;}
 						this.현재페이지 = val;
 					},
+					글등록(){
+						let popup;
+						
+						popup = window.open('/admin/boardWriteForm?bd_category2=notice','open','height=900 , width=1100, left=200')
+						popup.addEventListener('beforeunload', function() {							
+
+							setTimeout(() => {v.데이터가져오기()},1000);
+
+						});
+					},
 					openWin : function(i){
 						console.log(i)
 						
-						var popup;
+						let popup;
 						
 						let url = "/admin/boardUpdateForm"
 						var form = document.createElement("form");
@@ -228,9 +238,9 @@
 						document.body.removeChild(form);
 						
 						var count = 0;
-						popup.addEventListener('beforeunload', function() {
-							
+						popup.addEventListener('beforeunload', function() {							
 							count++
+							
 							if(count==2){
 								setTimeout(() => {v.데이터가져오기()},1000);
 							}

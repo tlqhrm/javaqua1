@@ -53,23 +53,23 @@ public class AutoLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		if (roleNames.contains("ROLE_ADMIN")) {
 			session.setAttribute("admin", 1);
-//			response.sendRedirect((String) session.getAttribute("prevPage"));
+			response.sendRedirect((String) session.getAttribute("prevPage"));
 			if(session.getAttribute("prevPage") != null) {
 				session.removeAttribute("prevPage");
 			}
-			
+			return;
 		}
 
 		if (roleNames.contains("ROLE_MEMBER")) {
 			session.setAttribute("admin", 0);
-//			response.sendRedirect((String) session.getAttribute("prevPage"));
+			response.sendRedirect((String) session.getAttribute("prevPage"));
 			if(session.getAttribute("prevPage") != null) {
 				session.removeAttribute("prevPage");
 			}
-			
+			return;
 		}
 
-		response.sendRedirect(request.getRequestURI());
+		response.sendRedirect("/");
 	}
 }
 

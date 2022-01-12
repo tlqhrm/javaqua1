@@ -74,25 +74,26 @@ public class BoardController {
 		log.info("-----------------------");
 		log.info("Upload File Name: "+file.getOriginalFilename());
 		log.info("Upload File Size: "+file.getSize());
-		if(bvo.getFile1() != null) {
-		String uuid = UUID.randomUUID().toString();
-		String fileName = uuid+file.getOriginalFilename();
-		System.out.println(fileName);
-		bvo.setFile1(fileName);
-		
-		File saveFile = new File(path+"board", fileName);
-					
-		log.info("/write.....");
-		
-		
-		map = bdService.insertBoard(bvo,admin);
-		if((int)map.get("result") == 1) {
-			try {
-				file.transferTo(saveFile);
-			}catch (Exception e) {
-				log.error(e.getMessage());
+		if(file.getSize() > 0) {
+			log.info(file);
+			String uuid = UUID.randomUUID().toString();
+			String fileName = uuid+file.getOriginalFilename();
+			System.out.println(fileName);
+			bvo.setFile1(fileName);
+			
+			File saveFile = new File(path+"board", fileName);
+						
+			log.info("/write.....");
+			
+			
+			map = bdService.insertBoard(bvo,admin);
+			if((int)map.get("result") == 1) {
+				try {
+					file.transferTo(saveFile);
+				}catch (Exception e) {
+					log.error(e.getMessage());
+				}
 			}
-		}
 		}else {
 			log.info(bvo);
 			map = bdService.insertBoard(bvo,admin);
@@ -170,7 +171,7 @@ public class BoardController {
 		
 		String fileName = null;
 		String uuid = UUID.randomUUID().toString();
-		if(bvo.getFile1().length() > 0) {
+		if(file.getSize() > 0) {
 			log.warn(file);
 			log.warn(bvo.getFile1());
 			log.warn(bvo.getFile1().length());
@@ -183,7 +184,7 @@ public class BoardController {
 		boolean result = bdService.updateBoard(bvo);
 		if(result) {
 		
-			if(bvo.getFile1().length() >0) {
+			if(file.getSize() > 0) {
 					
 			
 			log.info("-----------------------");
