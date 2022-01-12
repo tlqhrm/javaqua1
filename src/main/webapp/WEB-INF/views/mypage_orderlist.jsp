@@ -31,7 +31,7 @@
 				    <ul>
 						<a href="/order/order_list"><li id="now">주문내역</li></a>
 						<a href="/review/review_list"><li>리뷰내역</li></a>
-						<a href="/qna/qna_list"><li>Q&A내역</li></a>
+						<a href="/qna/qna_list"><li>상품문의내역</li></a>
 				        <a href="/member/passwordCheckForm"><li>개인정보수정</li></a>
 				    </ul>
 				</div> 

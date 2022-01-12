@@ -25,7 +25,7 @@
 							<input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>
 							<span class="right_border" onClick="document.getElementById('frm').submit()" style="cursor:pointer">로그아웃</span>
 						</form></li>
-	                    <li id="mypage"><a href="/order/order_list" class="right_border blue">님&nbsp;&nbsp;</a>                       
+	                    <li id="mypage"><a href="/order/order_list" class="right_border blue"><sec:authentication property="principal.member.user_id"/>님&nbsp;&nbsp;</a>                       
 	                    </li>	                   
 	                </ul>
             </div>
