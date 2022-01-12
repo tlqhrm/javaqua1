@@ -85,7 +85,7 @@
             <td colspan="3"><div id="subject" style="min-height: 400px;">${bvo.content }
             <c:choose>
             	<c:when test="${not empty bvo.file1 }">
-            		<br><img src="http://localhost:8090/resources/upload/board/${bvo.file1 }" alt="이미지" style="max-width:450px;">
+            		<br><img src="/resources/upload/board/${bvo.file1 }" alt="이미지" style="max-width:450px;">
             	</c:when>
             </c:choose>
             </div></td>
