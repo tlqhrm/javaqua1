@@ -48,12 +48,13 @@ public class ProductVO {
 		
 		
 		if(file_names2 != null) {
+			System.out.println("-----------------"+file_names2);
 			file1Arr = file_names2.split(";");
 		}
-		
-		if(file1Arr == null) {
-			file1Arr = new String [1];
-		}
+//		
+//		if(file1Arr == null) {
+//			file1Arr = new String [1];
+//		}
 
 
 	}

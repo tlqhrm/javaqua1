@@ -176,7 +176,12 @@ public class ProductController {
 		map.put("title",pvo.getTitle());
 		map.put("price",pvo.getStrPrice());
 		map.put("price2",pvo.getStrPrice2());
-		map.put("file1",pvo.getFile1Arr()[0]);
+		if(pvo.getFile1Arr() != null) {
+			map.put("file1",pvo.getFile1Arr()[0]);
+		}else {
+			map.put("file1","");
+		}
+		
 		
 		String recentPd = new Gson().toJson(map);
 		
@@ -251,7 +256,9 @@ public class ProductController {
 		if (files != null) {
 			for(String f : files) {
 				sb.append(f);
+				System.out.println(1);
 			}
+			
 			i = files.length;
 		}
 		List<MultipartFile> files2 = mhsr.getFiles("files2");
@@ -260,6 +267,13 @@ public class ProductController {
 		for(MultipartFile f : files2) {
 			String fileName = pvo.getFile1Arr()[i];
 			sb.append(fileName+";");
+			i++;
+			log.warn("1 = "+fileName);
+		}
+		if(files == null) {
+			i = 0;
+		}else {
+			i=files.length;
 		}
 		
 		
@@ -271,7 +285,7 @@ public class ProductController {
 		
 		if(deletedFiles != null) {
 			
-			log.info(deletedFiles[0]);
+			log.info(deletedFiles);
 			log.info("result : "+result);
 			log.info(deletedFiles.length);
 			if(result == 1 ) {
@@ -292,6 +306,7 @@ public class ProductController {
 				}
 			}
 		}
+
 		if(result == 1) {
 			for(MultipartFile f : files2) {
 				String fileName = pvo.getFile1Arr()[i];
@@ -310,10 +325,10 @@ public class ProductController {
 						e.printStackTrace();
 					}
 				}
+				log.warn("2 = "+fileName);
 				i++;
 			}	
 		}
-		
 		String pd_num = Integer.toString(pvo.getPd_num());
 
 		return pd_num;
