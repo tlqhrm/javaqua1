@@ -75,6 +75,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		if (roleNames.contains("ROLE_ADMIN")) {
 			session.setAttribute("admin", 1);
+			response.sendRedirect("/admin/member");
+			return;  
 		}else if (roleNames.contains("ROLE_MEMBER")) {
 			session.setAttribute("admin", 0);
 		}
