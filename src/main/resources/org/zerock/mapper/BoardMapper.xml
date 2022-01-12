@@ -52,7 +52,7 @@
 				select count(*) from board where bd_category2 = #{bd_category2} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
 			</when> 
 			<when test="bd_category2.equals('contact')">
-				select count(*) from board where bd_category2 = #{bd_category2} and user_id = #{id} and(user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
+				select count(*) from board where bd_category2 = #{bd_category2} and user_id = #{id,jdbcType=NULL} and(user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
 			</when>
 			<otherwise>
 				select count(*) from board where bd_category2 = #{bd_category2} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
@@ -70,7 +70,7 @@
 			</when> 
 			<when test="bd_category2.equals('contact')">
 				<![CDATA[select bd_num, user_id, title, content, writedate, reply, file1, group_num, step, indent, hit, bd_category1, bd_category2, bd_id, substr(updatedate,1,12) as updatedate,status
-						 from (select ROWNUM as rnum, A.* from (select * from board where bd_category2= #{bd_category2} and user_id =#{id} order by group_num desc, step, indent)A) 
+						 from (select ROWNUM as rnum, A.* from (select * from board where bd_category2= #{bd_category2} and user_id =#{id,jdbcType=NULL} order by group_num desc, step, indent)A) 
 						 where rnum >= #{startPage} and rnum <= #{endPage} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})]]>
 			</when>
 			<otherwise>
