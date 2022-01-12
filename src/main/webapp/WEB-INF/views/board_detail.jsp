@@ -129,24 +129,7 @@
  
 <div style="clear:both;"></div>
 <a href="boardList?bd_category2=${bvo.bd_category2 }&page=${page}" ><span style="width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">글 목록</span></a>
-	<c:if test="${admin eq 1 and bvo.bd_category2 ne 'contact' }">
-		<form action="/board/boardUpdateForm" method="post">
-		
-		<input type="hidden" name="bd_id" value="${bvo.bd_id }">
-		<input type="hidden" name="bd_category1" value="${bvo.bd_category1 }">
-		<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
-		<input type="hidden" name="title" value="${bvo.title }">
-		<input type="hidden" name="content" value="${bvo.content }">
-		<input type="hidden" name="file1" value="${bvo.file1 }">
-		<input type="submit" value="수정하기" id="update_btn" style="cursor:pointer; height:32px; width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">
-	</form>
-	<form action="/board/deleteBoard" method="post">
-		<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
-		<input type="hidden" name="bd_id" value="${bvo.bd_id}">
-		<input type="submit" onClick="return delete_Check()" value="삭제하기" style="cursor:pointer; height:32px; width:100px;text-align:center;line-height:30px;background-color:skyblue;border:rgb(103, 164, 185) solid 1px;float:right;color:#fff;margin-left:2px;font-size:13px;margin-top:60px;">
-	</form>		
-		
-	</c:if>
+	
 	<c:if test="${(id eq bvo.user_id or admin eq 1) and bvo.bd_category2 eq 'contact' }">
 	<form action="/board/boardUpdateForm" method="post">
 		<input type="hidden" name="bd_id" value="${bvo.bd_id }">
