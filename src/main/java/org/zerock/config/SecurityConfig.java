@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/qna/*").authenticated()
 		.antMatchers("/review/review_list").permitAll()
 		.antMatchers("/review/*").authenticated()
-		.antMatchers("/admin/*").hasAnyRole("ROLE_ADMIN")
+		.antMatchers("/admin/*").access("hasRole('ROLE_ADMIN')")
 		;
 		
 		//권한이 없을 때
