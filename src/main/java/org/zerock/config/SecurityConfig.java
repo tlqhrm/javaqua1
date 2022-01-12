@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.zerock.security.AutoLoginSuccessHandler;
 import org.zerock.security.CustomAccessDeniedHandler;
 import org.zerock.security.CustomAuthenticationEntryPoint;
 import org.zerock.security.CustomLoginFailureHandler;
@@ -55,29 +56,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(filter,CsrfFilter.class);
         
         
-//		http.authorizeRequests()
-//		.antMatchers("/member/login").anonymous()
-//		.antMatchers("/member/joinForm").anonymous()
-//		.antMatchers("/member/join").anonymous()
-//		.antMatchers("/member/login").anonymous()
-//		.antMatchers("/member/idCheck").anonymous()
-//		.antMatchers("/member/emailCheck").anonymous()
-//		.antMatchers("/member/*").authenticated()
-//		.antMatchers("/board/readBoard").permitAll()
-//		.antMatchers("/board/boardList").permitAll()
-//		.antMatchers("/board/*").authenticated()
-//		.antMatchers("/cart/*").authenticated()
-//		.antMatchers("/reply/getReplyList").permitAll()
-//		.antMatchers("/reply/*").authenticated()
-//		.antMatchers("/order/*").authenticated()
-//		.antMatchers("/product/productList").permitAll()
-//		.antMatchers("/product/productDetail").permitAll()
-//		.antMatchers("/product/*").access("hasRole('ROLE_ADMIN')")
-//		.antMatchers("/qna/qna_list").permitAll()
-//		.antMatchers("/qna/*").authenticated()
-//		.antMatchers("/review/review_list").permitAll()
-//		.antMatchers("/review/*").authenticated()
-//		;
+		http.authorizeRequests()
+		.antMatchers("/member/login").anonymous()
+		.antMatchers("/member/joinForm").anonymous()
+		.antMatchers("/member/join").anonymous()
+		.antMatchers("/member/login").anonymous()
+		.antMatchers("/member/idCheck").anonymous()
+		.antMatchers("/member/emailCheck").anonymous()
+		.antMatchers("/member/*").authenticated()
+		.antMatchers("/board/readBoard").permitAll()
+		.antMatchers("/board/boardList").permitAll()
+		.antMatchers("/board/*").authenticated()
+		.antMatchers("/cart/*").authenticated()
+		.antMatchers("/reply/getReplyList").permitAll()
+		.antMatchers("/reply/*").authenticated()
+		.antMatchers("/order/*").authenticated()
+		.antMatchers("/product/productList").permitAll()
+		.antMatchers("/product/productDetail").permitAll()
+		.antMatchers("/product/*").access("hasRole('ROLE_ADMIN')")
+		.antMatchers("/qna/qna_list").permitAll()
+		.antMatchers("/qna/*").authenticated()
+		.antMatchers("/review/review_list").permitAll()
+		.antMatchers("/review/*").authenticated()
+		.antMatchers("/admin/*").hasAnyRole("ROLE_ADMIN")
+		;
 		
 		//권한이 없을 때
 		http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
@@ -112,6 +114,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public AuthenticationSuccessHandler loginSuccessHandler() {
 		return new CustomLoginSuccessHandler();
+	}
+	@Bean
+	public AuthenticationSuccessHandler autologinSuccessHandler() {
+		return new AutoLoginSuccessHandler();
 	}
 	@Bean
 	public AuthenticationFailureHandler loginFailureHandler() {
