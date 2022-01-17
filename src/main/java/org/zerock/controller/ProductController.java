@@ -56,7 +56,8 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping(value= "/product/*", produces = "application/text; charset=UTF-8")
+//@RequestMapping(value= "/product/*", produces = "application/text; charset=UTF-8")
+@RequestMapping("/product/*")
 @AllArgsConstructor
 public class ProductController {
 	@Autowired
@@ -389,4 +390,19 @@ public class ProductController {
 		
 	}
 	
+	@ResponseBody
+	@PostMapping("/pdListMd")
+	public List<ProductVO> pdListMd(ProductCriteria cri) {
+		
+		cri.initCri(8);
+		cri.setStartPage(1);
+		cri.setEndPage(8);
+		
+		List<ProductVO> pdListMd = service.getIndexList(cri);
+		for(ProductVO pvo : pdListMd) {
+			pvo.pvoInit();
+		}
+		
+		return pdListMd;
+	}
 }

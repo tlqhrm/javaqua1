@@ -94,20 +94,6 @@ public class HomeController {
 		return "index.jsp";
 	}
 	
-	@ResponseBody
-	@PostMapping("/pdListMd")
-	public List<ProductVO> pdListMd(ProductCriteria cri) {
-		
-		cri.initCri(8);
-		cri.setStartPage(1);
-		cri.setEndPage(8);
-		
-		List<ProductVO> pdListMd = service.getIndexList(cri);
-		for(ProductVO pvo : pdListMd) {
-			pvo.pvoInit();
-		}
-		
-		return pdListMd;
-	}
+
 	
 }

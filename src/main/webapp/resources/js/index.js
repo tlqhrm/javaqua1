@@ -15,7 +15,7 @@ const v_pdList = new Vue({
 
 			const params = new URLSearchParams();
 			params.append("category2", category2);
-			axios.post('/pdListMd',params,config)
+			axios.post('/product/pdListMd',params,config)
 			.then(res=>{
 				this.pdListMd = res.data;		
 				this.category2 = category2;
