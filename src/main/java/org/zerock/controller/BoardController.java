@@ -2,6 +2,7 @@ package org.zerock.controller;
 
 
 import java.io.File;
+import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -261,5 +263,15 @@ public class BoardController {
 		}
 				
 		return "redirect:/board/boardList?bd_category2=contact&page=1";
+	}
+	
+	@ResponseBody
+	@PostMapping("/noticeList")
+	public List<BoardVO> noticeList(){
+		
+		 List<BoardVO>result = bdService.noticeList();
+		log.warn(result);
+		return result;
+		
 	}
 }

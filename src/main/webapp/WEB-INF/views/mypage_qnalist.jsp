@@ -31,7 +31,7 @@
 				    <ul>
 						<a href="/order/order_list"><li>주문내역</li></a>
 						<a href="/review/review_list"><li>리뷰내역</li></a>
-						<a href="/qna/qna_list"><li id="now">Q&A내역</li></a>
+						<a href="/qna/qna_list"><li id="now">상품문의내역</li></a>
 				        <a href="/member/passwordCheckForm"><li>개인정보수정</li></a>
 				    </ul>
 				</div> 
@@ -42,7 +42,7 @@
 						<div id="contents">
 							<div class="sub">																											
 								<div class="tb_tit" style="border-bottom:skyblue solid 2px;">
-						        	Q&A내역
+						        	상품문의내역
 						        </div>
 						        
 						        <table style="border-top:none;" width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table" v-for="(item,i) in 문의데이터" :key="i">				
@@ -67,7 +67,7 @@
 								</table> 
 								
 								<div v-if="!문의데이터.length" class="no_data" style="padding:150px 0 148px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;color:#4c4c4c;font-size:12px;">
-									Q&A가 존재하지 않습니다.
+									상품문의가 존재하지 않습니다.
 								</div>
 								
 								

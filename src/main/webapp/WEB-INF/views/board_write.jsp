@@ -48,7 +48,7 @@
  
 
 
-<form action = "/board/boardWrite?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form onsubmit="br()" action = "/board/boardWrite?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
 	<input type="hidden" name="group_num" value="${bvo.group_num }">
 	<input type="hidden" name="step" value="${bvo.step }">
@@ -118,5 +118,15 @@
 
 <jsp:include page="footer.jsp"></jsp:include>
 
+<script type="text/javascript">
+
+function br(){
+	var contents = document.querySelector('textarea');
+	contents.value = contents.value.replace(/(\n|\r\n)/g, '<br>');
+
+}
+
+
+</script>
 </body>
 </html>

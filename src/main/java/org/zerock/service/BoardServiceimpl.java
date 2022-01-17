@@ -129,5 +129,11 @@ public class BoardServiceimpl implements BoardService {
 			
 		return mapper.changeBoardStatus(bvo);
 	}
+
+	@Override
+	public List<BoardVO> noticeList() {
+		
+		return mapper.noticeList();
+	}
 	
 }

@@ -251,6 +251,29 @@ $(function(){
 	    cookieArr.reverse();
 	})();
 	
+	
+const vue = new Vue({
+	el:"#notice_list",
+	data:{
+		notice : []
+	},
+	created :function() {
+		const params = new URLSearchParams();
+		axios.post('/board/noticeList',params,config)
+		             .then(res=>{
+
+		             	this.notice = res.data;
+		             })
+		             .catch(err=>{
+		            	alert("오류가 발생했습니다.");
+		              	console.log(err);
+		             });
+		             
+	}
+	
+})
+	
+	
 	const v_recent = new Vue({
 		el:"#recent_div_1",
 		data:{

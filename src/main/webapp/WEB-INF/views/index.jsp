@@ -30,7 +30,7 @@
 <body>
   <jsp:include page="header.jsp"></jsp:include>
   
-    <div id="main">
+    <div id="main" v-cloak>
         <div class=" bx-sale" id="b-wrapper" style="max-width: 1050px; height: auto; ">
             <div id="bx-viewport" style="width: 1050px; position: relative; overflow: hidden; margin-left: auto; margin-right: auto; height: 242px; margin-bottom: 90px;">
                 <span class="bx-controls" style="width: 1050px; margin-top: 90px; height: 0px; z-index:1;">
@@ -177,7 +177,7 @@
 									<span ref="span1" class="mdFirSpan" style="visibility:hidden"></span>
                             		<span ref="span2" style="top:65px; visibility:hidden">{{item.title}}</span>
                             		<span ref="span3" style="top:165px; visibility:hidden">{{item.strPrice}}원</span>
-                            	 	<img ref="img" :src="'/resources/upload/product/'+item.file1Arr[0]">
+                            	 	<img ref="img" :src="'/resources/upload/product/'+item.file1Arr[0]" onerror="this.src='/resources/images/이미지준비중.jpg'">
 
                             	</a>
                             </li>  

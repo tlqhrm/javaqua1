@@ -33,7 +33,7 @@
  
 
 
-<form action = "/board/boardWrite?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form onsubmit="br()" action = "/board/boardWrite?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
 	<input type="hidden" name="group_num" value="${bvo.group_num }">
 	<input type="hidden" name="step" value="${bvo.step }">
@@ -56,6 +56,7 @@
 	                    <option value = "주문">주문</option>
 	                    <option value = "배송">배송</option>
 	                    <option value = "교환/환불">교환/환불</option>
+	                    <option value = "기타">기타</option>
             		</c:when> 
             	</c:choose>
             	</select>
@@ -68,7 +69,7 @@
 
         <tr>
             <td>내용</td>
-            <td><textarea name = "content" rows="30" cols = "100" required style="max-width:fit-content; margin-top:5px;margin-bottom: 5px;" ></textarea></td>
+            <td><textarea wrap="hard" name = "content" rows="30" cols = "100" required style="max-width:fit-content; margin-top:5px;margin-bottom: 5px;" ></textarea></td>
         </tr>
         <tr>
             <td>이미지</td>
@@ -94,5 +95,14 @@
 
 </div>  <!--wrap -->
 
+<script>
+
+function br(){
+	var contents = document.querySelector('textarea');
+	contents.value = contents.value.replace(/(\n|\r\n)/g, '<br>');
+
+}
+
+</script>
 </body>
 </html>

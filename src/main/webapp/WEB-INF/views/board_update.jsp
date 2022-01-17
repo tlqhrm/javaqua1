@@ -54,7 +54,6 @@
 		<a href="boardList?bd_category2=notice&page=1"><li <c:if test="${bvo.bd_category2 eq 'notice' }"> id="now"</c:if>>공지사항</li></a>
        <a href="boardList?bd_category2=faq&page=1"><li <c:if test="${bvo.bd_category2 eq 'faq' }"> id="now"</c:if>>자주하는질문</li></a>
        <a href="boardList?bd_category2=contact&page=1"><li <c:if test="${bvo.bd_category2 eq 'contact' }"> id="now"</c:if>>1:1 문의</li></a>
-       <a href=""><li>매장안내</li></a>
     </ul><br>
     </div>  <!--snb-->
 <div class="contents">
@@ -62,7 +61,7 @@
  
 
 
-<form action = "/board/boardUpdate" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form onsubmit="br()" action = "/board/boardUpdate" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_id" value="${bvo.bd_id }">
 	<input type="hidden" name="file1" value="${bvo.file1 }">
 	<input type="hidden" name="${_csrf.parameterName}"
@@ -131,5 +130,15 @@
 <jsp:include page="footer.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
+<script>
+var contents = document.querySelector('textarea');
+
+contents = text.replaceAll("<br>", "\r\n");
+
+function br(){	
+	contents.value = contents.value.replace(/(\n|\r\n)/g, '<br>');
+}
+</script>
+	
 </body>
 </html>

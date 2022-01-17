@@ -159,7 +159,7 @@
 					글등록(){
 						let popup;
 						
-						popup = window.open('/admin/boardWriteForm?bd_category2=notice','open','height=900 , width=1100, left=200')
+						popup = window.open('/admin/boardWriteForm?bd_category2=faq','open','height=900 , width=1100, left=200')
 						popup.addEventListener('beforeunload', function() {							
 
 							setTimeout(() => {v.데이터가져오기()},1000);
