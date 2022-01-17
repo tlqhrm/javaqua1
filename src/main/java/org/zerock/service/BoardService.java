@@ -24,4 +24,6 @@ public interface BoardService {
 	public int minusReply(int bd_id);
 	
 	public int changeBoardStatus(BoardVO bvo);
+
+	public List<BoardVO> noticeList();
 }

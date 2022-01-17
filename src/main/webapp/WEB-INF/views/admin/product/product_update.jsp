@@ -117,7 +117,7 @@
                                 <c:forEach items="${pvo.file1Arr}" var="file" varStatus="i">                                                             
                              		<div class="controll_div" id="img_controll_id_${i.index }" data-file1="${file }" data-file2="${file }">
 						        	<span class="controll_span_1"><img src="/resources/upload/product/${file }" data-file="${file }" class="selProductFile" title="Click to remove" style="max-width:73px; max-height:73px;\"></span>
-						        	<span class="controll_span_2">&nbsp;&nbsp;${file }</span>
+						        	<span class="controll_span_2">${file }</span>
 						        	<span class="controll_span_3"><button type="button" onClick="deleteImageAction(${i.index})" id="removeImg_${i.index }" style="cursor:not-allowed">삭제</button></span>
 						        	</div>
 						        </c:forEach>
@@ -283,7 +283,7 @@ function handleImgFileSelect(e){
 				alert("같은파일은 업로드 할 수 없습니다.");
 				return;
 			}
-		}
+		} 
 		sel_files2.push(f);
 		var html;
 		var reader = new FileReader();
@@ -304,7 +304,7 @@ function handleImgFileSelect(e){
 			
 			html = "<div class=\"controll_div\" id=\"img_controll_id_"+index+"\" data-file1=\""+f.name+"\" data-file2=\""+fileName+"\">"+
 		        	"<span class=\"controll_span_1\"><img src=\""+e.target.result+"\" data-file=\""+fileName+"\" class=\"selProductFile\" title=\"Click to remove\" style=\"max-width:73px; max-height:73px;\"></span>"+
-		        	"<span class=\"controll_span_2\">&nbsp&nbsp"+f.name+"</span>"+
+		        	"<span class=\"controll_span_2\">"+f.name+"</span>"+
 		        	"<span class=\"controll_span_3\"><button type=\"button\" onClick=\"deleteImageAction("+index+")\" id=\"removeImg_"+index+"\" style=\"cursor:not-allowed\">삭제</button></span>"+
 		        	"</div>";
 		    document.getElementById("img_controll").innerHTML = document.getElementById("img_controll").innerHTML + html;  
@@ -328,9 +328,26 @@ function deleteImageAction(index1){
 	console.log("before index"+index);
 	console.log("before index1"+index1);
 	
-	let sp = sel_files.splice(index1, 1);
-	sp = sp[0].replace(";",'');
-	deleted_files.push(sp);
+	if(index1 < sel_files.length){
+		//console.log("if");
+		if(sel_files.length > 0 ){			
+			let sp = sel_files.splice(index1, 1);
+			//console.log("sp: "+sp);
+			sp = sp[0].replace(";",'');
+			deleted_files.push(sp);
+			}
+	}else{
+		//console.log("else");
+		var img_name = document.getElementsByClassName("controll_span_2");
+		for(i=0; i<sel_files2.length; i++){
+			//console.log(sel_files2[i].name);
+			//console.log(img_name[index1].innerText);
+			if(sel_files2[i].name == img_name[index1].innerText ){
+				//console.log("ok");
+				sel_files2.splice(i, 1);
+			}
+		}
+	}
 
 	var img_id = ".img_id_"+index1;
 	$(img_id).remove();
@@ -383,9 +400,7 @@ function submitAction(){
 		alert("재고를 입력해 주세요.");
 		return false;
 	}
-	if($("#hidden").val()==null || $("#hidden").val() == ''){
-		return false;
-	}
+
 	
 	content_box2.innerHTML = content_box.innerHTML;
 	

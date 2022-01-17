@@ -67,7 +67,7 @@
 								</table> 
 								
 								<div v-if="!문의데이터.length" class="no_data" style="padding:150px 0 148px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;color:#4c4c4c;font-size:12px;">
-									Q&A가 존재하지 않습니다.
+									상품문의가 존재하지 않습니다.
 								</div>
 								
 								

@@ -82,6 +82,10 @@
 			
 	</select>
 	
+	<select id="noticeList" resultType="org.zerock.domain.BoardVO" parameterType="Map">
+		<![CDATA[select bd_id, title from board where ROWNUM <=6 and bd_category2 = 'notice']]>
+	</select>
+	
 	<select id="boardHitCheck" resultType="int" parameterType="Map">
 		<![CDATA[select count(*) from BOARDHIT where bd_id=#{bd_id} and ip=#{ip}]]>
 	</select>

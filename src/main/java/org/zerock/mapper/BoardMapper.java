@@ -34,4 +34,6 @@ public interface BoardMapper {
 		public int boardHitCheck(Map map);
 		
 		public int insertBoardHit(Map map);
+
+		public List<BoardVO> noticeList();
 }

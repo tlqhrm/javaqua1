@@ -344,7 +344,7 @@ body{
     margin-top: -10px;
     position: absolute;
     left: 20px;
-    top: 9.5px;
+    top: 11.5px;
 }
 #header .content{
     /* border:black 1px solid; */
@@ -366,6 +366,7 @@ body{
     font-size: 12px;
     text-align: right;
     height: 16px;
+    overflow: hidden;
 }
 #header .menu{
     width: 1050px;

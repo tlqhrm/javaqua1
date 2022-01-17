@@ -277,15 +277,7 @@ function handleImgFileSelect(e){
 		
 		
 	});
-	document.getElementById("hidden").value = content_box2.innerHTML;
-	document.getElementById("file_names1").value = "";
-	document.getElementById("file_names2").value = "";
-	for(var i=0; i<index; i++){
-		document.getElementById("file_names1").value += document.getElementById("img_controll_id_"+i).dataset.file1 + ";";
-		document.getElementById("file_names2").value += document.getElementById("img_controll_id_"+i).dataset.file2 + ";";
-
-	}
-	console.log(document.getElementById("file_names2").value);
+	
 	
 }
 

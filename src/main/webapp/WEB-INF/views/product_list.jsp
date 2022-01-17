@@ -21,7 +21,7 @@
 <body>
   <jsp:include page="header.jsp"></jsp:include>
   
-    <div id="main">
+    <div id="main" v-cloak>
      	
         <div class = "product_list">
         <!-- <div style="margin-left: auto; margin-right: auto; width:1050px; padding-top:20px;"><a>열대어</a> > <a>랜덤금붕어</a></div> -->

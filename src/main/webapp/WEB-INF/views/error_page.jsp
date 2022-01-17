@@ -6,16 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>오류</title>
 </head>
-<body>
+<body style="text-align:center;">
+<jsp:include page="header.jsp"></jsp:include>
+<div style="margin:200px 0px 300px 0px">
+<h1> 오류가 발생했습니다. 관리자에게 문의해주세요.</h1>
+</div>
+<h4>오류메세지 : <c:out value="${exception.getMessage() }"></c:out></h4>
 
-	<h4><c:out value="${exception.getMessage() }"></c:out></h4>
-	
-	<ul>
-	 <c:forEach items="${exception.getStackTrace() }" var="stack">
-	 	<li><c:out value="${stack }"></c:out></li>
-	 </c:forEach>
-	</ul>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

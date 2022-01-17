@@ -27,7 +27,7 @@
             </div>
             <div class="frame">
                 <div id="takbae">
-                    <a href="#none">※ <span class="red">생물 </span>배송안내 > ※</a>
+                    <a href="/board/readBoard?bd_id=62&page=1">※ <span class="red">생물 </span>배송안내 > ※</a>
                 </div>
                 &nbsp;&nbsp;&nbsp; github : <a href="https://github.com/tlqhrm/javaqua1.git" style="color:rgb(3, 140, 232)">github.com/tlqhrm/javaqua1.git</a>
                 <sec:authorize access="isAnonymous()">
@@ -74,21 +74,16 @@
             </div>
             <div id="notice">
                 <div class="title">
-                    <a href="#none">
+                    <a href="/board/boardList?bd_category2=notice&page=1">
                         <div id="icon"></div>
                         <div id="no">NOTICE</div>
                     </a>   
                 </div>
             </div>                
-            <div class="content">
-                <ul id="notice_list">
-                    <li><a href="#none">직원 & 아르바이트생 모집</a></li>
-                    <li><a href="#none">콜럼비아 야생 임제 수입</a> </li>
-                    <li><a href="#none">독일수입소식</a></li>
-                    <li><a href="#none">실지렁이 입고</a></li>
-                    <li><a href="#none">인도네시아 & 인도 수입종 입하소식</a></li>
-                    <li><a href="#none">베타 코이 암컷입고</a></li>
-                    <li><a href="#none">직원 & 아르바이트생 모집</a></li>
+            <div  class="content" >
+                <ul id="notice_list" >
+                	<li v-for="(item, i) in notice" ><a :href="'/board/readBoard?bd_id='+item.bd_id+'&page=1'">{{item.title}}</a></li>
+                   
                 </ul>
             </div>                 
         </div>
@@ -194,3 +189,11 @@
 			    </li>
    			</ul>
 		</div>
+<script>
+config = {
+		headers:{
+			"${_csrf.headerName}":"${_csrf.token}"
+		}	
+}
+
+</script>
