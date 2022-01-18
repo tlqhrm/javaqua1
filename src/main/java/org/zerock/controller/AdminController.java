@@ -133,29 +133,22 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/product_list")
 	public List<Object> product_list(String cri) throws JsonParseException, JsonMappingException, IOException {
-		
-		
+
 		log.warn(cri);
 		List<ProductVO> list = new ArrayList<>();
 		int[] paging = new int[3];
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-
 		ProductCriteriaAdmin criAdmin = objectMapper.readValue(cri, ProductCriteriaAdmin.class);
-
-
 		criAdmin.initCri(20);
-
 		
 		list = productService.getListAdmin(criAdmin); 
 		for(ProductVO lst : list) {
 			lst.pvoInit();
 		}
-		log.info(cri);
+		
 		paging = productService.getPagesAdmin(criAdmin);
-		
-		
-		
+
 		List<Object> rs = new ArrayList<Object>();
 		rs.add(list);
 		rs.add(paging);

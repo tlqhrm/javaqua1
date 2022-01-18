@@ -53,8 +53,7 @@ public class BoardController {
 
 	
 	@GetMapping("/boardWriteForm")
-	public String writeBoardForm(BoardVO bvo, Model model) {
-		
+	public String writeBoardForm(BoardVO bvo, Model model) {		
 		log.info("writeBoardForm............ " );
 		
 		model.addAttribute("bvo",bvo);
@@ -63,13 +62,10 @@ public class BoardController {
 	
 	
 	@PostMapping("/boardWrite")
-	public String writeBoard(BoardVO bvo, Model model,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {
-		
-
+	public String writeBoard(BoardVO bvo, Model model,@Nullable @SessionAttribute("admin") String admin, MultipartFile file , HttpServletRequest request) {		
 		String path = ImagePath.get();
 		bvo.setUser_id(request.getRemoteUser());
-		
-		
+				
 		if(admin == null) admin = "0";
 		Map map;
 		log.info(path);
@@ -109,15 +105,13 @@ public class BoardController {
 	}
 	
 	@GetMapping("/readBoard")
-	public String readBoard(int bd_id ,Model model, Integer page, String test, HttpServletRequest request) {
-		
+	public String readBoard(int bd_id ,Model model, Integer page, String test, HttpServletRequest request) {		
 		String ip = request.getRemoteAddr();
 
 		if(page == null) {
 			page = 1;
 		}
-		
-		
+			
 		log.info("read:" + bd_id);
 		
 		BoardVO bvo = bdService.readBoard(bd_id,ip);
@@ -129,7 +123,6 @@ public class BoardController {
 		model.addAttribute("page",page);
 		model.addAttribute("commentList",commentList);
 		
-
 		return "/board_detail.jsp";
 	}
 	
@@ -140,12 +133,12 @@ public class BoardController {
 		List<BoardVO> list = new ArrayList<>();
 		int[] paging = new int[3];
 		if(admin == null) admin = "0";
-		cri.setAdmin(admin);	
-		
-		
+		cri.setAdmin(admin);					
 		cri.setId(request.getRemoteUser());
+		
 		list = bdService.getBoardList(cri);
 		paging = bdService.getPages(cri);
+		
 		model.addAttribute("paging", paging);
 		model.addAttribute("bdList", list);
 		model.addAttribute("bdCri", cri);
@@ -166,11 +159,9 @@ public class BoardController {
 	public String modifyBoard(BoardVO bvo,Model model, MultipartFile file) {
 		log.info("modify:" + bvo);
 		
-		String path = ImagePath.get();
-		
+		String path = ImagePath.get();		
 		String ogFileName = bvo.getFile1();
-		File ogFile = new File(path+"board\\"+ogFileName);
-		
+		File ogFile = new File(path+"board\\"+ogFileName);		
 		String fileName = null;
 		String uuid = UUID.randomUUID().toString();
 		if(file.getSize() > 0) {
@@ -181,9 +172,9 @@ public class BoardController {
 			 fileName = uuid+file.getOriginalFilename();
 			bvo.setFile1(fileName);
 		}
-		int bd_id = bvo.getBd_id();
-		
+		int bd_id = bvo.getBd_id();		
 		boolean result = bdService.updateBoard(bvo);
+		
 		if(result) {
 		
 			if(file.getSize() > 0) {

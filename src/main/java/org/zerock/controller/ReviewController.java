@@ -41,7 +41,7 @@ public class ReviewController {
 		log.info("review_write............" );
 		ProductVO pvo = pvservice.productDetail(pd_num);
 		model.addAttribute("pvo", pvo);
-		log.info(pvo);
+
 		return "/review_write.jsp";
 	}
 	
@@ -108,7 +108,6 @@ public class ReviewController {
 		
 		int totalContnet = rvservice.review_cnt(pd_num);
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
-		log.info(pdto);
 		List<ReviewVO> reviewlist = rvservice.review_list(pd_num,pdto);
 		
 		List<Object> rs = new ArrayList<Object>();
@@ -126,9 +125,7 @@ public class ReviewController {
 		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, 10);
 		log.info(pdto);
 		List<ReviewVO> myreview = rvservice.myreview(user_id,pdto);
-		
-		log.info(myreview);
-		
+
 		List<Object> rs = new ArrayList<Object>();
 		rs.add(myreview);
 		rs.add(pdto);

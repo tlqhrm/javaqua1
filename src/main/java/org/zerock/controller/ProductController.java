@@ -62,8 +62,7 @@ import lombok.extern.log4j.Log4j;
 public class ProductController {
 	@Autowired
 	private ProductService service;
-	@Autowired
-	private ServletContext context;
+
 
 	
 	@GetMapping("/productList")
@@ -117,12 +116,9 @@ public class ProductController {
 		}else {
 			category1=";";
 		}
-
-		pvo.setCategory1(category1);
-		
+		pvo.setCategory1(category1);		
 		pvo.pvoInit();
-		
-		
+			
 		String path = ImagePath.get();
 		List<MultipartFile> files = mhsr.getFiles("files");
 		StringBuffer sb = new StringBuffer();
@@ -244,15 +240,13 @@ public class ProductController {
 		}else {
 			category1=";";
 		}
-		pvo.setCategory1(category1);
-		
+		pvo.setCategory1(category1);		
 		pvo.pvoInit();
 		
-		StringBuffer sb = new StringBuffer();
-		
-		String path = ImagePath.get();
-		
+		StringBuffer sb = new StringBuffer();		
+		String path = ImagePath.get();		
 		int i = 0;
+		//기존에 있던 파일들 중 삭제되지 않은 파일들
 		String[] files = mhsr.getParameterValues("files");
 		if (files != null) {
 			for(String f : files) {
@@ -262,8 +256,10 @@ public class ProductController {
 			
 			i = files.length;
 		}
+		
+		//새로등록한 파일목록
 		List<MultipartFile> files2 = mhsr.getFiles("files2");
-		String[] deletedFiles = mhsr.getParameterValues("deleted_files");
+
 		
 		for(MultipartFile f : files2) {
 			String fileName = pvo.getFile1Arr()[i];
@@ -284,6 +280,8 @@ public class ProductController {
 		
 		int result = service.productUpdate(pvo);
 		
+		//기존에 있던 파일 중 삭제된 파일 목록
+		String[] deletedFiles = mhsr.getParameterValues("deleted_files");
 		if(deletedFiles != null) {
 			
 			log.info(deletedFiles);
