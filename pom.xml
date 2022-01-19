@@ -26,7 +26,11 @@
 	    </dependencies>
 	</dependencyManagement>
 	
+	
+
+
 	<dependencies>	
+
 		<!-- ... other dependency elements ... --> 
 		<dependency>
 		    <groupId>org.springframework.security</groupId>

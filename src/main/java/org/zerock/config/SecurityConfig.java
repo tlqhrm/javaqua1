@@ -17,7 +17,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -27,7 +26,6 @@ import org.zerock.security.CustomAccessDeniedHandler;
 import org.zerock.security.CustomAuthenticationEntryPoint;
 import org.zerock.security.CustomLoginFailureHandler;
 import org.zerock.security.CustomLoginSuccessHandler;
-import org.zerock.security.CustomLogoutSuccessHandler;
 import org.zerock.security.CustomUserDetailsService;
 
 import lombok.Setter;
