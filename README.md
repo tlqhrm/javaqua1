@@ -5,6 +5,9 @@
 
 
 사이트 : [http://javaqua.cafe24.com/](http://javaqua.cafe24.com/)
+## 개요
+<br>
+스프링 MVC패턴을 이용한 온라인 쇼핑몰 구현.
 ## 목적
 
 * 홈페이지 구현을 통한 웹개발에 대한 전반적인 흐름파악
