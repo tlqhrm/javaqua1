@@ -37,7 +37,8 @@
 
 3. **동작구조**
 
-![동작구조](https://user-images.githubusercontent.com/87694251/150305470-1ba857dd-b01f-4f5a-9b02-280742f9d286.png)
+
+![동작구조](https://user-images.githubusercontent.com/87694251/150311125-18761bd1-1d1e-47fd-bde5-c9106be78137.jpg)
 
 
 
