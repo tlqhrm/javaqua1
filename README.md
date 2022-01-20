@@ -34,7 +34,7 @@
 * Spring 5
 * JDK 1.8
 * Oracle 19c
-* Tomcat 9
+* Tomcat 8
 * MyBatis 3.4
 * Maven 2.9
 
