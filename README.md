@@ -45,6 +45,7 @@
 * Ajax
 * Vue.js
 * Axios
+* JSP
 ## 프로젝트 구조
 <img width="1400" alt="폴더구조" src="https://user-images.githubusercontent.com/85216782/150079205-0673d829-a530-491e-bfea-94f6d03b87fe.png">  
 
