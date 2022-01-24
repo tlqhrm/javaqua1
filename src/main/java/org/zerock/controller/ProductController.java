@@ -182,7 +182,6 @@ public class ProductController {
 		
 		String recentPd = new Gson().toJson(map);
 		
-		String cName = "pd_num"+pvo.getPd_num();
 		Cookie cookie = new Cookie("pd_num" + Integer.toString(pvo.getPd_num()), URLEncoder.encode(recentPd,"UTF-8"));
 		cookie.setPath("/");
 		cookie.setMaxAge(0);
@@ -195,17 +194,14 @@ public class ProductController {
 
 		int count = 0;
 		int cookieNum = 10;
-		int[] index = new int[12];
+		int[] index = new int[11];
 		for(int i=0; i< cookies.length; i++) {
 			if(cookies[i].getName().contains("pd_num")) {
 				index[count] = i ;
 				count++;
-				if(cookies[i].getName().equals(cName)) {
-					cookieNum++;
-				}
 			}
 		}
-		if(count >= cookieNum) {
+		if(count > cookieNum) {
 			cookies[index[0]].setMaxAge(0);
 			cookies[index[0]].setPath("/");
 			response.addCookie(cookies[index[0]]);
