@@ -59,8 +59,8 @@ public class ProductCriteriaAdmin {
 			this.pagePerList = pagePerList;
 			pagingCount = 10;		
 			
-			startPage = (page - 1) * pagePerList +1;
-			endPage = startPage + pagePerList -1;
+			startPage = (page - 1) * pagePerList ;
+			endPage = startPage + pagePerList ;
 		}
 
 		if(order == null || order.equals("")) {

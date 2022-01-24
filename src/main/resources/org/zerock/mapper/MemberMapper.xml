@@ -9,7 +9,7 @@
 	</select> -->	
 	<insert id="insert">	
 		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_address2, user_phone)
-		 		values(member_seq.nextval, #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone})]]>
+		 		values(nextval(member_seq), #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone})]]>
 	</insert>
 	<insert id="insertAuth">
 		insert into member_auth(user_id, auth) values(#{user_id}, #{auth})
@@ -44,26 +44,7 @@
 		update member set user_pw= #{user_pw}, user_email=#{user_email}, user_address=#{user_address}, user_address2=#{user_address2},
 		user_phone=#{user_phone} where user_num=#{user_num}
 	</update>
-	<!--
-	
-	<insert id="insertSelectKey">
-		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
-			select seq_board.nextval from dual
-		</selectKey>
-		
-		insert into tbl_board (bno,title,content,writer)
-		values (#{bno}, #{title}, #{content}, #{writer})
-	</insert>
-	
-	<select id="read" resultType="org.zerock.domain.BoardVO">
-		select * from tbl_board where bno = #{bno}
-	</select>
-	
-	<delete id="delete">
-		delete from tbl_board where bno = #{bno}
-	</delete>
-	
-	 -->
+
 	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
     <id property="user_id" column="user_id"/>
     <result property="user_id" column="user_id"/>

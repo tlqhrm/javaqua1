@@ -13,11 +13,11 @@
 	
 	<insert id="insertReply">
 		<![CDATA[insert into reply(re_num, bd_id, user_id, comment1)
-				values(re_seq.nextval, #{bd_id}, #{user_id}, #{comment1})]]>
+				values(nextval(re_seq), #{bd_id}, #{user_id}, #{comment1})]]>
 	</insert>
 	
 	<update id="updateReply">
-		<![CDATA[update reply set comment1 = #{comment1}, updatedate = concat('(수정됨)',to_char(sysdate,'yyyy. mm. dd. PM hh12:mi:ss')) where re_num = #{re_num}]]>
+		<![CDATA[update reply set comment1 = #{comment1}, updatedate = concat('(수정됨)',date_format(sysdate(),'%Y. %m. %d. %T')) where re_num = #{re_num}]]>
 	</update>
 
 	<delete id="deleteReply">

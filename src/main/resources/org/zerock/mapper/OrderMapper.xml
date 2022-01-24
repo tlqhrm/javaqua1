@@ -9,16 +9,16 @@
 	<!-- [주문]order 테이블 insert -->
 	<insert id="insertOd">
 		insert into order1(od_num, user_id, totalPrice)
-	 	values(ORDER1_SEQ.NEXTVAL,#{odvo.user_id},#{totalPrice})
+	 	values(nextval(ORDER1_SEQ),#{odvo.user_id},#{totalPrice})
 	</insert>
 	<!-- [주문]order_detail 테이블 insert -->
 	<insert id="insertOdt">
 		<selectKey keyProperty="od_num" order="BEFORE" resultType="int">
-			SELECT od_num FROM order1 WHERE user_id=#{user_id} and ROWNUM=1 order by od_num DESC
+			SELECT od_num FROM order1 WHERE user_id=#{user_id} order by od_num DESC LIMIT 1
 		</selectKey>
 	
 		insert into order_detail(odt_num,od_num,pd_num,user_id,amount,price,title)
-	 	values(ORDER_DETAIL_SEQ.NEXTVAL,#{od_num},#{pd_num},#{user_id},#{amount},#{price},#{title})
+	 	values(nextval(ORDER_DETAIL_SEQ),#{od_num},#{pd_num},#{user_id},#{amount},#{price},#{title})
 	</insert>
 	
 	<!-- 주문내역 가져오기 (order1 테이블) -->
