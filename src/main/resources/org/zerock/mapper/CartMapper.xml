@@ -46,7 +46,7 @@
 	 		
 	 	<!-- od_num 얻어오기 -->	
 	 	<selectKey keyProperty="od_num" order="AFTER" resultType="int">
-			SELECT od_num FROM order1 WHERE user_id=#{user_id} and @ROWNUM:=@ROWNUM+1=1 order by od_num DESC
+			SELECT od_num FROM order1 WHERE user_id=#{user_id} order by od_num DESC limit 1
 		</selectKey>	
 	</insert>
 	
