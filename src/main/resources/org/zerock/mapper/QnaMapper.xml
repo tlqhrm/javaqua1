@@ -4,7 +4,7 @@
 <mapper namespace="org.zerock.mapper.QnaMapper">
 	<insert id="write">
 		insert into qna(qna_num, pd_num, user_id, subject, content)
-	 	values(nextval(QNA_SEQ),#{pd_num},#{user_id}, #{subject}, #{content})
+	 	values((select nextval('QNA_SEQ') FROM DUAL),#{pd_num},#{user_id}, #{subject}, #{content})
 	</insert>
 	<update id="modify">
 		update qna set subject=#{subject}, content=#{content} where qna_num=#{qna_num} and user_id=#{user_id}

@@ -9,7 +9,7 @@
 	</select> -->	
 	<insert id="insert">	
 		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_address2, user_phone)
-		 		values(nextval(member_seq), #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone})]]>
+		 		values((select nextval('member_seq') FROM DUAL), #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone})]]>
 	</insert>
 	<insert id="insertAuth">
 		insert into member_auth(user_id, auth) values(#{user_id}, #{auth})

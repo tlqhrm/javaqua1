@@ -6,16 +6,16 @@
 <!-- 게시글 쓰기 -->
 	<insert id="insertBoard" parameterType="Map">
 		<selectKey keyProperty="bd_id" order="BEFORE" resultType="_int" >
-			select nextval(board_seq)
+			select nextval('board_seq') FROM DUAL
 		</selectKey>
 		<choose>
 			<when test="group_num > 0"> 
 				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-			 	values(#{bd_id}, nextval(${bd_category2}_seq), #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
+			 	values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
 			</when>
 			<otherwise>
 				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-				values(#{bd_id}, nextval(${bd_category2}_seq), #{user_id}, #{title}, #{content}, nextval(${bd_category2}_group_seq), #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
+				values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content},(select nextval('${bd_category2}_group_seq') FROM DUAL), #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
 			</otherwise>
 		</choose>	
 	</insert>

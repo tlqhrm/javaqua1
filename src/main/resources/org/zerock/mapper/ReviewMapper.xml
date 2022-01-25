@@ -4,7 +4,7 @@
 <mapper namespace="org.zerock.mapper.ReviewMapper">
 	<insert id="write">
 		insert into review(rv_num, pd_num, user_id, content)
-	 	values(nextval(REVIEW_SEQ),#{pd_num},#{user_id}, #{content})
+	 	values((select nextval('REVIEW_SEQ') FROM DUAL),#{pd_num},#{user_id}, #{content})
 	</insert>
 	<update id="modify">
 		update review set content=#{content} where rv_num=#{rv_num} and user_id=#{user_id}

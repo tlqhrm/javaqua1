@@ -13,7 +13,7 @@
 	
 	<insert id="insertReply">
 		<![CDATA[insert into reply(re_num, bd_id, user_id, comment1)
-				values(nextval(re_seq), #{bd_id}, #{user_id}, #{comment1})]]>
+				values((select nextval('re_seq') FROM DUAL), #{bd_id}, #{user_id}, #{comment1})]]>
 	</insert>
 	
 	<update id="updateReply">

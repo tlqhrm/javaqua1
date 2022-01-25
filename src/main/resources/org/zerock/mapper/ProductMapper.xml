@@ -56,7 +56,7 @@
 	
 	<insert id="productRegist">
 		<selectKey keyProperty="pd_num" order="BEFORE" resultType="_int">
-			select nextval(product_seq) from dual
+			select nextval('product_seq') from dual
 		</selectKey>
 		<![CDATA[insert into Product(pd_num, category1, category2, title, price, content, file1, stock, discount)
 				 values(#{pd_num}, #{category1, jdbcType=VARCHAR}, #{category2}, #{title}, #{price}, #{content}, #{file1}, #{stock}, #{discount})]]>

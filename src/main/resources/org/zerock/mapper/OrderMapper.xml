@@ -9,7 +9,7 @@
 	<!-- [주문]order 테이블 insert -->
 	<insert id="insertOd">
 		insert into order1(od_num, user_id, totalPrice)
-	 	values(nextval(ORDER1_SEQ),#{odvo.user_id},#{totalPrice})
+	 	values((select nextval('ORDER1_SEQ') FROM DUAL),#{odvo.user_id},#{totalPrice})
 	</insert>
 	<!-- [주문]order_detail 테이블 insert -->
 	<insert id="insertOdt">
@@ -18,7 +18,7 @@
 		</selectKey>
 	
 		insert into order_detail(odt_num,od_num,pd_num,user_id,amount,price,title)
-	 	values(nextval(ORDER_DETAIL_SEQ),#{od_num},#{pd_num},#{user_id},#{amount},#{price},#{title})
+	 	values((select nextval('ORDER_DETAIL_SEQ') FROM DUAL),#{od_num},#{pd_num},#{user_id},#{amount},#{price},#{title})
 	</insert>
 	
 	<!-- 주문내역 가져오기 (order1 테이블) -->
