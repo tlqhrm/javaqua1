@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import lombok.extern.log4j.Log4j;
@@ -19,6 +20,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
       HttpServletResponse response, AccessDeniedException accessException)
       throws IOException, ServletException {
 
+	  UserDetails userDetails = (UserDetails)request.getUserPrincipal();
+	log.error(userDetails);  
     log.error("Access Denied Handler");
 
     log.error("Redirect....");

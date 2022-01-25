@@ -30,8 +30,8 @@ public class PagingDTO {
 		}
 		
 		//보여줄 데이터 범위 지정
-		startNum = page*pagePerList-(pagePerList-1);
-        endNum = startNum+(pagePerList-1); 
+		startNum = page*pagePerList-(pagePerList);
+        endNum = startNum+(pagePerList); 
 		
 		// 페이징 범위 계산
 		// 시작과 끝 페이지		

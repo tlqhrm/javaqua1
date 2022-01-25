@@ -389,7 +389,7 @@ public class ProductController {
 	public List<ProductVO> pdListMd(ProductCriteria cri) {
 		
 		cri.initCri(8);
-		cri.setStartPage(1);
+		cri.setStartPage(0);
 		cri.setEndPage(8);
 		
 		List<ProductVO> pdListMd = service.getIndexList(cri);
