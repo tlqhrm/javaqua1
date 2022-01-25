@@ -26,7 +26,7 @@
 		<![CDATA[ select A.*,
 		(select title from product where pd_num = A.pd_num ) title,
 		(select file1 from product where pd_num = A.pd_num ) file1
-		from (SELECT * FROM review WHERE user_id='admin90' order by writedate desc) A
+		from (SELECT * FROM review WHERE user_id=#{user_id} order by writedate desc) A
 		LIMIT #{pdto.startNum}, #{pdto.endNum} ]]>
 	</select>
 	<select id="myreview_cnt" resultType="int">
