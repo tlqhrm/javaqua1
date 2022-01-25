@@ -57,7 +57,7 @@ public class AdminController {
 	@Autowired
 	private ReplyService replyService;
 	
-	@GetMapping(value = {"/member",""})
+	@GetMapping("/member")
 	public String member() {
 		log.info("member............" );
 		return "/admin/member/member.jsp";
