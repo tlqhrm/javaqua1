@@ -11,7 +11,7 @@
 	</update>
 	
 	<delete id="delete">
-		delete review where rv_num=#{rv_num} and user_id=#{user_id}
+		delete from review where rv_num=#{rv_num} and user_id=#{user_id}
 	</delete>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	

@@ -10,12 +10,12 @@
 		</selectKey>
 		<choose>
 			<when test="group_num > 0"> 
-				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-			 	values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
+				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status,writedate, updatedate)
+			 	values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]',date_format(sysdate(),'%Y. %m. %d. %T'),date_format(sysdate(),'%Y. %m. %d. %T'))]]>
 			</when>
 			<otherwise>
-				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-				values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content},(select nextval('${bd_category2}_group_seq') FROM DUAL), #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]')]]>
+				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status,writedate, updatedate)
+				values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content},(select nextval('${bd_category2}_group_seq') FROM DUAL), #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]',date_format(sysdate(),'%Y. %m. %d. %T'),date_format(sysdate(),'%Y. %m. %d. %T'))]]>
 			</otherwise>
 		</choose>	
 	</insert>
@@ -69,7 +69,7 @@
 	
 <!-- 게시글 수정 -->	
 	<update id="updateBoard">
-		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1, jdbcType=NULL}, updatedate=now() where bd_id=#{bd_id}
+		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1, jdbcType=NULL}, updatedate=date_format(sysdate(),'%Y. %m. %d. %T') where bd_id=#{bd_id}
 	</update>
 <!-- 답글 순서변경 -->
 	<update id="increseStep">
@@ -92,7 +92,7 @@
 	</update>
 <!-- 게시글 삭제 -->
 	<delete id="deleteBoard">
-		delete board where bd_id = #{bd_id}
+		delete from board where bd_id = #{bd_id}
 	</delete>
 	
 </mapper>
