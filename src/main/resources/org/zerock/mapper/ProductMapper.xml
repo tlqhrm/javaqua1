@@ -64,7 +64,7 @@
 	
 
 	<select id="productDetail" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from Product where pd_num = #{pd_num}]]>
+		<![CDATA[select * from product where pd_num = #{pd_num}]]>
 	</select>
 	
 	<delete id="productDelete">

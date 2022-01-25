@@ -21,7 +21,7 @@
 	</insert>
 
 	<insert id="insertBoardHit" parameterType="Map">
-		<![CDATA[insert into BOARDHIT(bd_id, ip) values(#{bd_id}, #{ip})]]>
+		<![CDATA[insert into boardhit(bd_id, ip) values(#{bd_id}, #{ip})]]>
 	</insert>
 
 <!-- 게시글 상세보기 -->	
