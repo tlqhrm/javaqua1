@@ -64,7 +64,7 @@
 	</select>
 	
 	<select id="boardHitCheck" resultType="int" parameterType="Map">
-		<![CDATA[select count(*) from BOARDHIT where bd_id=#{bd_id} and ip=#{ip}]]>
+		<![CDATA[select count(*) from boardhit where bd_id=#{bd_id} and ip=#{ip}]]>
 	</select>
 	
 <!-- 게시글 수정 -->	
