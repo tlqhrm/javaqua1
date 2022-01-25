@@ -36,7 +36,8 @@
 
 ## 동작 구조
 
-![동작구조](https://user-images.githubusercontent.com/87694251/150311125-18761bd1-1d1e-47fd-bde5-c9106be78137.jpg)
+![구조](https://user-images.githubusercontent.com/87694251/150920090-aa8e92d0-8d67-4b76-8bda-c84c3e096fc8.jpg)
+
 
 
 
