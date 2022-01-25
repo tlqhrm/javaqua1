@@ -11,7 +11,7 @@
 	</update>
 	
 	<delete id="delete">
-		delete qna where qna_num=#{qna_num} and user_id=#{user_id}
+		delete from qna where qna_num=#{qna_num} and user_id=#{user_id}
 	</delete>
 	
 	<select id="qna_list" resultType="org.zerock.domain.QnaVO">	

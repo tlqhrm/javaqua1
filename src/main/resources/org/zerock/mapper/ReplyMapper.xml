@@ -12,8 +12,8 @@
 	</select>
 	
 	<insert id="insertReply">
-		<![CDATA[insert into reply(re_num, bd_id, user_id, comment1)
-				values((select nextval('re_seq') FROM DUAL), #{bd_id}, #{user_id}, #{comment1})]]>
+		<![CDATA[insert into reply(re_num, bd_id, user_id, comment1, writedate, updatedate)
+				values((select nextval('re_seq') FROM DUAL), #{bd_id}, #{user_id}, #{comment1}, date_format(sysdate(),'%Y. %m. %d. %T') ,date_format(sysdate(),'%Y. %m. %d. %T'))]]>
 	</insert>
 	
 	<update id="updateReply">
@@ -21,11 +21,11 @@
 	</update>
 
 	<delete id="deleteReply">
-		<![CDATA[delete reply where re_num = #{re_num}]]>
+		<![CDATA[delete from reply where re_num = #{re_num}]]>
 	</delete>
 	
 	<delete id="deleteReplyAll">
-		<![CDATA[delete reply where bd_id = #{bd_id}]]>
+		<![CDATA[delete from reply where bd_id = #{bd_id}]]>
 	</delete>
 
 </mapper>
