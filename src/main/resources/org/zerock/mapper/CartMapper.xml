@@ -30,12 +30,12 @@
 	
 	<!-- 특정상품삭제 -->	
 	<delete id="cartOneDel">
-		delete cart where cart_num=#{cart_num} and user_id=#{user_id}
+		delete from cart where cart_num=#{cart_num} and user_id=#{user_id}
 	</delete>
 	
 	<!-- 전체삭제 -->	
 	<delete id="cartAllDel">
-		delete cart where user_id=#{user_id}
+		delete from cart where user_id=#{user_id}
 	</delete>
 	
 
