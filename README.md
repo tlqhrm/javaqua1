@@ -18,7 +18,14 @@
 ## 주요기능 및 역할분담  
 
 
+> ### 김지훈
+* 로그인 (아이디저장, 자동로그인, 회원가입, 회원수정)
+* 게시판 (CRUD, 페이징, 조건별 검색 및 페이징, 단일 이미지 첨부, 댓글기능, 답글기능)
+* 상품 (CRUD, 페이징, 조건별 검색 및 페이징, 다중 이미지 첨부 및 텍스트)
+* 최근본 상품 (쿠키)
+* 스프링 시큐리티 (사용자 인증과 권한설정)
 
+> ### 이예구
 * 로그인 (아이디저장, 자동로그인, 회원가입, 회원수정)
 * 게시판 (CRUD, 페이징, 조건별 검색 및 페이징, 단일 이미지 첨부, 댓글기능, 답글기능)
 * 상품 (CRUD, 페이징, 조건별 검색 및 페이징, 다중 이미지 첨부 및 텍스트)
@@ -28,27 +35,27 @@
 * 관리자페이지 (회원정보, 상품관리, 주문관리, 게시글 및 문의관리)
 * 스프링 시큐리티 (사용자 인증과 권한설정)
 
-
 ## 개발환경
 
 > ### Back-End
 
 * Spring 5
 * JDK 1.8
-* Oracle 19c
+* MariaDB
 * Tomcat 8
 * MyBatis 3.4
 * Maven 2.9
 
 > ### Fornt-End
 
-* HTML & CSS & Java Script
+* HTML & CSS & JavaScript
 * Jquery
 * Ajax
 * Vue.js
 * Axios
 * JSP
-## 프로젝트 구조
-<img width="1400" alt="폴더구조" src="https://user-images.githubusercontent.com/85216782/150079205-0673d829-a530-491e-bfea-94f6d03b87fe.png">  
+## 동작 구조
+
+![구조](https://user-images.githubusercontent.com/87694251/151108148-ec56f69e-eba2-4ed6-baef-6d2eb345ffd3.jpg)
 
 
