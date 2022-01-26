@@ -56,5 +56,6 @@
 * JSP
 ## 동작 구조
 
+![구조](https://user-images.githubusercontent.com/87694251/151108148-ec56f69e-eba2-4ed6-baef-6d2eb345ffd3.jpg)
 
 
