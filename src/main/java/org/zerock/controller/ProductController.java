@@ -82,6 +82,8 @@ public class ProductController {
 		log.info(cri);
 		paging = service.getPages(cri);
 		
+		log.info(cri.getStartPage());
+		log.info(cri.getEndPage());
 		model.addAttribute("paging", paging);
 		model.addAttribute("pdList", list);
 		model.addAttribute("cri", cri);

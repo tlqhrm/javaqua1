@@ -48,12 +48,12 @@
 			<when test="bd_category2.equals('contact')">
 				<![CDATA[select bd_num, user_id, title, content, writedate, reply, file1, group_num, step, indent, hit, bd_category1, bd_category2, bd_id, substr(updatedate,1,12) as updatedate,status
 						 from board where bd_category2= #{bd_category2} and user_id =#{id,jdbcType=NULL} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
-						 order by group_num desc, step, indent LIMIT #{startPage},#{endPage};]]>
+						 order by group_num desc, step, indent LIMIT #{startPage},#{pagePerList};]]>
 			</when>
 			<otherwise>
 				<![CDATA[select bd_num, user_id, title, content, writedate, reply, file1, group_num, step, indent, hit, bd_category1, bd_category2, bd_id, substr(updatedate,1,12) as updatedate
 						 from board where bd_category2= #{bd_category2} and user_id =#{id,jdbcType=NULL} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
-						 order by group_num desc, step, indent LIMIT #{startPage},#{endPage};]]>
+						 order by group_num desc, step, indent LIMIT #{startPage},#{pagePerList};]]>
 			</otherwise>
 		</choose>
 			
