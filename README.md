@@ -9,22 +9,6 @@
 
 스프링 MVC패턴을 이용한 온라인 쇼핑몰 구현.
 
-<상품리스트>
-<img width="700" alt="plist" src="https://user-images.githubusercontent.com/87694251/151114760-96e0399b-fd34-40b1-a41b-518bb8242501.GIF">
-
-<상품디테일>
-<img width="700" alt="detail" src="https://user-images.githubusercontent.com/87694251/151114777-56c07ad9-c1e6-4f65-8cef-0de744a94dc9.GIF">
-
-<장바구니>
-<img width="700" alt="cart" src="https://user-images.githubusercontent.com/87694251/151114896-547ba3a7-9e4e-4b1a-9621-35bba940ba23.GIF">
-
-<주문화면>
-<img width="700" alt="order" src="https://user-images.githubusercontent.com/87694251/151114765-f847d50d-c385-4daa-aeab-075da106cc9d.GIF">
-
-<내주문내역>
-<img width="700" alt="orderlist" src="https://user-images.githubusercontent.com/87694251/151114767-e429dcb7-7fed-46c0-b5b8-3fbc89587b5f.GIF">
-
-
 ## 목적  
 
 * 홈페이지 구현을 통한 웹개발에 대한 전반적인 흐름파악
