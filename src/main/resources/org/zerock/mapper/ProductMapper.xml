@@ -47,11 +47,11 @@
 		<![CDATA[and stock >= #{minStock}]]></if>
 		<if test="maxStock > 0">
 		<![CDATA[and stock <=#{maxStock}]]></if>		 
-		<![CDATA[ order by ${order} desc LIMIT #{startPage},#{pagerPerList};]]>		
+		<![CDATA[ order by ${order} desc LIMIT #{startPage},#{pagePerList};]]>		
 	</select>
 	
 	<select id="getIndexList" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and stock > 0 order by salescount LIMIT #{startPage},#{pagePerList};]]>		
+		<![CDATA[select * from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and stock > 0 order by salescount LIMIT #{startPage},#{endPage};]]>		
 	</select>
 	
 	<insert id="productRegist">

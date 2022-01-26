@@ -33,7 +33,7 @@
 				<div id="contents">
 					<div class="sub">										
 				        <div class="tb_tit">
-				        	공지사항 
+				        	자주하는질문 
 				        	<span style="float:right"><button @click="글등록()">글등록</button></span>
 				        </div>
 				        

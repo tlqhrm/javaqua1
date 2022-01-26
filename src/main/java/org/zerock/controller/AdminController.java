@@ -141,7 +141,6 @@ public class AdminController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		ProductCriteriaAdmin criAdmin = objectMapper.readValue(cri, ProductCriteriaAdmin.class);
 		criAdmin.initCri(20);
-		
 		list = productService.getListAdmin(criAdmin); 
 		for(ProductVO lst : list) {
 			lst.pvoInit();
