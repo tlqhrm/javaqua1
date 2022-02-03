@@ -91,6 +91,7 @@ public class HomeController {
 		model.addAttribute("pdList4",result4);
 		model.addAttribute("pdListMd",result5);
 		
+		log.info(result1);
 		return "index.jsp";
 	}
 	

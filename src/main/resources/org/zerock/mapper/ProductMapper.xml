@@ -51,14 +51,14 @@
 	</select>
 	
 	<select id="getIndexList" resultType="org.zerock.domain.ProductVO">
-		<![CDATA[select * from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and stock > 0 order by salescount LIMIT #{startPage},#{endPage};]]>		
+		<![CDATA[select pd_num, category1, category2, title, price, file1 from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and stock > 0 order by salescount LIMIT #{startPage},#{endPage};]]>		
 	</select>
 	
 	<insert id="productRegist">
 		<selectKey keyProperty="pd_num" order="BEFORE" resultType="_int">
 			select nextval('product_seq') from dual
 		</selectKey>
-		<![CDATA[insert into Product(pd_num, category1, category2, title, price, content, file1, stock, discount, registdate)
+		<![CDATA[insert into product(pd_num, category1, category2, title, price, content, file1, stock, discount, registdate)
 				 values(#{pd_num}, #{category1, jdbcType=VARCHAR}, #{category2}, #{title}, #{price}, #{content}, #{file1}, #{stock}, #{discount}, date_format(sysdate(),'%Y. %m. %d. %T'))]]>
 	</insert>
 	

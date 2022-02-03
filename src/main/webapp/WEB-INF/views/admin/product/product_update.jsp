@@ -140,7 +140,7 @@
             	<h2><br>-----------------------본문 입력-------------------------</h2><Br><hr>
 
                 <div id="content_box" contentEditable="true" style="height:1000px; text-align:left; font-size: 15px; overflow:auto; border: solid 1px black; padding-left:5px;">${pvo.content }</div>
-                <div id="content_box2" contentEditable="true" style="display:none;"><div id="placehloder" class="place_h" placeholder="내용을 입력하세요."></div></div>
+                <div id="content_box2" contentEditable="true" style="display:none;"></div>
             </section>
             
 		
@@ -405,10 +405,16 @@ function submitAction(){
 	content_box2.innerHTML = content_box.innerHTML;
 	
 	for(var i=0; i<index; i++){
+		console.log(index);
+		console.log(document.getElementsByClassName("img_id_0")[0]);
+		console.log(document.getElementsByClassName("img_id_0")[1]);
+		console.log(document.getElementsByClassName("img_id_0")[0].childNodes[0]);
+		console.log(document.getElementsByClassName("img_id_0")[1].childNodes[0]);
 		let img_id = document.getElementsByClassName("img_id_"+i);
 		img_id[1].childNodes[0].src = "/resources/upload/product/"+img_id[1].childNodes[0].dataset.file;	
 	}
-	document.getElementById("hidden").value = content_box2.innerHTML;
+	
+	document.getElementById("hidden").value = content_box.innerHTML;
 	
 	document.getElementById("file_names1").value = "";
 	document.getElementById("file_names2").value = "";
