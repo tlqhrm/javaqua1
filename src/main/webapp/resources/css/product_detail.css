@@ -92,10 +92,9 @@
     font-family: "noto sans";
     color: #333333;
     width: 560px;
-    height: 68px;
     margin-left: 20px;
     border-top: solid 2px black;
-    border-bottom: solid 1px #cccccc;
+
     padding: 5px 0 15px 10px;
 }
 
@@ -221,7 +220,12 @@
 
 
 /* 디테일 ul 수정본 */
-
+#detail #name ul{
+    margin:0px;
+    padding:0px;
+    width:560px;
+    height:40px; 
+}
 #detail #name li{
     text-align: center;
     list-style: none;
@@ -231,7 +235,7 @@
     background-color: rgb(3, 140, 232);
     padding: 5px 10px 5px 10px; 
     font-size: 18px;
-    /* width: 150px; */
+    width: 220px; 
     height: 30px;
     font-weight: bold;
     /* border: solid 1px rgb(65,65,65); */
@@ -241,7 +245,7 @@
     color: #cccccc;
 }
 #detail #name .lname{
-    width: 250px;
+    width: 295px;
 }
 
 .detail_info ul{
@@ -277,12 +281,27 @@
     transition: all .35s ease-in-out;
     
 }
-.prev_img img{	
-	max-width:73px;
-	max-height:73px
+.prev_img{
+	width:78px;
+	height:78px;
+	border:1px solid gray;
+	display:inline-block;
+	vertical-align: middle;
+	line-height:70px;
 }
-
+.prev_img img{	
+	max-width:70px;
+	max-height:70px;
+	vertical-align: middle;
+	
+}
 #main_img{
+	width:405px;
+	height:405px;
+	display:inline-block;
+	line-height:405px;
+}
+#main_img img{
 	max-width:400px;
 	max-height:400px;
 }
@@ -312,6 +331,72 @@
 	height:73px;
 	display:inline-block;
 	border:1px solid gray;
+}
+section{
+	font-size:20px;
+}
+
+ #contents {position:relative;  overflow: hidden; min-height: 850px;}
+ #contents .sub { width:780px; margin: 0 auto 50px; }
+ 		
+ .tit{padding-top: 10px; font-weight: 900; font-size: 30px; color: #333; text-align: center; letter-spacing: -2.5px;}
+ 		
+ .tb_tit{font-size: 20px; font-weight:bold; color: #333; letter-spacing: -1px; padding:14px 0 16px; line-height:29px; border-bottom:1px solid #333;}
+ 		
+.mem_table th { font-size:13px; color: #444; font-weight:600; padding : 10px 0 10px 20px; line-height:22px; letter-spacing:-0.5px;}
+.mem_table td { font-size:13px; padding : 10px 10px 10px 20px; line-height:22px; letter-spacing:-0.5px; border-bottom:1px solid #dcdcdc;}
+.mem_table .txtb {font-weight:bold}
+
+.mem_table .replytr { background:#F8F8F8;}
+.mem_table .replytr .replytd{ padding-left:32px;}
+.mem_table .replytr .fontred{ padding-left:32px; color:red; }
+
+.cashbox_btn1{cursor:pointer; margin:20px 0 10px 0; float:right; color: #fff; font-size: 18px; font-weight: bold; background-color: rgb(3, 140, 232); text-align: center; width: 100%; padding: 10px 0 10px 0;}
+.btn{width: 80px; height: 40px; border: 1px solid rgb(3, 140, 232); background: rgb(3, 140, 232); color: #fff; letter-spacing:-1px; cursor: pointer;}
+
+.tab-dock-top .tab-titles {
+    background: #fff;
+    width: 1050px;
+    z-index: 100;
+}
+
+.tab .tab-titles {
+	padding-inline-start: 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    list-style-type: none;
+    font-size: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tab-titles li {
+    display: inline-block;
+    padding: 15px 0 14px 0;
+    width: 25%;
+    border-right: 1px solid #ccc;
+    background-color: #fafafa;
+    text-align: center;
+    color: #555;
+    font-weight: bold;
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.add_fixed{
+    position: fixed;
+    top: 60px;
+    z-index: 5;
+}
+
+.add_active{
+    margin-bottom: -2px;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    color: #111;
 }
 
 /* /////////////////////////////////////////////// */

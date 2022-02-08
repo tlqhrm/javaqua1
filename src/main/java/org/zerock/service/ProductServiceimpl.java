@@ -2,15 +2,13 @@ package org.zerock.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.domain.BoardVO;
-import org.zerock.domain.ProductCriteria;
-import org.zerock.domain.ProductVO;
-import org.zerock.domain.BoardCriteria;
 import org.zerock.domain.PagingDTO;
-import org.zerock.mapper.BoardMapper;
+import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
+import org.zerock.domain.ProductVO;
+import org.zerock.domain.ReviewVO;
 import org.zerock.mapper.ProductMapper;
 
 import lombok.Setter;
@@ -26,35 +24,23 @@ public class ProductServiceimpl implements ProductService {
 	private ProductMapper mapper;
 	
 	@Override
-	public int register(BoardVO board) {
+	public int register(ProductVO pvo) {
 		
-		log.info("register......" + board);
+		log.info("register......" + pvo);
 		
-		return mapper.insert(board);
+		return mapper.insert(pvo);
 	}
 
 	@Override
-	public BoardVO get(int bd_id) {
+	public ProductVO productDetail(int pd_num) {
 
-		log.info("get........" + bd_id);
+		log.info("get........" + pd_num);
 		
-		mapper.updateCount(bd_id);
+		mapper.updateCount(pd_num);
 		
-		return mapper.read(bd_id);
+		return mapper.productDetail(pd_num);
 	}
 
-	@Override
-	public boolean modify(BoardVO board) {
-		
-		log.info("modify......" + board);
-		return mapper.update(board) == 1;
-	}
-
-	@Override
-	public boolean remove(int bd_id) {
-		log.info("remove......" + bd_id);
-		return mapper.delete(bd_id) == 1;
-	}
 
 	@Override
 	public List<ProductVO> getList(ProductCriteria cri) {
@@ -78,6 +64,62 @@ public class ProductServiceimpl implements ProductService {
 		return pdto.getStartEnd();
 	}
 
+	@Override
+	public int productRegist(ProductVO pvo) {
+		int result = mapper.productRegist(pvo);
+		return result;
+	}
 
-	
+	@Override
+	public int productUpdate(ProductVO pvo) {
+		int result = mapper.productUpdate(pvo);
+		return result;
+	}
+
+	@Override
+	public int productDelete(int pd_num) {
+
+		int result = mapper.productDelete(pd_num);
+		return result;
+	}
+
+	@Override
+	public List<ProductVO> getIndexList(ProductCriteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getIndexList(cri);
+	}
+
+	@Override
+	public List<ProductVO> getListAdmin(ProductCriteriaAdmin cri) {
+			log.info("getList.........");
+		
+		return mapper.getListAdmin(cri);
+	}
+
+	@Override
+	public int[] getPagesAdmin(ProductCriteriaAdmin cri) {
+		log.info("getPages.........");
+		
+		int page = cri.getPage();
+		int pagePerList = cri.getPagePerList();
+		int pagingCount = cri.getPagingCount();
+			
+		int totalContnet = mapper.pagingAdmin(cri);
+		PagingDTO pdto = new PagingDTO(totalContnet, page, pagePerList, pagingCount);
+		return pdto.getStartEnd();
+	}
+
+	@Override
+	public int productUpdateAll(List<ProductVO> data) {
+		int result = 0;
+		for(ProductVO pvo : data) {
+			mapper.productUpdateAll(pvo);
+			result ++;
+		}
+		
+		return result;
+	}
+
+
+
 }

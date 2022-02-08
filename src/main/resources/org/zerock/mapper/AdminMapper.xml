@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.prg//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="org.zerock.mapper.AdminMapper">	
+	<select id="member_list" resultType="org.zerock.domain.MemberVO">	
+		<![CDATA[ SELECT * FROM member 
+		order by user_num desc
+		LIMIT #{startNum},#{pagePerList}]]>
+	</select>
+	<select id="member_cnt" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<select id="selectMember" resultType="org.zerock.domain.MemberVO">
+		select * from member where user_id = #{user_id}	
+	</select>
+	
+	<select id="order_list" resultType="org.zerock.domain.OrderDetailVO">	
+		<![CDATA[ SELECT * FROM order_detail order by orderdate desc
+	      LIMIT #{startNum},#{pagePerList}]]>
+	</select>
+	<select id="order_cnt" resultType="int">
+		select count(*) from order_detail
+	</select>
+	<update id="status_change">
+		update order_detail set odt_status=#{odt_status} where odt_num=#{odt_num}
+	</update>
+	
+	<select id="notice_list" resultType="org.zerock.domain.BoardVO">	
+		<![CDATA[ SELECT * FROM board where bd_category2='notice' order by updatedate desc
+	        LIMIT #{startNum},#{pagePerList}]]>
+	</select>
+	<select id="notice_cnt" resultType="int">
+		select count(*) from board where bd_category2='notice'
+	</select>
+	
+	<select id="faq_list" resultType="org.zerock.domain.BoardVO">	
+		<![CDATA[ SELECT * FROM board where bd_category2='faq' order by updatedate desc
+	        LIMIT #{startNum},#{pagePerList}]]>
+	</select>
+	<select id="faq_cnt" resultType="int">
+		select count(*) from board where bd_category2='faq'
+	</select>
+	
+	<select id="contact_list" resultType="org.zerock.domain.BoardVO">	
+		SELECT * FROM board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if> order by updatedate desc
+	        <![CDATA[LIMIT #{pdto.startNum},#{pdto.pagePerList}]]>
+	</select>
+	<select id="contact_cnt" resultType="int" parameterType="String">
+		select count(*) from board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if>
+	</select>
+	
+	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
+		<![CDATA[ SELECT * FROM review order by writedate desc LIMIT #{startNum},#{pagePerList}]]>
+	</select>
+	<select id="review_cnt" resultType="int">
+		select count(*) from review
+	</select>
+	
+	
+	<select id="qna_list" resultType="org.zerock.domain.QnaVO">	
+		<![CDATA[ SELECT * FROM qna order by reply desc, writedate desc
+	        LIMIT #{startNum},#{pagePerList}]]>
+	</select>
+	<select id="qna_cnt" resultType="int">
+		select count(*) from qna
+	</select>
+	<update id="qnaReply">
+		update QNA set reply=#{reply},status='답변완료',replydate=now() where qna_num=#{qna_num}
+	</update>
+</mapper>

@@ -145,9 +145,9 @@
             
                      
             <!-- 리뷰 구역 -->
-	        <div v-cloak class="tb_tit" id="target3">리뷰 ({{페이징정보.totalContent}})</div>
+	        <div v-cloak class="tb_tit">리뷰 ({{페이징정보.totalContent}})</div>
 	        
-			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table">				
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table" id="target3">				
 				<tr height="100" v-for="(item,i) in 리뷰데이터" :key="i">
 					<td width="100">{{item.user_id}}</td>
 					<td class="txtb" width="800"><span style="white-space: pre-line;">{{item.content}}</span></td>
@@ -198,14 +198,14 @@
 			<!-- qapp 열기 -->
 			<!-- 상품문의 구역 -->
 			<div id="qapp" v-cloak>
-		        <div class="tb_tit" id="target4">
+		        <div class="tb_tit">
 		        	상품문의
 		        	<span style="float:right">
 						<button type="button" class="btn" @click="문의하기새창(${pvo.pd_num})">문의하기</button>
 					</span>
 		        </div>
 		        
-		        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table" v-for="(item,i) in 문의데이터" :key="i">				
+		        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mem_table" v-for="(item,i) in 문의데이터" :key="i" id="target4">				
 					<tr height="100">
 						<td width="40">질문</td>
 						<td width="100">{{item.user_id}}</td>

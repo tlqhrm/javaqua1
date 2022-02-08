@@ -8,27 +8,11 @@
     <meta charset="utf-8">
     <link href="/resources/css/suport_page.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="/resources/css/header.css">    
+    <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">    
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="/resources/js/header.js"></script>
-    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 </head>
-<c:choose>
-	<c:when test="${empty id and bvo.bd_category2 eq 'contact' }">
-		<script>
-		alert("접근권한이 없습니다.");
-		location.href="/";
-		</script>
-	</c:when>
-	<c:when test="${admin ne 1 and bvo.bd_category2 ne 'contact' }">
-		<script>
-		alert("접근권한이 없습니다1.");
-		location.href="/";
-		</script>
-	</c:when>
-	<c:otherwise>
+
 <body>
 
      <!---header-->
@@ -57,7 +41,6 @@
 		<a href="boardList?bd_category2=notice&page=1"><li <c:if test="${bvo.bd_category2 eq 'notice' }"> id="now"</c:if>>공지사항</li></a>
        <a href="boardList?bd_category2=faq&page=1"><li <c:if test="${bvo.bd_category2 eq 'faq' }"> id="now"</c:if>>자주하는질문</li></a>
        <a href="boardList?bd_category2=contact&page=1"><li <c:if test="${bvo.bd_category2 eq 'contact' }"> id="now"</c:if>>1:1 문의</li></a>
-       <a href=""><li>매장안내</li></a>
     </ul><br>
     </div>  <!--snb-->
 <div class="contents">
@@ -65,11 +48,13 @@
  
 
 
-<form action = "/board/boardWrite" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form onsubmit="br()" action = "/board/boardWrite?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_category2" value="${bvo.bd_category2 }">
 	<input type="hidden" name="group_num" value="${bvo.group_num }">
 	<input type="hidden" name="step" value="${bvo.step }">
 	<input type="hidden" name="indent" value="${bvo.indent }">
+	<input type="hidden" name="${_csrf.parameterName}"
+    		value="${_csrf.token}" />
 <table id = "write_form">
     <tbody>
         <tr> 
@@ -132,7 +117,16 @@
 </div>  <!--wrap -->
 
 <jsp:include page="footer.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+
+<script type="text/javascript">
+
+function br(){
+	var contents = document.querySelector('textarea');
+	contents.value = contents.value.replace(/(\n|\r\n)/g, '<br>');
+
+}
+
+
+</script>
 </body>
 </html>

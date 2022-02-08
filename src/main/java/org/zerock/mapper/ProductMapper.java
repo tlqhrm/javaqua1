@@ -2,11 +2,11 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Select;
-import org.zerock.domain.BoardVO;
+import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.ProductCriteria;
+import org.zerock.domain.ProductCriteriaAdmin;
 import org.zerock.domain.ProductVO;
-import org.zerock.domain.BoardCriteria;
+import org.zerock.domain.ReviewVO;
 
 public interface ProductMapper {
 
@@ -18,15 +18,34 @@ public interface ProductMapper {
 			
 		public String getTime();
 						
-		public int insert(BoardVO board);
+		public int insert(ProductVO board);
 		
-		public void insertSelectKey(BoardVO board);
+		public void insertSelectKey(ProductVO board);
 		
-		public BoardVO read(int bd_id);
+		public ProductVO productDetail(int pd_num);
 		
-		public int delete(int bd_id);
+		public int delete(int pd_num);
 		
-		public int update(BoardVO board);
+		public int update(ProductVO board);
 		
-		public int updateCount(int bd_id);
+		public int updateCount(int pd_num);
+
+		public int productRegist(ProductVO pvo);
+
+		public int productUpdate(ProductVO pvo);
+
+		public int stockChk(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
+
+		public int productDelete(int pd_num);
+		
+		public int salesCountPlus(@Param("pd_num") int pd_num, @Param("cart_amount") int cart_amount);
+
+		public List<ProductVO> getIndexList(ProductCriteria cri);
+
+		public List<ProductVO> getListAdmin(ProductCriteriaAdmin cri);
+
+		public int pagingAdmin(ProductCriteriaAdmin cri);
+
+		public int productUpdateAll(ProductVO pvo);
+
 }

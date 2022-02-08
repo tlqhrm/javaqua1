@@ -4,14 +4,14 @@ $(function(){
     var moving = function(){
         // if (y_value > (img_height)*($(''+ul_name+' li').length - 1)){
             y_value -= 16;
-            $(ul_name).css('transition-duration', '0.3s');                  
+            $(ul_name).css('transition-duration', '0.2s');                  
             $(ul_name).css('transform','translate3d(0,'+y_value+'px,0)'); 
             if (y_value <= -96){
                 setTimeout(function(){
                     y_value = 0
                 $(ul_name).css('transition-duration', '0s'); 
                 $(ul_name).css('transform','translate3d(0,'+y_value+'px,0)');     
-                    },300);
+                    },200);
             };                                  
         // };
     };
@@ -94,7 +94,7 @@ $(function(){
         $('#header #header4 ').css('visibility','visible');
         $('#header #header4 .h_menu').css('opacity','1');
     },function(){
-        $(this).css('transition-duration', '0.3s')
+        $(this).css('transition-duration', '0.2s')
         $('#view_all div').css('transform', 'rotate(0deg)');
         $(this).css('border', 'none');
         $('#header #header4 ').css('visibility','hidden');
@@ -120,7 +120,7 @@ $(function(){
         $('#view_all').css('width', '138px');
         
     },function(){
-        $('#view_all div').css('transition-duration', '0.3s')
+        $('#view_all div').css('transition-duration', '0.2s')
         $('#view_all div').css('transform', 'rotate(0deg)');
         $('#view_all').css('border', 'none');
         $('#header #header4 ').css('visibility','hidden');
@@ -228,6 +228,107 @@ $(function(){
         $('#mypage').find("ul").css('visibility','hidden');
     })
     $('#mypage ul').hover()
-    
-    console.log("얼럿");
 });     
+
+$(function(){   
+    var y_value = 0;
+    var img_height = 160;
+    var ul_name = "#recent_ul";
+    var count = 0;
+	var cookieArr = [];
+	var cookie;
+	(function () {
+	    var theCookies = document.cookie.split(';');
+	    for (var i = 1 ; i <= theCookies.length; i++) {
+	        var pd_num = theCookies[i-1].split("=")[0];
+	      
+	        if(pd_num.includes("pd_num")){
+	       	cookieArr.push(JSON.parse(Cookies.get(pd_num.replace(" ",""))));
+
+	        }
+	        
+	    }
+	    cookieArr.reverse();
+	})();
+	
+	
+const vue = new Vue({
+	el:"#notice_list",
+	data:{
+		notice : []
+	},
+	created :function() {
+		const params = new URLSearchParams();
+		axios.post('/board/noticeList',params,config)
+		             .then(res=>{
+
+		             	this.notice = res.data;
+		             })
+		             .catch(err=>{
+		            	alert("오류가 발생했습니다.");
+		              	console.log(err);
+		             });
+		             
+	}
+	
+})
+	
+	
+	const v_recent = new Vue({
+		el:"#recent_div_1",
+		data:{
+			cookieArr : cookieArr
+		},
+		methods:{
+			품명 : function(t){
+				return t.replace(/\+/gi," ");
+			},
+			상세페이지:function(pd_num){
+				location.href ="/product/productDetail?pd_num="+pd_num;
+			},
+			위로 : function(){
+				if(y_value != 0){
+	            y_value +=img_height;
+	            $(ul_name).css('transition-duration', '0.2s');
+	            $(ul_name).css('transform','translate3d(0,'+y_value+'px,0)');
+	            count--;
+                }
+            },
+            아래로 : function(){
+                if(cookieArr.length>3 && count < cookieArr.length-3){		
+                    y_value -=img_height;
+                   $(ul_name).css('transition-duration', '0.2s');
+                   $(ul_name).css('transform','translate3d(0,'+y_value+'px,0)');
+                   count++;
+                }
+            }
+                      
+        
+			
+		}
+	})
+	
+
+	
+	$("#recent_ul").css("height",cookieArr.length * 160);
+	if(cookieArr.length > 3){
+		$("#recent_div_1").css("height",(3*160) + 91);
+	}else if(cookieArr.length == 0){
+        $("#recent_div_1").css("height",111);
+    }
+    else{
+		$("#recent_div_1").css("height",(cookieArr.length*160) + 92);
+	}
+	if(cookieArr.length > 3){
+		$("#recent_div_2").css("height",(3*160) + 91);
+	}else{
+		$("#recent_div_2").css("height",(cookieArr.length*160) -1);
+	}
+	if(cookieArr.length > 3){
+		$("#recent_div_1-2").css("height",(3*160)-5);
+	}else{
+		$("#recent_div_1-2").css("height",(cookieArr.length*160)-5);
+	}
+
+
+});

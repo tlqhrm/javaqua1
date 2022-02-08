@@ -6,38 +6,22 @@
 <!-- 게시글 쓰기 -->
 	<insert id="insertBoard" parameterType="Map">
 		<selectKey keyProperty="bd_id" order="BEFORE" resultType="_int" >
-			select board_seq.nextval from dual
+			select nextval('board_seq') FROM DUAL
 		</selectKey>
 		<choose>
 			<when test="group_num > 0"> 
-				<choose>
-					<when test="bd_category2.equals('contact') and admin==0">
-					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-				 	values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent}, '[답변대기]')]]>
-					</when>
-					<otherwise>
-					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent)
-				 	values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent})]]>
-					</otherwise>
-				</choose>	
+				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status,writedate, updatedate)
+			 	values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content}, #{group_num}, #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]',date_format(sysdate(),'%Y. %m. %d. %T'),date_format(sysdate(),'%Y. %m. %d. %T'))]]>
 			</when>
 			<otherwise>
-				<choose>
-					<when test="bd_category2.equals('contact') and admin== 0">
-					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status)
-					 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent}, '[답변대기]')]]>
-					</when>
-					<otherwise>
-					<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent)
-					 values(#{bd_id}, ${bd_category2}_seq.nextval, #{user_id}, #{title}, #{content}, ${bd_category2}_group_seq.nextval, #{bd_category1}, #{bd_category2}, #{file1}, #{step}, #{indent})]]>
-					</otherwise>
-				</choose>	
+				<![CDATA[insert into board(bd_id, bd_num, user_id, title, content, group_num, bd_category1, bd_category2, file1, step, indent, status,writedate, updatedate)
+				values(#{bd_id},(select nextval('${bd_category2}_seq') FROM DUAL), #{user_id}, #{title}, #{content},(select nextval('${bd_category2}_group_seq') FROM DUAL), #{bd_category1}, #{bd_category2}, #{file1, jdbcType=NULL}, #{step}, #{indent}, '[답변대기]',date_format(sysdate(),'%Y. %m. %d. %T'),date_format(sysdate(),'%Y. %m. %d. %T'))]]>
 			</otherwise>
 		</choose>	
 	</insert>
 
 	<insert id="insertBoardHit" parameterType="Map">
-		<![CDATA[insert into BOARDHIT(bd_id, ip) values(#{bd_id}, #{ip})]]>
+		<![CDATA[insert into boardhit(bd_id, ip) values(#{bd_id}, #{ip})]]>
 	</insert>
 
 <!-- 게시글 상세보기 -->	
@@ -48,11 +32,9 @@
 <!--  페이징  -->
 	<select id="paging" resultType="_int">	
 		<choose>
- 			<when test="bd_category2.equals('contact') and admin==1">
-				select count(*) from board where bd_category2 = #{bd_category2} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
-			</when> 
+ 			
 			<when test="bd_category2.equals('contact')">
-				select count(*) from board where bd_category2 = #{bd_category2} and user_id = #{id} and(user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
+				select count(*) from board where bd_category2 = #{bd_category2} and user_id = #{id,jdbcType=NULL} and(user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
 			</when>
 			<otherwise>
 				select count(*) from board where bd_category2 = #{bd_category2} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
@@ -63,32 +45,31 @@
 <!-- 게시글 리스트 -->	
 	<select id="getBoardList" resultType="org.zerock.domain.BoardVO">
 		<choose>
-		 	<when test="bd_category2.equals('contact') and admin==1">
-				<![CDATA[select bd_num, user_id, title, content, writedate, reply, file1, group_num, step, indent, hit, bd_category1, bd_category2, bd_id, substr(updatedate,1,12) as updatedate,status 
-						from (select ROWNUM as rnum, A.* from (select * from board where bd_category2= #{bd_category2} order by group_num desc, step, indent)A) 
-						where rnum >= #{startPage} and rnum <= #{endPage} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})]]>
-			</when> 
 			<when test="bd_category2.equals('contact')">
 				<![CDATA[select bd_num, user_id, title, content, writedate, reply, file1, group_num, step, indent, hit, bd_category1, bd_category2, bd_id, substr(updatedate,1,12) as updatedate,status
-						 from (select ROWNUM as rnum, A.* from (select * from board where bd_category2= #{bd_category2} and user_id =#{id} order by group_num desc, step, indent)A) 
-						 where rnum >= #{startPage} and rnum <= #{endPage} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})]]>
+						 from board where bd_category2= #{bd_category2} and user_id =#{id,jdbcType=NULL} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
+						 order by group_num desc, step, indent LIMIT #{startPage},#{pagePerList};]]>
 			</when>
 			<otherwise>
 				<![CDATA[select bd_num, user_id, title, content, writedate, reply, file1, group_num, step, indent, hit, bd_category1, bd_category2, bd_id, substr(updatedate,1,12) as updatedate
-						 from (select ROWNUM as rnum, A.* from (select * from board where bd_category2= #{bd_category2} order by group_num desc, step, indent)A) 
-						 where rnum >= #{startPage} and rnum <= #{endPage} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})]]>	
+						 from board where bd_category2= #{bd_category2} and user_id =#{id,jdbcType=NULL} and (user_id Like #{serName} or Title Like #{serTitle} or Content Like #{serContent})
+						 order by group_num desc, step, indent LIMIT #{startPage},#{pagePerList};]]>
 			</otherwise>
 		</choose>
 			
 	</select>
 	
+	<select id="noticeList" resultType="org.zerock.domain.BoardVO" parameterType="Map">
+		<![CDATA[select bd_id, title from board where bd_category2 = 'notice' LIMIT 1,6]]>
+	</select>
+	
 	<select id="boardHitCheck" resultType="int" parameterType="Map">
-		<![CDATA[select count(*) from BOARDHIT where bd_id=#{bd_id} and ip=#{ip}]]>
+		<![CDATA[select count(*) from boardhit where bd_id=#{bd_id} and ip=#{ip}]]>
 	</select>
 	
 <!-- 게시글 수정 -->	
 	<update id="updateBoard">
-		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1}, updatedate=to_char(sysdate,'yyyy. mm. dd. PM hh12:mi:ss') where bd_id=#{bd_id}
+		update board set title= #{title}, content=#{content}, bd_category1=#{bd_category1}, file1=#{file1, jdbcType=NULL}, updatedate=date_format(sysdate(),'%Y. %m. %d. %T') where bd_id=#{bd_id}
 	</update>
 <!-- 답글 순서변경 -->
 	<update id="increseStep">
@@ -111,7 +92,7 @@
 	</update>
 <!-- 게시글 삭제 -->
 	<delete id="deleteBoard">
-		delete board where bd_id = #{bd_id}
+		delete from board where bd_id = #{bd_id}
 	</delete>
 	
 </mapper>

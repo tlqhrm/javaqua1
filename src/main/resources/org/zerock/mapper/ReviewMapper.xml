@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.prg//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.ReviewMapper">
+	<insert id="write">
+		insert into review(rv_num, pd_num, user_id, content)
+	 	values((select nextval('REVIEW_SEQ') FROM DUAL),#{pd_num},#{user_id}, #{content})
+	</insert>
+	<update id="modify">
+		update review set content=#{content} where rv_num=#{rv_num} and user_id=#{user_id}
+	</update>
+	
+	<delete id="delete">
+		delete from review where rv_num=#{rv_num} and user_id=#{user_id}
+	</delete>
+	
+	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
+		<![CDATA[  SELECT * FROM review WHERE pd_num=#{pd_num} order by writedate desc
+			LIMIT #{pdto.startNum}, #{pdto.pagePerList} ]]>
+	</select>
+	<select id="review_cnt" resultType="int">
+		select count(*) from review where pd_num=#{pd_num}
+	</select>
+	
+	<select id="myreview" resultType="org.zerock.domain.ReviewVO">	
+		<![CDATA[ select A.*,
+		(select title from product where pd_num = A.pd_num ) title,
+		(select file1 from product where pd_num = A.pd_num ) file1
+		from (SELECT * FROM review WHERE user_id=#{user_id} order by writedate desc) A
+		LIMIT #{pdto.startNum}, #{pdto.pagePerList} ]]>
+	</select>
+	<select id="myreview_cnt" resultType="int">
+		select count(*) from review where user_id=#{user_id}
+	</select>
+	
+	<select id="mywrite" resultType="org.zerock.domain.ReviewVO">
+		select * from review where user_id=#{user_id} and pd_num=#{pd_num}
+	</select>
+</mapper>

@@ -16,14 +16,7 @@
 	
 	
     </head>
-	
-	<c:choose>
-		<c:when test="${not empty id }">
-			<script>history.go(-1)</script>
-		</c:when>
-		<c:otherwise>
 
-	
     <body>
         <!---header-->
         <jsp:include page="header.jsp"></jsp:include>
@@ -33,6 +26,8 @@
             <div class="container">
                 <h3 class="tit">회원가입</h3>
                 <form name="fmData" method="post" action="/member/join">  
+                
+					
                     <table class="tbl_comm">
                         <tbody>
                             <tr>
@@ -74,22 +69,16 @@
                                 <th>휴대폰</th>
                                 <td>
                                     <input type="text" name="user_phone" maxlength="11" placeholder="숫자만 입력해주세요" class="inputText">
-                                    <button type="button" class="btn_call" onclick="singup()">인증번호</button>
-                                </td>
-                            </tr>
-
-                            <tr id="numChkTab">
-                                <th></th>
-                                <td>
-                                    <input type="text" name="singupNum" maxlength="6" class="inputText">
-                                    <button type="button" class="numChk" onclick="numChk()">인증확인</button>
                                 </td>
                             </tr>
 
                             <tr>
                                 <th>주소</th>
                                 <td>
-                                    <button type="button" class="btn_address" name="user_address">주소 검색</button>
+                                    <button type="button" class="btn_address" name="user_address" onclick="execDaumPostcode()">주소 검색</button>
+									<input type="text" class="inputText" name="user_address" id="address" placeholder="주소" readonly="readonly" style="margin-top:10px">
+									<input type="text" class="inputText" name="user_address2" id="detailAddress" style="margin-top:10px" placeholder="상세주소">
+									
                                 </td>
                             </tr>
 
@@ -129,8 +118,10 @@
                         </tbody>
                     </table>
                 <div style="text-align: center; margin-top: 30px;">
-                    <button type="submit" class="btn_join" onclick="return frm_check()">가입하기</button>
+                    <button type="button" class="btn_join" onclick="frm_check()">가입하기</button>
                 </div> 
+                <input type="hidden" name="${_csrf.parameterName}"
+					    		value="${_csrf.token}" />
                 </form>
              
             </div>
@@ -142,12 +133,12 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
        		<script src="/resources/js/join.js"></script>
         	<script src="/resources/js/header.js"></script>
-		<script>
 
-		</script>
-
-       		<script src="/resources/js/join.js"></script> 
+     	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+     	<script>
+     	var csrfHeaderName = "${_csrf.headerName}";
+     	var csrfTokenValue = "${_csrf.token}";
+     	</script>
     </body>
-    		</c:otherwise>
-	</c:choose>
+
 </html>
