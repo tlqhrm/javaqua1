@@ -61,7 +61,7 @@
  
 
 
-<form onsubmit="br()" action = "/board/boardUpdate" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form onsubmit="br()" action = "/board/boardUpdate?${_csrf.parameterName}=${_csrf.token}" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_id" value="${bvo.bd_id }">
 	<input type="hidden" name="file1" value="${bvo.file1 }">
 	<input type="hidden" name="${_csrf.parameterName}"

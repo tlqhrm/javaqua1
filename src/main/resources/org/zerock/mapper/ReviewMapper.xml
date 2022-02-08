@@ -4,37 +4,30 @@
 <mapper namespace="org.zerock.mapper.ReviewMapper">
 	<insert id="write">
 		insert into review(rv_num, pd_num, user_id, content)
-	 	values(REVIEW_SEQ.NEXTVAL,#{pd_num},#{user_id}, #{content})
+	 	values((select nextval('REVIEW_SEQ') FROM DUAL),#{pd_num},#{user_id}, #{content})
 	</insert>
 	<update id="modify">
 		update review set content=#{content} where rv_num=#{rv_num} and user_id=#{user_id}
 	</update>
 	
 	<delete id="delete">
-		delete review where rv_num=#{rv_num} and user_id=#{user_id}
+		delete from review where rv_num=#{rv_num} and user_id=#{user_id}
 	</delete>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM review WHERE pd_num=#{pd_num} order by writedate desc
-	        ) A
-        ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
+		<![CDATA[  SELECT * FROM review WHERE pd_num=#{pd_num} order by writedate desc
+			LIMIT #{pdto.startNum}, #{pdto.pagePerList} ]]>
 	</select>
 	<select id="review_cnt" resultType="int">
 		select count(*) from review where pd_num=#{pd_num}
 	</select>
 	
 	<select id="myreview" resultType="org.zerock.domain.ReviewVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        	(select title from product where pd_num = A.pd_num ) title,
-                (select file1 from product where pd_num = A.pd_num ) file1,
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM review WHERE user_id=#{user_id} order by writedate desc
-	        ) A
-        ) WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
+		<![CDATA[ select A.*,
+		(select title from product where pd_num = A.pd_num ) title,
+		(select file1 from product where pd_num = A.pd_num ) file1
+		from (SELECT * FROM review WHERE user_id=#{user_id} order by writedate desc) A
+		LIMIT #{pdto.startNum}, #{pdto.pagePerList} ]]>
 	</select>
 	<select id="myreview_cnt" resultType="int">
 		select count(*) from review where user_id=#{user_id}

@@ -43,7 +43,7 @@ public class HomeController {
 		log.info("Welcome home! The client locale is {}.");
 		
 		ProductCriteria cri = new ProductCriteria();
-		cri.setStartPage(1);
+		cri.setStartPage(0);
 		cri.setEndPage(12);
 		cri.setCriCategory2("^");
 		cri.setCriCategory1("new");
@@ -91,6 +91,7 @@ public class HomeController {
 		model.addAttribute("pdList4",result4);
 		model.addAttribute("pdListMd",result5);
 		
+		log.info(result1);
 		return "index.jsp";
 	}
 	

@@ -4,12 +4,9 @@
 	
 <mapper namespace="org.zerock.mapper.AdminMapper">	
 	<select id="member_list" resultType="org.zerock.domain.MemberVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM member order by user_num desc
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+		<![CDATA[ SELECT * FROM member 
+		order by user_num desc
+		LIMIT #{startNum},#{pagePerList}]]>
 	</select>
 	<select id="member_cnt" resultType="int">
 		select count(*) from member
@@ -19,30 +16,9 @@
 		select * from member where user_id = #{user_id}	
 	</select>
 	
-	
-	<select id="product_list" resultType="org.zerock.domain.ProductVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM product order by pd_num
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
-	</select>
-	<select id="product_cnt" resultType="int">
-		select count(*) from product
-	</select>
-	<select id="product_detail" resultType="org.zerock.domain.ProductVO">
-		select * from product where pd_num=#{pd_num}
-	</select>
-	
-	
 	<select id="order_list" resultType="org.zerock.domain.OrderDetailVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM order_detail order by orderdate desc
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+		<![CDATA[ SELECT * FROM order_detail order by orderdate desc
+	      LIMIT #{startNum},#{pagePerList}]]>
 	</select>
 	<select id="order_cnt" resultType="int">
 		select count(*) from order_detail
@@ -52,48 +28,31 @@
 	</update>
 	
 	<select id="notice_list" resultType="org.zerock.domain.BoardVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM board where bd_category2='notice' order by updatedate desc
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+		<![CDATA[ SELECT * FROM board where bd_category2='notice' order by updatedate desc
+	        LIMIT #{startNum},#{pagePerList}]]>
 	</select>
 	<select id="notice_cnt" resultType="int">
 		select count(*) from board where bd_category2='notice'
 	</select>
 	
 	<select id="faq_list" resultType="org.zerock.domain.BoardVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM board where bd_category2='faq' order by updatedate desc
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+		<![CDATA[ SELECT * FROM board where bd_category2='faq' order by updatedate desc
+	        LIMIT #{startNum},#{pagePerList}]]>
 	</select>
 	<select id="faq_cnt" resultType="int">
 		select count(*) from board where bd_category2='faq'
 	</select>
 	
 	<select id="contact_list" resultType="org.zerock.domain.BoardVO">	
-		SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if> order by updatedate desc
-	        ) A
-        )<![CDATA[  WHERE RNUM >= #{pdto.startNum} AND RNUM <= #{pdto.endNum} ]]>
+		SELECT * FROM board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if> order by updatedate desc
+	        <![CDATA[LIMIT #{pdto.startNum},#{pdto.pagePerList}]]>
 	</select>
 	<select id="contact_cnt" resultType="int" parameterType="String">
 		select count(*) from board where bd_category2='contact' <if test="status.equals('[답변대기]')">and status = #{status}</if>
 	</select>
 	
 	<select id="review_list" resultType="org.zerock.domain.ReviewVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM review order by writedate desc
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+		<![CDATA[ SELECT * FROM review order by writedate desc LIMIT #{startNum},#{pagePerList}]]>
 	</select>
 	<select id="review_cnt" resultType="int">
 		select count(*) from review
@@ -101,17 +60,13 @@
 	
 	
 	<select id="qna_list" resultType="org.zerock.domain.QnaVO">	
-		<![CDATA[ SELECT * FROM ( 
-	        SELECT A.*, 
-	        ROWNUM AS RNUM FROM (
-	            SELECT * FROM qna order by reply desc, writedate desc
-	        ) A
-        ) WHERE RNUM >= #{startNum} AND RNUM <= #{endNum} ]]>
+		<![CDATA[ SELECT * FROM qna order by reply desc, writedate desc
+	        LIMIT #{startNum},#{pagePerList}]]>
 	</select>
 	<select id="qna_cnt" resultType="int">
 		select count(*) from qna
 	</select>
 	<update id="qnaReply">
-		update QNA set reply=#{reply},status='답변완료',replydate=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS') where qna_num=#{qna_num}
+		update QNA set reply=#{reply},status='답변완료',replydate=now() where qna_num=#{qna_num}
 	</update>
 </mapper>

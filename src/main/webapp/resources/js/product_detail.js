@@ -22,7 +22,7 @@ $(function(){
  	$(".li2").click(function(){ 
 		
 		let offset = $("#target2").offset();
-		offset.top = offset.top - 110;
+		offset.top = offset.top - 200;
         $('html, body').animate({scrollTop : offset.top}, 300);
 		
         $('.li1').removeClass('add_active');
@@ -33,7 +33,7 @@ $(function(){
  	$(".li3").click(function(){ 
  	
  		let offset = $("#target3").offset();
-		offset.top = offset.top - 110 ;
+ 		offset.top = offset.top - 300 ;
         $('html, body').animate({scrollTop : offset.top}, 300);
  	
         $('.li1').removeClass('add_active');
@@ -44,7 +44,7 @@ $(function(){
  	$(".li4").click(function(){ 
  	
  		let offset = $("#target3").offset();
-		offset.top = offset.top + 550 ;
+		offset.top = offset.top - 300 ;
         $('html, body').animate({scrollTop : offset.top}, 300);
  	
         $('.li1').removeClass('add_active');

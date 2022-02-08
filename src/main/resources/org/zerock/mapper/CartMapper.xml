@@ -10,7 +10,7 @@
 	<!-- 장바구니 추가 -->
 	<insert id="cart_add">
 		insert into cart(cart_num, pd_num, title, price, amount, user_id, file1)
-	 	values(cart_seq.nextval,#{pd_num},#{title},#{price},#{amount},#{user_id},#{file1})
+	 	values((select nextval('cart_seq') FROM DUAL),#{pd_num},#{title},#{price},#{amount},#{user_id},#{file1})
 	</insert>
 	
 	<!-- 장바구니 리스트 -->
@@ -30,30 +30,30 @@
 	
 	<!-- 특정상품삭제 -->	
 	<delete id="cartOneDel">
-		delete cart where cart_num=#{cart_num} and user_id=#{user_id}
+		delete from cart where cart_num=#{cart_num} and user_id=#{user_id}
 	</delete>
 	
 	<!-- 전체삭제 -->	
 	<delete id="cartAllDel">
-		delete cart where user_id=#{user_id}
+		delete from cart where user_id=#{user_id}
 	</delete>
 	
 
 	<!-- [주문]order1 테이블 insert 후 od_num 값 반환 -->
 	<insert id="insertOd" parameterType="org.zerock.domain.Order1VO">	
 		insert into order1(od_num,user_id,TOTALPRICE)
-	 	values(ORDER1_SEQ.NEXTVAL,#{user_id},#{totalprice})		
+	 	values((select nextval('ORDER1_SEQ') FROM DUAL),#{user_id},#{totalprice})		
 	 		
 	 	<!-- od_num 얻어오기 -->	
 	 	<selectKey keyProperty="od_num" order="AFTER" resultType="int">
-			SELECT od_num FROM order1 WHERE user_id=#{user_id} and ROWNUM=1 order by od_num DESC
+			SELECT od_num FROM order1 WHERE user_id=#{user_id} order by od_num DESC limit 1
 		</selectKey>	
 	</insert>
 	
 	<!-- [주문]cart 테이블 참조하여 order_detail 테이블로 insert -->
 	<insert id="insertOdt">
 		INSERT into order_detail (odt_num, od_num, pd_num, user_id, amount, price, title) 
-		SELECT ORDER_detail_SEQ.NEXTVAL, #{od_num}, pd_num , user_id , amount, price, title  FROM cart
+		SELECT (select nextval('ORDER_detail_SEQ') FROM DUAL), #{od_num}, pd_num , user_id , amount, price, title  FROM cart
 		WHERE user_id = #{user_id}
 	</insert>
 </mapper>

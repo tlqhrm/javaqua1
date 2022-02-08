@@ -32,8 +32,8 @@ public class BoardCriteria {
 		pagingCount = 10;
 		
 		// 요청된 페이지에 따른 게시물 범위 지정
-		startPage = (page - 1) * pagePerList +1;
-		endPage = startPage + pagePerList -1;
+		startPage = (page - 1) * pagePerList ;
+		endPage = startPage + pagePerList ;
 		
 		checker = "%"+word+"%";
 		
