@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.prg//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.OrderMapper">
+	<!-- [주문]주문 전 재고체크 -->
+	<select id="stockChk" resultType="int">
+		select stock from product where pd_num = #{pd_num}	
+	</select>
+	<!-- [주문]order 테이블 insert -->
+	<insert id="insertOd">
+		insert into order1(od_num, user_id, totalPrice)
+	 	values((select nextval('ORDER1_SEQ') FROM DUAL),#{odvo.user_id},#{totalPrice})
+	</insert>
+	<!-- [주문]order_detail 테이블 insert -->
+	<insert id="insertOdt">
+		<selectKey keyProperty="od_num" order="BEFORE" resultType="int">
+			SELECT od_num FROM order1 WHERE user_id=#{user_id} order by od_num DESC LIMIT 1
+		</selectKey>
+	
+		insert into order_detail(odt_num,od_num,pd_num,user_id,amount,price,title)
+	 	values((select nextval('ORDER_DETAIL_SEQ') FROM DUAL),#{od_num},#{pd_num},#{user_id},#{amount},#{price},#{title})
+	</insert>
+	
+	<!-- 주문내역 가져오기 (order1 테이블) -->
+	<select id="orderList" resultType="org.zerock.domain.Order1VO">
+		select * from order1 where user_id=#{user_id} order by od_num desc
+	</select>
+	
+	<!-- 주문상세내역 가져오기 (order_detail 테이블) -->
+	<select id="orderDetailList" resultType="org.zerock.domain.OrderDetailVO">
+		select a.*,
+			(select file1 from product where pd_num=a.pd_num) file1 ,
+			(select count(*) as cnt from review where user_id=a.user_id and pd_num=a.pd_num) review 
+		from order_detail a 
+		where user_id=#{user_id}
+	</select>
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.prg//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.ProductMapper">
+
+<!-- <select id="getList" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[select * from tbl_board where bno > 0]]>
+	
+	</select> -->	
+	<select id="paging" resultType="_int">	
+		<![CDATA[select count(*)
+		 from product 
+		 where category1 REGEXP(#{criCategory1})
+		 	and category2 REGEXP(#{criCategory2}) 
+		 	and Title REGEXP(#{criSerTitle}) 
+		 order by ${order} desc]]>
+	</select>
+	<select id="getList" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * 
+		from product 
+		where category1 REGEXP(#{criCategory1}) 
+			and category2 REGEXP(#{criCategory2}) 
+			and title REGEXP(#{criSerTitle})
+		order by #{order} desc LIMIT #{startPage},#{pagePerList};]]>		
+	</select>
+	
+	<select id="pagingAdmin" resultType="_int">	
+		<![CDATA[select count(*) from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and title REGEXP(#{criSerTitle})]]>
+		<if test="minPrice > 0">
+		<![CDATA[and price >= #{minPrice}]]></if>
+		<if test="maxPrice > 0">
+		<![CDATA[and price <= #{maxPrice}]]></if>
+		<if test="minStock > 0">
+		<![CDATA[and stock >= #{minStock}]]></if>
+		<if test="maxStock > 0">
+		<![CDATA[and stock <=#{maxStock}]]></if>
+		order by ${order} desc
+		
+	</select>
+	<select id="getListAdmin" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and title REGEXP(#{criSerTitle})]]>
+		<if test="minPrice > 0">
+		<![CDATA[and price >= #{minPrice}]]></if>
+		<if test="maxPrice > 0">
+		<![CDATA[and price <= #{maxPrice}]]></if>
+		<if test="minStock > 0">
+		<![CDATA[and stock >= #{minStock}]]></if>
+		<if test="maxStock > 0">
+		<![CDATA[and stock <=#{maxStock}]]></if>		 
+		<![CDATA[ order by ${order} desc LIMIT #{startPage},#{pagePerList};]]>		
+	</select>
+	
+	<select id="getIndexList" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select pd_num, category1, category2, title, price, file1 from product where category1 REGEXP(#{criCategory1}) and category2 REGEXP(#{criCategory2}) and stock > 0 order by salescount LIMIT #{startPage},#{endPage};]]>		
+	</select>
+	
+	<insert id="productRegist">
+		<selectKey keyProperty="pd_num" order="BEFORE" resultType="_int">
+			select nextval('product_seq') from dual
+		</selectKey>
+		<![CDATA[insert into product(pd_num, category1, category2, title, price, content, file1, stock, discount, registdate)
+				 values(#{pd_num}, #{category1, jdbcType=VARCHAR}, #{category2}, #{title}, #{price}, #{content}, #{file1}, #{stock}, #{discount}, date_format(sysdate(),'%Y. %m. %d. %T'))]]>
+	</insert>
+	
+
+	<select id="productDetail" resultType="org.zerock.domain.ProductVO">
+		<![CDATA[select * from product where pd_num = #{pd_num}]]>
+	</select>
+	
+	<delete id="productDelete">
+		delete from product where pd_num = #{pd_num}
+	</delete>
+	
+	<update id="productUpdate">
+		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
+		 		content=#{content}, file1=#{file1}, stock=#{stock}, discount=#{discount} where pd_num=#{pd_num}]]>
+	</update>
+	<update id="productUpdateAll">
+		<![CDATA[update product set category1=#{category1}, category2=#{category2}, title=#{title}, price=#{price},
+		 		stock=#{stock}, discount=#{discount} where pd_num=#{pd_num}]]>
+	</update>
+	<update id="salesCountPlus">
+			update product set salescount = salescount+#{cart_amount}, stock = stock-#{cart_amount} where pd_num = #{pd_num}
+	</update>
+	
+	<update id="updateCount">
+		update board set hit=hit+1 where bd_id=#{bd_id}
+	</update>
+	
+		
+	<select id="stockChk" resultType="int">
+		<![CDATA[ select count(*) as cnt from product where pd_num=#{pd_num} and stock>= #{cart_amount} ]]>
+	</select>
+</mapper>

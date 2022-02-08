@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.prg//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.MemberMapper">
+
+<!-- <select id="getList" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[select * from tbl_board where bno > 0]]>
+	
+	</select> -->	
+	<insert id="insert">	
+		<![CDATA[insert into member(user_num, user_id, user_pw, name, user_email, user_address, user_address2, user_phone)
+		 		values((select nextval('member_seq') FROM DUAL), #{user_id}, #{user_pw}, #{name}, #{user_email}, #{user_address}, #{user_address2}, #{user_phone})]]>
+	</insert>
+	<insert id="insertAuth">
+		insert into member_auth(user_id, auth) values(#{user_id}, #{auth})
+	</insert>
+	
+	
+	
+	<select id="get" resultType="org.zerock.domain.MemberVO">
+		<![CDATA[select name,admin from member where user_id = #{user_id} and user_pw = #{user_pw}]]>
+			
+	</select>
+	
+	<select id="getId" resultType="_int">
+		<![CDATA[select count(*) from member where user_id = #{id}]]>
+			
+	</select>
+	<select id="getEmail" resultType="_int">
+		<![CDATA[select count(*) from member where user_email = #{user_email} and 
+			user_email != (select user_email from member where user_id = #{user_id})]]>
+	</select>
+	<select id="getEmail2" resultType="_int">
+		<![CDATA[select count(*) from member where user_email = #{user_email}]]>
+	</select>
+	
+	<select id="selectMember" resultType="org.zerock.domain.MemberVO">
+		select * from member where user_id = #{user_id}	
+	</select>
+	<select id="passwordCheck" resultType="org.zerock.domain.MemberVO">
+		select * from member where user_id = #{user_id}
+	</select>
+	<update id="updateMember">
+		update member set user_pw= #{user_pw}, user_email=#{user_email}, user_address=#{user_address}, user_address2=#{user_address2},
+		user_phone=#{user_phone} where user_num=#{user_num}
+	</update>
+
+	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+    <id property="user_id" column="user_id"/>
+    <result property="user_id" column="user_id"/>
+    <result property="user_pw" column="user_pw"/>
+    <result property="name" column="name"/>
+    <collection property="authList" resultMap="authMap">
+    </collection> 
+  </resultMap>
+  
+  <resultMap type="org.zerock.domain.AuthVO" id="authMap">
+    <result property="user_id" column="user_id"/>
+    <result property="auth" column="auth"/>
+  </resultMap>
+  
+  <select id="read" resultMap="memberMap">
+		SELECT 
+		  mem.user_id,  user_pw, name, auth
+		FROM 
+		  member mem LEFT OUTER JOIN member_auth auth on mem.user_id = auth.user_id 
+		WHERE mem.user_id = #{user_id} 
+  </select>
+</mapper>
