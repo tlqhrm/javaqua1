@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<c:if test="${name != null }"><script>location.href = document.referrer;</script></c:if>
+<c:if test="${name != null }"><script>alert('잘못된 접근입니다.'); history.go(-1);</script></c:if>
     <div id="header">
         <div id="header2">
             <div id="header_logo" style="width: 1050px;margin: 0px; margin-left: auto; margin-right: auto; ">
@@ -36,18 +36,24 @@
         		<c:when test="${cookie.save.value ne null }">
         		<input type="text" name="user_id" placeholder="아이디" id="input_id" value="${cookie.save.value}"><br>
             <input type="password" name="user_pw" placeholder="비밀번호" id="input_password"><br>
-            <div id="save"><input type="checkbox" name="save" value="save" checked> 아이디 저장<span style="padding-left: 190px;">      
+            <div>s${errorMsg }</div>
+            <div id="save"><input type="checkbox" name="save" value="save" checked>아이디 저장
+            				<input type="checkbox" name="remember-me">자동로그인 <span style="padding-left: 90px;"> 
         		</c:when>
         		<c:otherwise>
         		<input type="text" name="user_id" placeholder="아이디" id="input_id"><br>
             <input type="password" name="user_pw" placeholder="비밀번호" id="input_password"><br>
-            <div id="save"><input type="checkbox" name="save" value="save"> 아이디 저장<span style="padding-left: 190px;">
+            <div>${errorMsg }<br></div>
+            <div id="save"><input type="checkbox" name="save" value="save">아이디 저장
+            			<input type="checkbox" name="remember-me">자동로그인<span style="padding-left: 90px;">
         		</c:otherwise>
         	</c:choose>
             <a href="#none" id="find"> 아이디 찾기 </a><b>|</b>
             <a href="#none" id="find"> 비밀번호 찾기 </a></span><br></div>
             <a href="로그인 버튼"><button type="submit" name="login" class="button"><span class="font_box"><b>로그인</b></span></button></a><br>
             <a href='/member/joinForm'><button type="button" class="button"> <b><span class="font_box"> 계정이 없으신가요? 회원가입</button></a>
+            <input type="hidden" name="${_csrf.parameterName}"
+    		value="${_csrf.token}" />
         </form>
         <hr id="line">
         <div>

@@ -1,8 +1,13 @@
+ImagePath.java
 RootConfig.java
 pom.properties
 
+123.txt
+target/
+.project
+.classpath
 
-
+src/test/
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
 
@@ -41,7 +46,7 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
+.target/
 
 # Tern plugin
 .tern-project
@@ -71,5 +76,3 @@ local.properties
 ### Eclipse Patch ###
 # Spring Boot Tooling
 .sts4-cache/
-
-# End of https://www.toptal.com/developers/gitignore/api/eclipse

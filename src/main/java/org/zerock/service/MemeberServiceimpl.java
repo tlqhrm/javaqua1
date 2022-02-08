@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.AuthVO;
 import org.zerock.domain.BoardCriteria;
 import org.zerock.domain.MemberVO;
 
@@ -22,10 +23,11 @@ public class MemeberServiceimpl implements MemberService {
 	private MemberMapper mapper;
 	
 	@Override
-	public void register(MemberVO member) {
+	public void register(MemberVO member, AuthVO avo) {
 		
 		log.info("register......" + member);
 		
+		mapper.insertAuth(avo);
 		mapper.insert(member);
 	}
 
@@ -36,12 +38,6 @@ public class MemeberServiceimpl implements MemberService {
 		return mapper.get(member);
 	}
 
-	@Override
-	public boolean modify(BoardVO board) {
-		
-		log.info("modify......" + board);
-		return mapper.update(board) == 1;
-	}
 
 	@Override
 	public boolean remove(Long bno) {
@@ -63,15 +59,42 @@ public class MemeberServiceimpl implements MemberService {
 	}
 	
 	@Override
-	public boolean getEmail(String email) {
+	public int getEmail(String email, String user_id) {
 		
-		return mapper.getEmail(email) !=0 ;
+		int result = mapper.getEmail(email,user_id);
+		
+		return result ;
 		
 	}
 	
 	@Override
-	public String getFile(int bd_id) {
+	public int getEmail(String email) {
+		
+		int result = mapper.getEmail2(email);
+		
+		return result ;
 		
 	}
 	
+	@Override
+	public MemberVO selectMember(String user_id) {
+		return mapper.selectMember(user_id);
+	}
+
+	@Override
+	public int updateMember(MemberVO mvo) {
+		int result = mapper.updateMember(mvo);
+		return result;
+	}
+
+	@Override
+	public MemberVO passwordCheck(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return mapper.passwordCheck(mvo);
+	}
+
+
+
+
+
 }

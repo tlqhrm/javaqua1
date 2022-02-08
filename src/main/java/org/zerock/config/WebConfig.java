@@ -12,7 +12,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] {RootConfig.class};
+		return new Class[] {RootConfig.class, SecurityConfig.class};
 	}
 
 	@Override
@@ -34,15 +34,4 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		
 		MultipartConfigElement multipartConfig = new MultipartConfigElement("C:\\sts\\spring_study\\ex021\\src\\main\\webapp\\resources\\upload\\board\\tmp",(1024*1024*5), (1024*1024*40), (1024*1024*5));
 	}
-
-	@Override
-	protected Filter[] getServletFilters() {
-		CharacterEncodingFilter characterEncodingFilter =
-				new CharacterEncodingFilter();
-		characterEncodingFilter.setEncoding("UTF-8");
-		characterEncodingFilter.setForceEncoding(true);
-		
-		return new Filter[] {characterEncodingFilter};
-	}
-
 }

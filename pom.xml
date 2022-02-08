@@ -13,9 +13,47 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+	        <!-- ... other dependency elements ... -->
+	        <dependency>
+	            <groupId>org.springframework.security</groupId>
+	            <artifactId>spring-security-bom</artifactId>
+	            <version>5.2.6.RELEASE</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>
 	
-	
-	<dependencies>
+	<dependencies>	
+		<!-- ... other dependency elements ... --> 
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-acl</artifactId>
+		    
+		</dependency>
+
+
+
 	
 		<dependency>
 	    <!-- com.googlecode.json-simple -->
@@ -54,12 +92,15 @@
 			<version>2.9.5</version>
 		</dependency>  
 		
-			<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6 -->
+
+		
+		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
 		<dependency>
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.4</version>
-		</dependency>   
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc8</artifactId>
+		    <version>19.3.0.0</version>
+		</dependency>
+		
 		<!-- HikariCP -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>

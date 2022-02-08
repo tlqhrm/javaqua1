@@ -1,39 +1,39 @@
 $(function(){
     $('.bx-prev img').hover(function(){
-        $(this).attr("src","images/화살표/이전버튼호버.png")},
+        $(this).attr("src","/resources/images/화살표/이전버튼호버.png")},
         function(){
-        $(this).attr("src","images/화살표/이전버튼.png")});
+        $(this).attr("src","/resources/images/화살표/이전버튼.png")});
     $('.bx-next img').mouseover(function(){
-        $(this).attr("src","images/화살표/다음버튼호버.png")
+        $(this).attr("src","/resources/images/화살표/다음버튼호버.png")
     });
     $('.bx-next img').mouseout(function(){
-        $(this).attr("src","images/화살표/다음버튼.png")
+        $(this).attr("src","/resources/images/화살표/다음버튼.png")
     })
 
     $('.bx-prev_3 img').mouseover(function(){
-        $(this).attr("src","images/화살표/이전버튼호버.png")
+        $(this).attr("src","/resources/images/화살표/이전버튼호버.png")
     });
     $('.bx-prev_3 img').mouseout(function(){
-        $(this).attr("src","images/화살표/이전버튼.png")
+        $(this).attr("src","/resources/images/화살표/이전버튼.png")
     });
     $('.bx-next_3 img').mouseover(function(){
-        $(this).attr("src","images/화살표/다음버튼호버.png")
+        $(this).attr("src","/resources/images/화살표/다음버튼호버.png")
     });
     $('.bx-next_3 img').mouseout(function(){
-        $(this).attr("src","images/화살표/다음버튼.png")
+        $(this).attr("src","/resources/images/화살표/다음버튼.png")
     })
 
     $('.bx-prev_4 img').mouseover(function(){
-        $(this).attr("src","images/화살표/이전버튼호버.png")
+        $(this).attr("src","/resources/images/화살표/이전버튼호버.png")
     });
     $('.bx-prev_4 img').mouseout(function(){
-        $(this).attr("src","images/화살표/이전버튼.png")
+        $(this).attr("src","/resources/images/화살표/이전버튼.png")
     });
     $('.bx-next_4 img').mouseover(function(){
-        $(this).attr("src","images/화살표/다음버튼호버.png")
+        $(this).attr("src","/resources/images/화살표/다음버튼호버.png")
     });
     $('.bx-next_4 img').mouseout(function(){
-        $(this).attr("src","images/화살표/다음버튼.png")
+        $(this).attr("src","/resources/images/화살표/다음버튼.png")
     })
 
     $('.bx-sale a').mouseover(function(){
@@ -77,12 +77,12 @@ $(function(){
     $(function(){            
     $('.cut').mouseover(function(){
         $(this).find('img').css('transform','scale(1.1)');
-        $(this).find('.md span').css('visibility', 'visible');
+ //       $(this).find('.md span').css('visibility', 'visible');
         });
         
     $('.cut').mouseout(function(){          
         $(this).find('img').css('transform','scale(1.0)');
-        $(this).find('.md span').css('visibility', 'hidden');
+  //      $(this).find('.md span').css('visibility', 'hidden');
         });
     $('.cut').hover(function(){
         $(this).find('.under a').css('opacity','1');

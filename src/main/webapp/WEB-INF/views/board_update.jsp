@@ -8,12 +8,9 @@
     <meta charset="utf-8">
     <link href="/resources/css/suport_page.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="/resources/css/header.css">    
+    <link href="/resources/images/로고/자바쿠아 아이콘.jpg" rel="shortcut icon" type="image/x-icon">  
     <title>JavaQua</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="/resources/js/header.js"></script>
-    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 </head>
 <c:choose>
 	<c:when test="${empty id and bvo.bd_category2 eq 'contact' }">
@@ -57,7 +54,6 @@
 		<a href="boardList?bd_category2=notice&page=1"><li <c:if test="${bvo.bd_category2 eq 'notice' }"> id="now"</c:if>>공지사항</li></a>
        <a href="boardList?bd_category2=faq&page=1"><li <c:if test="${bvo.bd_category2 eq 'faq' }"> id="now"</c:if>>자주하는질문</li></a>
        <a href="boardList?bd_category2=contact&page=1"><li <c:if test="${bvo.bd_category2 eq 'contact' }"> id="now"</c:if>>1:1 문의</li></a>
-       <a href=""><li>매장안내</li></a>
     </ul><br>
     </div>  <!--snb-->
 <div class="contents">
@@ -65,9 +61,11 @@
  
 
 
-<form action = "/board/boardUpdate" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
+<form onsubmit="br()" action = "/board/boardUpdate" name = "contact_write" method = "POST" enctype = "multipart/form-data" class="form">
 	<input type="hidden" name="bd_id" value="${bvo.bd_id }">
 	<input type="hidden" name="file1" value="${bvo.file1 }">
+	<input type="hidden" name="${_csrf.parameterName}"
+    		value="${_csrf.token}" />
 <table id = "write_form">
     <tbody>
         <tr>
@@ -132,5 +130,15 @@
 <jsp:include page="footer.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
+<script>
+var contents = document.querySelector('textarea');
+
+contents = text.replaceAll("<br>", "\r\n");
+
+function br(){	
+	contents.value = contents.value.replace(/(\n|\r\n)/g, '<br>');
+}
+</script>
+	
 </body>
 </html>
