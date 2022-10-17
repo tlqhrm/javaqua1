@@ -4,7 +4,6 @@
 <img width="700" alt="폴더구조" src="https://user-images.githubusercontent.com/85216782/150094647-254fcdd1-303f-4857-8606-e5f84017cc05.png">
 
 
-사이트 : [http://javaqua.cafe24.com/](http://javaqua.cafe24.com/)
 ## 개요  
 
 스프링 MVC패턴을 이용한 온라인 쇼핑몰 구현.
